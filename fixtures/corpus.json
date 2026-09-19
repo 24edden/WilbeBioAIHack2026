@@ -1,0 +1,117 @@
+{
+  "_comment": "Literature corpus subset for the literature specialist. In mock mode these are embedded with the mock hashing embedder; in live mode the same records go through a BioNeMo embedding NIM. Abstract text is paraphrased for the demo - replace with retrieved text before any claim leaves the room.",
+  "documents": [
+    {
+      "pmid": "18316791",
+      "year": 2008,
+      "journal": "N Engl J Med",
+      "title": "KRAS mutations and benefit from cetuximab in advanced colorectal cancer",
+      "text": "Among patients with metastatic colorectal cancer treated with cetuximab, those whose tumours carried a mutation in KRAS codon 12 or 13 derived no significant benefit in overall or progression-free survival, whereas patients with wild-type KRAS did. KRAS mutation status is a predictive biomarker of resistance to anti-EGFR antibody therapy.",
+      "tags": ["KRAS", "cetuximab", "anti-EGFR", "resistance", "colorectal"]
+    },
+    {
+      "pmid": "20921465",
+      "year": 2010,
+      "journal": "J Clin Oncol",
+      "title": "Wild-type KRAS is required for panitumumab efficacy in metastatic colorectal cancer",
+      "text": "Panitumumab monotherapy improved progression-free survival only in the wild-type KRAS subgroup. In the mutant KRAS subgroup progression-free survival was no better than best supportive care, consistent with constitutive MAPK pathway activation downstream of the receptor.",
+      "tags": ["KRAS", "panitumumab", "anti-EGFR", "resistance", "colorectal"]
+    },
+    {
+      "pmid": "24024839",
+      "year": 2013,
+      "journal": "N Engl J Med",
+      "title": "Extended RAS testing and outcomes with anti-EGFR therapy",
+      "text": "Extending mutation testing beyond KRAS exon 2 to NRAS and additional KRAS exons identifies further patients who do not benefit from anti-EGFR therapy and may be harmed by its addition to oxaliplatin-based chemotherapy. Molecular results should be available before first-line treatment selection.",
+      "tags": ["RAS", "anti-EGFR", "testing", "colorectal", "treatment selection"]
+    },
+    {
+      "pmid": "28002915",
+      "year": 2017,
+      "journal": "Clin Pharmacol Ther",
+      "title": "CPIC guideline for DPYD genotype and fluoropyrimidine dosing",
+      "text": "Carriers of the DPYD*2A (c.1905+1G>A) no-function allele have reduced dihydropyrimidine dehydrogenase activity and are at high risk of severe or fatal fluoropyrimidine toxicity. A 50% starting dose reduction is recommended for heterozygous carriers, with subsequent titration guided by toxicity.",
+      "tags": ["DPYD", "5-FU", "fluoropyrimidine", "toxicity", "dosing", "pharmacogenomics"]
+    },
+    {
+      "pmid": "26041808",
+      "year": 2015,
+      "journal": "Lancet Oncol",
+      "title": "DPYD genotype-guided dose individualisation of fluoropyrimidine therapy",
+      "text": "Prospective genotyping for DPYD*2A followed by upfront dose reduction lowered the incidence of grade 3 or higher fluoropyrimidine toxicity in carriers from 73% to 28%, without evidence of reduced efficacy. Severe early neutropenia and mucositis within the first two cycles are the characteristic presentation in untested carriers.",
+      "tags": ["DPYD", "5-FU", "neutropenia", "mucositis", "toxicity", "dose reduction"]
+    },
+    {
+      "pmid": "19339720",
+      "year": 2009,
+      "journal": "Ann Oncol",
+      "title": "Dose intensity and outcome in first-line chemotherapy for metastatic colorectal cancer",
+      "text": "Reduced relative dose intensity in the first three cycles of first-line combination chemotherapy was associated with shorter progression-free survival in observational cohorts, though the association is confounded by the frailty and comorbidity that prompt dose reduction.",
+      "tags": ["dose intensity", "chemotherapy", "progression", "confounding", "colorectal"]
+    },
+    {
+      "pmid": "25691039",
+      "year": 2015,
+      "journal": "Br J Cancer",
+      "title": "Carcinoembryonic antigen kinetics as a marker of progression",
+      "text": "A rise in carcinoembryonic antigen of more than 30 percent between two measurements taken at least four weeks apart during treatment had high specificity for radiologically confirmed progression in metastatic colorectal cancer, although isolated rises occur with inflammation, smoking and hepatic dysfunction.",
+      "tags": ["CEA", "progression", "monitoring", "biomarker", "colorectal"]
+    },
+    {
+      "pmid": "22228638",
+      "year": 2012,
+      "journal": "Nature",
+      "title": "Emergence of KRAS mutations during anti-EGFR therapy",
+      "text": "KRAS mutant clones can be detected in circulating tumour DNA months before radiological progression in patients initially responding to anti-EGFR therapy, indicating that acquired resistance often reflects selection of pre-existing subclones rather than de novo mutation.",
+      "tags": ["KRAS", "acquired resistance", "ctDNA", "anti-EGFR", "clonal"]
+    },
+    {
+      "pmid": "21228335",
+      "year": 2011,
+      "journal": "J Natl Cancer Inst",
+      "title": "MTHFR C677T polymorphism and fluoropyrimidine outcome: a meta-analysis",
+      "text": "Across 28 studies the MTHFR C677T polymorphism showed no consistent association with response or toxicity in fluoropyrimidine-treated colorectal cancer. Reported effects were small, heterogeneous and concentrated in studies with fewer than 100 patients, a pattern consistent with publication bias.",
+      "tags": ["MTHFR", "C677T", "5-FU", "no association", "meta-analysis", "negative"]
+    },
+    {
+      "pmid": "27993330",
+      "year": 2016,
+      "journal": "Pharmacogenomics J",
+      "title": "Reappraisal of candidate polymorphisms in fluoropyrimidine pharmacogenetics",
+      "text": "Candidate-gene associations for MTHFR and TYMS variants failed to replicate in a prospectively genotyped cohort of 1200 patients. Only DPYD no-function alleles retained a clinically actionable effect size.",
+      "tags": ["MTHFR", "TYMS", "replication failure", "DPYD", "pharmacogenomics", "negative"]
+    },
+    {
+      "pmid": "17925551",
+      "year": 2007,
+      "journal": "Clin Cancer Res",
+      "title": "TP53 status and prognosis in colorectal cancer",
+      "text": "TP53 mutation was associated with shorter overall survival in colorectal cancer cohorts but did not predict differential benefit from EGFR-directed therapy in the analyses reported to date.",
+      "tags": ["TP53", "prognosis", "colorectal", "not predictive"]
+    },
+    {
+      "pmid": "30982772",
+      "year": 2019,
+      "journal": "JCO Precis Oncol",
+      "title": "Turnaround time of molecular profiling and first-line treatment decisions",
+      "text": "In a multicentre audit, molecular profiling results arrived after first-line treatment had started in 31 percent of metastatic colorectal cancer cases. Delayed reporting was the most common reason for treatment that was discordant with the eventual molecular result.",
+      "tags": ["turnaround", "molecular profiling", "workflow", "treatment selection", "failure mode"]
+    },
+    {
+      "pmid": "29431110",
+      "year": 2018,
+      "journal": "Ann Oncol",
+      "title": "Primary versus acquired resistance to anti-EGFR therapy: definitions and pitfalls",
+      "text": "Progression within the first three months of anti-EGFR therapy in a patient with a baseline RAS mutation should be classified as primary resistance. Attributing such progression to acquired mechanisms overstates the evidence and misdirects subsequent treatment.",
+      "tags": ["primary resistance", "acquired resistance", "anti-EGFR", "classification", "KRAS"]
+    },
+    {
+      "pmid": "31123456",
+      "year": 2019,
+      "journal": "Support Care Cancer",
+      "title": "Early severe neutropenia after first fluoropyrimidine exposure",
+      "text": "Grade 4 neutropenia occurring within ten days of a first 5-FU infusion is uncommon at standard doses and should prompt evaluation for dihydropyrimidine dehydrogenase deficiency before further exposure.",
+      "tags": ["neutropenia", "5-FU", "DPYD", "early toxicity", "first cycle"]
+    }
+  ]
+}

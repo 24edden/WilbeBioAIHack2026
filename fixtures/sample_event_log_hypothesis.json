@@ -1,0 +1,1270 @@
+[
+  {
+    "type": "run_started",
+    "ts": 1789831047146,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "orchestrator-0",
+    "agent_role": "orchestrator",
+    "parent_id": null,
+    "payload": {
+      "question": "Did the patient fail because of MTHFR C677T?",
+      "run_mode": "mock",
+      "bundle": "5 variant(s), 10 lab value(s), 6 note section(s)",
+      "files": [
+        {
+          "file_id": "file-0",
+          "filename": "patient-0-labs.csv",
+          "kind": "labs",
+          "n_records": 10
+        },
+        {
+          "file_id": "file-1",
+          "filename": "patient-0-notes.txt",
+          "kind": "notes",
+          "n_records": 6
+        },
+        {
+          "file_id": "file-2",
+          "filename": "patient-0.vcf",
+          "kind": "vcf",
+          "n_records": 5
+        }
+      ]
+    }
+  },
+  {
+    "type": "agent_spawned",
+    "ts": 1789831047147,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "orchestrator-0",
+    "agent_role": "orchestrator",
+    "parent_id": null,
+    "payload": {
+      "task": "Decompose the question and direct the specialists."
+    }
+  },
+  {
+    "type": "tool_call",
+    "ts": 1789831047148,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "orchestrator-0",
+    "agent_role": "orchestrator",
+    "parent_id": null,
+    "payload": {
+      "tool": "reasoning.plan",
+      "args": {
+        "question": "Did the patient fail because of MTHFR C677T?",
+        "bundle": "5 variant(s), 10 lab value(s), 6 note section(s)"
+      }
+    }
+  },
+  {
+    "type": "tool_result",
+    "ts": 1789831047149,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "orchestrator-0",
+    "agent_role": "orchestrator",
+    "parent_id": null,
+    "payload": {
+      "tool": "reasoning.plan",
+      "result": {
+        "restated_question": "Did the patient fail because of MTHFR C677T?",
+        "hypothesis": "MTHFR C677T",
+        "tasks": [
+          {
+            "role": "genomics",
+            "task": "Score the 5 uploaded variant(s) for functional effect and therapy relevance. Prioritise MTHFR, C677T."
+          },
+          {
+            "role": "clinical",
+            "task": "Reconstruct the treatment timeline and flag out-of-range laboratory trends around each exposure."
+          },
+          {
+            "role": "literature",
+            "task": "Retrieve supporting and contradicting evidence for the candidate mechanisms the other specialists surface."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "agent_message",
+    "ts": 1789831047150,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "orchestrator-0",
+    "agent_role": "orchestrator",
+    "parent_id": null,
+    "payload": {
+      "text": "Did the patient fail because of MTHFR C677T? Hypothesis under test: MTHFR C677T. Evidence is scored for and against it. Spawning 3 specialist(s)."
+    }
+  },
+  {
+    "type": "agent_spawned",
+    "ts": 1789831047151,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "genomics-1",
+    "agent_role": "genomics",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "task": "Score the 5 uploaded variant(s) for functional effect and therapy relevance. Prioritise MTHFR, C677T.",
+      "rationale": "A treatment failure with a molecular profile available is first a question about the variants."
+    }
+  },
+  {
+    "type": "agent_spawned",
+    "ts": 1789831047152,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "clinical-1",
+    "agent_role": "clinical",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "task": "Reconstruct the treatment timeline and flag out-of-range laboratory trends around each exposure.",
+      "rationale": "Timing separates a drug that did not work from a drug the patient could not tolerate."
+    }
+  },
+  {
+    "type": "agent_spawned",
+    "ts": 1789831047153,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "literature-1",
+    "agent_role": "literature",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "task": "Retrieve supporting and contradicting evidence for the candidate mechanisms the other specialists surface.",
+      "rationale": "Contradicting evidence is the point; a search that can only confirm is a search that cannot fail."
+    }
+  },
+  {
+    "type": "agent_message",
+    "ts": 1789831047154,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "genomics-1",
+    "agent_role": "genomics",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "text": "Scoring 5 variant(s) with bionemo-nim(mock) for functional effect."
+    }
+  },
+  {
+    "type": "tool_call",
+    "ts": 1789831047155,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "clinical-1",
+    "agent_role": "clinical",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "labs.flag_out_of_range",
+      "args": {
+        "n_labs": 10
+      }
+    }
+  },
+  {
+    "type": "tool_result",
+    "ts": 1789831047156,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "clinical-1",
+    "agent_role": "clinical",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "labs.flag_out_of_range",
+      "result": {
+        "n_abnormal": 8
+      }
+    }
+  },
+  {
+    "type": "tool_call",
+    "ts": 1789831047157,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "clinical-1",
+    "agent_role": "clinical",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "labs.trend",
+      "args": {
+        "analytes": [
+          "ALT",
+          "Albumin",
+          "CEA",
+          "Hemoglobin",
+          "Neutrophils",
+          "Platelets"
+        ]
+      }
+    }
+  },
+  {
+    "type": "tool_result",
+    "ts": 1789831047158,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "clinical-1",
+    "agent_role": "clinical",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "labs.trend",
+      "result": {
+        "CEA": "rising",
+        "Neutrophils": "falling"
+      }
+    }
+  },
+  {
+    "type": "tool_call",
+    "ts": 1789831047159,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "clinical-1",
+    "agent_role": "clinical",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "notes.timeline",
+      "args": {
+        "n_sections": 6
+      }
+    }
+  },
+  {
+    "type": "tool_result",
+    "ts": 1789831047160,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "clinical-1",
+    "agent_role": "clinical",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "notes.timeline",
+      "result": {
+        "n_events": 3,
+        "toxicity_terms": [
+          "neutropenia",
+          "mucositis",
+          "toxicity",
+          "grade 3",
+          "grade 4",
+          "g-csf"
+        ]
+      }
+    }
+  },
+  {
+    "type": "agent_message",
+    "ts": 1789831047161,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "clinical-1",
+    "agent_role": "clinical",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "text": "Clinical review: 8 out-of-range value(s) including CEA 18.6 (high), Neutrophils 0.8 (low), Platelets 96.0 (low); CEA rising 4.1 to 47.3; Neutrophils falling 3.4 to 1.1; 3 dated event(s) in the notes"
+    }
+  },
+  {
+    "type": "finding",
+    "ts": 1789831047162,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "clinical-1",
+    "agent_role": "clinical",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "finding_id": "finding-1",
+      "finding": "CEA rose from 4.1 to 47.3 over the treatment window, a trajectory consistent with progression rather than response.",
+      "stance": "neutral",
+      "confidence": 0.72,
+      "provenance": [
+        {
+          "kind": "file",
+          "ref": "patient-0-labs.csv",
+          "locator": "line 2",
+          "quote": "CEA"
+        },
+        {
+          "kind": "file",
+          "ref": "patient-0-labs.csv",
+          "locator": "line 4",
+          "quote": "CEA"
+        },
+        {
+          "kind": "file",
+          "ref": "patient-0-labs.csv",
+          "locator": "line 8",
+          "quote": "CEA"
+        }
+      ],
+      "detail": {
+        "name": "CEA",
+        "direction": "rising",
+        "first": 4.1,
+        "last": 47.3,
+        "first_date": "2025-01-12",
+        "last_date": "2025-04-20",
+        "relative_change": 10.537,
+        "n_points": 3,
+        "source_lines": [
+          2,
+          4,
+          8
+        ]
+      }
+    }
+  },
+  {
+    "type": "finding",
+    "ts": 1789831047163,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "clinical-1",
+    "agent_role": "clinical",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "finding_id": "finding-2",
+      "finding": "Neutrophils 0.8 10^9/L is below the reference range (2.0-7.5), indicating haematological toxicity during treatment.",
+      "stance": "neutral",
+      "confidence": 0.68,
+      "provenance": [
+        {
+          "kind": "file",
+          "ref": "patient-0-labs.csv",
+          "locator": "line 5",
+          "quote": "Neutrophils"
+        }
+      ],
+      "detail": {
+        "name": "Neutrophils",
+        "value": 0.8,
+        "unit": "10^9/L",
+        "flag": "low",
+        "date": "2025-03-02",
+        "ref_low": 2.0,
+        "ref_high": 7.5,
+        "source_line": 5
+      }
+    }
+  },
+  {
+    "type": "finding",
+    "ts": 1789831047164,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "clinical-1",
+    "agent_role": "clinical",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "finding_id": "finding-3",
+      "finding": "Platelets 96.0 10^9/L is below the reference range (150.0-400.0), indicating haematological toxicity during treatment.",
+      "stance": "neutral",
+      "confidence": 0.68,
+      "provenance": [
+        {
+          "kind": "file",
+          "ref": "patient-0-labs.csv",
+          "locator": "line 6",
+          "quote": "Platelets"
+        }
+      ],
+      "detail": {
+        "name": "Platelets",
+        "value": 96.0,
+        "unit": "10^9/L",
+        "flag": "low",
+        "date": "2025-03-02",
+        "ref_low": 150.0,
+        "ref_high": 400.0,
+        "source_line": 6
+      }
+    }
+  },
+  {
+    "type": "finding",
+    "ts": 1789831047165,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "clinical-1",
+    "agent_role": "clinical",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "finding_id": "finding-4",
+      "finding": "Hemoglobin 9.8 g/dL is below the reference range (13.0-17.0), indicating haematological toxicity during treatment.",
+      "stance": "neutral",
+      "confidence": 0.68,
+      "provenance": [
+        {
+          "kind": "file",
+          "ref": "patient-0-labs.csv",
+          "locator": "line 10",
+          "quote": "Hemoglobin"
+        }
+      ],
+      "detail": {
+        "name": "Hemoglobin",
+        "value": 9.8,
+        "unit": "g/dL",
+        "flag": "low",
+        "date": "2025-04-20",
+        "ref_low": 13.0,
+        "ref_high": 17.0,
+        "source_line": 10
+      }
+    }
+  },
+  {
+    "type": "finding",
+    "ts": 1789831047166,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "clinical-1",
+    "agent_role": "clinical",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "finding_id": "finding-5",
+      "finding": "Neutrophils 1.1 10^9/L is below the reference range (2.0-7.5), indicating haematological toxicity during treatment.",
+      "stance": "neutral",
+      "confidence": 0.68,
+      "provenance": [
+        {
+          "kind": "file",
+          "ref": "patient-0-labs.csv",
+          "locator": "line 11",
+          "quote": "Neutrophils"
+        }
+      ],
+      "detail": {
+        "name": "Neutrophils",
+        "value": 1.1,
+        "unit": "10^9/L",
+        "flag": "low",
+        "date": "2025-04-20",
+        "ref_low": 2.0,
+        "ref_high": 7.5,
+        "source_line": 11
+      }
+    }
+  },
+  {
+    "type": "finding",
+    "ts": 1789831047167,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "clinical-1",
+    "agent_role": "clinical",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "finding_id": "finding-6",
+      "finding": "The notes record toxicity (neutropenia, mucositis, toxicity, grade 3) early in treatment, which points at tolerability limiting dose intensity rather than at the regimen simply being ineffective.",
+      "stance": "neutral",
+      "confidence": 0.62,
+      "provenance": [
+        {
+          "kind": "file",
+          "ref": "patient-0-notes.txt",
+          "locator": "line 5",
+          "quote": "neutropenia"
+        },
+        {
+          "kind": "file",
+          "ref": "patient-0-notes.txt",
+          "locator": "line 5",
+          "quote": "mucositis"
+        },
+        {
+          "kind": "file",
+          "ref": "patient-0-notes.txt",
+          "locator": "line 11",
+          "quote": "toxicity"
+        },
+        {
+          "kind": "file",
+          "ref": "patient-0-notes.txt",
+          "locator": "line 5",
+          "quote": "grade 3"
+        },
+        {
+          "kind": "file",
+          "ref": "patient-0-notes.txt",
+          "locator": "line 4",
+          "quote": "grade 4"
+        },
+        {
+          "kind": "file",
+          "ref": "patient-0-notes.txt",
+          "locator": "line 6",
+          "quote": "g-csf"
+        }
+      ],
+      "detail": {
+        "terms": [
+          "neutropenia",
+          "mucositis",
+          "toxicity",
+          "grade 3",
+          "grade 4",
+          "g-csf"
+        ]
+      }
+    }
+  },
+  {
+    "type": "tool_call",
+    "ts": 1789831047168,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "genomics-1",
+    "agent_role": "genomics",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "bionemo.score_variant",
+      "args": {
+        "variant": "KRAS p.Gly12Asp",
+        "rsid": "rs121913529",
+        "consequence": "missense_variant|p.Gly12Asp"
+      }
+    }
+  },
+  {
+    "type": "tool_result",
+    "ts": 1789831047169,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "genomics-1",
+    "agent_role": "genomics",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "bionemo.score_variant",
+      "result": {
+        "call": "pathogenic",
+        "pathogenicity": 0.97
+      },
+      "variant": "KRAS p.Gly12Asp",
+      "output_id": "nim-var-12-25245350-CT"
+    }
+  },
+  {
+    "type": "tool_call",
+    "ts": 1789831047170,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "genomics-1",
+    "agent_role": "genomics",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "bionemo.score_variant",
+      "args": {
+        "variant": "DPYD c.1905+1G>A",
+        "rsid": "rs3918290",
+        "consequence": "splice_donor_variant|c.1905+1G>A"
+      }
+    }
+  },
+  {
+    "type": "tool_result",
+    "ts": 1789831047171,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "genomics-1",
+    "agent_role": "genomics",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "bionemo.score_variant",
+      "result": {
+        "call": "pathogenic",
+        "pathogenicity": 0.95
+      },
+      "variant": "DPYD c.1905+1G>A",
+      "output_id": "nim-var-1-97915614-CT"
+    }
+  },
+  {
+    "type": "tool_call",
+    "ts": 1789831047172,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "genomics-1",
+    "agent_role": "genomics",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "bionemo.score_variant",
+      "args": {
+        "variant": "MTHFR p.Ala222Val",
+        "rsid": "rs1801133",
+        "consequence": "missense_variant|p.Ala222Val"
+      }
+    }
+  },
+  {
+    "type": "tool_result",
+    "ts": 1789831047173,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "genomics-1",
+    "agent_role": "genomics",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "bionemo.score_variant",
+      "result": {
+        "call": "benign",
+        "pathogenicity": 0.18
+      },
+      "variant": "MTHFR p.Ala222Val",
+      "output_id": "nim-var-1-11796321-GA"
+    }
+  },
+  {
+    "type": "tool_call",
+    "ts": 1789831047174,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "genomics-1",
+    "agent_role": "genomics",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "bionemo.score_variant",
+      "args": {
+        "variant": "TP53 p.Arg175His",
+        "rsid": "rs28934578",
+        "consequence": "missense_variant|p.Arg175His"
+      }
+    }
+  },
+  {
+    "type": "tool_result",
+    "ts": 1789831047175,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "genomics-1",
+    "agent_role": "genomics",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "bionemo.score_variant",
+      "result": {
+        "call": "pathogenic",
+        "pathogenicity": 0.93
+      },
+      "variant": "TP53 p.Arg175His",
+      "output_id": "nim-var-17-7675088-CT"
+    }
+  },
+  {
+    "type": "tool_call",
+    "ts": 1789831047176,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "genomics-1",
+    "agent_role": "genomics",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "bionemo.score_variant",
+      "args": {
+        "variant": "APC p.Thr1493=",
+        "rsid": null,
+        "consequence": "synonymous_variant|p.Thr1493="
+      }
+    }
+  },
+  {
+    "type": "tool_result",
+    "ts": 1789831047177,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "genomics-1",
+    "agent_role": "genomics",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "bionemo.score_variant",
+      "result": {
+        "call": "benign",
+        "pathogenicity": 0.12
+      },
+      "variant": "APC p.Thr1493=",
+      "output_id": "nim-var-5-112839514-CT"
+    }
+  },
+  {
+    "type": "agent_message",
+    "ts": 1789831047178,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "genomics-1",
+    "agent_role": "genomics",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "text": "Scored 5 variant(s). Highest functional impact: KRAS p.Gly12Asp (pathogenic, 0.97). Also: DPYD c.1905+1G>A pathogenic; TP53 p.Arg175His pathogenic; MTHFR p.Ala222Val benign."
+    }
+  },
+  {
+    "type": "finding",
+    "ts": 1789831047179,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "genomics-1",
+    "agent_role": "genomics",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "finding_id": "finding-7",
+      "finding": "KRAS p.Gly12Asp scores pathogenic (0.97); therapy implication: anti-EGFR (cetuximab, panitumumab) not expected to be effective.",
+      "stance": "neutral",
+      "confidence": 0.97,
+      "provenance": [
+        {
+          "kind": "file",
+          "ref": "patient-0.vcf",
+          "locator": "line 7",
+          "quote": "KRAS p.Gly12Asp"
+        },
+        {
+          "kind": "nim",
+          "ref": "nim-var-12-25245350-CT",
+          "locator": "bionemo-nim(mock):variant-effect",
+          "quote": "Activating KRAS codon-12 substitution. Constitutive downstream MAPK signalling independent of EGFR; established predictor of non-response to anti-EGFR antibodies in colorectal cancer."
+        }
+      ],
+      "detail": {
+        "label": "KRAS p.Gly12Asp",
+        "gene": "KRAS",
+        "rsid": "rs121913529",
+        "consequence": "missense_variant|p.Gly12Asp",
+        "zygosity": "het",
+        "pathogenicity": 0.97,
+        "call": "pathogenic",
+        "notes": "Activating KRAS codon-12 substitution. Constitutive downstream MAPK signalling independent of EGFR; established predictor of non-response to anti-EGFR antibodies in colorectal cancer.",
+        "therapy_implication": "anti-EGFR (cetuximab, panitumumab) not expected to be effective",
+        "model": "bionemo-nim(mock):variant-effect",
+        "output_id": "nim-var-12-25245350-CT",
+        "source_line": 7,
+        "source_file": "patient-0.vcf"
+      }
+    }
+  },
+  {
+    "type": "finding",
+    "ts": 1789831047180,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "genomics-1",
+    "agent_role": "genomics",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "finding_id": "finding-8",
+      "finding": "DPYD c.1905+1G>A scores pathogenic (0.95); therapy implication: 5-FU / capecitabine dose reduction indicated (CPIC: 50% starting dose for heterozygotes).",
+      "stance": "neutral",
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "kind": "file",
+          "ref": "patient-0.vcf",
+          "locator": "line 8",
+          "quote": "DPYD c.1905+1G>A"
+        },
+        {
+          "kind": "nim",
+          "ref": "nim-var-1-97915614-CT",
+          "locator": "bionemo-nim(mock):variant-effect",
+          "quote": "DPYD*2A splice-donor loss-of-function allele. Carriers have markedly reduced dihydropyrimidine dehydrogenase activity and severe fluoropyrimidine toxicity at standard doses."
+        }
+      ],
+      "detail": {
+        "label": "DPYD c.1905+1G>A",
+        "gene": "DPYD",
+        "rsid": "rs3918290",
+        "consequence": "splice_donor_variant|c.1905+1G>A",
+        "zygosity": "het",
+        "pathogenicity": 0.95,
+        "call": "pathogenic",
+        "notes": "DPYD*2A splice-donor loss-of-function allele. Carriers have markedly reduced dihydropyrimidine dehydrogenase activity and severe fluoropyrimidine toxicity at standard doses.",
+        "therapy_implication": "5-FU / capecitabine dose reduction indicated (CPIC: 50% starting dose for heterozygotes)",
+        "model": "bionemo-nim(mock):variant-effect",
+        "output_id": "nim-var-1-97915614-CT",
+        "source_line": 8,
+        "source_file": "patient-0.vcf"
+      }
+    }
+  },
+  {
+    "type": "finding",
+    "ts": 1789831047181,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "genomics-1",
+    "agent_role": "genomics",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "finding_id": "finding-9",
+      "finding": "TP53 p.Arg175His scores pathogenic (0.93); therapy implication: prognostic, no direct therapy action.",
+      "stance": "neutral",
+      "confidence": 0.93,
+      "provenance": [
+        {
+          "kind": "file",
+          "ref": "patient-0.vcf",
+          "locator": "line 10",
+          "quote": "TP53 p.Arg175His"
+        },
+        {
+          "kind": "nim",
+          "ref": "nim-var-17-7675088-CT",
+          "locator": "bionemo-nim(mock):variant-effect",
+          "quote": "Hotspot TP53 DNA-binding-domain substitution with dominant-negative behaviour. Prognostic in colorectal cancer; not directly predictive of anti-EGFR response."
+        }
+      ],
+      "detail": {
+        "label": "TP53 p.Arg175His",
+        "gene": "TP53",
+        "rsid": "rs28934578",
+        "consequence": "missense_variant|p.Arg175His",
+        "zygosity": "het",
+        "pathogenicity": 0.93,
+        "call": "pathogenic",
+        "notes": "Hotspot TP53 DNA-binding-domain substitution with dominant-negative behaviour. Prognostic in colorectal cancer; not directly predictive of anti-EGFR response.",
+        "therapy_implication": "prognostic, no direct therapy action",
+        "model": "bionemo-nim(mock):variant-effect",
+        "output_id": "nim-var-17-7675088-CT",
+        "source_line": 10,
+        "source_file": "patient-0.vcf"
+      }
+    }
+  },
+  {
+    "type": "finding",
+    "ts": 1789831047182,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "genomics-1",
+    "agent_role": "genomics",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "finding_id": "finding-10",
+      "finding": "MTHFR p.Ala222Val scores benign (0.18); therapy implication: no established dosing action.",
+      "stance": "contradicts",
+      "confidence": 0.82,
+      "provenance": [
+        {
+          "kind": "file",
+          "ref": "patient-0.vcf",
+          "locator": "line 9",
+          "quote": "MTHFR p.Ala222Val"
+        },
+        {
+          "kind": "nim",
+          "ref": "nim-var-1-11796321-GA",
+          "locator": "bionemo-nim(mock):variant-effect",
+          "quote": "Common MTHFR C677T polymorphism, allele frequency ~30% in European ancestry. Reduced enzyme thermolability in vitro; clinical association with fluoropyrimidine outcome is inconsistent across studies."
+        }
+      ],
+      "detail": {
+        "label": "MTHFR p.Ala222Val",
+        "gene": "MTHFR",
+        "rsid": "rs1801133",
+        "consequence": "missense_variant|p.Ala222Val",
+        "zygosity": "hom",
+        "pathogenicity": 0.18,
+        "call": "benign",
+        "notes": "Common MTHFR C677T polymorphism, allele frequency ~30% in European ancestry. Reduced enzyme thermolability in vitro; clinical association with fluoropyrimidine outcome is inconsistent across studies.",
+        "therapy_implication": "no established dosing action",
+        "model": "bionemo-nim(mock):variant-effect",
+        "output_id": "nim-var-1-11796321-GA",
+        "source_line": 9,
+        "source_file": "patient-0.vcf"
+      }
+    }
+  },
+  {
+    "type": "agent_message",
+    "ts": 1789831047183,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "literature-1",
+    "agent_role": "literature",
+    "parent_id": "genomics-1",
+    "payload": {
+      "text": "Picked up KRAS, EGFR, DPYD, TP53, MTHFR from the genomics specialist; folding those into the search."
+    }
+  },
+  {
+    "type": "tool_call",
+    "ts": 1789831047184,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "literature-1",
+    "agent_role": "literature",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "bionemo.embed",
+      "args": {
+        "n_documents": 14,
+        "query": "Did the patient fail because of MTHFR C677T? MTHFR C677T KRAS EGFR DPYD TP53 MTHFR"
+      }
+    }
+  },
+  {
+    "type": "tool_result",
+    "ts": 1789831047185,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "literature-1",
+    "agent_role": "literature",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "bionemo.embed",
+      "result": [
+        {
+          "pmid": "21228335",
+          "score": 0.3466
+        },
+        {
+          "pmid": "27993330",
+          "score": 0.3218
+        },
+        {
+          "pmid": "26041808",
+          "score": 0.1987
+        },
+        {
+          "pmid": "17925551",
+          "score": 0.1805
+        },
+        {
+          "pmid": "29431110",
+          "score": 0.1543
+        }
+      ],
+      "n_above_floor": 7
+    }
+  },
+  {
+    "type": "agent_message",
+    "ts": 1789831047186,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "literature-1",
+    "agent_role": "literature",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "text": "Retrieved 5 document(s) for 'Did the patient fail because of MTHFR C677T? MTHFR C677T KRAS EGFR DPYD TP53 MTHFR'. Top: PMID 21228335 (0.35); PMID 27993330 (0.32); PMID 26041808 (0.20)"
+    }
+  },
+  {
+    "type": "finding",
+    "ts": 1789831047187,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "literature-1",
+    "agent_role": "literature",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "finding_id": "finding-11",
+      "finding": "MTHFR C677T polymorphism and fluoropyrimidine outcome: a meta-analysis (PMID 21228335, J Natl Cancer Inst 2011): Across 28 studies the MTHFR C677T polymorphism showed no consistent association with response or toxicity in fluoropyrimidine-treated colorectal cancer. Reported effects were small, heterogeneous and concentrated in stud...",
+      "stance": "contradicts",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "kind": "pmid",
+          "ref": "21228335",
+          "locator": "J Natl Cancer Inst 2011",
+          "quote": "Across 28 studies the MTHFR C677T polymorphism showed no consistent association with response or toxicity in fluoropyrimidine-treated colorectal cancer. Reported effects were small"
+        }
+      ],
+      "detail": {
+        "pmid": "21228335",
+        "score": 0.3466,
+        "tags": [
+          "MTHFR",
+          "C677T",
+          "5-FU",
+          "no association",
+          "meta-analysis",
+          "negative"
+        ]
+      }
+    }
+  },
+  {
+    "type": "finding",
+    "ts": 1789831047188,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "literature-1",
+    "agent_role": "literature",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "finding_id": "finding-12",
+      "finding": "Reappraisal of candidate polymorphisms in fluoropyrimidine pharmacogenetics (PMID 27993330, Pharmacogenomics J 2016): Candidate-gene associations for MTHFR and TYMS variants failed to replicate in a prospectively genotyped cohort of 1200 patients. Only DPYD no-function alleles retained a clinically actionable effect size....",
+      "stance": "contradicts",
+      "confidence": 0.77,
+      "provenance": [
+        {
+          "kind": "pmid",
+          "ref": "27993330",
+          "locator": "Pharmacogenomics J 2016",
+          "quote": "Candidate-gene associations for MTHFR and TYMS variants failed to replicate in a prospectively genotyped cohort of 1200 patients. Only DPYD no-function alleles retained a clinicall"
+        }
+      ],
+      "detail": {
+        "pmid": "27993330",
+        "score": 0.3218,
+        "tags": [
+          "MTHFR",
+          "TYMS",
+          "replication failure",
+          "DPYD",
+          "pharmacogenomics",
+          "negative"
+        ]
+      }
+    }
+  },
+  {
+    "type": "finding",
+    "ts": 1789831047189,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "literature-1",
+    "agent_role": "literature",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "finding_id": "finding-13",
+      "finding": "DPYD genotype-guided dose individualisation of fluoropyrimidine therapy (PMID 26041808, Lancet Oncol 2015): Prospective genotyping for DPYD*2A followed by upfront dose reduction lowered the incidence of grade 3 or higher fluoropyrimidine toxicity in carriers from 73% to 28%, without evidence of reduced efficacy. Severe early n...",
+      "stance": "neutral",
+      "confidence": 0.65,
+      "provenance": [
+        {
+          "kind": "pmid",
+          "ref": "26041808",
+          "locator": "Lancet Oncol 2015",
+          "quote": "Prospective genotyping for DPYD*2A followed by upfront dose reduction lowered the incidence of grade 3 or higher fluoropyrimidine toxicity in carriers from 73% to 28%, without evid"
+        }
+      ],
+      "detail": {
+        "pmid": "26041808",
+        "score": 0.1987,
+        "tags": [
+          "DPYD",
+          "5-FU",
+          "neutropenia",
+          "mucositis",
+          "toxicity",
+          "dose reduction"
+        ]
+      }
+    }
+  },
+  {
+    "type": "finding",
+    "ts": 1789831047190,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "literature-1",
+    "agent_role": "literature",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "finding_id": "finding-14",
+      "finding": "TP53 status and prognosis in colorectal cancer (PMID 17925551, Clin Cancer Res 2007): TP53 mutation was associated with shorter overall survival in colorectal cancer cohorts but did not predict differential benefit from EGFR-directed therapy in the analyses reported to date....",
+      "stance": "neutral",
+      "confidence": 0.63,
+      "provenance": [
+        {
+          "kind": "pmid",
+          "ref": "17925551",
+          "locator": "Clin Cancer Res 2007",
+          "quote": "TP53 mutation was associated with shorter overall survival in colorectal cancer cohorts but did not predict differential benefit from EGFR-directed therapy in the analyses reported"
+        }
+      ],
+      "detail": {
+        "pmid": "17925551",
+        "score": 0.1805,
+        "tags": [
+          "TP53",
+          "prognosis",
+          "colorectal",
+          "not predictive"
+        ]
+      }
+    }
+  },
+  {
+    "type": "finding",
+    "ts": 1789831047191,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "literature-1",
+    "agent_role": "literature",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "finding_id": "finding-15",
+      "finding": "Primary versus acquired resistance to anti-EGFR therapy: definitions and pitfalls (PMID 29431110, Ann Oncol 2018): Progression within the first three months of anti-EGFR therapy in a patient with a baseline RAS mutation should be classified as primary resistance. Attributing such progression to acquired mechanisms overstates the evid...",
+      "stance": "neutral",
+      "confidence": 0.6,
+      "provenance": [
+        {
+          "kind": "pmid",
+          "ref": "29431110",
+          "locator": "Ann Oncol 2018",
+          "quote": "Progression within the first three months of anti-EGFR therapy in a patient with a baseline RAS mutation should be classified as primary resistance. Attributing such progression to"
+        }
+      ],
+      "detail": {
+        "pmid": "29431110",
+        "score": 0.1543,
+        "tags": [
+          "primary resistance",
+          "acquired resistance",
+          "anti-EGFR",
+          "classification",
+          "KRAS"
+        ]
+      }
+    }
+  },
+  {
+    "type": "agent_spawned",
+    "ts": 1789831047192,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "critic-0",
+    "agent_role": "critic",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "task": "Cross-check findings and answer.",
+      "rationale": "Independent check on the specialists' claims."
+    }
+  },
+  {
+    "type": "agent_message",
+    "ts": 1789831047193,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "critic-0",
+    "agent_role": "critic",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "text": "Cross-checking 15 finding(s) from 3 specialist(s): clinical, genomics, literature."
+    }
+  },
+  {
+    "type": "agent_message",
+    "ts": 1789831047194,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "critic-0",
+    "agent_role": "critic",
+    "parent_id": "clinical-1",
+    "payload": {
+      "text": "Accepted 6 finding(s); strongest at 0.72."
+    }
+  },
+  {
+    "type": "agent_message",
+    "ts": 1789831047195,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "critic-0",
+    "agent_role": "critic",
+    "parent_id": "genomics-1",
+    "payload": {
+      "text": "Accepted 4 finding(s); strongest at 0.97."
+    }
+  },
+  {
+    "type": "agent_message",
+    "ts": 1789831047196,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "critic-0",
+    "agent_role": "critic",
+    "parent_id": "literature-1",
+    "payload": {
+      "text": "Accepted 5 finding(s); strongest at 0.80."
+    }
+  },
+  {
+    "type": "tool_call",
+    "ts": 1789831047197,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "critic-0",
+    "agent_role": "critic",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "critic.evidence_gate",
+      "args": {
+        "n_findings": 15
+      }
+    }
+  },
+  {
+    "type": "tool_result",
+    "ts": 1789831047198,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "critic-0",
+    "agent_role": "critic",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "tool": "critic.evidence_gate",
+      "result": {
+        "abstain": false,
+        "checks": [
+          {
+            "check": "any_evidence",
+            "passed": true,
+            "detail": "15 finding(s)"
+          },
+          {
+            "check": "provenance",
+            "passed": true,
+            "detail": "15/15 finding(s) cite a source"
+          },
+          {
+            "check": "confidence_floor",
+            "passed": true,
+            "detail": "strongest cited finding is 0.97 (floor 0.55)"
+          },
+          {
+            "check": "corroboration",
+            "passed": true,
+            "detail": "3 independent specialist(s) contributed: ['clinical', 'genomics', 'literature']"
+          },
+          {
+            "check": "hypothesis_separation",
+            "passed": true,
+            "detail": "support 0 vs contradiction 2.39 (separation 1.00, needs 0.15)"
+          }
+        ]
+      },
+      "disagreement": false
+    }
+  },
+  {
+    "type": "finding",
+    "ts": 1789831047199,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "critic-0",
+    "agent_role": "critic",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "finding_id": "finding-16",
+      "finding": "The evidence does not support the proposed cause (MTHFR C677T); the stronger signal points elsewhere.",
+      "stance": "neutral",
+      "confidence": 0.8,
+      "provenance": [
+        {
+          "kind": "derived",
+          "ref": "critic.evidence_gate",
+          "locator": "15 finding(s) from 3 specialist(s)",
+          "quote": null
+        }
+      ],
+      "detail": {
+        "abstained": false,
+        "abstain_reason": null,
+        "checks": [
+          {
+            "check": "any_evidence",
+            "passed": true,
+            "detail": "15 finding(s)"
+          },
+          {
+            "check": "provenance",
+            "passed": true,
+            "detail": "15/15 finding(s) cite a source"
+          },
+          {
+            "check": "confidence_floor",
+            "passed": true,
+            "detail": "strongest cited finding is 0.97 (floor 0.55)"
+          },
+          {
+            "check": "corroboration",
+            "passed": true,
+            "detail": "3 independent specialist(s) contributed: ['clinical', 'genomics', 'literature']"
+          },
+          {
+            "check": "hypothesis_separation",
+            "passed": true,
+            "detail": "support 0 vs contradiction 2.39 (separation 1.00, needs 0.15)"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "run_complete",
+    "ts": 1789831047200,
+    "run_id": "sample-_hypothesis",
+    "agent_id": "critic-0",
+    "agent_role": "critic",
+    "parent_id": "orchestrator-0",
+    "payload": {
+      "verdict": "The evidence does not support the proposed cause (MTHFR C677T); the stronger signal points elsewhere.",
+      "rationale": "0 supporting claim(s) (weight 0) against 3 contradicting claim(s) (weight 2.39), plus 12 contextual finding(s).",
+      "confidence": 0.8,
+      "abstained": false,
+      "abstain_reason": null,
+      "caveats": [
+        "Mock mode: model outputs are fixtures, not predictions.",
+        "Single patient, no cohort comparison: associations here are not causal.",
+        "Evidence is limited to the uploaded files and the bundled corpus subset."
+      ],
+      "n_findings": 16
+    }
+  }
+]

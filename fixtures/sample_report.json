@@ -1,0 +1,494 @@
+{
+  "run_id": "sample-",
+  "question": "Why did this patient fail?",
+  "status": "complete",
+  "verdict": {
+    "answer": "Most likely account of the failure: KRAS p.Gly12Asp scores pathogenic (0.97); therapy implication: anti-EGFR (cetuximab, panitumumab) not expected to be effective.",
+    "rationale": "Ranked 12 claim(s) from the specialists by per-claim confidence, with cross-agent agreement as the tie-breaker.",
+    "confidence": 0.9,
+    "abstained": false,
+    "abstain_reason": null,
+    "caveats": [
+      "Mock mode: model outputs are fixtures, not predictions.",
+      "Single patient, no cohort comparison: associations here are not causal.",
+      "Evidence is limited to the uploaded files and the bundled corpus subset."
+    ]
+  },
+  "findings": [
+    {
+      "finding_id": "finding-1",
+      "agent_id": "clinical-1",
+      "agent_role": "clinical",
+      "claim": "CEA rose from 4.1 to 47.3 over the treatment window, a trajectory consistent with progression rather than response.",
+      "stance": "neutral",
+      "confidence": 0.72,
+      "provenance": [
+        {
+          "kind": "file",
+          "ref": "patient-0-labs.csv",
+          "locator": "line 2",
+          "quote": "CEA"
+        },
+        {
+          "kind": "file",
+          "ref": "patient-0-labs.csv",
+          "locator": "line 4",
+          "quote": "CEA"
+        },
+        {
+          "kind": "file",
+          "ref": "patient-0-labs.csv",
+          "locator": "line 8",
+          "quote": "CEA"
+        }
+      ],
+      "detail": {
+        "name": "CEA",
+        "direction": "rising",
+        "first": 4.1,
+        "last": 47.3,
+        "first_date": "2025-01-12",
+        "last_date": "2025-04-20",
+        "relative_change": 10.537,
+        "n_points": 3,
+        "source_lines": [
+          2,
+          4,
+          8
+        ]
+      }
+    },
+    {
+      "finding_id": "finding-2",
+      "agent_id": "clinical-1",
+      "agent_role": "clinical",
+      "claim": "Neutrophils 0.8 10^9/L is below the reference range (2.0-7.5), indicating haematological toxicity during treatment.",
+      "stance": "neutral",
+      "confidence": 0.68,
+      "provenance": [
+        {
+          "kind": "file",
+          "ref": "patient-0-labs.csv",
+          "locator": "line 5",
+          "quote": "Neutrophils"
+        }
+      ],
+      "detail": {
+        "name": "Neutrophils",
+        "value": 0.8,
+        "unit": "10^9/L",
+        "flag": "low",
+        "date": "2025-03-02",
+        "ref_low": 2.0,
+        "ref_high": 7.5,
+        "source_line": 5
+      }
+    },
+    {
+      "finding_id": "finding-3",
+      "agent_id": "clinical-1",
+      "agent_role": "clinical",
+      "claim": "Platelets 96.0 10^9/L is below the reference range (150.0-400.0), indicating haematological toxicity during treatment.",
+      "stance": "neutral",
+      "confidence": 0.68,
+      "provenance": [
+        {
+          "kind": "file",
+          "ref": "patient-0-labs.csv",
+          "locator": "line 6",
+          "quote": "Platelets"
+        }
+      ],
+      "detail": {
+        "name": "Platelets",
+        "value": 96.0,
+        "unit": "10^9/L",
+        "flag": "low",
+        "date": "2025-03-02",
+        "ref_low": 150.0,
+        "ref_high": 400.0,
+        "source_line": 6
+      }
+    },
+    {
+      "finding_id": "finding-4",
+      "agent_id": "clinical-1",
+      "agent_role": "clinical",
+      "claim": "Hemoglobin 9.8 g/dL is below the reference range (13.0-17.0), indicating haematological toxicity during treatment.",
+      "stance": "neutral",
+      "confidence": 0.68,
+      "provenance": [
+        {
+          "kind": "file",
+          "ref": "patient-0-labs.csv",
+          "locator": "line 10",
+          "quote": "Hemoglobin"
+        }
+      ],
+      "detail": {
+        "name": "Hemoglobin",
+        "value": 9.8,
+        "unit": "g/dL",
+        "flag": "low",
+        "date": "2025-04-20",
+        "ref_low": 13.0,
+        "ref_high": 17.0,
+        "source_line": 10
+      }
+    },
+    {
+      "finding_id": "finding-5",
+      "agent_id": "clinical-1",
+      "agent_role": "clinical",
+      "claim": "Neutrophils 1.1 10^9/L is below the reference range (2.0-7.5), indicating haematological toxicity during treatment.",
+      "stance": "neutral",
+      "confidence": 0.68,
+      "provenance": [
+        {
+          "kind": "file",
+          "ref": "patient-0-labs.csv",
+          "locator": "line 11",
+          "quote": "Neutrophils"
+        }
+      ],
+      "detail": {
+        "name": "Neutrophils",
+        "value": 1.1,
+        "unit": "10^9/L",
+        "flag": "low",
+        "date": "2025-04-20",
+        "ref_low": 2.0,
+        "ref_high": 7.5,
+        "source_line": 11
+      }
+    },
+    {
+      "finding_id": "finding-6",
+      "agent_id": "clinical-1",
+      "agent_role": "clinical",
+      "claim": "The notes record toxicity (neutropenia, mucositis, toxicity, grade 3) early in treatment, which points at tolerability limiting dose intensity rather than at the regimen simply being ineffective.",
+      "stance": "neutral",
+      "confidence": 0.62,
+      "provenance": [
+        {
+          "kind": "file",
+          "ref": "patient-0-notes.txt",
+          "locator": "line 5",
+          "quote": "neutropenia"
+        },
+        {
+          "kind": "file",
+          "ref": "patient-0-notes.txt",
+          "locator": "line 5",
+          "quote": "mucositis"
+        },
+        {
+          "kind": "file",
+          "ref": "patient-0-notes.txt",
+          "locator": "line 11",
+          "quote": "toxicity"
+        },
+        {
+          "kind": "file",
+          "ref": "patient-0-notes.txt",
+          "locator": "line 5",
+          "quote": "grade 3"
+        },
+        {
+          "kind": "file",
+          "ref": "patient-0-notes.txt",
+          "locator": "line 4",
+          "quote": "grade 4"
+        },
+        {
+          "kind": "file",
+          "ref": "patient-0-notes.txt",
+          "locator": "line 6",
+          "quote": "g-csf"
+        }
+      ],
+      "detail": {
+        "terms": [
+          "neutropenia",
+          "mucositis",
+          "toxicity",
+          "grade 3",
+          "grade 4",
+          "g-csf"
+        ]
+      }
+    },
+    {
+      "finding_id": "finding-7",
+      "agent_id": "genomics-1",
+      "agent_role": "genomics",
+      "claim": "KRAS p.Gly12Asp scores pathogenic (0.97); therapy implication: anti-EGFR (cetuximab, panitumumab) not expected to be effective.",
+      "stance": "neutral",
+      "confidence": 0.97,
+      "provenance": [
+        {
+          "kind": "file",
+          "ref": "patient-0.vcf",
+          "locator": "line 7",
+          "quote": "KRAS p.Gly12Asp"
+        },
+        {
+          "kind": "nim",
+          "ref": "nim-var-12-25245350-CT",
+          "locator": "bionemo-nim(mock):variant-effect",
+          "quote": "Activating KRAS codon-12 substitution. Constitutive downstream MAPK signalling independent of EGFR; established predictor of non-response to anti-EGFR antibodies in colorectal cancer."
+        }
+      ],
+      "detail": {
+        "label": "KRAS p.Gly12Asp",
+        "gene": "KRAS",
+        "rsid": "rs121913529",
+        "consequence": "missense_variant|p.Gly12Asp",
+        "zygosity": "het",
+        "pathogenicity": 0.97,
+        "call": "pathogenic",
+        "notes": "Activating KRAS codon-12 substitution. Constitutive downstream MAPK signalling independent of EGFR; established predictor of non-response to anti-EGFR antibodies in colorectal cancer.",
+        "therapy_implication": "anti-EGFR (cetuximab, panitumumab) not expected to be effective",
+        "model": "bionemo-nim(mock):variant-effect",
+        "output_id": "nim-var-12-25245350-CT",
+        "source_line": 7,
+        "source_file": "patient-0.vcf"
+      }
+    },
+    {
+      "finding_id": "finding-8",
+      "agent_id": "genomics-1",
+      "agent_role": "genomics",
+      "claim": "DPYD c.1905+1G>A scores pathogenic (0.95); therapy implication: 5-FU / capecitabine dose reduction indicated (CPIC: 50% starting dose for heterozygotes).",
+      "stance": "neutral",
+      "confidence": 0.95,
+      "provenance": [
+        {
+          "kind": "file",
+          "ref": "patient-0.vcf",
+          "locator": "line 8",
+          "quote": "DPYD c.1905+1G>A"
+        },
+        {
+          "kind": "nim",
+          "ref": "nim-var-1-97915614-CT",
+          "locator": "bionemo-nim(mock):variant-effect",
+          "quote": "DPYD*2A splice-donor loss-of-function allele. Carriers have markedly reduced dihydropyrimidine dehydrogenase activity and severe fluoropyrimidine toxicity at standard doses."
+        }
+      ],
+      "detail": {
+        "label": "DPYD c.1905+1G>A",
+        "gene": "DPYD",
+        "rsid": "rs3918290",
+        "consequence": "splice_donor_variant|c.1905+1G>A",
+        "zygosity": "het",
+        "pathogenicity": 0.95,
+        "call": "pathogenic",
+        "notes": "DPYD*2A splice-donor loss-of-function allele. Carriers have markedly reduced dihydropyrimidine dehydrogenase activity and severe fluoropyrimidine toxicity at standard doses.",
+        "therapy_implication": "5-FU / capecitabine dose reduction indicated (CPIC: 50% starting dose for heterozygotes)",
+        "model": "bionemo-nim(mock):variant-effect",
+        "output_id": "nim-var-1-97915614-CT",
+        "source_line": 8,
+        "source_file": "patient-0.vcf"
+      }
+    },
+    {
+      "finding_id": "finding-9",
+      "agent_id": "genomics-1",
+      "agent_role": "genomics",
+      "claim": "TP53 p.Arg175His scores pathogenic (0.93); therapy implication: prognostic, no direct therapy action.",
+      "stance": "neutral",
+      "confidence": 0.93,
+      "provenance": [
+        {
+          "kind": "file",
+          "ref": "patient-0.vcf",
+          "locator": "line 10",
+          "quote": "TP53 p.Arg175His"
+        },
+        {
+          "kind": "nim",
+          "ref": "nim-var-17-7675088-CT",
+          "locator": "bionemo-nim(mock):variant-effect",
+          "quote": "Hotspot TP53 DNA-binding-domain substitution with dominant-negative behaviour. Prognostic in colorectal cancer; not directly predictive of anti-EGFR response."
+        }
+      ],
+      "detail": {
+        "label": "TP53 p.Arg175His",
+        "gene": "TP53",
+        "rsid": "rs28934578",
+        "consequence": "missense_variant|p.Arg175His",
+        "zygosity": "het",
+        "pathogenicity": 0.93,
+        "call": "pathogenic",
+        "notes": "Hotspot TP53 DNA-binding-domain substitution with dominant-negative behaviour. Prognostic in colorectal cancer; not directly predictive of anti-EGFR response.",
+        "therapy_implication": "prognostic, no direct therapy action",
+        "model": "bionemo-nim(mock):variant-effect",
+        "output_id": "nim-var-17-7675088-CT",
+        "source_line": 10,
+        "source_file": "patient-0.vcf"
+      }
+    },
+    {
+      "finding_id": "finding-10",
+      "agent_id": "literature-1",
+      "agent_role": "literature",
+      "claim": "KRAS mutations and benefit from cetuximab in advanced colorectal cancer (PMID 18316791, N Engl J Med 2008): Among patients with metastatic colorectal cancer treated with cetuximab, those whose tumours carried a mutation in KRAS codon 12 or 13 derived no significant benefit in overall or progression-free survival, whereas patie...",
+      "stance": "neutral",
+      "confidence": 0.65,
+      "provenance": [
+        {
+          "kind": "pmid",
+          "ref": "18316791",
+          "locator": "N Engl J Med 2008",
+          "quote": "Among patients with metastatic colorectal cancer treated with cetuximab, those whose tumours carried a mutation in KRAS codon 12 or 13 derived no significant benefit in overall or "
+        }
+      ],
+      "detail": {
+        "pmid": "18316791",
+        "score": 0.2001,
+        "tags": [
+          "KRAS",
+          "cetuximab",
+          "anti-EGFR",
+          "resistance",
+          "colorectal"
+        ]
+      }
+    },
+    {
+      "finding_id": "finding-11",
+      "agent_id": "literature-1",
+      "agent_role": "literature",
+      "claim": "TP53 status and prognosis in colorectal cancer (PMID 17925551, Clin Cancer Res 2007): TP53 mutation was associated with shorter overall survival in colorectal cancer cohorts but did not predict differential benefit from EGFR-directed therapy in the analyses reported to date....",
+      "stance": "neutral",
+      "confidence": 0.62,
+      "provenance": [
+        {
+          "kind": "pmid",
+          "ref": "17925551",
+          "locator": "Clin Cancer Res 2007",
+          "quote": "TP53 mutation was associated with shorter overall survival in colorectal cancer cohorts but did not predict differential benefit from EGFR-directed therapy in the analyses reported"
+        }
+      ],
+      "detail": {
+        "pmid": "17925551",
+        "score": 0.1654,
+        "tags": [
+          "TP53",
+          "prognosis",
+          "colorectal",
+          "not predictive"
+        ]
+      }
+    },
+    {
+      "finding_id": "finding-12",
+      "agent_id": "literature-1",
+      "agent_role": "literature",
+      "claim": "Extended RAS testing and outcomes with anti-EGFR therapy (PMID 24024839, N Engl J Med 2013): Extending mutation testing beyond KRAS exon 2 to NRAS and additional KRAS exons identifies further patients who do not benefit from anti-EGFR therapy and may be harmed by its addition to oxaliplatin-based chemotherapy. M...",
+      "stance": "neutral",
+      "confidence": 0.6,
+      "provenance": [
+        {
+          "kind": "pmid",
+          "ref": "24024839",
+          "locator": "N Engl J Med 2013",
+          "quote": "Extending mutation testing beyond KRAS exon 2 to NRAS and additional KRAS exons identifies further patients who do not benefit from anti-EGFR therapy and may be harmed by its addit"
+        }
+      ],
+      "detail": {
+        "pmid": "24024839",
+        "score": 0.1455,
+        "tags": [
+          "RAS",
+          "anti-EGFR",
+          "testing",
+          "colorectal",
+          "treatment selection"
+        ]
+      }
+    },
+    {
+      "finding_id": "finding-13",
+      "agent_id": "critic-0",
+      "agent_role": "critic",
+      "claim": "Most likely account of the failure: KRAS p.Gly12Asp scores pathogenic (0.97); therapy implication: anti-EGFR (cetuximab, panitumumab) not expected to be effective.",
+      "stance": "neutral",
+      "confidence": 0.9,
+      "provenance": [
+        {
+          "kind": "derived",
+          "ref": "critic.evidence_gate",
+          "locator": "12 finding(s) from 3 specialist(s)",
+          "quote": null
+        }
+      ],
+      "detail": {
+        "abstained": false,
+        "abstain_reason": null,
+        "checks": [
+          {
+            "check": "any_evidence",
+            "passed": true,
+            "detail": "12 finding(s)"
+          },
+          {
+            "check": "provenance",
+            "passed": true,
+            "detail": "12/12 finding(s) cite a source"
+          },
+          {
+            "check": "confidence_floor",
+            "passed": true,
+            "detail": "strongest cited finding is 0.97 (floor 0.55)"
+          },
+          {
+            "check": "corroboration",
+            "passed": true,
+            "detail": "3 independent specialist(s) contributed: ['clinical', 'genomics', 'literature']"
+          }
+        ]
+      }
+    }
+  ],
+  "agents": [
+    {
+      "agent_id": "genomics-1",
+      "agent_role": "genomics",
+      "parent_id": "orchestrator-0",
+      "task": "Score the 5 uploaded variant(s) for functional effect and therapy relevance.",
+      "status": "done",
+      "n_findings": 3
+    },
+    {
+      "agent_id": "clinical-1",
+      "agent_role": "clinical",
+      "parent_id": "orchestrator-0",
+      "task": "Reconstruct the treatment timeline and flag out-of-range laboratory trends around each exposure.",
+      "status": "done",
+      "n_findings": 6
+    },
+    {
+      "agent_id": "literature-1",
+      "agent_role": "literature",
+      "parent_id": "orchestrator-0",
+      "task": "Retrieve supporting and contradicting evidence for the candidate mechanisms the other specialists surface.",
+      "status": "done",
+      "n_findings": 3
+    },
+    {
+      "agent_id": "critic-0",
+      "agent_role": "critic",
+      "parent_id": "orchestrator-0",
+      "task": "Cross-check findings and answer.",
+      "status": "done",
+      "n_findings": 1
+    }
+  ],
+  "bundle_summary": "5 variant(s), 10 lab value(s), 6 note section(s)",
+  "run_mode": "mock",
+  "started_ts": 1789831046857,
+  "finished_ts": 1789831046909,
+  "error": null
+}
