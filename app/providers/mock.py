@@ -189,6 +189,32 @@ class MockReasoningProvider:
     ) -> ReasoningStep:
         self.calls.append(("step", role))
         await self._sleep("step", f"{role}:{task}")
+        if context.get("task_mode") == "idea_review":
+            def excerpt(value: str, limit: int) -> str:
+                value = " ".join(value.split())
+                return value if len(value) <= limit else value[:limit].rsplit(" ", 1)[0] + "..."
+
+            question = excerpt(context.get("question", "the proposal"), 180)
+            prior = context.get("discussion", [])
+            # Retain a visible connection to the previous turn without recursively
+            # quoting the whole transcript in every mock response.
+            reply = excerpt(prior[-1]["text"], 220) if prior else "No prior discussion."
+            phase = context.get("phase")
+            if phase == "opening":
+                text = f"Proposal for '{question}': define a measurable target, a baseline and a small falsifiable comparison. Potential value is conditional on outperforming that baseline; feasibility is an assumption."
+            elif phase == "challenge":
+                text = f"Challenge to the preceding proposal ({reply}): the target, baseline quality and independent evaluation data have not been established. What result would refute the idea, and could leakage explain an apparent improvement?"
+            elif phase == "revision":
+                text = f"Revision responding to the challenge ({reply}): for '{question}', predefine the target and failure criterion, hold out evaluation inputs, and compare against a simple baseline before making a usefulness claim. These are proposed checks, not completed experiments."
+            else:
+                incomplete = [name for name, status in context.get("review_agent_statuses", {}).items() if status != "done"]
+                status_note = ("Incomplete contributions: " + ", ".join(incomplete) + ". "
+                               if incomplete else "The research, support and challenge turns are complete. ")
+                text = (f"Review of '{question}': {len(prior)} contributions were considered. "
+                        + status_note + "Next, define a measurable target and failure criterion, "
+                        "hold out evaluation inputs, and compare against a simple baseline. "
+                        "Proceed as a testable proposal; independent evidence is still needed before claiming scientific validity.")
+            return ReasoningStep(message=text)
         handler = {
             "genomics": self._step_genomics,
             "clinical": self._step_clinical,

@@ -9,15 +9,18 @@ from __future__ import annotations
 
 import json
 import time
+import os
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterator
+from typing import Any, Callable, Iterator
+from urllib.parse import quote
 
 import httpx
 
 from .events import Event
 
-FIXTURE_DIR = Path(__file__).resolve().parent.parent / "fixtures"
-DEFAULT_BACKEND = "http://localhost:8000"
+FIXTURE_DIR = Path(os.environ.get("TRACE_FIXTURE_DIR", str(Path(__file__).resolve().parent.parent / "fixtures")))
+DEFAULT_BACKEND = os.environ.get("TRACE_BACKEND_URL", "http://localhost:8000")
 
 
 # -- live -----------------------------------------------------------------
@@ -45,59 +48,108 @@ def _file_ids(body: Any) -> list[str]:
     return []
 
 
-def upload_files(base_url: str, files: list[tuple[str, bytes]], timeout: float = 60.0) -> list[str]:
+@dataclass(frozen=True)
+class BackendContract:
+    """Change paths and wire mappings here; keep normalized Event/RunState stable."""
+    upload_path: str = "/upload"
+    sample_path: str = "/demo/sample-patient"
+    start_path: str = "/investigate"
+    events_path: str = "/events/{run_id}"
+    report_path: str = "/report/{run_id}"
+    capabilities_path: str = "/capabilities"
+    cancel_path: str = "/runs/{run_id}/cancel"
+    upload_field: str = "files"
+    start_payload: Callable[[str, list[str], dict[str, Any]], Any] = lambda question, ids, config: {
+        "question": question, "file_ids": ids, **({"config": config} if config else {})}
+    parse_file_ids: Callable[[Any], list[str]] = _file_ids
+    parse_run_id: Callable[[Any], str] = lambda body: str(body["run_id"])
+    map_event: Callable[[Any], Event] = Event.from_dict
+    map_capabilities: Callable[[Any], dict[str, Any]] = lambda body: body
+
+
+DEFAULT_CONTRACT = BackendContract()
+
+
+def _mapped_event(blob: str, contract: BackendContract) -> Event:
+    try:
+        event = contract.map_event(json.loads(blob))
+        if not isinstance(event, Event):
+            raise TypeError("map_event must return Event")
+        return event
+    except Exception as exc:
+        return Event(type="error", payload={"message": f"Could not map backend event: {exc}"})
+
+
+def upload_files(base_url: str, files: list[tuple[str, bytes]], timeout: float = 60.0, *, contract: BackendContract = DEFAULT_CONTRACT) -> list[str]:
     """POST /upload: returns file ids for the uploaded patient files."""
-    payload = [("files", (name, data)) for name, data in files]
-    resp = httpx.post(f"{base_url.rstrip('/')}/upload", files=payload, timeout=timeout)
+    payload = [(contract.upload_field, (name, data)) for name, data in files]
+    resp = httpx.post(f"{base_url.rstrip('/')}{contract.upload_path}", files=payload, timeout=timeout)
     resp.raise_for_status()
-    return _file_ids(resp.json())
+    return contract.parse_file_ids(resp.json())
 
 
-def load_sample_patient(base_url: str, timeout: float = 60.0) -> list[str]:
+def load_sample_patient(base_url: str, timeout: float = 60.0, *, contract: BackendContract = DEFAULT_CONTRACT) -> list[str]:
     """POST /demo/sample-patient: loads the bundled patient server side.
 
     This is the stage path. No file picker, no dragging a VCF around live.
     """
-    resp = httpx.post(f"{base_url.rstrip('/')}/demo/sample-patient", timeout=timeout)
+    resp = httpx.post(f"{base_url.rstrip('/')}{contract.sample_path}", timeout=timeout)
     resp.raise_for_status()
-    return _file_ids(resp.json())
+    return contract.parse_file_ids(resp.json())
 
 
-def start_run(base_url: str, question: str, file_ids: list[str], timeout: float = 30.0) -> str:
+def start_run(base_url: str, question: str, file_ids: list[str], timeout: float = 30.0, *, contract: BackendContract = DEFAULT_CONTRACT, config: dict[str, Any] | None = None) -> str:
     """POST /investigate: returns the run_id to stream."""
     resp = httpx.post(
-        f"{base_url.rstrip('/')}/investigate",
-        json={"question": question, "file_ids": file_ids},
+        f"{base_url.rstrip('/')}{contract.start_path}",
+        json=contract.start_payload(question, file_ids, config or {}),
         timeout=timeout,
     )
     resp.raise_for_status()
-    return str(resp.json()["run_id"])
+    return contract.parse_run_id(resp.json())
 
 
-def fetch_report(base_url: str, run_id: str, timeout: float = 30.0) -> dict[str, Any]:
-    """GET /report/{run_id}: the final structured report."""
-    resp = httpx.get(f"{base_url.rstrip('/')}/report/{run_id}", timeout=timeout)
+def fetch_capabilities(base_url: str, *, contract: BackendContract = DEFAULT_CONTRACT) -> dict[str, Any]:
+    resp = httpx.get(base_url.rstrip('/') + contract.capabilities_path, timeout=5.0)
+    resp.raise_for_status()
+    body = contract.map_capabilities(resp.json())
+    if not isinstance(body, dict):
+        raise ValueError("Capabilities mapping must return an object")
+    return body
+
+
+def cancel_run(base_url: str, run_id: str, *, contract: BackendContract = DEFAULT_CONTRACT) -> dict[str, Any]:
+    resp = httpx.post(base_url.rstrip('/') + contract.cancel_path.format(run_id=quote(run_id, safe="")), timeout=15.0)
     resp.raise_for_status()
     return resp.json()
 
 
-def live_stream(base_url: str, run_id: str, connect_timeout: float = 10.0) -> Iterator[Event]:
+def fetch_report(base_url: str, run_id: str, timeout: float = 30.0, *, contract: BackendContract = DEFAULT_CONTRACT) -> dict[str, Any]:
+    """GET /report/{run_id}: the final structured report."""
+    resp = httpx.get(base_url.rstrip('/') + contract.report_path.format(run_id=quote(run_id, safe="")), timeout=timeout)
+    resp.raise_for_status()
+    return resp.json()
+
+
+def live_stream(base_url: str, run_id: str, connect_timeout: float = 10.0, *, contract: BackendContract = DEFAULT_CONTRACT, should_stop: Callable[[], bool] | None = None) -> Iterator[Event]:
     """GET /events/{run_id}: Server-Sent Events, parsed into `Event`s.
 
     Hand-rolled rather than pulling an SSE library: the wire format is three
     lines of parsing and one less dependency for another team to reproduce.
     """
-    url = f"{base_url.rstrip('/')}/events/{run_id}"
+    url = base_url.rstrip('/') + contract.events_path.format(run_id=quote(run_id, safe=""))
     # No read timeout: the stream is idle between agent steps by design.
-    timeout = httpx.Timeout(None, connect=connect_timeout)
+    timeout = httpx.Timeout(120.0, connect=connect_timeout)
     try:
         with httpx.stream("GET", url, timeout=timeout) as resp:
             resp.raise_for_status()
             data: list[str] = []
             for line in resp.iter_lines():
+                if should_stop and should_stop():
+                    return
                 if line == "":
                     if data:
-                        yield Event.from_json("\n".join(data))
+                        yield _mapped_event("\n".join(data), contract)
                         data = []
                     continue
                 if line.startswith(":"):  # keep-alive comment
@@ -105,7 +157,7 @@ def live_stream(base_url: str, run_id: str, connect_timeout: float = 10.0) -> It
                 if line.startswith("data:"):
                     data.append(line[5:].lstrip())
             if data:
-                yield Event.from_json("\n".join(data))
+                yield _mapped_event("\n".join(data), contract)
     except httpx.HTTPError as exc:
         yield Event(
             type="error",

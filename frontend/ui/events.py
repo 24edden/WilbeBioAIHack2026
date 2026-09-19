@@ -11,6 +11,7 @@ becomes an `error` event and is rendered as such.
 from __future__ import annotations
 
 import json
+from copy import deepcopy
 from dataclasses import dataclass, field
 from typing import Any, Iterable
 
@@ -104,6 +105,17 @@ class Event:
         if not isinstance(items, list):
             return []
         return [i if isinstance(i, dict) else {"source": str(i)} for i in items]
+
+    @property
+    def weak_points(self) -> dict[str, Any]:
+        """Optional backend assessment. Missing/unsupported data is not an empty audit."""
+        assessment = self.payload.get("weak_points")
+        if not isinstance(assessment, dict) or assessment.get("status") not in ("assessed", "not_assessed"):
+            return {"status": "not_assessed", "items": []}
+        items = assessment.get("items")
+        if not isinstance(items, list) or any(not isinstance(item, dict) for item in items):
+            return {"status": "not_assessed", "items": []}
+        return deepcopy(assessment)
 
 
 def _fmt_args(args: Any) -> str:

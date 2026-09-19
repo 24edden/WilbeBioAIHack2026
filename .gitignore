@@ -7,3 +7,4 @@ venv/
 uploads/
 *.egg-info/
 .streamlit/secrets.toml
+.deploy/

@@ -1,0 +1,9 @@
+{
+  "data_root": "..",
+  "label_scope": "Synthetic repo behavioral regressions, not a biological validation set",
+  "cases": [
+    {"id": "sample-supported", "inputs": {"question": "Why did this patient fail?", "files": ["samples/patient-0.vcf", "samples/patient-0-labs.csv", "samples/patient-0-notes.txt"]}, "expected": {"abstained": false, "answer_contains": ["KRAS"]}},
+    {"id": "empty-evidence", "inputs": {"question": "Why did this patient fail?", "files": []}, "expected": {"abstained": true}},
+    {"id": "unrelated-hypothesis", "inputs": {"question": "Did the patient fail because of BRCA2?", "files": ["samples/patient-0-notes.txt"]}, "expected": {"abstained": true}}
+  ]
+}

@@ -15,6 +15,7 @@ from .events import Event
 RUNNING = "running"
 DONE = "done"
 FAILED = "failed"
+STOPPED = "stopped"
 
 
 @dataclass
@@ -26,6 +27,9 @@ class Agent:
     spawned_ts: int = 0
     activity: int = 0
     last_line: str = ""
+    skills: list[str] = field(default_factory=list)
+    alignment: str = ""
+    icon: str = "agent"
 
 
 @dataclass
@@ -53,6 +57,7 @@ class RunState:
     run_id: str = ""
     question: str = ""
     files: list[str] = field(default_factory=list)
+    config: dict[str, Any] = field(default_factory=dict)
     agents: dict[str, Agent] = field(default_factory=dict)
     edges: set[tuple[str, str]] = field(default_factory=set)
     # (sender, recipient) -> number of messages, used to label the graph edges
@@ -66,7 +71,12 @@ class RunState:
     confidence: float | None = None
     abstained: bool = False
     complete: bool = False
+    status: str = "idle"
+    metrics: dict[str, Any] = field(default_factory=dict)
+    task_mode: str = "investigation"
+    discussion: list[dict[str, Any]] = field(default_factory=list)
     errors: list[str] = field(default_factory=list)
+    weak_points: dict[str, Any] = field(default_factory=lambda: {"status": "not_assessed", "items": []})
 
     # -- folding ---------------------------------------------------------
 
@@ -86,7 +96,12 @@ class RunState:
         handler(ev)
 
     def _on_run_started(self, ev: Event) -> None:
+        self.status = "running"
         self.question = str(ev.payload.get("question") or self.question)
+        config = ev.payload.get("config")
+        if isinstance(config, dict):
+            self.config = dict(config)
+            self.task_mode = str(config.get("task_mode") or "investigation")
         files = ev.payload.get("files")
         if isinstance(files, list):
             self.files = [str(f) for f in files]
@@ -100,16 +115,22 @@ class RunState:
             role=ev.agent_role or "unknown",
             parent_id=ev.parent_id,
             spawned_ts=ev.ts,
+            skills=[str(skill) for skill in ev.payload.get("skills", [])] if isinstance(ev.payload.get("skills"), list) else [],
+            alignment=str(ev.payload.get("alignment") or ""),
+            icon=str(ev.payload.get("icon") or "agent"),
         )
         if ev.parent_id:
             self.edges.add((ev.parent_id, ev.agent_id))
         self._log(ev)
 
     def _on_agent_message(self, ev: Event) -> None:
+        entry = ev.payload.get("discussion")
+        if isinstance(entry, dict):
+            self.discussion.append(dict(entry))
         self._touch(ev)
         # A message names its recipient in parent_id; draw it so agent-to-agent
         # cross-examination is visible in the graph, not just the timeline.
-        if ev.agent_id and ev.parent_id and ev.parent_id in self.agents:
+        if ev.agent_id and ev.parent_id:
             pair = (ev.agent_id, ev.parent_id)
             self.edges.add(pair)
             self.talk[pair] = self.talk.get(pair, 0) + 1
@@ -126,8 +147,6 @@ class RunState:
     def _on_finding(self, ev: Event) -> None:
         self._touch(ev)
         agent = self.agents.get(ev.agent_id or "")
-        if agent is not None:
-            agent.status = DONE
         self.findings.append(
             Finding(
                 agent_id=ev.agent_id or "?",
@@ -141,13 +160,27 @@ class RunState:
         self._log(ev)
 
     def _on_run_complete(self, ev: Event) -> None:
+        self.task_mode = str(ev.payload.get("task_mode") or self.task_mode)
+        discussion = ev.payload.get("discussion")
+        if isinstance(discussion, list):
+            self.discussion = [dict(item) for item in discussion if isinstance(item, dict)]
+        self.status = str(ev.payload.get("status") or ("cancelled" if ev.payload.get("cancelled") else "complete"))
+        metrics = ev.payload.get("metrics")
+        if isinstance(metrics, dict):
+            self.metrics = dict(metrics)
+        self.weak_points = ev.weak_points
         self.verdict = ev.text
         self.confidence = ev.confidence
         self.abstained = bool(ev.payload.get("abstained"))
         self.complete = True
+        statuses = ev.payload.get("agent_statuses")
+        statuses = statuses if isinstance(statuses, dict) else {}
         for agent in self.agents.values():
-            if agent.status == RUNNING:
-                agent.status = DONE
+            reported = statuses.get(agent.id)
+            if reported:
+                agent.status = {"error": FAILED, "cancelled": STOPPED}.get(str(reported), str(reported))
+            elif agent.status == RUNNING:
+                agent.status = STOPPED if self.status == "cancelled" else DONE
         self._log(ev)
 
     def _on_error(self, ev: Event) -> None:
@@ -195,6 +228,9 @@ class RunState:
 
     @property
     def elapsed_ms(self) -> int:
+        measured = self.metrics.get("wall_time_ms", self.metrics.get("wall_ms"))
+        if self.complete and isinstance(measured, (int, float)) and not isinstance(measured, bool):
+            return max(0, int(measured))
         if not self.raw:
             return 0
         return max(e.ts for e in self.raw) - min(e.ts for e in self.raw)

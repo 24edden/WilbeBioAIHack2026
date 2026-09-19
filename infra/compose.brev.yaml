@@ -1,0 +1,6 @@
+# Add the UI's private Brev mesh listener for the authenticated HTTPS gateway.
+# The API remains internal. Do not substitute a public interface or 0.0.0.0.
+services:
+  ui:
+    ports:
+      - "${TRACE_BREV_IP:?Set the verified Brev mesh IPv4 address}:${TRACE_UI_PORT:-8501}:8501"

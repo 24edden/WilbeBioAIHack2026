@@ -66,3 +66,18 @@ def test_hypothesis_with_decisive_evidence_answers():
     gate = evidence_gate(findings, hypothesis="MTHFR C677T")
     assert not gate.abstain
     assert not gate.disagreement
+
+
+def test_one_specialist_cannot_corroborate_itself():
+    gate = evidence_gate([finding("genomics", "strong", 0.95),
+                          finding("genomics", "same voice", 0.9)], None)
+    assert gate.abstain
+    assert "corroboration" in gate.reason
+
+
+def test_unrelated_strong_evidence_cannot_upgrade_a_weak_hypothesis():
+    gate = evidence_gate([finding("genomics", "weak", 0.1, stance="supports"),
+                          finding("clinical", "unrelated", 0.95),
+                          finding("literature", "context", 0.8)], "BRCA2")
+    assert gate.abstain
+    assert "confidence floor" in gate.reason

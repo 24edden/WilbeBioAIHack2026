@@ -1,0 +1,327 @@
+{
+  "date": "2026-09-19",
+  "environment": "Windows 11, Python 3.12, local mock providers",
+  "interpretation": "Resource and duplicate-call reduction. Small-sample wall times are effectively unchanged. Paced cases contain synthetic waits and do not benchmark live models.",
+  "summary": [
+    {
+      "case": "sample_no_wait",
+      "same_findings_and_verdict": true,
+      "before_median_seconds": 0.002345600001717685,
+      "after_median_seconds": 0.0035981000000901986,
+      "before_calls": 5,
+      "after_calls": 5,
+      "before_peak_calls": 1,
+      "after_peak_calls": 1
+    },
+    {
+      "case": "sample_paced",
+      "same_findings_and_verdict": true,
+      "before_median_seconds": 2.074023199998919,
+      "after_median_seconds": 2.058455700000195,
+      "before_calls": 5,
+      "after_calls": 5,
+      "before_peak_calls": 5,
+      "after_peak_calls": 5
+    },
+    {
+      "case": "repeated_uploads",
+      "same_findings_and_verdict": true,
+      "before_median_seconds": 0.557857799998601,
+      "after_median_seconds": 0.56727200000023,
+      "before_calls": 60,
+      "after_calls": 5,
+      "before_peak_calls": 60,
+      "after_peak_calls": 5
+    }
+  ],
+  "before": {
+    "kind": "synthetic_mock_workflow_profile",
+    "live_model_calls": 0,
+    "note": "Paced cases include simulated waits. These are orchestration measurements, not inference speed or scientific accuracy.",
+    "cases": {
+      "sample_no_wait": {
+        "synthetic_vcf_copies": 1,
+        "mock_latency_scale": 0,
+        "median_wall_seconds": 0.002345600001717685,
+        "trials": [
+          {
+            "wall_seconds": 0.004948199999489589,
+            "first_event_seconds": 0.00032110000029206276,
+            "first_finding_seconds": 0.0008672000003571156,
+            "variants": 5,
+            "score_calls": 5,
+            "peak_variant_calls": 1,
+            "events": 53,
+            "findings": 13,
+            "status": "complete",
+            "abstained": false,
+            "result_sha256": "0f2a3c5c153ca16fbd53ee48668fae19b08f00712233acf480bf997e0dfdc161"
+          },
+          {
+            "wall_seconds": 0.002345600001717685,
+            "first_event_seconds": 0.00020280000171624124,
+            "first_finding_seconds": 0.0005477000013343059,
+            "variants": 5,
+            "score_calls": 5,
+            "peak_variant_calls": 1,
+            "events": 53,
+            "findings": 13,
+            "status": "complete",
+            "abstained": false,
+            "result_sha256": "e123bcede5fa66d657d8f4852bc5fe535b860d1a51bbf18f5d2efa9870990cba"
+          },
+          {
+            "wall_seconds": 0.0022557000011147466,
+            "first_event_seconds": 0.00016010000035748817,
+            "first_finding_seconds": 0.000473000000056345,
+            "variants": 5,
+            "score_calls": 5,
+            "peak_variant_calls": 1,
+            "events": 53,
+            "findings": 13,
+            "status": "complete",
+            "abstained": false,
+            "result_sha256": "d3d2cc7c2d13e4e8cffaa45e8f2d64a422b9c425e975b713412e2596d5ceb768"
+          }
+        ]
+      },
+      "sample_paced": {
+        "synthetic_vcf_copies": 1,
+        "mock_latency_scale": 0.2,
+        "median_wall_seconds": 2.074023199998919,
+        "trials": [
+          {
+            "wall_seconds": 2.074023199998919,
+            "first_event_seconds": 0.0001049999991664663,
+            "first_finding_seconds": 0.7695142000011401,
+            "variants": 5,
+            "score_calls": 5,
+            "peak_variant_calls": 5,
+            "events": 53,
+            "findings": 13,
+            "status": "complete",
+            "abstained": false,
+            "result_sha256": "425d0003148d1e6ca7ee857c9e713246f44e68f3e6d27dfa55ce217a7dfe1601"
+          },
+          {
+            "wall_seconds": 2.036227999997209,
+            "first_event_seconds": 0.000152900000102818,
+            "first_finding_seconds": 0.8011796999999206,
+            "variants": 5,
+            "score_calls": 5,
+            "peak_variant_calls": 5,
+            "events": 53,
+            "findings": 13,
+            "status": "complete",
+            "abstained": false,
+            "result_sha256": "8e892e24b6cce24da5de8ac9e39623daac873e9a2a3b2573cea47762dfe54677"
+          },
+          {
+            "wall_seconds": 2.074733200002811,
+            "first_event_seconds": 0.00010620000102790073,
+            "first_finding_seconds": 0.7835979000010411,
+            "variants": 5,
+            "score_calls": 5,
+            "peak_variant_calls": 5,
+            "events": 53,
+            "findings": 13,
+            "status": "complete",
+            "abstained": false,
+            "result_sha256": "60c50edc3d04af4920ee306dcb87a4644088a069f1a6ef94ced6307bbfd77462"
+          }
+        ]
+      },
+      "repeated_uploads": {
+        "synthetic_vcf_copies": 12,
+        "mock_latency_scale": 0.05,
+        "median_wall_seconds": 0.557857799998601,
+        "trials": [
+          {
+            "wall_seconds": 0.5661160999989079,
+            "first_event_seconds": 0.0001080999973055441,
+            "first_finding_seconds": 0.18429769999784185,
+            "variants": 60,
+            "score_calls": 60,
+            "peak_variant_calls": 60,
+            "events": 196,
+            "findings": 46,
+            "status": "complete",
+            "abstained": false,
+            "result_sha256": "a899a94c5129c10e42591f406ecb3cf3495197ff21c5ae1fed3069d27ba27fbc"
+          },
+          {
+            "wall_seconds": 0.557857799998601,
+            "first_event_seconds": 0.00021220000053290278,
+            "first_finding_seconds": 0.18084409999937634,
+            "variants": 60,
+            "score_calls": 60,
+            "peak_variant_calls": 60,
+            "events": 196,
+            "findings": 46,
+            "status": "complete",
+            "abstained": false,
+            "result_sha256": "01bcd8c117d5a3a7213add989eb456fa4959719232dfb1388a34b15a7c99b23d"
+          },
+          {
+            "wall_seconds": 0.5391794999995909,
+            "first_event_seconds": 0.0001841000012063887,
+            "first_finding_seconds": 0.19043819999933476,
+            "variants": 60,
+            "score_calls": 60,
+            "peak_variant_calls": 60,
+            "events": 196,
+            "findings": 46,
+            "status": "complete",
+            "abstained": false,
+            "result_sha256": "0a001e3db5f8d8b1e9686fda37f75bb3bcc8ddf386e56dd7383c66489195a525"
+          }
+        ]
+      }
+    }
+  },
+  "after": {
+    "kind": "synthetic_mock_workflow_profile",
+    "live_model_calls": 0,
+    "note": "Paced cases include simulated waits. These are orchestration measurements, not inference speed or scientific accuracy.",
+    "cases": {
+      "sample_no_wait": {
+        "synthetic_vcf_copies": 1,
+        "mock_latency_scale": 0,
+        "median_wall_seconds": 0.0035981000000901986,
+        "trials": [
+          {
+            "wall_seconds": 0.003626300000178162,
+            "first_event_seconds": 0.0003880000003846362,
+            "first_finding_seconds": 0.0008358000013686251,
+            "variants": 5,
+            "score_calls": 5,
+            "peak_variant_calls": 1,
+            "events": 53,
+            "findings": 13,
+            "status": "complete",
+            "abstained": false,
+            "result_sha256": "0f2a3c5c153ca16fbd53ee48668fae19b08f00712233acf480bf997e0dfdc161"
+          },
+          {
+            "wall_seconds": 0.0035981000000901986,
+            "first_event_seconds": 0.000216500000533415,
+            "first_finding_seconds": 0.000721799999155337,
+            "variants": 5,
+            "score_calls": 5,
+            "peak_variant_calls": 1,
+            "events": 53,
+            "findings": 13,
+            "status": "complete",
+            "abstained": false,
+            "result_sha256": "e123bcede5fa66d657d8f4852bc5fe535b860d1a51bbf18f5d2efa9870990cba"
+          },
+          {
+            "wall_seconds": 0.002918800000770716,
+            "first_event_seconds": 0.00016970000069704838,
+            "first_finding_seconds": 0.0006339999999909196,
+            "variants": 5,
+            "score_calls": 5,
+            "peak_variant_calls": 1,
+            "events": 53,
+            "findings": 13,
+            "status": "complete",
+            "abstained": false,
+            "result_sha256": "d3d2cc7c2d13e4e8cffaa45e8f2d64a422b9c425e975b713412e2596d5ceb768"
+          }
+        ]
+      },
+      "sample_paced": {
+        "synthetic_vcf_copies": 1,
+        "mock_latency_scale": 0.2,
+        "median_wall_seconds": 2.058455700000195,
+        "trials": [
+          {
+            "wall_seconds": 2.058455700000195,
+            "first_event_seconds": 0.0001416000013705343,
+            "first_finding_seconds": 0.7741146000007575,
+            "variants": 5,
+            "score_calls": 5,
+            "peak_variant_calls": 5,
+            "events": 53,
+            "findings": 13,
+            "status": "complete",
+            "abstained": false,
+            "result_sha256": "425d0003148d1e6ca7ee857c9e713246f44e68f3e6d27dfa55ce217a7dfe1601"
+          },
+          {
+            "wall_seconds": 2.0456652000029862,
+            "first_event_seconds": 0.00014740000187885016,
+            "first_finding_seconds": 0.7902890000004845,
+            "variants": 5,
+            "score_calls": 5,
+            "peak_variant_calls": 5,
+            "events": 53,
+            "findings": 13,
+            "status": "complete",
+            "abstained": false,
+            "result_sha256": "8e892e24b6cce24da5de8ac9e39623daac873e9a2a3b2573cea47762dfe54677"
+          },
+          {
+            "wall_seconds": 2.0669789999992645,
+            "first_event_seconds": 0.00024140000095940195,
+            "first_finding_seconds": 0.782166100001632,
+            "variants": 5,
+            "score_calls": 5,
+            "peak_variant_calls": 5,
+            "events": 53,
+            "findings": 13,
+            "status": "complete",
+            "abstained": false,
+            "result_sha256": "60c50edc3d04af4920ee306dcb87a4644088a069f1a6ef94ced6307bbfd77462"
+          }
+        ]
+      },
+      "repeated_uploads": {
+        "synthetic_vcf_copies": 12,
+        "mock_latency_scale": 0.05,
+        "median_wall_seconds": 0.56727200000023,
+        "trials": [
+          {
+            "wall_seconds": 0.56727200000023,
+            "first_event_seconds": 0.00021150000247871503,
+            "first_finding_seconds": 0.18539510000118753,
+            "variants": 60,
+            "score_calls": 5,
+            "peak_variant_calls": 5,
+            "events": 141,
+            "findings": 46,
+            "status": "complete",
+            "abstained": false,
+            "result_sha256": "a899a94c5129c10e42591f406ecb3cf3495197ff21c5ae1fed3069d27ba27fbc"
+          },
+          {
+            "wall_seconds": 0.5720689999980095,
+            "first_event_seconds": 0.00020569999833242036,
+            "first_finding_seconds": 0.17585649999818997,
+            "variants": 60,
+            "score_calls": 5,
+            "peak_variant_calls": 5,
+            "events": 141,
+            "findings": 46,
+            "status": "complete",
+            "abstained": false,
+            "result_sha256": "01bcd8c117d5a3a7213add989eb456fa4959719232dfb1388a34b15a7c99b23d"
+          },
+          {
+            "wall_seconds": 0.5518647999997484,
+            "first_event_seconds": 0.00013249999756226316,
+            "first_finding_seconds": 0.21806879999712692,
+            "variants": 60,
+            "score_calls": 5,
+            "peak_variant_calls": 5,
+            "events": 141,
+            "findings": 46,
+            "status": "complete",
+            "abstained": false,
+            "result_sha256": "0a001e3db5f8d8b1e9686fda37f75bb3bcc8ddf386e56dd7383c66489195a525"
+          }
+        ]
+      }
+    }
+  }
+}

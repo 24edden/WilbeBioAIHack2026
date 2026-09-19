@@ -66,6 +66,9 @@ class LiteratureAgent(Agent):
         by_pmid = {hit["pmid"]: hit for hit in hits}
         for claim in step.claims:
             hit = by_pmid.get(str((claim.detail or {}).get("pmid", "")), {})
+            if not hit:
+                self.say("Withheld a claim: its PMID was not present in the retrieved evidence.")
+                continue
             provenance = [
                 Provenance(
                     kind="pmid",

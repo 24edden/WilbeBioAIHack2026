@@ -2,16 +2,102 @@
 
 Working notes for the team.
 
+## Responsive execution and profiling
+
+The UI runs event sources in a session-owned worker and drains batches on the
+Streamlit script thread. Source workers must never call Streamlit or mutate its
+session state. The submitted question/configuration is a snapshot; editing the
+next draft does not change a running investigation. Keep the adapter boundary when
+replacing the backend. See [ARCHITECTURE.md](ARCHITECTURE.md) and
+[Plan/architecture-review.md](Plan/architecture-review.md).
+
+Variant scoring uses at most eight workers per investigation and reuses identical
+biological inputs within that run. Each original upload's provenance is retained.
+This is not a cross-user cache or a cache of reasoning responses. The API provides
+real cancellation at `POST /runs/{run_id}/cancel`; closing an SSE connection does
+not stop a backend run. Reports and terminal events share execution metrics.
+
+Reproduce the small synthetic performance check without keys or live model calls:
+
+```powershell
+.venv/Scripts/python.exe scripts/profile_workflow.py --output .deploy/profile-new.json
+```
+
+Use a new output filename. [Plan/performance-check.json](Plan/performance-check.json)
+records three trials per case before/after: repeated copies of five variants went
+from 60 scoring calls to five while preserving the findings and verdict. Small-case
+wall times were effectively unchanged. Paced cases include simulated waits; these
+measure orchestration and resource use, not live inference or scientific accuracy.
+
+Voice controls use the browser's speech APIs, with no server transcription model or
+new API key. Recognition is opt-in and may use the browser vendor's service. It
+requires browser support, microphone permission, and HTTPS or localhost. Spoken
+stage updates are opt-in and use local device voices when available. Unsupported
+features show text guidance; typing and navigation remain available.
+
+## Comparing models and configurations
+
+The new `eval/` runner uses the existing Python dependencies. From the repository root:
+
+```powershell
+.venv/Scripts/python.exe -m eval --output eval/results/comparison-001.jsonl --concurrency 2
+```
+
+This runs a token-free, six-trial mock comparison on three frozen repo cases. Choose
+a new output filename each time. Read [eval/README.md](eval/README.md) for live
+configuration, actual token accounting, and replacing the backend adapter; see
+[Plan/model-evaluation.md](Plan/model-evaluation.md) for the researched benchmark
+recommendation. Mock behavioral passes are not model-performance or scientific scores.
+
+## Hosting and demo deployment
+
+[infra/README.md](infra/README.md) documents the single-host Docker Compose setup,
+readiness checks, Brev access and its current validation status. The API remains
+private and uses one worker because uploads and runs are stored in memory.
+
+[Plan/hosting-and-demo.md](Plan/hosting-and-demo.md) compares hosting options and
+sets out a live presentation with clearly labeled precomputed results and recorded
+fallbacks. The service is deployed on `agentic-takeoff-cpu` in mock mode at
+<https://trace-z484f0h2c.gobrev.dev> (NVIDIA sign-in and an allowed account required).
+The containers, connected API workflow and UI through SSH forwarding have been
+verified. See [infra/DEPLOYMENT.md](infra/DEPLOYMENT.md) for release fingerprints,
+test results and the remaining authenticated-browser check.
+
+## Connecting to NVIDIA Brev from Windows
+
+Verified on 19 September 2026: the Brev CLI is installed and authenticated inside
+the `Ubuntu` WSL distribution (`/home/ed/.local/bin/brev`). Run from PowerShell:
+
+```powershell
+wsl -d Ubuntu -- bash -lc 'brev ls'
+wsl -d Ubuntu -- bash -lc 'brev refresh'
+wsl -d Ubuntu -- bash -lc 'brev shell agentic-takeoff-cpu'
+# Run a single remote command:
+wsl -d Ubuntu -- bash -lc 'brev exec agentic-takeoff-cpu "hostname"'
+```
+
+`brev refresh` repairs missing or stale SSH host configuration; it resolved
+`Could not resolve hostname agentic-takeoff-cpu` during this check. The current
+instance is in `London-AI-Brev`, is running, and is a CPU machine (`n2d-highmem-4`)
+with no GPU listed. Use `brev ls` to confirm the current instance before connecting.
+
 ## Running the frontend
+
+Run from the repository root so `.streamlit/config.toml` themes the native controls.
+For backend/dataset replacement boundaries and the small UI contract, see
+[INTEGRATION.md](INTEGRATION.md).
 
 ```bash
 pip install -r frontend/requirements.txt
 streamlit run frontend/app.py
 ```
 
-Opens on <http://localhost:8501> in **Mock mode**, replaying a fixture and needing no
-backend, no GPU and no tokens. Switch to Live mode in the sidebar once the backend is up
-on `localhost:8000`.
+Opens on <http://localhost:8501> with **Try the demo**. This runs the workflow on the
+bundled synthetic case with an editable question and agent selection, simulated
+model outputs, and no API keys. Install both root and frontend requirements for this
+mode. Recorded playback remains available. Choose **Investigate my data** in the
+Evidence step once the backend is up on `localhost:8000`. The connected backend can
+itself run in mock mode; the UI labels simulated output explicitly.
 
 Before pushing frontend changes: `python frontend/smoke_test.py` (headless, no Streamlit).
 
@@ -140,12 +226,12 @@ whole system on fixtures.
 
 ```bash
 # API on http://127.0.0.1:8000  (interactive docs at /docs)
-.venv/Scripts/python.exe -m uvicorn app.main:app --reload
+.venv/Scripts/python.exe -m uvicorn app.main:app --reload --env-file .env
 
 # or headless, printing the agent stream to the terminal
 .venv/Scripts/python.exe -m app.cli "Why did this patient fail?" samples/*
 
-# tests (35 of them, ~1s, no network)
+# tests (no network; includes grounding and frontend event-contract regressions)
 .venv/Scripts/python.exe -m pytest -q
 ```
 
@@ -153,6 +239,22 @@ whole system on fixtures.
 metastatic colorectal cancer case that progressed on FOLFIRI + cetuximab. `POST
 /demo/sample-patient` loads the same three files into the service in one call, which
 is the demo path — no file picker on stage.
+
+The API command above loads `.env` explicitly. For the headless CLI, export the
+variables in your shell before running; `app.config` itself reads process environment
+variables, not `.env` files. Install `frontend/requirements.txt` into the same virtual
+environment to run the backend-to-frontend contract tests and the Streamlit app.
+
+The current orchestration implementation is the plain async fallback described in
+`ARCHITECTURE.md`; NVIDIA Agent Toolkit integration is not implemented. Live BioNeMo
+paths and model names are provisional adapters, not verified deployed NIM services.
+Missing reasoning credentials return HTTP 503 before creating a run; live failures
+never switch silently to fixtures.
+
+Grounding regressions cover multiple uploaded files, original note/CSV line numbers,
+withholding model claims with missing or ambiguous source references, and abstention
+when a second specialist does not corroborate the evidence. The confidence values
+and this gate are demo heuristics, not calibrated probabilities.
 
 ### Endpoints
 
@@ -164,7 +266,16 @@ is the demo path — no file picker on stage.
 | `GET` | `/events/{run_id}` | SSE stream of the event schema. Replays from the start, so connecting late is fine. |
 | `GET` | `/events/{run_id}/log` | The same events as one JSON array, for tests and debugging. |
 | `GET` | `/report/{run_id}` | Structured report. Readable while the run is still going (`status: running`). |
+| `POST` | `/runs/{run_id}/cancel` | Stops an active investigation, waits for cleanup, and preserves its partial report. Repeated requests return the existing terminal status. |
 | `GET` | `/runs`, `/health` | What is running, and which mode the service is in. |
+| `GET` | `/capabilities` | Implemented agent controls and safe configured model defaults. |
+
+`POST /investigate` also accepts optional `config`: choose one to three unique
+`specialists` from `genomics`, `clinical`, and `literature`; the orchestrator and
+critic remain required. Live runs can override `reasoning_model`, `variant_model`,
+and `embedding_model` for that run on the already-configured endpoints. Mock runs
+reject model overrides rather than pretending a name changes the fixtures. See
+[INTEGRATION.md](INTEGRATION.md) for examples, adapter hooks, and compatibility rules.
 
 SSE frames carry a `data:` line only — no `event:` name — so a browser
 `EventSource.onmessage`, a Streamlit polling loop and plain `curl -N` all read the
@@ -191,7 +302,9 @@ Two properties worth keeping:
 |---|---|---|
 | `RUN_MODE` | `mock` | `mock` or `live`. |
 | `MOCK_LATENCY_SCALE` | `1.0` | Multiplier on simulated thinking time. |
-| `REASONING_BASE_URL` / `REASONING_API_KEY` / `REASONING_MODEL` | OpenAI defaults | GPT-Rosalind or any OpenAI-compatible chat endpoint. |
+| `REASONING_BASE_URL` / `REASONING_API_KEY` / `REASONING_MODEL` | OpenAI base URL, empty key, `gpt-4o-mini` | Set model to `gpt-rosalind-research` with an approved project's key for Rosalind. |
+| `REASONING_API` | `auto` | Selects Responses for Rosalind and chat completions for other models. Explicit `responses` / `chat_completions` also supported. |
+| `REASONING_TIMEOUT_SECONDS` / `REASONING_MAX_OUTPUT_TOKENS` | `180` / `16000` | Reasoning timeout and output budget, including internal reasoning tokens. Uses `max_output_tokens` for Responses and `max_completion_tokens` for chat. |
 | `BIONEMO_BASE_URL` / `BIONEMO_API_KEY` / `BIONEMO_VARIANT_MODEL` / `BIONEMO_EMBED_MODEL` | localhost NIM | Confirm the real paths against the container running on Brev. |
 
 ### Layout
@@ -220,15 +333,19 @@ against those with no backend running. Regenerate after any schema change:
 
 ### Going live
 
-Set `RUN_MODE=live` and fill the credentials. The live provider deliberately raises
-rather than degrading into invented output, so a missing key fails loudly. Two things
-need confirming on site before it will work end to end — both are open questions in
-[Context/tooling.md](Context/tooling.md):
+For a free branded audience URL, domain options, QR preparation and the capacity
+distinction between 50 viewers and 50 investigations, see
+[Plan/public-demo-hosting.md](Plan/public-demo-hosting.md). The existing private
+Brev link is not yet an anonymous audience demo.
 
-1. whether GPT-Rosalind is callable programmatically, and at what URL;
-2. which BioNeMo NIMs are available on Brev, and the request shape of the variant-effect
-   endpoint.
+GPT-Rosalind now has a Responses adapter. Follow
+[Context/rosalind-integration.md](Context/rosalind-integration.md) for the verified
+model ID, approved-project access requirement, `.env` settings and the
+`scripts/check_reasoning.py` lookup/smoke checks. No API credential was configured
+locally during implementation, so live generation remains unverified.
 
-`app/providers/live.py` is the only file that should need editing when those answers
-arrive. If one vendor is unavailable, the factory can return a mixed pair — real
-BioNeMo with mock reasoning, or vice versa — and the demo still runs.
+Set `RUN_MODE=live` and fill the credentials. The live provider raises rather than
+degrading into invented output. A clinical-only run exercises Rosalind without
+BioNeMo; its limited evidence still goes through the existing abstention gate.
+Genomics and Literature also need confirmed BioNeMo NIM paths and request shapes.
+The factory does not silently mix live and mock providers.

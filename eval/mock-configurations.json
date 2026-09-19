@@ -1,0 +1,4 @@
+[
+  {"id": "mock-planner", "settings": {"run_mode": "mock"}},
+  {"id": "mock-clinical-only", "settings": {"run_mode": "mock", "specialists": ["clinical"]}}
+]

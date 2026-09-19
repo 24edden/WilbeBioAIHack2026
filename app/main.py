@@ -12,6 +12,7 @@ from __future__ import annotations
 import asyncio
 import json
 from contextlib import asynccontextmanager
+from dataclasses import replace
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, UploadFile
@@ -19,7 +20,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 
 from app.config import get_settings
-from app.engine import run_investigation
+from app.engine import run_investigation, finalize_cancelled
+from app.execution import DEFAULT_VARIANT_CONCURRENCY
+from app.skills import workflow_capabilities, role_metadata, resolve_task_mode
 from app.events import Event
 from app.ingest import build_bundle, sniff_kind
 from app.models import (
@@ -30,6 +33,7 @@ from app.models import (
     UploadResponse,
 )
 from app.providers import build_providers
+from app.providers.live import ProviderError
 from app.store import files as file_store
 from app.store import runs as run_store
 
@@ -40,9 +44,12 @@ HEARTBEAT_SECONDS = 15.0
 async def lifespan(_: FastAPI):
     yield
     # Stop any investigation still running so the process can exit promptly.
+    tasks = []
     for run in run_store.all():
         if run.task and not run.task.done():
             run.task.cancel()
+            tasks.append(run.task)
+    await asyncio.gather(*tasks, return_exceptions=True)
 
 
 app = FastAPI(
@@ -72,6 +79,32 @@ async def health() -> dict[str, str | int]:
         "run_mode": settings.run_mode,
         "runs": len(run_store.all()),
         "files": len(file_store.all()),
+    }
+
+
+@app.get("/capabilities")
+async def capabilities() -> dict:
+    """Configured controls, not a discovery claim about model availability."""
+    settings = get_settings()
+    return {
+        "run_mode": settings.run_mode,
+        **workflow_capabilities(),
+        "specialist_roles": [
+            {"id": role, "label": role.title(), **role_metadata(role)}
+            for role in ("genomics", "clinical", "literature")
+        ],
+        "required_roles": ["orchestrator", "critic"],
+        "defaults": {
+            "task_mode": "investigation",
+            "specialists": ["genomics", "clinical", "literature"],
+            "reasoning_model": settings.reasoning_model,
+            "variant_model": settings.bionemo_variant_model,
+            "embedding_model": settings.bionemo_embed_model,
+        },
+        "model_overrides_supported": not settings.is_mock,
+        "reasoning_api": settings.effective_reasoning_api if not settings.is_mock else "mock",
+        "cancellation_supported": True,
+        "execution_limits": {"variant_concurrency": DEFAULT_VARIANT_CONCURRENCY},
     }
 
 
@@ -138,15 +171,48 @@ async def investigate(request: InvestigateRequest) -> InvestigateResponse:
     bundle = build_bundle([(s.file_id, s.filename, s.text) for s in stored])
 
     settings = get_settings()
+    config = request.config
+    task_mode = config.task_mode if config else "investigation"
+    effective_mode, _ = resolve_task_mode(task_mode, question, bundle)
+    if effective_mode == "idea_review" and config and config.specialists is not None:
+        raise HTTPException(status_code=422, detail="Idea review uses a fixed research/supporter/challenger team; omit specialists.")
+    overrides = {}
+    if config is not None:
+        for request_name, setting_name in (
+            ("reasoning_model", "reasoning_model"),
+            ("variant_model", "bionemo_variant_model"),
+            ("embedding_model", "bionemo_embed_model"),
+        ):
+            value = getattr(config, request_name)
+            if value is not None:
+                overrides[setting_name] = value
+    if settings.is_mock and overrides:
+        raise HTTPException(status_code=422, detail="Model overrides require RUN_MODE=live; mock providers use fixtures.")
+    settings = replace(settings, **overrides)
+    try:
+        providers = build_providers(settings)
+    except ProviderError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
     run = run_store.create(question, bundle, settings.run_mode)
+    run.report.config = {
+        "specialists": config.specialists if config else None,
+        "roster_source": "user" if config and config.specialists is not None else "planner",
+        "run_mode": settings.run_mode,
+        "reasoning_model": settings.reasoning_model if not settings.is_mock else "rosalind(mock)",
+        "reasoning_api": settings.effective_reasoning_api if not settings.is_mock else "mock",
+        "variant_model": settings.bionemo_variant_model if not settings.is_mock else "bionemo-nim(mock):variant-effect",
+        "embedding_model": settings.bionemo_embed_model if not settings.is_mock else "hash-embedding(mock)",
+    }
     run.task = asyncio.create_task(
         run_investigation(
             run_id=run.run_id,
             question=question,
             bundle=bundle,
             bus=run.bus,
-            providers=build_providers(settings),
+            providers=providers,
             report=run.report,
+            specialists=config.specialists if config else None,
+            task_mode=task_mode,
         )
     )
     return InvestigateResponse(run_id=run.run_id)
@@ -161,6 +227,28 @@ def _sse(event: Event) -> str:
     JSON, per the shared schema.
     """
     return f"data: {json.dumps(event.model_dump(), separators=(',', ':'))}\n\n"
+
+
+@app.post("/runs/{run_id}/cancel")
+async def cancel_run(run_id: str) -> dict:
+    run = run_store.get(run_id)
+    if run is None:
+        raise HTTPException(status_code=404, detail=f"unknown run {run_id}")
+    if run.report.status == "running":
+        if run.task and not run.task.done():
+            # Repeated simultaneous requests must not interrupt cancellation cleanup.
+            if not run.task.cancelling():
+                run.task.cancel()
+
+        async def finish_cancellation():
+            if run.task:
+                await asyncio.gather(run.task, return_exceptions=True)
+            finalize_cancelled(run.report, run.bundle, run.bus)
+
+        # A disconnected HTTP caller must not interrupt engine cleanup or leave
+        # a task cancelled before its first instruction permanently running.
+        await asyncio.shield(finish_cancellation())
+    return {"run_id": run_id, "status": run.report.status}
 
 
 @app.get("/events/{run_id}")
@@ -193,6 +281,7 @@ async def events(run_id: str) -> StreamingResponse:
                 yield frame
         finally:
             pump_task.cancel()
+            await asyncio.gather(pump_task, return_exceptions=True)
 
     return StreamingResponse(
         stream(),

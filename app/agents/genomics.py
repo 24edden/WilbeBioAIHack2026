@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
-import asyncio
+import json
 from typing import Any
 
 from app.agents.base import Agent
 from app.models import PatientBundle, Provenance, Variant
+from app.execution import bounded_map, DEFAULT_VARIANT_CONCURRENCY
 from app.providers.base import VariantScore
 
 
@@ -30,7 +31,37 @@ class GenomicsAgent(Agent):
             f"Scoring {len(variants)} variant(s) with "
             f"{self.ctx.providers.bio.name} for functional effect."
         )
-        scores = await asyncio.gather(*(self._score(v) for v in variants))
+        # Reuse exact biological inputs only within this run/provider context.
+        # Source metadata stays on each row and is reattached to every finding.
+        keys = [json.dumps(variant.model_dump(exclude={"source_line", "source_file", "source_file_id"}),
+                           sort_keys=True) for variant in variants]
+        unique = dict(zip(keys, variants))
+        metrics = self.ctx.extras.setdefault("metrics", {})
+        metrics["variant_requests"] = metrics.get("variant_requests", 0) + len(variants)
+        active = 0
+
+        async def score_unique(variant):
+            nonlocal active
+            metrics["variant_unique_requests"] = metrics.get("variant_unique_requests", 0) + 1
+            active += 1
+            metrics["variant_peak_concurrency"] = max(metrics.get("variant_peak_concurrency", 0), active)
+            try:
+                return await self._score(variant)
+            finally:
+                active -= 1
+
+        unique_scores = await bounded_map(list(unique.values()), score_unique,
+            self.ctx.extras.get("variant_concurrency", DEFAULT_VARIANT_CONCURRENCY))
+        by_key = dict(zip(unique, unique_scores))
+        scores = [by_key[key] for key in keys]
+        seen = set()
+        for variant, key, score in zip(variants, keys, scores):
+            if key in seen and score is not None:
+                metrics["variant_cache_hits"] = metrics.get("variant_cache_hits", 0) + 1
+                self.tool_result("bionemo.score_variant", {"call": score.call, "pathogenicity": score.pathogenicity},
+                                 variant=variant.label, output_id=score.output_id, reused=True,
+                                 source_file=variant.source_file, source_file_id=variant.source_file_id)
+            seen.add(key)
 
         vcf_name = source_filename(self.ctx.bundle, "vcf")
         scored: list[dict[str, Any]] = []
@@ -51,7 +82,8 @@ class GenomicsAgent(Agent):
                     "model": score.model,
                     "output_id": score.output_id,
                     "source_line": variant.source_line,
-                    "source_file": vcf_name,
+                    "source_file": variant.source_file or vcf_name,
+                    "source_file_id": variant.source_file_id,
                 }
             )
 
@@ -63,9 +95,15 @@ class GenomicsAgent(Agent):
         if step.message:
             self.say(step.message)
 
-        by_label = {entry["label"]: entry for entry in scored}
         for claim in step.claims:
-            entry = by_label.get(str(claim.detail.get("label", "")), {})
+            matches = [entry for entry in scored
+                       if entry["label"] == str(claim.detail.get("label", ""))
+                       and (not claim.detail.get("source_file_id")
+                            or entry["source_file_id"] == claim.detail["source_file_id"])]
+            if len(matches) != 1:
+                self.say("Withheld a claim: its variant source was missing or ambiguous in the scored evidence.")
+                continue
+            entry = matches[0]
             provenance = [
                 Provenance(
                     kind="file",

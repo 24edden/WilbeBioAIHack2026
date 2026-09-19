@@ -1,0 +1,74 @@
+name: trace-demo
+
+x-runtime: &runtime
+  build:
+    context: ..
+    dockerfile: infra/Dockerfile
+  init: true
+  restart: unless-stopped
+  read_only: true
+  tmpfs:
+    - /tmp
+  logging:
+    driver: json-file
+    options:
+      max-size: "10m"
+      max-file: "3"
+
+services:
+  api:
+    <<: *runtime
+    # Compose >= 2.24. No file or credentials are needed in mock mode.
+    env_file:
+      - path: ../.env
+        required: false
+    environment:
+      # Explicit opt-in, independent of an existing RUN_MODE value in .env.
+      RUN_MODE: ${TRACE_RUN_MODE:-mock}
+      MOCK_LATENCY_SCALE: ${TRACE_MOCK_LATENCY_SCALE:-0.2}
+    command:
+      - python
+      - -m
+      - uvicorn
+      - app.main:app
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      - --workers
+      - "1"
+    # No host port: the current API has no authentication or tenant isolation.
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 15s
+
+  ui:
+    <<: *runtime
+    environment:
+      TRACE_BACKEND_URL: http://api:8000
+    command:
+      - python
+      - -m
+      - streamlit
+      - run
+      - frontend/app.py
+      - --server.address=0.0.0.0
+      - --server.port=8501
+      - --server.headless=true
+      - --server.fileWatcherType=none
+      - --server.maxUploadSize=10
+      - --browser.gatherUsageStats=false
+    ports:
+      - "127.0.0.1:${TRACE_UI_PORT:-8501}:8501"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8501/_stcore/health', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 20s

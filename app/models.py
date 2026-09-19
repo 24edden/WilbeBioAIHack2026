@@ -5,7 +5,8 @@ from __future__ import annotations
 import re
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
+from app.execution import initial_metrics
 
 AgentRole = Literal[
     "orchestrator",
@@ -14,6 +15,9 @@ AgentRole = Literal[
     "clinical",
     "stats",
     "critic",
+    "research",
+    "supporter",
+    "challenger",
 ]
 
 Stance = Literal["supports", "contradicts", "neutral"]
@@ -33,6 +37,8 @@ class Variant(BaseModel):
     consequence: str | None = None
     zygosity: str | None = None
     source_line: int | None = None
+    source_file: str | None = None
+    source_file_id: str | None = None
 
     @property
     def protein_change(self) -> str | None:
@@ -59,6 +65,8 @@ class LabResult(BaseModel):
     ref_high: float | None = None
     date: str | None = None
     source_line: int | None = None
+    source_file: str | None = None
+    source_file_id: str | None = None
 
     @property
     def flag(self) -> str:
@@ -78,6 +86,9 @@ class NoteSection(BaseModel):
     heading: str | None = None
     text: str
     source_line: int | None = None
+    text_start_line: int | None = None
+    source_file: str | None = None
+    source_file_id: str | None = None
 
 
 class SourceFile(BaseModel):
@@ -137,8 +148,11 @@ class AgentSummary(BaseModel):
     agent_role: AgentRole
     parent_id: str | None = None
     task: str
-    status: Literal["spawned", "running", "done", "error"] = "spawned"
+    status: Literal["spawned", "running", "done", "error", "cancelled"] = "spawned"
     n_findings: int = 0
+    skills: list[str] = Field(default_factory=list)
+    alignment: str = "neutral"
+    icon: str = ""
 
 
 class Verdict(BaseModel):
@@ -150,10 +164,25 @@ class Verdict(BaseModel):
     caveats: list[str] = Field(default_factory=list)
 
 
+class WeakPoint(BaseModel):
+    id: str
+    category: Literal["evidence_gap", "conflicting_findings", "source_gap", "provider_failure", "scope_limit"]
+    title: str
+    rationale: str
+    next_evidence: str
+    finding_ids: list[str] = Field(default_factory=list)
+    sources: list[Provenance] = Field(default_factory=list)
+
+
+class WeakPointAssessment(BaseModel):
+    status: Literal["assessed", "not_assessed"] = "not_assessed"
+    items: list[WeakPoint] = Field(default_factory=list)
+
+
 class Report(BaseModel):
     run_id: str
     question: str
-    status: Literal["running", "complete", "error"] = "running"
+    status: Literal["running", "complete", "error", "cancelled"] = "running"
     verdict: Verdict | None = None
     findings: list[Finding] = Field(default_factory=list)
     agents: list[AgentSummary] = Field(default_factory=list)
@@ -162,13 +191,47 @@ class Report(BaseModel):
     started_ts: int = 0
     finished_ts: int | None = None
     error: str | None = None
+    config: dict[str, Any] = Field(default_factory=dict)
+    weak_points: WeakPointAssessment = Field(default_factory=WeakPointAssessment)
+    metrics: dict[str, int | float] = Field(default_factory=initial_metrics)
+    discussion: list[dict[str, Any]] = Field(default_factory=list)
 
 
 # --- HTTP request/response ----------------------------------------------
 
+class RunConfig(BaseModel):
+    """Per-run controls; endpoint locations and credentials remain server configuration."""
+
+    model_config = ConfigDict(extra="forbid")
+    task_mode: Literal["auto", "investigation", "idea_review"] = "investigation"
+    specialists: list[Literal["genomics", "clinical", "literature"]] | None = Field(
+        default=None, min_length=1, max_length=3
+    )
+    reasoning_model: str | None = Field(default=None, max_length=200)
+    variant_model: str | None = Field(default=None, max_length=200)
+    embedding_model: str | None = Field(default=None, max_length=200)
+
+    @field_validator("specialists")
+    @classmethod
+    def unique_specialists(cls, value):
+        if value is not None and len(value) != len(set(value)):
+            raise ValueError("specialists must be unique")
+        return value
+
+    @field_validator("reasoning_model", "variant_model", "embedding_model")
+    @classmethod
+    def nonempty_model(cls, value):
+        if value is not None:
+            value = value.strip()
+            if not value:
+                raise ValueError("model identifier must not be empty")
+        return value
+
+
 class InvestigateRequest(BaseModel):
     question: str
     file_ids: list[str] = Field(default_factory=list)
+    config: RunConfig | None = None
 
 
 class InvestigateResponse(BaseModel):

@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import csv
 import io
+import math
 import re
 
 from app.models import LabResult, NoteSection, PatientBundle, SourceFile, Variant
@@ -88,7 +89,8 @@ def _to_float(value: str) -> float | None:
     cleaned = value.strip().replace(",", "")
     cleaned = re.sub(r"^[<>~=]+", "", cleaned).strip()
     try:
-        return float(cleaned)
+        number = float(cleaned)
+        return number if math.isfinite(number) else None
     except ValueError:
         return None
 
@@ -107,8 +109,14 @@ def parse_labs(text: str) -> list[LabResult]:
         return []
     dialect_delimiter = "\t" if text.splitlines()[0].count("\t") >= 1 else ","
     reader = csv.DictReader(io.StringIO(text), delimiter=dialect_delimiter)
+    _ = reader.fieldnames  # consume the header before measuring physical row offsets
     results: list[LabResult] = []
-    for offset, row in enumerate(reader, start=2):  # header is line 1
+    while True:
+        offset = reader.line_num + 1
+        try:
+            row = next(reader)
+        except StopIteration:
+            break
         name = _pick(row, "test", "name", "analyte", "marker", "lab")
         if not name:
             continue
@@ -142,11 +150,14 @@ def parse_notes(text: str) -> list[NoteSection]:
     heading: str | None = None
     buffer: list[str] = []
     start_line = 1
+    body_start_line = 1
 
     def flush() -> None:
         body = "\n".join(buffer).strip()
         if body or heading:
-            sections.append(NoteSection(heading=heading, text=body, source_line=start_line))
+            leading_blank_lines = next((i for i, line in enumerate(buffer) if line.strip()), 0)
+            sections.append(NoteSection(heading=heading, text=body, source_line=start_line,
+                                        text_start_line=body_start_line + leading_blank_lines))
 
     for lineno, raw in enumerate(text.splitlines(), start=1):
         line = raw.rstrip()
@@ -157,6 +168,7 @@ def parse_notes(text: str) -> list[NoteSection]:
             heading = line.lstrip("#").rstrip(":").strip()
             buffer = []
             start_line = lineno
+            body_start_line = lineno + 1
             continue
         buffer.append(line)
     flush()
@@ -171,15 +183,21 @@ def build_bundle(files: list[tuple[str, str, str]], patient_id: str = "patient-0
         n_records = 0
         if kind == "vcf":
             parsed = parse_vcf(text)
+            for record in parsed:
+                record.source_file, record.source_file_id = filename, file_id
             bundle.variants.extend(parsed)
             n_records = len(parsed)
         elif kind == "labs":
             parsed_labs = parse_labs(text)
+            for record in parsed_labs:
+                record.source_file, record.source_file_id = filename, file_id
             bundle.labs.extend(parsed_labs)
             n_records = len(parsed_labs)
         else:
             kind = "notes"
             parsed_notes = parse_notes(text)
+            for record in parsed_notes:
+                record.source_file, record.source_file_id = filename, file_id
             bundle.notes.extend(parsed_notes)
             n_records = len(parsed_notes)
         bundle.files.append(

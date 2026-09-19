@@ -4,11 +4,12 @@ This is the part of the system worth defending. Everything upstream produces
 claims; this agent decides whether the claims add up to an answer, and says so
 out loud when they do not.
 
-The gate is deterministic and runs *after* the reasoning provider has written
-its synthesis. A model asked "are you confident?" will usually say yes, so the
+The gate is deterministic and enforced when the reasoning provider's synthesis
+is turned into a verdict. A model asked "are you confident?" may say yes, so the
 abstention decision is taken away from it: the rules below look at how many
-independent agents contributed, whether the strongest evidence clears a floor,
-and whether support and contradiction cancel out. Swapping the mock provider
+specialist roles contributed, whether the strongest evidence clears a floor,
+and whether support and contradiction cancel out. Role diversity does not prove
+independent evidence: two agents may cite the same source. Swapping the mock provider
 for a live one cannot weaken it.
 """
 
@@ -21,7 +22,7 @@ from app.agents.base import Agent
 from app.models import Finding, Provenance, Verdict
 
 MIN_TOP_CONFIDENCE = 0.55   # strongest single piece of evidence must clear this
-MIN_CORROBORATION = 0.35    # a lone agent's claim must clear this to stand alone
+MIN_CORROBORATION = 0.35    # minimum confidence from a second specialist role
 BALANCE_MARGIN = 0.15       # support vs contradiction must separate by this much
 
 
@@ -85,13 +86,13 @@ def evidence_gate(findings: list[Finding], hypothesis: str | None) -> GateResult
             checks=checks,
         )
 
-    roles = {f.agent_role for f in cited}
-    corroborated = len(roles) > 1 or top.confidence >= MIN_CORROBORATION
+    roles = {f.agent_role for f in cited if f.confidence >= MIN_CORROBORATION}
+    corroborated = len(roles) > 1
     checks.append(
         _check(
             "corroboration",
             corroborated,
-            f"{len(roles)} independent specialist(s) contributed: {sorted(roles)}",
+            f"{len(roles)} specialist role(s) contributed: {sorted(roles)}",
         )
     )
 
@@ -125,7 +126,22 @@ def evidence_gate(findings: list[Finding], hypothesis: str | None) -> GateResult
                 checks=checks,
                 disagreement=disagreement,
             )
+        relevant = supporting + contradicting
+        if max(f.confidence for f in relevant) < MIN_TOP_CONFIDENCE:
+            return GateResult(
+                abstain=True,
+                reason="Evidence bearing on the proposed cause is below the confidence floor.",
+                checks=checks + [_check("hypothesis_confidence", False, "Only weak relevant evidence")],
+                disagreement=disagreement,
+            )
 
+    if not corroborated:
+        return GateResult(
+            abstain=True,
+            reason="The findings lack corroboration from a second specialist; one voice is not a consensus.",
+            checks=checks,
+            disagreement=disagreement,
+        )
     return GateResult(abstain=False, checks=checks, disagreement=disagreement)
 
 
@@ -179,7 +195,7 @@ class CriticAgent(Agent):
                     "confidence": f.confidence,
                     "provenance": [p.model_dump() for p in f.provenance],
                 }
-                for f in findings
+                for f in findings if f.provenance
             ],
             {
                 "hypothesis": self.ctx.hypothesis,
@@ -194,16 +210,17 @@ class CriticAgent(Agent):
         if self.ctx.providers.mode == "mock":
             caveats.insert(0, "Mock mode: model outputs are fixtures, not predictions.")
 
-        if gate.abstain:
+        if gate.abstain or synthesis.abstained:
+            reason = gate.reason or synthesis.abstain_reason or "The reasoning provider declined to draw a conclusion."
             verdict = Verdict(
-                answer=f"ABSTAIN — {gate.reason}",
+                answer=f"ABSTAIN: {reason}",
                 rationale=(
                     f"The synthesis offered was: {synthesis.answer} It is withheld because "
-                    f"the evidence gate did not pass. {synthesis.rationale}"
+                    f"{reason} {synthesis.rationale}"
                 ),
                 confidence=min(synthesis.confidence, 0.3),
                 abstained=True,
-                abstain_reason=gate.reason,
+                abstain_reason=reason,
                 caveats=caveats,
             )
         else:

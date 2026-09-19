@@ -14,6 +14,7 @@ from typing import Any
 from app.events import EventBus
 from app.models import AgentRole, Finding, PatientBundle, Provenance, Stance
 from app.providers.base import Providers
+from app.skills import role_metadata
 
 _counter = itertools.count(1)
 
@@ -103,6 +104,7 @@ class Agent:
         self.ctx = ctx
         self.parent_id = parent_id
         self.findings: list[Finding] = []
+        self.status = "spawned"
 
     # --- event helpers ---------------------------------------------------
 
@@ -112,7 +114,7 @@ class Agent:
             agent_id=self.agent_id,
             agent_role=self.role,
             parent_id=self.parent_id,
-            payload={"task": self.task, "rationale": rationale},
+            payload={"task": self.task, "rationale": rationale, **role_metadata(self.role)},
         )
 
     def say(self, text: str, to: str | None = None) -> None:
@@ -195,9 +197,15 @@ class Agent:
         One specialist falling over must not take the investigation with it;
         the critic is told what is missing and lowers its confidence instead.
         """
+        self.status = "running"
         try:
             await self.investigate()
+            self.status = "done"
+        except asyncio.CancelledError:
+            self.status = "cancelled"
+            raise
         except Exception as exc:  # noqa: BLE001 - reported, not swallowed
+            self.status = "error"
             self.ctx.bus.emit(
                 "error",
                 agent_id=self.agent_id,

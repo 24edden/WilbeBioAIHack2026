@@ -35,6 +35,7 @@ def flag_abnormal(labs: list[LabResult]) -> list[dict[str, Any]]:
             "ref_low": lab.ref_low,
             "ref_high": lab.ref_high,
             "source_line": lab.source_line,
+            "source_file": lab.source_file,
         }
         for lab in labs
         if lab.flag in ("high", "low")
@@ -75,6 +76,8 @@ def compute_trends(labs: list[LabResult]) -> list[dict[str, Any]]:
                 "relative_change": round(change, 3),
                 "n_points": len(ordered),
                 "source_lines": [lab.source_line for lab in ordered],
+                "source_records": [{"source_line": lab.source_line, "source_file": lab.source_file}
+                                   for lab in ordered],
             }
         )
     return sorted(trends, key=lambda t: abs(t["relative_change"]), reverse=True)
@@ -125,10 +128,18 @@ class ClinicalAgent(Agent):
             {t["name"]: t["direction"] for t in trends},
         )
 
-        notes_text = bundle.notes_text()
         self.tool_call("notes.timeline", n_sections=len(bundle.notes))
-        timeline = extract_timeline(notes_text)
-        toxicity = find_toxicity_terms(notes_text)
+        timeline = []
+        toxicity = []
+        for section in bundle.notes:
+            offset = (section.text_start_line or section.source_line or 1) - 1
+            for item in extract_timeline(section.text):
+                timeline.append({**item, "line": item["line"] + offset,
+                                 "source_file": section.source_file or notes_file})
+            for item in find_toxicity_terms(section.text):
+                toxicity.append({**item, "line": item["line"] + offset,
+                                 "source_file": section.source_file or notes_file})
+        timeline.sort(key=lambda item: item["date"])
         self.tool_result(
             "notes.timeline",
             {"n_events": len(timeline), "toxicity_terms": [t["term"] for t in toxicity]},
@@ -149,35 +160,37 @@ class ClinicalAgent(Agent):
         if step.message:
             self.say(step.message)
 
-        toxicity_lines = {t["term"]: t["line"] for t in toxicity}
         for claim in step.claims:
             detail = claim.detail or {}
             provenance: list[Provenance] = []
             lines = detail.get("source_lines") or (
                 [detail["source_line"]] if detail.get("source_line") else []
             )
-            for line in lines:
-                provenance.append(
-                    Provenance(
-                        kind="file",
-                        ref=labs_file,
-                        locator=f"line {line}",
-                        quote=detail.get("name"),
-                    )
-                )
+            sources = detail.get("source_records") or [
+                {"source_line": line, "source_file": detail.get("source_file")} for line in lines
+            ]
+            for source in sources:
+                line = source.get("source_line")
+                matches = [lab for lab in bundle.labs
+                           if lab.source_line == line and lab.name == detail.get("name")
+                           and (not source.get("source_file") or lab.source_file == source["source_file"])]
+                if len(matches) != 1:
+                    continue  # ambiguous rows require the model to name the actual file
+                lab = matches[0]
+                provenance.append(Provenance(
+                    kind="file", ref=lab.source_file or labs_file,
+                    locator=f"line {line}", quote=f"{lab.name}: {lab.raw_value}",
+                ))
             for term in detail.get("terms", []):
-                provenance.append(
-                    Provenance(
-                        kind="file",
-                        ref=notes_file,
-                        locator=f"line {toxicity_lines.get(term, '?')}",
-                        quote=term,
-                    )
-                )
+                for hit in toxicity:
+                    if hit["term"] == term:
+                        provenance.append(Provenance(
+                            kind="file", ref=hit["source_file"],
+                            locator=f"line {hit['line']}", quote=term,
+                        ))
             if not provenance:
-                provenance.append(
-                    Provenance(kind="derived", ref=notes_file, locator="clinical review")
-                )
+                self.say("Withheld a claim: no matching lab row or note term was found in the uploaded evidence.")
+                continue
             self.record(
                 claim.claim,
                 confidence=claim.confidence,

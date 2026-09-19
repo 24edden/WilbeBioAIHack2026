@@ -110,3 +110,12 @@ def test_a_late_subscriber_still_sees_the_whole_run(client):
     first = read_stream(client, run_id)      # drains the run to completion
     replay = read_stream(client, run_id)     # connects after it is over
     assert [e["ts"] for e in replay] == [e["ts"] for e in first]
+
+
+def test_missing_live_credentials_does_not_create_an_orphan_run(client, monkeypatch):
+    monkeypatch.setenv("RUN_MODE", "live")
+    monkeypatch.setenv("REASONING_API_KEY", "")
+    response = client.post("/investigate", json={"question": "Why did treatment fail?"})
+    assert response.status_code == 503
+    assert "REASONING_API_KEY" in response.json()["detail"]
+    assert client.get("/runs").json() == []
