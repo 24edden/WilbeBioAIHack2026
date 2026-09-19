@@ -1,5 +1,11 @@
 # WilbeBioAIHack2026
 
+## Research and project documentation
+
+Start with the [project knowledge library](docs/README.md) for the Rosalind hypotheses, Ana’s case studies, architecture, dataset notes, implementation records, event preparation and reusable agent skills. The [source inventory](docs/SOURCE-INVENTORY.md) tracks the collected local and Brev documents and their duplicate copies.
+
+The library preserves both current proposals and earlier planning. It does not establish that proposed analyses have run or that the documented prototype is installed in this repository.
+
 Repo for the Wilbe Bio x AI hackathon (London, WilbeLABS).
 
 Project idea is TBD. Notes on the event brief, tracks, and judging criteria are in

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Benchmark Creation"
+  short_description: "Design reliable benchmarks for agents and models"
+  default_prompt: "Use $benchmark-creation to build a reproducible agent benchmark with held-out tasks, defensible scoring, and fair comparisons."

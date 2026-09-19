@@ -1,0 +1,82 @@
+# Planning template only; not a vendor runtime configuration.
+# Null values are unresolved decisions to fill before the corresponding run.
+schema_version: 1
+benchmark:
+  name: null
+  version: null
+  intended_decision: null
+  target_task_population: null
+  system_boundary: null
+  independent_sampling_unit: null
+  generalization_claim: null
+dataset:
+  source_provenance: []
+  permitted_use: null
+  source_versions: []
+  task_id_field: task_id
+  dependence_group_field: group_id
+  split_strategy: null
+  development_path: null
+  calibration_path: null
+  held_out_path: null
+  agent_visible_fields: []
+  private_grading_fields: []
+  deduplication_method: null
+  challenge_slices: []
+  sampling_weights: null
+  synthetic_data_review: null
+  contamination_limitations: null
+systems:
+  baseline: null
+  candidates: []
+  frozen_config_paths: []
+  comparison_controls: []
+environment:
+  mode: null
+  fixture_path: null
+  initial_state_hash: null
+  reset_procedure: null
+  tools_and_permissions: null
+  clock_and_external_data_policy: null
+execution:
+  repetitions_per_task: null
+  task_order_policy: null
+  max_model_turns: null
+  max_tool_calls: null
+  timeout_seconds: null
+  per_trial_cost_limit: null
+  total_cost_limit: null
+  concurrency: null
+  retry_policy: null
+  resume_identity_fields: [task_id, system_config_hash, repetition]
+  cancellation_policy: null
+grading:
+  primary_outcome: null
+  acceptable_alternatives: null
+  rubric_path: null
+  deterministic_verifiers: []
+  judge_config_path: null
+  judge_calibration_evidence: null
+  grader_validation_cases: []
+  critical_requirements: []
+  missing_and_error_policy: null
+analysis:
+  denominators: null
+  aggregation_and_weights: null
+  paired_comparison: null
+  uncertainty_method: null
+  resampling_unit: null
+  sample_size_rationale: null
+  minimum_meaningful_difference: null
+  release_criteria: null
+  exploratory_comparisons: []
+reporting:
+  results_path: null
+  artifacts_path: null
+  required_measures:
+    - verified_task_success
+    - independent_task_and_group_counts
+    - generation_and_grading_failure_counts
+    - uncertainty
+    - cost_and_latency
+    - slice_results_and_limitations

@@ -1,5 +1,11 @@
 # Developer README
 
+## Collected project documentation
+
+The [knowledge library](docs/README.md) is the entry point for the Markdown collected from the local Ai X Bio workspace and Brev on 19 September 2026. Scientific context stays in `Context/`; `docs/` groups case studies, architecture, datasets, implementation records and event preparation; `skills/` contains the two authored reusable skills and their small YAML resources.
+
+This documentation import does not install prototype code or copy datasets. Follow the [implementation boundary](docs/implementation/shared-context/CURRENT_IMPLEMENTATION.md) before attempting to run commands from a historical prototype guide. The [source inventory](docs/SOURCE-INVENTORY.md) maps every collected source to its retained copy. Update the preferred document and index when revising a topic; historical snapshots should remain clearly labelled.
+
 Working notes for the team. Setup and run instructions go here once we have something to run.
 
 ## Context files
