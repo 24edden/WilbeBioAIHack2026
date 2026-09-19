@@ -1,0 +1,45 @@
+{
+  "_comment": "Mock BioNeMo NIM variant-effect outputs. Keyed by rsID first, then by GENE. Anything unknown falls back to a deterministic hash-derived score so an arbitrary uploaded VCF still runs.",
+  "by_rsid": {
+    "rs121913529": {
+      "gene": "KRAS",
+      "hgvs_p": "p.Gly12Asp",
+      "pathogenicity": 0.97,
+      "call": "pathogenic",
+      "notes": "Activating KRAS codon-12 substitution. Constitutive downstream MAPK signalling independent of EGFR; established predictor of non-response to anti-EGFR antibodies in colorectal cancer.",
+      "therapy_implication": "anti-EGFR (cetuximab, panitumumab) not expected to be effective"
+    },
+    "rs3918290": {
+      "gene": "DPYD",
+      "hgvs_c": "c.1905+1G>A",
+      "pathogenicity": 0.95,
+      "call": "pathogenic",
+      "notes": "DPYD*2A splice-donor loss-of-function allele. Carriers have markedly reduced dihydropyrimidine dehydrogenase activity and severe fluoropyrimidine toxicity at standard doses.",
+      "therapy_implication": "5-FU / capecitabine dose reduction indicated (CPIC: 50% starting dose for heterozygotes)"
+    },
+    "rs1801133": {
+      "gene": "MTHFR",
+      "hgvs_p": "p.Ala222Val",
+      "pathogenicity": 0.18,
+      "call": "benign",
+      "notes": "Common MTHFR C677T polymorphism, allele frequency ~30% in European ancestry. Reduced enzyme thermolability in vitro; clinical association with fluoropyrimidine outcome is inconsistent across studies.",
+      "therapy_implication": "no established dosing action"
+    },
+    "rs28934578": {
+      "gene": "TP53",
+      "hgvs_p": "p.Arg175His",
+      "pathogenicity": 0.93,
+      "call": "pathogenic",
+      "notes": "Hotspot TP53 DNA-binding-domain substitution with dominant-negative behaviour. Prognostic in colorectal cancer; not directly predictive of anti-EGFR response.",
+      "therapy_implication": "prognostic, no direct therapy action"
+    }
+  },
+  "by_gene": {
+    "APC": {
+      "pathogenicity": 0.12,
+      "call": "benign",
+      "notes": "Synonymous change with no predicted splice effect.",
+      "therapy_implication": "none"
+    }
+  }
+}
