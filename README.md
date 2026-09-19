@@ -3,7 +3,7 @@
 Repo for the Wilbe Bio x AI hackathon (London, WilbeLABS).
 
 Project idea is TBD. Notes on the event brief, tracks, and judging criteria are in
-[Context/](Context/).
+[Context/](Context/); candidate ideas and weekend plans are in [Plan/](Plan/).
 
 Team setup notes and how to load the context files into Claude, Codex, or a web UI are in
 [DeveloperREADME.md](DeveloperREADME.md).
@@ -16,6 +16,7 @@ TBD.
 
 ```
 Context/           event brief, judging criteria, tooling prep
+Plan/              idea candidates, scoring, and execution plans
 AGENTS.md          project instructions for coding agents (edit this one)
 CLAUDE.md          one-line import of AGENTS.md, for Claude Code
 ```

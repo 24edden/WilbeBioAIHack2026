@@ -19,6 +19,16 @@ guessing at the event's constraints:
   criterion 2 versus which are just build-time tooling. Read before proposing an
   architecture. Sections marked INFERRED are team analysis, not event text.
 
+## Planning
+
+`Plan/` holds pre-event idea generation and execution plans: 16 scored candidates in
+`Plan/ideas/`, three worked-up finalists in `Plan/finalists/`, plus the decision framework,
+timeline, risk register, presentation structure and reproducibility checklist.
+
+Start at `Plan/README.md`. All of it was written before the team, the compute and the event
+details were known — treat it as scaffolding to be revised, not as decisions already made.
+`Plan/06-iteration-log.md` lists the open questions that must be answered on site.
+
 `DeveloperREADME.md` has team setup notes and conventions.
 
 ## Conventions
