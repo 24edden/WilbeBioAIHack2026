@@ -95,3 +95,10 @@ just ask what its project instructions say.
 - One branch per workstream, merge into `main` when it runs.
 - Write down setup steps as you discover them, in this file. The judging criteria include
   reproducibility by another team, so a working README is worth actual points.
+
+
+## CD19 reproduction insights and agent data preparation
+
+Read [the acquired-data findings](docs/datasets/cd19-reproduction-insights/README.md) and [next implementation steps](docs/datasets/cd19-reproduction-insights/NEXT-STEPS.md). This public edition contains conclusions and guidance only. The complete data-bearing package is on the existing Brev instance at `/home/ubuntu/rosalind-shared-files/cd19-reproduction-data/2026-09-20/START-HERE.md`; use `brev shell agentic-takeoff-cpu`.
+
+The current change updates the bioinformatics, statistics and discovery-planning skills to suggest question- and design-dependent preparation and analysis. It does not prescribe a case-specific cleaning pipeline or introduce new readers. [Data references](docs/datasets/cd19-reproduction-insights/DATA-REFERENCES.md) provide the primary study, deposit and code links; the app data Markdown carries the same references.
