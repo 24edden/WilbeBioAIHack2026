@@ -1,0 +1,124 @@
+{
+  "package": "rosalind-agent-development-plan",
+  "date": "2026-09-19",
+  "github_main": "ae2d11e59350c39d7f4adbd70ea79a59dbb3ee0b",
+  "github_documentation": "8891b522386844db6bc7ee5b832a0198fd596d0e",
+  "files": [
+    {
+      "path": "01-PRD.md",
+      "bytes": 16221,
+      "sha256": "68e12c22f614a93ed2360a2b17fc8f0cea9706ab900be82aaf9f8a91f1739ac8",
+      "source_sha256": "68e12c22f614a93ed2360a2b17fc8f0cea9706ab900be82aaf9f8a91f1739ac8"
+    },
+    {
+      "path": "02-ARCHITECTURE.md",
+      "bytes": 22079,
+      "sha256": "156b1048c9cfba34fe381a47047f1a220b3b4d29b3b58e26c3568bcc0c799fc5",
+      "source_sha256": "156b1048c9cfba34fe381a47047f1a220b3b4d29b3b58e26c3568bcc0c799fc5"
+    },
+    {
+      "path": "03-MODELS-AND-TOOLS.md",
+      "bytes": 16128,
+      "sha256": "4f0442f142e00ddf4ca6e54640a9e2cab98e7ac794d6acf5e2752dfa969482b9",
+      "source_sha256": "4f0442f142e00ddf4ca6e54640a9e2cab98e7ac794d6acf5e2752dfa969482b9"
+    },
+    {
+      "path": "04-LOCAL-BREV-RUNBOOK.md",
+      "bytes": 10286,
+      "sha256": "a8e263d9cb1bab3deaa6521de832cdbae786de3fb64e55e7cd98c6d026e67a79",
+      "source_sha256": "4fe059ed4e7e57dacb78d9caecb9edec52199384c44bc7e2cadcdcc9daef5bd9"
+    },
+    {
+      "path": "05-DELIVERY-PLAN.md",
+      "bytes": 15461,
+      "sha256": "9d7340b3253a04162d4db0720328a5a9af65868acfabdaae901f6593b7f84e30",
+      "source_sha256": "9d7340b3253a04162d4db0720328a5a9af65868acfabdaae901f6593b7f84e30"
+    },
+    {
+      "path": "06-VERIFICATION-AND-SOURCES.md",
+      "bytes": 12257,
+      "sha256": "ea9c61066882ade0582b45f3cf75f57abc618ed7aeec386fc27852b6f8f8a60c",
+      "source_sha256": "78230066e794a06163cee20e19f187f9c95fef933887d4de624d17ce14b4ec86"
+    },
+    {
+      "path": "07-RD-FEEDBACK-LOOP.md",
+      "bytes": 15757,
+      "sha256": "4add1c0754f8f5a713c41974ce87fd175913d087ef7faa10d32b7cded2e6fa56",
+      "source_sha256": "4add1c0754f8f5a713c41974ce87fd175913d087ef7faa10d32b7cded2e6fa56"
+    },
+    {
+      "path": "README.md",
+      "bytes": 8306,
+      "sha256": "c2a234006e746dd4aceafbf177e9326626848dd4c36e15d055e95f52d3098c5d",
+      "source_sha256": "14e737736f539b112ad25c6b0e3e82583c1949e83195130b50de5e6c5cf5ec69"
+    },
+    {
+      "path": "contracts/README.md",
+      "bytes": 4290,
+      "sha256": "f6e3abc5727d3313c16b488d0b7bcc70d0e77d89ac7f6f8fcc06ec14d363f8b5",
+      "source_sha256": "f6e3abc5727d3313c16b488d0b7bcc70d0e77d89ac7f6f8fcc06ec14d363f8b5"
+    },
+    {
+      "path": "contracts/action.schema.json",
+      "bytes": 8516,
+      "sha256": "dc54784ee1a40905fe8447f435271b0f804ff0781db066e4b4d52823bdac26a7",
+      "source_sha256": "dc54784ee1a40905fe8447f435271b0f804ff0781db066e4b4d52823bdac26a7"
+    },
+    {
+      "path": "contracts/case-alk.example.json",
+      "bytes": 1915,
+      "sha256": "6c1d22e059c828209e84dc479d06efe64c11ab24ab2cfa8d66c90845b8a88a1e",
+      "source_sha256": "6c1d22e059c828209e84dc479d06efe64c11ab24ab2cfa8d66c90845b8a88a1e"
+    },
+    {
+      "path": "contracts/case-manifest.schema.json",
+      "bytes": 6181,
+      "sha256": "939e67f5ed719ae628fc3aaa9a8496f9715f1b8714a31b9d9692732c6c8e1069",
+      "source_sha256": "939e67f5ed719ae628fc3aaa9a8496f9715f1b8714a31b9d9692732c6c8e1069"
+    },
+    {
+      "path": "contracts/decision.schema.json",
+      "bytes": 7792,
+      "sha256": "ee0b0c589f94d9d48509286220bde837da1ded2cc2452de8c598687cdf504051",
+      "source_sha256": "ee0b0c589f94d9d48509286220bde837da1ded2cc2452de8c598687cdf504051"
+    },
+    {
+      "path": "contracts/hypothesis-template.md",
+      "bytes": 1317,
+      "sha256": "ed79cac95321dcaef9257ce484b4b4cb36d64352017c086d305271766428db3b",
+      "source_sha256": "ed79cac95321dcaef9257ce484b4b4cb36d64352017c086d305271766428db3b"
+    },
+    {
+      "path": "contracts/runtime-config.example.yaml",
+      "bytes": 2590,
+      "sha256": "72c63729df9de410b42fe7d6f69c2c08eedf2510f5fb95083356a29655b2e278",
+      "source_sha256": "72c63729df9de410b42fe7d6f69c2c08eedf2510f5fb95083356a29655b2e278"
+    },
+    {
+      "path": "contracts/state-schema.sql",
+      "bytes": 6623,
+      "sha256": "bf1cf5b1b2d162b200df0c8f1566a7fcfdd78a418fb99612547ce64a06a91256",
+      "source_sha256": "bf1cf5b1b2d162b200df0c8f1566a7fcfdd78a418fb99612547ce64a06a91256"
+    },
+    {
+      "path": "validation-report.json",
+      "bytes": 3522,
+      "sha256": "d450b985821fa913673299d632b0379cd497d49c76d3d0a80c238547381466d0",
+      "source_sha256": "d9d1dce56f2a968828a17afb7d7308d9139ae01bb34fd813a521ac8bf423ddee"
+    }
+  ],
+  "revision": "User-supplied hypothesis intake and R&D feedback-loop specification",
+  "updated_utc": "2026-09-19T15:38:08.490260+00:00",
+  "publication": {
+    "prepared_utc": "2026-09-19T15:57:16.764284+00:00",
+    "source_manifest_sha256": "8b38eed8ab7e0e596d5d595048699026e4c780a5a65c352dd301f4a14b436ab6",
+    "source_location": "<LOCAL_AI_X_BIO_ROOT>/outputs/agent-development-plan",
+    "github_path": "docs/architecture/agent-development-plan",
+    "brev_path": "/home/ubuntu/rosalind-shared-files/agent-development-plan/2026-09-19",
+    "transformations": [
+      "Replace personal Mac paths with documented placeholders",
+      "Add shared-location index",
+      "Record publication validation and hashes"
+    ]
+  }
+}

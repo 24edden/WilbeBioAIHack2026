@@ -1,0 +1,131 @@
+{
+  "verified_utc": "2026-09-19T15:21:08.993423+00:00",
+  "scope": "Planning artifacts and existing prototype tests only; no live vendor inference",
+  "checks": [
+    {
+      "check": "json_schema_definition",
+      "passed": true,
+      "file": "action.schema.json"
+    },
+    {
+      "check": "json_schema_definition",
+      "passed": true,
+      "file": "case-manifest.schema.json"
+    },
+    {
+      "check": "json_schema_definition",
+      "passed": true,
+      "file": "decision.schema.json"
+    },
+    {
+      "check": "alk_case_schema",
+      "passed": true
+    },
+    {
+      "check": "case_scope_and_path_shape_rejections",
+      "passed": true
+    },
+    {
+      "check": "alk_workbook_current_hash",
+      "passed": true,
+      "sha256": "f160f2a451a581d37f54bcbb321705a6f51429ca6f10a93bd6ce51e1f86abe78"
+    },
+    {
+      "check": "action_route_backend_and_unknown_argument_rejections",
+      "passed": true
+    },
+    {
+      "check": "sqlite_schema_creates_cleanly",
+      "passed": true,
+      "tables": [
+        "cases",
+        "runs",
+        "actions",
+        "action_attempts",
+        "artifacts",
+        "evidence",
+        "decisions",
+        "feedback",
+        "events"
+      ]
+    },
+    {
+      "check": "decision_immutability_and_cross_run_feedback_rejection",
+      "passed": true
+    },
+    {
+      "check": "relative_markdown_links_and_fences",
+      "passed": true
+    },
+    {
+      "check": "yaml_parsing_and_disabled_unverified_capabilities",
+      "passed": true
+    },
+    {
+      "check": "decision_example_and_self_acceptance_rejection",
+      "passed": true
+    }
+  ],
+  "existing_prototype_tests": {
+    "passed": 20,
+    "failed": 0,
+    "live_inference_calls": 0,
+    "includes_loopback_fake_service": true
+  },
+  "markdown_word_count": 16302,
+  "file_count_before_report": 16,
+  "documentation_revision": {
+    "verified_utc": "2026-09-19T15:38:08.490260+00:00",
+    "scope": "User-supplied hypothesis clarification and Markdown template; no runtime change or prototype test rerun",
+    "markdown_files_checked": 10,
+    "relative_links_checked": 33,
+    "checks": [
+      {
+        "check": "relative_markdown_links_and_balanced_fences",
+        "passed": true
+      },
+      {
+        "check": "p0_backlog_estimate_totals_36_to_52_hours",
+        "passed": true
+      },
+      {
+        "check": "work_and_requirement_references_resolve",
+        "passed": true
+      },
+      {
+        "check": "existing_machine_contract_files_unchanged",
+        "passed": true
+      }
+    ]
+  },
+  "documentation_revision_history": [
+    {
+      "verified_utc": "2026-09-19T15:33:21.778949+00:00",
+      "scope": "R&D feedback-loop documentation only; no inference, experiments or prototype test rerun",
+      "markdown_files_checked": 9,
+      "relative_links_checked": 28,
+      "checks": [
+        {
+          "check": "relative_markdown_links_and_balanced_fences",
+          "passed": true
+        },
+        {
+          "check": "p0_backlog_estimate_totals_36_to_52_hours",
+          "passed": true
+        },
+        {
+          "check": "work_and_requirement_references_resolve",
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "publication": {
+    "prepared_utc": "2026-09-19T15:57:16.764284+00:00",
+    "scope": "Portable team documentation copy; no prototype tests or inference rerun",
+    "relative_markdown_links_checked": 33,
+    "personal_mac_paths_replaced": true,
+    "credential_pattern_scan_passed": true,
+    "markdown_links_and_fences_passed": true
+  }
+}

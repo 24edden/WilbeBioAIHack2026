@@ -4,6 +4,12 @@ Collected 19 September 2026 from the local Ai X Bio project and the shared Brev 
 
 Exact duplicate content is published once. Distinct local snapshots are retained under `archive/`; use the main documentation index for the preferred reading order. Original files were not modified.
 
+## Agent development plan addition
+
+The [current engineering package](architecture/agent-development-plan/README.md) adds 18 files from `<LOCAL_AI_X_BIO_ROOT>/outputs/agent-development-plan/`: 10 Markdown documents and eight JSON/SQL/YAML artifacts, including validation and package manifests. Its [package manifest](architecture/agent-development-plan/PACKAGE-MANIFEST.json) records original and published file hashes, source-manifest identity and the shared Brev location. Publication replaces personal Mac roots with placeholders and adds team access links. This includes the user-supplied hypothesis requirement and the CAR-T R&D feedback loop; runtime features and scientific predictions remain proposed work unless explicitly recorded otherwise.
+
+## Earlier collected sources
+
 Excluded: private arrival/contact/credential notes, downloaded or vendored third-party documentation, environment dependencies, dataset payloads, code, and binary artifacts. Links to absent payloads are labelled as outside this Markdown collection. Personal Mac paths are replaced with placeholders. Authored skill YAML templates are included so those skills remain usable.
 
 | Source | Published document | SHA-256 |
