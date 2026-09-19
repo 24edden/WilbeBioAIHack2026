@@ -10,6 +10,7 @@ Research and planning documents collected on 19 September 2026 from the local Ai
 4. [Scientific hypotheses](../Context/TRANSLATIONAL_SCIENCE_HYPOTHESES.md): competing mechanisms and experiments.
 5. [Reference architecture](architecture/reference-architecture/2026-09-19/REFERENCE-ARCHITECTURE.md): earlier roles, evidence, decisions and feedback design.
 6. [Dataset landscape](datasets/DATASET-LANDSCAPE.md) and [remaining data gaps](datasets/2026-09-19/GAPS.md).
+7. [How to use BioNeMo for CAR-T](HOW-TO-USE-BIONEMO.md): skill priorities, target-retention requirements, molecular inputs, binder design and experimental validation.
 
 ## Browse by topic
 
