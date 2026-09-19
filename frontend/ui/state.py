@@ -1,6 +1,6 @@
 """Accumulated view of a run, built by folding events in arrival order.
 
-The UI renders `RunState` and nothing else — every panel is a pure function of
+The UI renders `RunState` and nothing else. Every panel is a pure function of
 this object, so replaying a saved event log gives a pixel-identical view to a
 live run. Keep it that way.
 """
@@ -165,7 +165,7 @@ class RunState:
             return
         agent = self.agents.get(ev.agent_id)
         if agent is None:
-            # Event from an agent we never saw spawn — synthesise it so the
+            # Event from an agent we never saw spawn, so synthesise it so the
             # graph stays connected instead of losing the activity.
             agent = Agent(id=ev.agent_id, role=ev.agent_role or "unknown", parent_id=ev.parent_id)
             self.agents[ev.agent_id] = agent
@@ -201,7 +201,7 @@ class RunState:
 
     @property
     def conversation(self) -> list[Message]:
-        """Agent-to-agent talk only — the cross-examination, not the tool noise."""
+        """Agent-to-agent talk only: the cross-examination, not the tool noise."""
         return [m for m in self.timeline if m.type == "agent_message"]
 
     def findings_by_confidence(self) -> list[Finding]:

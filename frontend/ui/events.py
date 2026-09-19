@@ -1,4 +1,4 @@
-"""Event schema — SHARED CONTRACT with the backend (see ARCHITECTURE.md).
+"""Event schema: SHARED CONTRACT with the backend (see ARCHITECTURE.md).
 
 Field names here mirror the contract exactly. Do not rename them unilaterally;
 coordinate with the `hack-infra` worktree first.

@@ -9,7 +9,7 @@ pip install -r frontend/requirements.txt
 streamlit run frontend/app.py
 ```
 
-Opens on <http://localhost:8501> in **Mock mode** — it replays a fixture and needs no
+Opens on <http://localhost:8501> in **Mock mode**, replaying a fixture and needing no
 backend, no GPU and no tokens. Switch to Live mode in the sidebar once the backend is up
 on `localhost:8000`.
 
@@ -17,7 +17,7 @@ Before pushing frontend changes: `python frontend/smoke_test.py` (headless, no S
 
 Details, fixture format and the UI conventions are in
 [frontend/README.md](frontend/README.md). The event schema shared with the backend is
-`frontend/ui/events.py` and [ARCHITECTURE.md](ARCHITECTURE.md) — changing a field name
+`frontend/ui/events.py` and [ARCHITECTURE.md](ARCHITECTURE.md). Changing a field name
 there is a two-worktree conversation.
 
 Verified on Python 3.12.10 / Streamlit 1.64 / Windows 11.
@@ -81,7 +81,7 @@ command to run and nothing to keep in sync.
 ### Why it's arranged this way
 
 Codex reads `AGENTS.md`. Claude Code reads `AGENTS.md` too (v2.1.277 and later), but only
-when the repo has no `CLAUDE.md` — if both files exist, Claude reads `CLAUDE.md` and
+when the repo has no `CLAUDE.md`. If both files exist, Claude reads `CLAUDE.md` and
 ignores `AGENTS.md` entirely. Two files with the same content would mean Claude and Codex
 reading different copies that drift apart within a day.
 

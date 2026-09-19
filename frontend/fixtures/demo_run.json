@@ -131,7 +131,7 @@
       "agent_id": "clinical-1",
       "agent_role": "clinical",
       "parent_id": "orchestrator-0",
-      "payload": {"message": "Notes record a partial response at week 8, then progression at week 14. That ordering matters — this is acquired, not primary, resistance."}
+      "payload": {"message": "Notes record a partial response at week 8, then progression at week 14. That ordering matters: this is acquired, not primary, resistance."}
     },
     {
       "type": "finding",
@@ -157,7 +157,7 @@
       "agent_role": "clinical",
       "parent_id": "orchestrator-0",
       "payload": {
-        "finding": "Response-then-progression at week 14 with LDH rising 2.1× over the same window and no interval immune-related adverse event — the trajectory of acquired resistance rather than a patient who never responded.",
+        "finding": "Response-then-progression at week 14 with LDH rising 2.1× over the same window and no interval immune-related adverse event. That is the trajectory of acquired resistance rather than a patient who never responded.",
         "confidence": 0.74,
         "provenance": [
           {"source": "labs_04.csv", "rows": "88-133", "analyte": "LDH"},
@@ -213,7 +213,7 @@
       "agent_id": "critic-2",
       "agent_role": "critic",
       "parent_id": "genomics-1",
-      "payload": {"message": "Zygosity is load-bearing here. Heterozygous B2M loss would not support this verdict — what is the evidence for biallelic?"}
+      "payload": {"message": "Zygosity is load-bearing here. Heterozygous B2M loss would not support this verdict, so what is the evidence for biallelic?"}
     },
     {
       "type": "agent_message",

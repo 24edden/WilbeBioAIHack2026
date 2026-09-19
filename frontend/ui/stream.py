@@ -24,7 +24,7 @@ DEFAULT_BACKEND = "http://localhost:8000"
 
 
 def upload_files(base_url: str, files: list[tuple[str, bytes]], timeout: float = 60.0) -> list[str]:
-    """POST /upload — returns file_ids for the uploaded patient files."""
+    """POST /upload: returns file_ids for the uploaded patient files."""
     payload = [("files", (name, data)) for name, data in files]
     resp = httpx.post(f"{base_url.rstrip('/')}/upload", files=payload, timeout=timeout)
     resp.raise_for_status()
@@ -34,7 +34,7 @@ def upload_files(base_url: str, files: list[tuple[str, bytes]], timeout: float =
 
 
 def start_run(base_url: str, question: str, file_ids: list[str], timeout: float = 30.0) -> str:
-    """POST /investigate — returns the run_id to stream."""
+    """POST /investigate: returns the run_id to stream."""
     resp = httpx.post(
         f"{base_url.rstrip('/')}/investigate",
         json={"question": question, "file_ids": file_ids},
@@ -45,14 +45,14 @@ def start_run(base_url: str, question: str, file_ids: list[str], timeout: float 
 
 
 def fetch_report(base_url: str, run_id: str, timeout: float = 30.0) -> dict[str, Any]:
-    """GET /report/{run_id} — the final structured report."""
+    """GET /report/{run_id}: the final structured report."""
     resp = httpx.get(f"{base_url.rstrip('/')}/report/{run_id}", timeout=timeout)
     resp.raise_for_status()
     return resp.json()
 
 
 def live_stream(base_url: str, run_id: str, connect_timeout: float = 10.0) -> Iterator[Event]:
-    """GET /events/{run_id} — Server-Sent Events, parsed into `Event`s.
+    """GET /events/{run_id}: Server-Sent Events, parsed into `Event`s.
 
     Hand-rolled rather than pulling an SSE library: the wire format is three
     lines of parsing and one less dependency for another team to reproduce.

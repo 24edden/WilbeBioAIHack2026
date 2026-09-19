@@ -1,6 +1,6 @@
 {
   "name": "Thin evidence (abstains)",
-  "description": "The same machinery on a question the bundle cannot answer. The critic refuses to produce a verdict. This is the honesty case — keep it in the demo.",
+  "description": "The same machinery on a question the bundle cannot answer. The critic refuses to produce a verdict. This is the honesty case. Keep it in the demo.",
   "events": [
     {
       "type": "run_started",
@@ -30,7 +30,7 @@
       "agent_id": "orchestrator-0",
       "agent_role": "orchestrator",
       "parent_id": null,
-      "payload": {"message": "Bundle contains a VCF only — no labs, no notes, no treatment dates. The clinical line of investigation has nothing to run on. Proceeding with genomics and literature, and flagging the gap."}
+      "payload": {"message": "Bundle contains a VCF only: no labs, no notes, no treatment dates. The clinical line of investigation has nothing to run on. Proceeding with genomics and literature, and flagging the gap."}
     },
     {
       "type": "agent_spawned",
@@ -75,7 +75,7 @@
       "agent_id": "genomics-1",
       "agent_role": "genomics",
       "parent_id": "orchestrator-0",
-      "payload": {"message": "I can give you a mutation count, but calling it TMB would be wrong — a 41-gene panel does not support a per-megabase estimate. Reporting the limitation instead of a number."}
+      "payload": {"message": "I can give you a mutation count, but calling it TMB would be wrong, because a 41-gene panel does not support a per-megabase estimate. Reporting the limitation instead of a number."}
     },
     {
       "type": "finding",
@@ -123,7 +123,7 @@
       "agent_id": "critic-2",
       "agent_role": "critic",
       "parent_id": "genomics-1",
-      "payload": {"message": "Is there any path to a TMB estimate from what we hold — any way to bound it?"}
+      "payload": {"message": "Is there any path to a TMB estimate from what we hold, any way to bound it at all?"}
     },
     {
       "type": "agent_message",
@@ -151,7 +151,7 @@
       "agent_role": "critic",
       "parent_id": null,
       "payload": {
-        "verdict": "ABSTAIN — this bundle cannot answer the question. TMB is not estimable from a 41-gene targeted panel, published thresholds are assay-specific and non-transferable, and no clinical trajectory was supplied to corroborate against. To answer it, supply whole-exome sequencing or the TMB value from the assay used at treatment time, plus treatment dates and response assessments.",
+        "verdict": "ABSTAIN. This bundle cannot answer the question. TMB is not estimable from a 41-gene targeted panel, published thresholds are assay-specific and non-transferable, and no clinical trajectory was supplied to corroborate against. To answer it, supply whole-exome sequencing or the TMB value from the assay used at treatment time, plus treatment dates and response assessments.",
         "confidence": 0.24,
         "abstained": true,
         "missing": ["whole-exome or calibrated TMB", "treatment dates", "response assessments"]
