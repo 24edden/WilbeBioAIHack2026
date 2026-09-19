@@ -1,0 +1,336 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rosalind:decision:1.0",
+  "title": "Decision version",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "decision_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "previous_decision_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "execution_mode": {
+      "enum": [
+        "live",
+        "replay",
+        "synthetic"
+      ]
+    },
+    "conclusion_status": {
+      "enum": [
+        "supported_within_scope",
+        "contradicted",
+        "unresolved",
+        "not_evaluable"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "hypotheses": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "properties": {
+          "hypothesis_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1
+          },
+          "state": {
+            "enum": [
+              "supported_within_scope",
+              "contradicted",
+              "unresolved",
+              "not_evaluable"
+            ]
+          },
+          "supporting_evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+            },
+            "uniqueItems": true
+          },
+          "counterevidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+            },
+            "uniqueItems": true
+          },
+          "missing_observations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "falsifier": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "hypothesis_id",
+          "statement",
+          "state",
+          "supporting_evidence_ids",
+          "counterevidence_ids",
+          "missing_observations",
+          "falsifier"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "claim_type": {
+            "enum": [
+              "observation",
+              "derived_result",
+              "model_prediction",
+              "inference"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+            },
+            "uniqueItems": true,
+            "minItems": 1
+          },
+          "counterevidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+            },
+            "uniqueItems": true
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "claim_id",
+          "text",
+          "claim_type",
+          "evidence_ids",
+          "counterevidence_ids",
+          "scope",
+          "limitations"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "unresolved_questions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "next_action": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "analysis",
+            "experiment",
+            "data_request"
+          ]
+        },
+        "objective": {
+          "type": "string",
+          "minLength": 1
+        },
+        "discriminates_hypothesis_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "controls": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "readouts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "predicted_outcomes": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "properties": {
+              "observation": {
+                "type": "string",
+                "minLength": 1
+              },
+              "interpretation": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "observation",
+              "interpretation"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "inconclusive_interpretation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "feasibility_limits": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "objective",
+        "discriminates_hypothesis_ids",
+        "controls",
+        "readouts",
+        "predicted_outcomes",
+        "inconclusive_interpretation",
+        "feasibility_limits"
+      ],
+      "additionalProperties": false
+    },
+    "stop_reason": {
+      "enum": [
+        "question_answered_within_scope",
+        "new_data_required",
+        "no_feasible_discriminator",
+        "budget_exhausted",
+        "tool_blocked",
+        "input_not_evaluable"
+      ]
+    },
+    "tool_failure_action_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+      },
+      "uniqueItems": true
+    },
+    "applied_lesson_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+      },
+      "uniqueItems": true
+    },
+    "review_status_at_issue": {
+      "const": "unreviewed"
+    }
+  },
+  "required": [
+    "schema_version",
+    "decision_id",
+    "run_id",
+    "case_id",
+    "version",
+    "previous_decision_id",
+    "execution_mode",
+    "conclusion_status",
+    "summary",
+    "hypotheses",
+    "claims",
+    "unresolved_questions",
+    "next_action",
+    "stop_reason",
+    "tool_failure_action_ids",
+    "applied_lesson_ids",
+    "review_status_at_issue"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "conclusion_status": {
+            "const": "supported_within_scope"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "claims": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

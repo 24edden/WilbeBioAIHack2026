@@ -1,0 +1,69 @@
+# Proposed application config: implement loader/validation in W01.
+schema_version: "1.0"
+profile: brev-cpu
+application:
+  bind_host: "127.0.0.1"
+  port: 8080
+  runtime_root: "/home/ubuntu/rosalind-runtime"
+  casepack_root: "/home/ubuntu/rosalind-casepacks"
+  database: "/home/ubuntu/rosalind-runtime/state/app.sqlite"
+  session_database: "/home/ubuntu/rosalind-runtime/state/sessions.sqlite"
+  workers: 1
+  max_active_runs: 1
+  public_access: false
+openai:
+  model: "gpt-rosalind-research"
+  api_key_env: "OPENAI_API_KEY"
+  transport: "responses"  # Target; launch gate checks the entitled model.
+  capability_record: "/home/ubuntu/rosalind-runtime/state/capabilities.json"
+  require_tool_round_trip_probe: true
+  structured_output_enabled: false  # Enable after probe.
+  streaming_enabled: false          # Optional independent probe.
+  hosted_trace_export_enabled: false
+  client_max_retries: 0             # Application owns classified retries.
+  automatic_model_fallback: false
+nim:
+  credential_env_precedence: ["NGC_API_KEY", "NVIDIA_API_KEY"]
+  automatic_backend_fallback: false
+  tools:
+    boltz2_compare_ligand:
+      enabled: false               # W06/W07 + live contract gate.
+      backend: "boltz2_hosted"
+      endpoint: "https://health.api.nvidia.com/v1/biology/mit/boltz2/predict"
+      model_revision: "unknown-until-observed"
+      contract_version: "alk-ligand-pair-v1"
+    evo2_score_snv:
+      enabled: false               # New adapter; current prototype lacks it.
+      backend: "evo2_7b_hosted"
+      endpoint: "https://health.api.nvidia.com/v1/biology/arc/evo2-7b/forward"
+      model_revision: "unknown-until-observed"
+      contract_version: "single-prefix-snv-v1"
+  connect_timeout_seconds: 10
+  request_timeout_seconds: 300
+  reconcile_deadline_seconds: 900
+  retry_ambiguous_post: false
+budgets:
+  max_model_requests: 12
+  max_total_input_tokens: 80000
+  max_total_output_tokens: 16000
+  max_openai_estimated_usd: 2.00
+  max_gateway_actions: 24
+  max_nim_requests: 4
+  max_run_active_seconds: 900
+  max_heavy_cpu_jobs: 1
+  cpu_threads_per_job: 2
+  memory_gib_per_job: 16
+  gpu_provisioning_enabled: false
+  max_gpu_hours: 0
+  nim_rate_card: null               # Unknown cost is never recorded as zero.
+policy:
+  default_execution_mode: "replay"
+  allow_mode_change_during_run: false
+  expose_general_shell: false
+  allow_controlled_data_export: false
+  max_tool_summary_tokens: 2000
+  max_coordinator_cycles: 3
+  max_reviewer_rounds: 1
+  max_schema_repair_attempts: 1
+  scientist_review_required_for_scientific_acceptance: true
+  auto_activate_lessons: false

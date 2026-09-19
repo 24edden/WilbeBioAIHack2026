@@ -1,0 +1,388 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rosalind:action:1.0",
+  "title": "Analysis action",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "action_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+    },
+    "hypothesis_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+    },
+    "tool": {
+      "enum": [
+        "extract_alk_assay",
+        "evo2_score_snv",
+        "boltz2_compare_ligand",
+        "summarize_expression"
+      ]
+    },
+    "contract_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "question_kind": {
+      "enum": [
+        "functional_phenotype",
+        "variant_sequence_plausibility",
+        "ligand_structure",
+        "expression_state"
+      ]
+    },
+    "question": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_discriminator": {
+      "type": "string",
+      "minLength": 1
+    },
+    "input_artifact_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "backend": {
+      "enum": [
+        "cpu",
+        "evo2_7b_hosted",
+        "evo2_self_hosted",
+        "boltz2_hosted",
+        "boltz2_self_hosted"
+      ]
+    },
+    "replicate_index": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "parameters": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/alk"
+        },
+        {
+          "$ref": "#/$defs/evo"
+        },
+        {
+          "$ref": "#/$defs/boltz"
+        },
+        {
+          "$ref": "#/$defs/expression"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "action_id",
+    "run_id",
+    "hypothesis_id",
+    "tool",
+    "contract_version",
+    "question_kind",
+    "question",
+    "rationale",
+    "expected_discriminator",
+    "input_artifact_ids",
+    "backend",
+    "replicate_index",
+    "parameters"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "alk": {
+      "type": "object",
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+        },
+        "variant_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "table": {
+          "const": "Table S2"
+        },
+        "requested_fields": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "classification",
+              "resistance_score",
+              "fitness"
+            ]
+          }
+        }
+      },
+      "required": [
+        "source_id",
+        "variant_key",
+        "table",
+        "requested_fields"
+      ],
+      "additionalProperties": false
+    },
+    "evo": {
+      "type": "object",
+      "properties": {
+        "reference_artifact_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+        },
+        "position_1based": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 4096
+        },
+        "ref": {
+          "enum": [
+            "A",
+            "C",
+            "G",
+            "T"
+          ]
+        },
+        "alt": {
+          "enum": [
+            "A",
+            "C",
+            "G",
+            "T"
+          ]
+        },
+        "mapping_artifact_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+        },
+        "context_kind": {
+          "enum": [
+            "genomic",
+            "construct"
+          ]
+        },
+        "orientation": {
+          "const": "as_recorded"
+        }
+      },
+      "required": [
+        "reference_artifact_id",
+        "position_1based",
+        "ref",
+        "alt",
+        "mapping_artifact_id",
+        "context_kind",
+        "orientation"
+      ],
+      "additionalProperties": false
+    },
+    "boltz": {
+      "type": "object",
+      "properties": {
+        "wt_sequence_artifact_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+        },
+        "mutant_sequence_artifact_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+        },
+        "ligand_artifact_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+        },
+        "mapping_artifact_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+        },
+        "recycling_steps": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "sampling_steps": {
+          "type": "integer",
+          "minimum": 10,
+          "maximum": 200
+        },
+        "diffusion_samples": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1
+        },
+        "predict_affinity": {
+          "const": false
+        }
+      },
+      "required": [
+        "wt_sequence_artifact_id",
+        "mutant_sequence_artifact_id",
+        "ligand_artifact_id",
+        "mapping_artifact_id",
+        "recycling_steps",
+        "sampling_steps",
+        "diffusion_samples",
+        "predict_affinity"
+      ],
+      "additionalProperties": false
+    },
+    "expression": {
+      "type": "object",
+      "properties": {
+        "matrix_artifact_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+        },
+        "annotation_artifact_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+        },
+        "sample_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "gene_set_artifact_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+        },
+        "analysis_spec_artifact_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+        }
+      },
+      "required": [
+        "matrix_artifact_id",
+        "annotation_artifact_id",
+        "sample_ids",
+        "gene_set_artifact_id",
+        "analysis_spec_artifact_id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "tool": {
+            "const": "extract_alk_assay"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "question_kind": {
+            "const": "functional_phenotype"
+          },
+          "backend": {
+            "enum": [
+              "cpu"
+            ]
+          },
+          "parameters": {
+            "$ref": "#/$defs/alk"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "tool": {
+            "const": "evo2_score_snv"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "question_kind": {
+            "const": "variant_sequence_plausibility"
+          },
+          "backend": {
+            "enum": [
+              "evo2_7b_hosted",
+              "evo2_self_hosted"
+            ]
+          },
+          "parameters": {
+            "$ref": "#/$defs/evo"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "tool": {
+            "const": "boltz2_compare_ligand"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "question_kind": {
+            "const": "ligand_structure"
+          },
+          "backend": {
+            "enum": [
+              "boltz2_hosted",
+              "boltz2_self_hosted"
+            ]
+          },
+          "parameters": {
+            "$ref": "#/$defs/boltz"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "tool": {
+            "const": "summarize_expression"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "question_kind": {
+            "const": "expression_state"
+          },
+          "backend": {
+            "enum": [
+              "cpu"
+            ]
+          },
+          "parameters": {
+            "$ref": "#/$defs/expression"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Harness Building"
+  short_description: "Build reliable agent loops, tools, and recovery"
+  default_prompt: "Use $agent-harness-building to design and implement a reliable agent harness with scoped tools, durable state, recovery, and evaluation."

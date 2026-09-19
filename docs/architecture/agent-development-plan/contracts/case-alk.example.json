@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "case_id": "case_alk_l1196m_v1",
+  "manifest_version": "1.0",
+  "casepack": "alk_atlas",
+  "question": "Which drug-specific functional observations are supported for ALK L1196M, and what would distinguish an interaction-based mechanism from assay or model-context alternatives?",
+  "source_scope": "functional_assay",
+  "subject_id": null,
+  "study_ids": [
+    "doi:10.1186/s13059-026-03977-4"
+  ],
+  "independent_unit": "experimental_model",
+  "independent_units": null,
+  "evaluation_mode": "open_book_development",
+  "allowed_execution_modes": [
+    "live",
+    "replay"
+  ],
+  "sources": [
+    {
+      "source_id": "alk_atlas_workbook",
+      "relative_path": "alk-atlas/13059_2026_3977_MOESM2_ESM.xlsx",
+      "sha256": "f160f2a451a581d37f54bcbb321705a6f51429ca6f10a93bd6ce51e1f86abe78",
+      "media_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "source_type": "experimental_workbook",
+      "locator_hint": {
+        "table": "Table S2",
+        "row_1based": 1331,
+        "source_key": "ALK_E23_C70A"
+      }
+    }
+  ],
+  "limitations": [
+    "The independent experimental units and biological replicate count must be confirmed from the assay tables before inferential analysis.",
+    "Functional screen scores are not clinical resistance probabilities or IC50 measurements.",
+    "The Table S5 concentration-header versus supplementary-legend discrepancy remains unresolved.",
+    "Molecular sequences, residue mapping and alectinib ligand identity must be qualified separately before a NIM request."
+  ],
+  "allowed_tool_families": [
+    "source_retrieval",
+    "assay_extraction"
+  ],
+  "process_contract_release": null,
+  "memory_release": null,
+  "data_policy": {
+    "input_class": "public",
+    "model_transmission": "approved_excerpts_only",
+    "external_trace_export": false,
+    "source_redistribution": "review_required"
+  }
+}

@@ -1,6 +1,18 @@
 # Developer README
 
+## Collected project documentation
+
+The [knowledge library](docs/README.md) is the entry point for the Markdown collected from the local Ai X Bio workspace and Brev on 19 September 2026. Scientific context stays in `Context/`; `docs/` groups case studies, architecture, datasets, implementation records and event preparation; `skills/` contains the two authored reusable skills and their small YAML resources.
+
+This documentation import does not install prototype code or copy datasets. Follow the [implementation boundary](docs/implementation/shared-context/CURRENT_IMPLEMENTATION.md) before attempting to run commands from a historical prototype guide. The [source inventory](docs/SOURCE-INVENTORY.md) maps every collected source to its retained copy. Update the preferred document and index when revising a topic; historical snapshots should remain clearly labelled.
+
 Working notes for the team. Setup and run instructions go here once we have something to run.
+
+## Agent development handoff
+
+Read the [agent development plan](docs/architecture/agent-development-plan/README.md), then its [local/Brev runbook](docs/architecture/agent-development-plan/04-LOCAL-BREV-RUNBOOK.md) and [delivery backlog](docs/architecture/agent-development-plan/05-DELIVERY-PLAN.md). These specify the proposed build and distinguish verified prototype behavior from implementation still required. The investigation hypothesis is supplied through the user's message, prompt, Markdown/text file or structured brief; an optional [hypothesis template](docs/architecture/agent-development-plan/contracts/hypothesis-template.md) is included.
+
+For the shared copy, connect with `brev shell agentic-takeoff-cpu` and open `/home/ubuntu/rosalind-shared-files/agent-development-plan/2026-09-19/README.md`. The shared `START-HERE.md` links to it. `PACKAGE-MANIFEST.json` records the published file hashes; the adjacent `agent-development-plan.zip` contains the same package. Publication copies replace personal Mac roots with documented placeholders. Code deployment and live inference remain explicit backlog gates.
 
 ## Context files
 

@@ -1,0 +1,297 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rosalind:case:1.0",
+  "title": "Case manifest",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "case_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+    },
+    "manifest_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "casepack": {
+      "enum": [
+        "alk_atlas",
+        "bcma_gse164551",
+        "maynard_th266",
+        "synthetic_fixture"
+      ]
+    },
+    "question": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_scope": {
+      "enum": [
+        "functional_assay",
+        "patient",
+        "model",
+        "reference",
+        "synthetic"
+      ]
+    },
+    "subject_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "study_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "independent_unit": {
+      "enum": [
+        "experimental_model",
+        "patient",
+        "synthetic_case",
+        "reference_record"
+      ]
+    },
+    "independent_units": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "evaluation_mode": {
+      "enum": [
+        "open_book_development",
+        "blinded_evaluation",
+        "open_challenge"
+      ]
+    },
+    "allowed_execution_modes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "live",
+          "replay",
+          "synthetic"
+        ]
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$"
+          },
+          "relative_path": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "media_type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_type": {
+            "enum": [
+              "experimental_workbook",
+              "clinical_metadata",
+              "expression_matrix",
+              "variant_table",
+              "literature",
+              "sequence",
+              "ligand",
+              "synthetic"
+            ]
+          },
+          "locator_hint": {
+            "type": "object",
+            "properties": {
+              "table": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "row_1based": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1
+              },
+              "source_key": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "table",
+              "row_1based",
+              "source_key"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "source_id",
+          "relative_path",
+          "sha256",
+          "media_type",
+          "source_type",
+          "locator_hint"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "allowed_tool_families": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "source_retrieval",
+          "assay_extraction",
+          "variant_summary",
+          "expression_summary",
+          "sequence_scoring",
+          "ligand_structure",
+          "protein_complex"
+        ]
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "process_contract_release": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "memory_release": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "data_policy": {
+      "type": "object",
+      "properties": {
+        "input_class": {
+          "enum": [
+            "public",
+            "controlled",
+            "private",
+            "synthetic"
+          ]
+        },
+        "model_transmission": {
+          "enum": [
+            "approved_excerpts_only",
+            "disabled"
+          ]
+        },
+        "external_trace_export": {
+          "type": "boolean"
+        },
+        "source_redistribution": {
+          "enum": [
+            "review_required",
+            "allowed",
+            "disallowed"
+          ]
+        }
+      },
+      "required": [
+        "input_class",
+        "model_transmission",
+        "external_trace_export",
+        "source_redistribution"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "case_id",
+    "manifest_version",
+    "casepack",
+    "question",
+    "source_scope",
+    "subject_id",
+    "study_ids",
+    "independent_unit",
+    "independent_units",
+    "evaluation_mode",
+    "allowed_execution_modes",
+    "sources",
+    "limitations",
+    "allowed_tool_families",
+    "process_contract_release",
+    "memory_release",
+    "data_policy"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "source_scope": {
+            "const": "patient"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "subject_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "independent_unit": {
+            "const": "patient"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "source_scope": {
+            "const": "functional_assay"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "subject_id": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}
