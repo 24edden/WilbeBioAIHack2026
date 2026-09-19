@@ -1,5 +1,7 @@
 # Markdown source inventory
 
+[How to use Rosalind](HOW-TO-USE-ROSALIND.md) was added from `local:rosalind-demo/docs/HOW-TO-USE-ROSALIND.md` on 19 September 2026. Source SHA-256: `e900fc3c9e2853cebb7b053639793421c4268197427e043cb0602cde5fb6fa2d`. The publication is byte-identical to the source. This is a project usage reference, not an analysis or inference result.
+
 Collected 19 September 2026 from the local Ai X Bio project and the shared Brev workspace, including Ana’s case-study folder. Source hashes describe the original files, before publication link/path cleanup.
 
 Exact duplicate content is published once. Distinct local snapshots are retained under `archive/`; use the main documentation index for the preferred reading order. Original files were not modified.

@@ -12,6 +12,8 @@ Research and planning documents collected on 19 September 2026 from the local Ai
 6. [Dataset landscape](datasets/DATASET-LANDSCAPE.md) and [remaining data gaps](datasets/2026-09-19/GAPS.md).
 7. [How to use BioNeMo for CAR-T](HOW-TO-USE-BIONEMO.md): skill priorities, target-retention requirements, molecular inputs, binder design and experimental validation.
 
+8. [How to use Rosalind](HOW-TO-USE-ROSALIND.md): relevant science services and skills, recommended investigation workflow, example requests, and current integration boundaries.
+
 ## Browse by topic
 
 | Topic | Documents |
