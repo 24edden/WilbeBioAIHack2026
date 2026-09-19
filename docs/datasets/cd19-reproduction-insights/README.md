@@ -1,6 +1,6 @@
 # CD19 reproduction insights and next implementation steps
 
-**Recommended next step: [prepare versioned inputs and bounded analysis readers](NEXT-STEPS.md).** We have enough qualified released measurements for useful numerical workflows. The new adapters, full model reconstruction and complementary donor analysis remain implementation work.
+**Current update: [general skill guidance](NEXT-STEPS.md).** The scientific roles suggest preparation and analyses from the question and study design. Study-specific findings remain reference material; no fixed cleaning pipeline or expected answers are added to the skills. [Primary data references](DATA-REFERENCES.md) are documented separately.
 
 This is a documents-only public edition. Detailed clinical/sample maps, source inventories, numeric tables, code/data payloads and verification receipts are retained on the team's Brev instance; see [data access](DATA-ACCESS.md). The research conclusions and all 20 finding-group dispositions are documented here.
 

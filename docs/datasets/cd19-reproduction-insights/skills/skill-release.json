@@ -1,0 +1,49 @@
+{
+  "scope": "Changed entries from the existing application skill manifest; this is not a complete standalone skill registry",
+  "entries": [
+    {
+      "id": "bioinformatician",
+      "name": "Source qualification and executable analysis",
+      "version": "1.2.0",
+      "sha256": "8195630ccdd12edd36ff61e950a9a38bbeb9e0c4bb5c7b8e77e6c711e188858b",
+      "path": "scientific/bioinformatician.md",
+      "roles": [
+        "bioinformatician"
+      ],
+      "origin": "Team TBD: user-specified specialist architecture",
+      "description": "Qualify measured inputs and suggest traceable preparation and executable analyses appropriate to their assay and study design."
+    },
+    {
+      "id": "statistician",
+      "name": "Design and uncertainty review",
+      "version": "1.2.0",
+      "sha256": "8f1afd58a0cfd32f846b644464768eb1cf808ccd2f296edcf91e1d51e261bb0b",
+      "path": "scientific/statistician.md",
+      "roles": [
+        "statistician"
+      ],
+      "origin": "Team TBD: user-specified specialist architecture",
+      "description": "Match analysis and validation to the estimand, experimental unit and data-generating design."
+    },
+    {
+      "id": "discovery-planning",
+      "name": "Role-owned discovery and tool selection",
+      "version": "1.1.0",
+      "sha256": "c8ea50d784f30f41f0e231f05ab448812fec14efab986c4fd18d18214d8c22a4",
+      "path": "scientific/discovery-planning.md",
+      "roles": [
+        "clinical_scientist",
+        "bioinformatician",
+        "statistician",
+        "clinical_pharmacologist",
+        "molecular_scientist",
+        "translational_scientist",
+        "assay_scientist",
+        "coordinator",
+        "reviewer"
+      ],
+      "origin": "Team TBD: role-specific scientific planning and registered capability contract",
+      "description": "Choose question-driven preparation and available analyses without embedding dataset-specific answers or fixed pipelines."
+    }
+  ]
+}

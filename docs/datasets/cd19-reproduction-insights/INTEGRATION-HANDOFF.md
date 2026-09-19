@@ -1,4 +1,6 @@
-# Executable integration handoff
+# Study-specific integration possibilities
+
+**Current scope:** [general skill guidance](NEXT-STEPS.md) and [data references](DATA-REFERENCES.md). The study-specific possibilities below preserve the earlier audit; they are not a required sequence or reusable skill instructions. No new analysis adapters are implemented by the skill update.
 
 This is a concrete proposal for the application/analysis agents. All original sources remain read-only. Develop readers in a separate checkout and review source-catalog changes before deployment. Do not edit accepted evidence or either saved decision; new computations require new versioned recipes and evidence records.
 
