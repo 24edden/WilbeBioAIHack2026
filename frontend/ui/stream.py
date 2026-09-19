@@ -23,14 +23,44 @@ DEFAULT_BACKEND = "http://localhost:8000"
 # -- live -----------------------------------------------------------------
 
 
+def _file_ids(body: Any) -> list[str]:
+    """Pull file ids out of an UploadResponse.
+
+    The backend returns `{"files": [{"file_id": ..., "filename": ...}, ...]}`.
+    The other shapes are tolerated so a backend tweak degrades instead of
+    silently investigating zero files.
+    """
+    if isinstance(body, dict):
+        entries = body.get("files")
+        if isinstance(entries, list):
+            ids = [
+                e.get("file_id") if isinstance(e, dict) else e
+                for e in entries
+            ]
+            return [str(i) for i in ids if i]
+        if isinstance(body.get("file_ids"), list):
+            return [str(i) for i in body["file_ids"]]
+    if isinstance(body, list):
+        return [str(i) for i in body]
+    return []
+
+
 def upload_files(base_url: str, files: list[tuple[str, bytes]], timeout: float = 60.0) -> list[str]:
-    """POST /upload: returns file_ids for the uploaded patient files."""
+    """POST /upload: returns file ids for the uploaded patient files."""
     payload = [("files", (name, data)) for name, data in files]
     resp = httpx.post(f"{base_url.rstrip('/')}/upload", files=payload, timeout=timeout)
     resp.raise_for_status()
-    body = resp.json()
-    ids = body.get("file_ids", body if isinstance(body, list) else [])
-    return [str(i) for i in ids]
+    return _file_ids(resp.json())
+
+
+def load_sample_patient(base_url: str, timeout: float = 60.0) -> list[str]:
+    """POST /demo/sample-patient: loads the bundled patient server side.
+
+    This is the stage path. No file picker, no dragging a VCF around live.
+    """
+    resp = httpx.post(f"{base_url.rstrip('/')}/demo/sample-patient", timeout=timeout)
+    resp.raise_for_status()
+    return _file_ids(resp.json())
 
 
 def start_run(base_url: str, question: str, file_ids: list[str], timeout: float = 30.0) -> str:

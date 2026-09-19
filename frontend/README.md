@@ -20,6 +20,18 @@ Opens on <http://localhost:8501>. **No backend needed**, it starts in Mock mode.
 | **Mock** (default) | replays a fixture from `fixtures/`, sleeping the real inter-event gaps so it animates | nothing |
 | **Live** | `POST /investigate` then streams `GET /events/{run_id}` | the backend on `localhost:8000` |
 
+In Live mode the sidebar defaults to **the bundled sample patient**, which loads
+server side via `POST /demo/sample-patient`. That is the stage path: no file
+picker, nothing to drag around during a demo. Turn the toggle off to upload your
+own VCF, labs CSV and notes instead.
+
+To run both halves:
+
+```bash
+python -m uvicorn app.main:app --port 8000   # backend, mock mode by default
+streamlit run frontend/app.py                # frontend, switch to Live
+```
+
 Both paths yield the same `Event` objects and fold into the same `RunState`, so
 what you rehearse in mock mode is what you get live. Mock mode is the daily dev
 loop and the zero-token rehearsal path, the same reasoning as `RUN_MODE=mock` on

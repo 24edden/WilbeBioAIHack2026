@@ -18,7 +18,14 @@ import streamlit as st
 
 from ui import components as C
 from ui.state import RunState
-from ui.stream import DEFAULT_BACKEND, list_fixtures, live_stream, start_run, upload_files
+from ui.stream import (
+    DEFAULT_BACKEND,
+    list_fixtures,
+    live_stream,
+    load_sample_patient,
+    start_run,
+    upload_files,
+)
 from ui.theme import CSS
 
 st.set_page_config(page_title="Failure Investigation", page_icon="\U0001f9ec", layout="wide")
@@ -39,7 +46,7 @@ with st.sidebar:
         help="Mock replays a recorded run. No backend required.",
     )
 
-    fixture, backend, speed, uploads = None, DEFAULT_BACKEND, 1.5, []
+    fixture, backend, speed, uploads, sample = None, DEFAULT_BACKEND, 1.5, [], False
 
     if mode == "Mock":
         fixtures = list_fixtures()
@@ -55,10 +62,15 @@ with st.sidebar:
         )
     else:
         backend = st.text_input("Backend", DEFAULT_BACKEND)
-        uploads = st.file_uploader(
-            "Patient files", accept_multiple_files=True,
-            type=["vcf", "csv", "txt", "tsv", "json"],
-        ) or []
+        sample = st.toggle(
+            "Use the bundled sample patient", value=True,
+            help="Loads the sample patient server side. No file picker on stage.",
+        )
+        if not sample:
+            uploads = st.file_uploader(
+                "Patient files", accept_multiple_files=True,
+                type=["vcf", "csv", "txt", "tsv", "json"],
+            ) or []
 
     st.divider()
     if st.button("Clear run", width="stretch"):
@@ -173,6 +185,7 @@ if go:
             "speed": speed,
             "backend": backend,
             "question": question.strip(),
+            "sample": sample,
             "uploads": [(f.name, f.getvalue()) for f in uploads],
         }
         st.rerun()
@@ -192,11 +205,13 @@ else:
         stream = mock_stream(pending["fixture"], speed=pending["speed"])
     else:
         try:
-            with st.spinner("Uploading and starting the run"):
-                file_ids = (
-                    upload_files(pending["backend"], pending["uploads"])
-                    if pending["uploads"] else []
-                )
+            with st.spinner("Loading the patient bundle and starting the run"):
+                if pending["sample"]:
+                    file_ids = load_sample_patient(pending["backend"])
+                elif pending["uploads"]:
+                    file_ids = upload_files(pending["backend"], pending["uploads"])
+                else:
+                    file_ids = []
                 run_id = start_run(pending["backend"], pending["question"], file_ids)
             stream = live_stream(pending["backend"], run_id)
         except Exception as exc:  # noqa: BLE001 - surface any backend problem in the UI
