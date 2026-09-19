@@ -1,4 +1,8 @@
-# AGENTS.md
+# Project instructions
+
+Single source of project instructions for every coding agent. Codex reads this file
+directly; Claude Code reads it through the `@AGENTS.md` import at the top of `CLAUDE.md`.
+**Edit this file, not `CLAUDE.md`.**
 
 Hackathon project for the Wilbe Bio x AI hack (London, WilbeLABS). Project idea is TBD.
 
@@ -10,6 +14,10 @@ guessing at the event's constraints:
 - `Context/challengeWeb.md` — event brief, the four tracks, speakers.
 - `Context/judgingCriteria.md` — scoring rubric, submission requirements, prizes.
   Read this before writing slides, the pitch, or anything about scope.
+- `Context/tooling.md` — accounts to set up (Brev, Codex, Rosalind), what each
+  platform is for, and which tools count as "central to the solution" for judging
+  criterion 2 versus which are just build-time tooling. Read before proposing an
+  architecture. Sections marked INFERRED are team analysis, not event text.
 
 `DeveloperREADME.md` has team setup notes and conventions.
 

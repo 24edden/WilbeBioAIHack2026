@@ -15,9 +15,9 @@ TBD.
 ## Layout
 
 ```
-Context/           event brief and judging criteria
-CLAUDE.md          repo context for Claude Code, read automatically
-AGENTS.md          same, for Codex
+Context/           event brief, judging criteria, tooling prep
+AGENTS.md          project instructions for coding agents (edit this one)
+CLAUDE.md          one-line import of AGENTS.md, for Claude Code
 ```
 
 ## Notes
