@@ -1,6 +1,26 @@
 # Developer README
 
-Working notes for the team. Setup and run instructions go here once we have something to run.
+Working notes for the team.
+
+## Running the frontend
+
+```bash
+pip install -r frontend/requirements.txt
+streamlit run frontend/app.py
+```
+
+Opens on <http://localhost:8501> in **Mock mode** — it replays a fixture and needs no
+backend, no GPU and no tokens. Switch to Live mode in the sidebar once the backend is up
+on `localhost:8000`.
+
+Before pushing frontend changes: `python frontend/smoke_test.py` (headless, no Streamlit).
+
+Details, fixture format and the UI conventions are in
+[frontend/README.md](frontend/README.md). The event schema shared with the backend is
+`frontend/ui/events.py` and [ARCHITECTURE.md](ARCHITECTURE.md) — changing a field name
+there is a two-worktree conversation.
+
+Verified on Python 3.12.10 / Streamlit 1.64 / Windows 11.
 
 ## Context files
 
