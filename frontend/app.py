@@ -184,11 +184,12 @@ def monitor():
     presentation.ingest(state.raw,complete=False)
     presentation.index=max(0,len(presentation.turns)-1)
     render_pet(state,presentation,mode=st.session_state.submitted.mode)
-    if current_job.cancel_requested:
-        st.caption('Cancellation requested. Waiting for the investigation to stop safely.')
-    elif current_job.can_cancel and (st.session_state.submitted.mode!='Live' or state.run_id):
-        if st.button('Cancel investigation',key='cancel_run'):
-            current_job.request_cancel();st.rerun()
+    if current_job.cancel_requested or (current_job.can_cancel and (st.session_state.submitted.mode!='Live' or state.run_id)):
+        with st.container(key='run_actions'):
+            if current_job.cancel_requested:
+                st.caption('Cancellation requested. Waiting for the investigation to stop safely.')
+            elif st.button('Cancel investigation',key='cancel_run'):
+                current_job.request_cancel();st.rerun()
     if state.errors:
         st.caption('An issue was reported; the investigation is still running.')
 

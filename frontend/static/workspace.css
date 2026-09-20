@@ -63,3 +63,10 @@ h1,h2,h3{color:var(--ui-text)}.stApp a{color:var(--ui-accent)}
 .st-key-trace_home button p{font-size:25px!important;font-weight:750!important;letter-spacing:-1px!important}
 .st-key-resume_strip{border:1px solid var(--ui-border);background:var(--ui-soft);border-radius:12px;padding:12px 17px;margin-bottom:18px}
 [data-testid=stToolbar]{visibility:hidden}
+
+/* Keep cancellation separate from the scientific content and primary navigation. */
+.st-key-run_actions{max-width:890px;margin:28px auto 0;padding:16px 0 0;border-top:1px solid var(--ui-border)}
+.st-key-run_actions [data-testid=stButton]{display:flex;justify-content:flex-end}
+.st-key-run_actions button{background:transparent!important;color:var(--ui-muted)!important;border-color:transparent!important;box-shadow:none!important;font-size:12px!important;min-height:38px!important;padding:.45rem .75rem!important}
+.st-key-run_actions button:hover{background:var(--ui-soft)!important;color:var(--ui-critical)!important;border-color:var(--ui-border)!important}
+@media(max-width:720px){.st-key-run_actions{margin-top:24px;padding-top:16px}}
