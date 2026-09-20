@@ -380,7 +380,6 @@ def render_team(run, brief, evidence):
 
 def render_nvidia(run, brief, artifacts, source):
     st.title('NVIDIA predictions & exact inputs')
-    render_structure_previews(artifacts, run['id'])
     st.caption('Predictions are exploratory structural evidence. Inspect each receipt for its scope; they do not establish patient causation or clinical efficacy.')
     structures = [a for a in artifacts if a.get('name', '').lower().endswith('.cif')]
     other_artifacts = [a for a in artifacts if a not in structures]
@@ -400,7 +399,8 @@ def render_nvidia(run, brief, artifacts, source):
             prose(item)
     if structures:
         st.subheader('NVIDIA structure files (.cif)', anchor='nvidia-structure-files')
-        st.caption('Recorded 3D structure files. Open a file, choose Load artifact, then Download verified artifact. Each receipt retains its exact construct and scope.')
+        render_structure_previews(structures, run['id'], heading=False)
+        st.caption('Images load automatically. Open the details below for the original structure files and receipts.')
     for i, artifact in enumerate(structures + other_artifacts):
         if i == len(structures):
             st.subheader('Other saved artifacts' if structures else 'Artifacts')
@@ -410,10 +410,16 @@ def render_nvidia(run, brief, artifacts, source):
             if label:
                 st.caption(label)
             prose(artifact.get('scope'))
-            st.caption('Artifact bytes are retrieved only when requested and checked against recorded hashes where available.')
             identity = [str(getattr(source, 'base', getattr(source, 'root', ''))), run['id'], artifact.get('url', artifact.get('path')), artifact.get('sha256')]
             cache_key = 'artifact:' + hashlib.sha256(json.dumps(identity).encode()).hexdigest()
-            if st.button('Load artifact', key=cache_key + ':load'):
+            is_structure = artifact in structures
+            if is_structure:
+                st.caption('Original structure file · Checked against its recorded hash.')
+                load_requested = cache_key not in st.session_state
+            else:
+                st.caption('Artifact bytes are retrieved when requested and checked against recorded hashes where available.')
+                load_requested = st.button('Load artifact', key=cache_key + ':load')
+            if load_requested:
                 try:
                     st.session_state[cache_key] = source.artifact_bytes(artifact)
                 except Exception as exc:

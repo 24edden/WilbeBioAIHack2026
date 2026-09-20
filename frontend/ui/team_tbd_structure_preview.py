@@ -33,14 +33,15 @@ def saved_structure_images(artifacts, run_id=None):
     return results
 
 
-def render_structure_previews(artifacts, run_id=None):
+def render_structure_previews(artifacts, run_id=None, *, heading=True):
     """Render immediately on page load, with native click-to-expand images."""
     images = saved_structure_images(artifacts, run_id)
     if not images:
         return
-    st.subheader('NVIDIA structure predictions')
+    if heading:
+        st.subheader('NVIDIA structure predictions')
     columns = st.columns(min(2, len(images)))
     for index, (item, data) in enumerate(images):
         with columns[index % len(columns)]:
             st.image(data, caption=item['title'] + ' · ' + item['model'], width='stretch')
-    st.caption('Saved predictions · Click an image to enlarge. Exact inputs and provider receipts are below in NVIDIA & sequences.')
+    st.caption('Saved NVIDIA Boltz-2 predictions · Click an image to enlarge.')
