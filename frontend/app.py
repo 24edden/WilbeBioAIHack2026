@@ -2,6 +2,7 @@
 from copy import deepcopy
 from dataclasses import replace
 from uuid import uuid4
+import os
 import streamlit as st
 
 from ui import components as C
@@ -24,7 +25,11 @@ from ui.voice_settings import render_stage_audio
 from ui.client_controls import render_client_controls
 
 st.set_page_config(page_title=PROFILE.page_title,page_icon=":material/science:",layout="wide",initial_sidebar_state="collapsed")
-st.session_state.setdefault('ui_theme','light')
+connected_studies = bool(os.environ.get('TEAM_TBD_CAPSULE'))
+if connected_studies:
+    st.session_state.ui_theme = 'dark'
+else:
+    st.session_state.setdefault('ui_theme','light')
 st.session_state.astral_theme=st.session_state.ui_theme=='light'
 st.markdown(stylesheet('astral' if st.session_state.ui_theme=='light' else 'dark'),unsafe_allow_html=True)
 st.markdown(pet_stylesheet(),unsafe_allow_html=True)
@@ -43,6 +48,9 @@ if st.session_state.get('flow_version') != 3:
 
 def go_home():
     st.session_state.stage='prompt'
+    if connected_studies:
+        from ui.team_tbd import return_to_chat
+        return_to_chat()
 
 
 def show_running():
@@ -78,7 +86,19 @@ def start(request):
     st.rerun()
 
 
+if connected_studies:
+    from ui.composer import capture_composer_draft
+    capture_composer_draft(st.session_state.draft)
 _collected=collect_updates(st.session_state)
+# Keep the original question/running/results workflow as the front door. Saved
+# scientific studies are a separate, read-only route; entering it never submits.
+if connected_studies:
+    from ui.team_tbd import render_brand, render_workspace, open_study, render_home_studies
+    render_brand()
+    st.session_state.draft['appearance'] = 'team-tbd'
+    if 'run' in st.query_params or 'view' in st.query_params:
+        render_workspace()
+        st.stop()
 job=st.session_state.job
 run_active=bool(job and job.active)
 # Old bookmarks/session state never reveal an alternate interface.
@@ -93,10 +113,14 @@ with st.container(key='workspace_header'):
         with st.container(key='trace_home'):
             st.button(PROFILE.name,key='home',on_click=go_home,help='Return to the question window. An active investigation keeps running.')
     with theme:
-        st.button('☾ Dark mode' if st.session_state.ui_theme=='light' else '☀ Light mode',
-                  key='theme_toggle',on_click=toggle_theme,help='Use this appearance on all three screens.')
+        if connected_studies:
+            st.button('Completed studies', key='tbd_open_studies', on_click=open_study, help='Explore the two saved Team TBD studies.')
+        else:
+            st.button('☾ Dark mode' if st.session_state.ui_theme=='light' else '☀ Light mode',
+                      key='theme_toggle',on_click=toggle_theme,help='Use this appearance on all three screens.')
     with settings:render_setup(st.session_state.draft)
-render_client_controls()
+if not connected_studies:
+    render_client_controls()
 
 if st.session_state.stage=='prompt':
     if run_active:
@@ -107,6 +131,8 @@ if st.session_state.stage=='prompt':
         st.button('View last results',key='view_last_results',on_click=show_running)
     request=render_start(st.session_state.draft,run_active=run_active)
     if isinstance(request,RunRequest):start(request)
+    if connected_studies:
+        render_home_studies()
 
 elif st.session_state.stage=='results':
     state=st.session_state.run

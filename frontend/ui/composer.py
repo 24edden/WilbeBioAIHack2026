@@ -43,23 +43,42 @@ def validate_action(value):
     return {**value,'question':question.strip(),'uploads':decode_files(value.get('files',[]))}
 
 
+def apply_composer_draft(draft, pending):
+    """Persist a browser draft independently of whether its composer stays mounted."""
+    if draft.get('mode') == 'Mock' or not isinstance(pending, dict) or pending.get('generation') != draft['composer_id']:
+        return
+    text = pending.get('question')
+    if not isinstance(text, str) or len(text) > MAX_QUESTION:
+        return
+    try:
+        uploads = decode_files(pending.get('files', []))
+    except ValueError as exc:
+        st.error(str(exc))
+        return
+    draft.update(question=text, uploads=uploads)
+
+
+def capture_composer_draft(draft):
+    # Blur can deliver a component update in the same rerun as a navigation
+    # click. Capture it before routing removes the component from the page.
+    component_state = st.session_state.get('trace_prompt_composer', {})
+    if isinstance(component_state, dict):
+        apply_composer_draft(draft, component_state.get('draft'))
+
+
 def render_composer(draft,*,question,read_only=False,disabled=False,note=''):
     from streamlit.components.v2 import component
     assets=Path(__file__).resolve().parents[1]/'static'
     composer=component('trace_prompt_composer',html=(assets/'composer.html').read_text(encoding='utf-8'),
         css=(assets/'composer.css').read_text(encoding='utf-8'),js=(assets/'voice_shared.js').read_text(encoding='utf-8')+'\n'+(assets/'microphone.js').read_text(encoding='utf-8')+'\n'+(assets/'composer.js').read_text(encoding='utf-8'))
     result=composer(key='trace_prompt_composer',data={'question':question,'generation':draft['composer_id'],
-        'colors':palette(st.session_state.get('ui_theme','light')),'theme':st.session_state.get('ui_theme','light'),
+        'colors':palette('team-tbd' if draft.get('appearance')=='team-tbd' else st.session_state.get('ui_theme','light')),'theme':st.session_state.get('ui_theme','light'),
         'readOnly':read_only,'disabled':disabled,'note':note,'extensions':list(PROFILE.input_extensions),
         'files':[{'name':name,'size':len(data),'data':base64.b64encode(data).decode()} for name,data in draft['uploads']]},
-        on_action_change=lambda:None,on_draft_change=lambda:None)
+        on_action_change=lambda:None,on_draft_change=lambda:capture_composer_draft(draft))
     pending=getattr(result,'draft',None)
-    if isinstance(pending,dict) and pending.get('generation')==draft['composer_id'] and not read_only:
-        text=pending.get('question')
-        if isinstance(text,str) and len(text)<=MAX_QUESTION:
-            draft['question']=text
-        try:draft['uploads']=decode_files(pending.get('files',[]))
-        except ValueError as exc:st.error(str(exc))
+    if not read_only:
+        apply_composer_draft(draft, pending)
     raw_action=getattr(result,'action',None)
     if not isinstance(raw_action,dict) or raw_action.get('generation')!=draft['composer_id']:return None
     try:action=validate_action(raw_action)

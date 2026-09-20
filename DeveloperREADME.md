@@ -370,7 +370,7 @@ preparing another draft.
 Local preview command:
 
 ```bash
-python -m streamlit run frontend/app.py --server.address 127.0.0.1 --server.port 8502 --browser.gatherUsageStats false
+python -m streamlit run frontend/app.py --server.address 127.0.0.1 --server.port 8502 --browser.gatherUsageStats false --theme.base dark --theme.primaryColor '#d6fb73' --theme.backgroundColor '#080b09' --theme.secondaryBackgroundColor '#101612' --theme.textColor '#f0f5ee'
 ```
 
 Validate with `python -m pytest -q`, `python frontend/smoke_test.py` and
@@ -420,3 +420,34 @@ Repeated live Graphviz updates caused preview responsiveness problems; the integ
 network now renders bounded SVG instead. Final end-to-end browser revalidation was
 curtailed at the user's request to ship promptly. Real microphone capture, provider
 inference and 50-user hosting capacity were not exercised in this integration pass.
+
+### Team TBD read-only connection
+
+Set `TEAM_TBD_CAPSULE` to the private external
+`team-tbd-results-capsule-2026-09-20-v1` directory to enable the connected pet
+workspace. Start it separately on loopback port 8504, leaving the existing services
+on 8081 and 8082 unchanged:
+
+```bash
+export TEAM_TBD_CAPSULE="/absolute/path/to/private/team-tbd-results-capsule-2026-09-20-v1"
+.venv/bin/python -m streamlit run frontend/app.py --server.address 127.0.0.1 --server.port 8504 --browser.gatherUsageStats false --theme.base dark --theme.primaryColor '#d6fb73' --theme.backgroundColor '#080b09' --theme.secondaryBackgroundColor '#101612' --theme.textColor '#f0f5ee'
+```
+
+The workspace defaults to explicitly labeled frozen replay. Live reads fetch the
+selected existing run, with optional 15-second refresh; no connected control
+submits scientific work or changes backend settings. Unset `TEAM_TBD_CAPSULE` to
+retain the original UI. Keep the capsule outside Git and public static assets.
+See [frontend/TEAM-TBD.md](frontend/TEAM-TBD.md) for environment setup, source
+routing, adapter mappings, integrity bounds, snapshot interpretation and validation.
+
+The Team TBD connected workspace now displays only Ana GSE28460 and CAR-T/CD19,
+in that order, with a black/lime theme. Open **Agent collaboration** to trace
+upstream/downstream work, evidence, skills/model receipts and acceptance checks.
+The overview and findings include direct drilldown buttons. Existing capsule
+histories remain unchanged outside the two-study platform view.
+
+The bare preview URL now keeps the original simple composer as the homepage.
+Use **Completed studies** or the Ana/CAR-T buttons below the composer for saved
+results; **Back to chat** preserves the question and attached files. The composer
+retains the original Demo/TRACE_BACKEND_URL behavior. Do not assign the read-only
+Team TBD study origins as legacy investigation transports.
