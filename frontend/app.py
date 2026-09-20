@@ -25,7 +25,10 @@ from ui.voice_settings import render_stage_audio
 from ui.client_controls import render_client_controls
 
 st.set_page_config(page_title=PROFILE.page_title,page_icon=":material/science:",layout="wide",initial_sidebar_state="collapsed")
-st.session_state.setdefault('ui_theme','light')
+if os.environ.get('TEAM_TBD_CAPSULE'):
+    st.session_state.ui_theme = 'dark'
+else:
+    st.session_state.setdefault('ui_theme','light')
 st.session_state.astral_theme=st.session_state.ui_theme=='light'
 st.markdown(stylesheet('astral' if st.session_state.ui_theme=='light' else 'dark'),unsafe_allow_html=True)
 st.markdown(pet_stylesheet(),unsafe_allow_html=True)

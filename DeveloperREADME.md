@@ -370,7 +370,7 @@ preparing another draft.
 Local preview command:
 
 ```bash
-python -m streamlit run frontend/app.py --server.address 127.0.0.1 --server.port 8502 --browser.gatherUsageStats false
+python -m streamlit run frontend/app.py --server.address 127.0.0.1 --server.port 8502 --browser.gatherUsageStats false --theme.base dark --theme.primaryColor '#d6fb73' --theme.backgroundColor '#080b09' --theme.secondaryBackgroundColor '#101612' --theme.textColor '#f0f5ee'
 ```
 
 Validate with `python -m pytest -q`, `python frontend/smoke_test.py` and
@@ -430,7 +430,7 @@ on 8081 and 8082 unchanged:
 
 ```bash
 export TEAM_TBD_CAPSULE="/absolute/path/to/private/team-tbd-results-capsule-2026-09-20-v1"
-.venv/bin/python -m streamlit run frontend/app.py --server.address 127.0.0.1 --server.port 8504 --browser.gatherUsageStats false
+.venv/bin/python -m streamlit run frontend/app.py --server.address 127.0.0.1 --server.port 8504 --browser.gatherUsageStats false --theme.base dark --theme.primaryColor '#d6fb73' --theme.backgroundColor '#080b09' --theme.secondaryBackgroundColor '#101612' --theme.textColor '#f0f5ee'
 ```
 
 The workspace defaults to explicitly labeled frozen replay. Live reads fetch the
@@ -439,3 +439,9 @@ submits scientific work or changes backend settings. Unset `TEAM_TBD_CAPSULE` to
 retain the original UI. Keep the capsule outside Git and public static assets.
 See [frontend/TEAM-TBD.md](frontend/TEAM-TBD.md) for environment setup, source
 routing, adapter mappings, integrity bounds, snapshot interpretation and validation.
+
+The Team TBD connected workspace now displays only Ana GSE28460 and CAR-T/CD19,
+in that order, with a black/lime theme. Open **Agent collaboration** to trace
+upstream/downstream work, evidence, skills/model receipts and acceptance checks.
+The overview and findings include direct drilldown buttons. Existing capsule
+histories remain unchanged outside the two-study platform view.

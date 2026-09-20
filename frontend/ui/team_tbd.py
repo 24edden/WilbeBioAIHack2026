@@ -14,12 +14,29 @@ from types import SimpleNamespace
 
 import streamlit as st
 
-from .appearance import toggle_theme
 from .pets import pet_picture, LABELS
 from .network_svg import network_svg
 from .team_tbd_adapter import Capsule, LiveSource
 
-PAGES = ['Overview', 'Findings', 'Team', 'Evidence', 'NVIDIA & sequences', 'Handoffs & review', 'Next steps', 'History']
+PAGES = ['Overview', 'Agent collaboration', 'Findings', 'Evidence', 'NVIDIA & sequences', 'Decisions & review', 'Next steps', 'History']
+CURATED_STUDIES = {
+    'f10acf36fcfd4cfc97b84d92c631e8ab': 'Ana · GSE28460 diagnosis–relapse',
+    '037a6844bfb54d5a8d9010043d6c0a89': 'CAR-T · CD19 investigation',
+}
+
+
+def platform_studies(runs):
+    """Presentation allowlist: the two studies requested, in the requested order."""
+    by_id = {r['run_id']: r for r in runs}
+    return [dict(by_id[run_id], label=label) for run_id, label in CURATED_STUDIES.items() if run_id in by_id]
+
+
+def open_page(page, evidence_id=None):
+    # The pending value is applied before the navigation widget on the next full run.
+    st.session_state['_tbd_next_page'] = page
+    if evidence_id is not None:
+        st.session_state['_tbd_next_evidence'] = evidence_id
+    st.rerun(scope='app')
 SOURCES = {'brev-main': os.environ.get('TEAM_TBD_MAIN_URL', 'http://127.0.0.1:8081'),
            'mac-ana-isolated': os.environ.get('TEAM_TBD_ANA_URL', 'http://127.0.0.1:8082')}
 
@@ -73,14 +90,14 @@ def render_workspace():
         st.error(f'Could not open the configured frozen results: {exc}')
         return
     with st.container(key='workspace_header'):
-        brand, theme, settings = st.columns([6, 1, .5], vertical_alignment='center')
+        brand, identity, settings = st.columns([6, 2, .5], vertical_alignment='center')
         with brand:
             with st.container(key='trace_home'):
                 if st.button('TRACE', help='Return to completed studies'):
                     st.session_state.tbd_page = 'Overview'
                     st.rerun()
-        with theme:
-            st.button('☾ Dark mode' if st.session_state.ui_theme == 'light' else '☀ Light mode', on_click=toggle_theme)
+        with identity:
+            st.markdown('<div class="tbd-brand-note">TEAM TBD / STUDY EXPLORER</div>', unsafe_allow_html=True)
         with settings:
             with st.popover('Settings', icon=':material/settings:'):
                 st.markdown('<div class="trace-setup-marker"></div>', unsafe_allow_html=True)
@@ -91,13 +108,17 @@ def render_workspace():
                 st.caption('Private preview · loopback only')
                 st.link_button('Open original workbench', SOURCES['brev-main'])
     st.markdown('<div class="tbd-eyebrow">TEAM TBD / COMPLETED STUDIES</div>', unsafe_allow_html=True)
-    featured = capsule.manifest.get('featured_run_ids', [])
-    entries = sorted(capsule.runs, key=lambda r: (r['run_id'] not in featured, featured.index(r['run_id']) if r['run_id'] in featured else 99))
+    entries = platform_studies(capsule.runs)
+    if not entries:
+        st.error('The two selected completed studies are not available in this capsule.')
+        return
     ids = [r['run_id'] for r in entries]
     by_id = {r['run_id']: r for r in entries}
     initial = st.query_params.get('run', ids[0])
     if initial not in ids:
         initial = ids[0]
+    if st.session_state.get('tbd_study', initial) not in ids:
+        st.session_state.tbd_study = initial
     a, b = st.columns([2.6, 1])
     with a:
         run_id = st.selectbox('Study', ids, index=ids.index(initial), format_func=lambda x: by_id[x]['label'], key='tbd_study')
@@ -106,6 +127,10 @@ def render_workspace():
     st.query_params['run'] = run_id
     st.query_params['mode'] = 'live' if mode == 'Live reads' else 'replay'
     meta = by_id[run_id]
+    if st.session_state.get('_tbd_selected_study') != run_id:
+        st.session_state['_tbd_selected_study'] = run_id
+        st.session_state.pop('tbd_evidence_search', None)
+        st.session_state.pop('_tbd_next_evidence', None)
     if mode == 'Live reads':
         x, y = st.columns([3, 1])
         with x:
@@ -115,8 +140,17 @@ def render_workspace():
                 load_bundle.clear()
     else:
         auto = False
-    st.session_state.setdefault('tbd_page', 'Overview')
-    page = st.radio('Explore this study', PAGES, horizontal=True, key='tbd_page', label_visibility='collapsed')
+    initial_page = st.query_params.get('view', 'Overview')
+    st.session_state.setdefault('tbd_page', initial_page if initial_page in PAGES else 'Overview')
+    if '_tbd_next_page' in st.session_state:
+        st.session_state.tbd_page = st.session_state.pop('_tbd_next_page')
+    old_pages = {'Team': 'Agent collaboration', 'Handoffs & review': 'Decisions & review'}
+    st.session_state.tbd_page = old_pages.get(st.session_state.tbd_page, st.session_state.tbd_page)
+    if st.session_state.tbd_page not in PAGES:
+        st.session_state.tbd_page = 'Overview'
+    with st.container(key='tbd_navigation'):
+        page = st.radio('Explore this study', PAGES, horizontal=True, key='tbd_page')
+    st.query_params['view'] = page
 
     @st.fragment(run_every=15 if auto else None)
     def body():
@@ -143,15 +177,32 @@ def render_page(page, bundle, source):
     brief = view.get('findings') or {}
     if page == 'Overview':
         question = view.get('question') or run.get('hypothesis') or {}
-        prose(question.get('text', '').split('\n')[0], css='tbd-question')
-        with st.expander('Original question & provenance'):
-            prose(question.get('text'))
-            record(question, 'Exact original question record')
         headline = brief.get('headline') or 'No completed research brief is available'
         summary = brief.get('plain_summary') or run.get('error') or 'Inspect the preserved status, partial work and evidence in this historical run.'
         st.markdown(f'<section class="trace-pet-stage tbd-summary"><div class="trace-pet-scene"><div class="trace-pet-character">{pet_picture("coordinator")}<strong>Team TBD</strong></div><article><div class="tbd-eyebrow">{escape(run.get("status", "unknown"))} · SAVED FINDING</div><h1>{escape(headline)}</h1><p>{escape(summary)}</p></article></div></section>', unsafe_allow_html=True)
         answer = brief.get('proposed_answer') or {}
         prose(answer.get('scope'), css='tbd-scope')
+        st.subheader('Explore the work behind this study')
+        with st.container(key='tbd_shortcuts'):
+            collab, findings, predictions = st.columns(3)
+            with collab, st.container(border=True):
+                st.markdown('#### How the agents worked together')
+                st.caption(f"{len(run.get('handoffs', []))} saved handoffs. Follow who sent what, their evidence, skills and review checks.")
+                if st.button('Explore agent collaboration →', type='primary', width='stretch'):
+                    open_page('Agent collaboration')
+            with findings, st.container(border=True):
+                st.markdown('#### Findings and their evidence')
+                st.caption(f"{len(evidence)} source records. Open each finding to inspect the measurements and limits behind it.")
+                if st.button('Trace findings to evidence →', width='stretch'):
+                    open_page('Findings')
+            with predictions, st.container(border=True):
+                st.markdown('#### Predictions and exact inputs')
+                st.caption('Inspect NVIDIA receipts, verified artifacts, exact sequences and missing inputs.')
+                if st.button('Inspect predictions & sequences →', width='stretch'):
+                    open_page('NVIDIA & sequences')
+        with st.expander('Original question & provenance'):
+            prose(question.get('text'))
+            record(question, 'Exact original question record')
         a, b, c = st.columns(3)
         a.metric('Decision versions', len(run.get('decisions', [])))
         b.metric('Recorded handoffs', len(run.get('handoffs', [])))
@@ -171,19 +222,30 @@ def render_page(page, bundle, source):
                 with st.expander('Why it matters & supporting evidence'):
                     prose(finding.get('why_it_matters'))
                     refs(finding.get('evidence_ids'), evidence)
+                    for evidence_id in finding.get('evidence_ids', []):
+                        if st.button(f'Open evidence {evidence_id} →', key=f'finding:{run["id"]}:{i}:{evidence_id}'):
+                            open_page('Evidence', evidence_id)
+        if st.button('See the agents behind these findings →'):
+            open_page('Agent collaboration')
         if not brief:
             st.info('This historical run has no research brief. Its partial records remain available in the other views.')
-    elif page == 'Team':
-        render_team(run, brief, evidence)
+    elif page == 'Agent collaboration':
+        from .team_tbd_collaboration import render_collaboration
+        render_collaboration(run, brief, evidence)
     elif page == 'Evidence':
         st.title('Evidence, with its limits')
         st.caption(f'{len(evidence)} saved records. Measured data, literature, predictions and proposals keep their original qualifications.')
-        search = st.text_input('Find evidence', placeholder='Search a title, ID or summary')
+        if '_tbd_next_evidence' in st.session_state:
+            st.session_state.tbd_evidence_search = st.session_state.pop('_tbd_next_evidence')
+        search = st.text_input('Find evidence', placeholder='Search a title, ID or summary', key='tbd_evidence_search')
+        if search and st.button('Show all evidence', key='clear_evidence'):
+            st.session_state['_tbd_next_evidence'] = ''
+            st.rerun(scope='app')
         items = [e for e in evidence if search.lower() in json.dumps(e).lower()]
         if not items:
             st.info('No matching evidence.')
         for e in items:
-            with st.expander(f'{e.get("id", "")} · {e.get("title", "Evidence")}'):
+            with st.expander(f'{e.get("id", "")} · {e.get("title", "Evidence")}', expanded=search == e.get("id")):
                 prose(e.get('kind'), css='tbd-eyebrow')
                 prose(e.get('summary'))
                 src = e.get('source') or {}
@@ -192,7 +254,7 @@ def render_page(page, bundle, source):
                 st.json({'source': src, 'values': e.get('values')}, expanded=False)
     elif page == 'NVIDIA & sequences':
         render_nvidia(run, brief, bundle['artifacts'], source)
-    elif page == 'Handoffs & review':
+    elif page == 'Decisions & review':
         render_review(run, brief, evidence)
     elif page == 'Next steps':
         st.title('The next experiment')

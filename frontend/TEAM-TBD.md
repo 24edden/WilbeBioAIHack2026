@@ -1,7 +1,7 @@
 # Team TBD: connected pet frontend
 
 This integration starts from `codex/pet-ui-integration` and reuses its pet assets,
-open layout, theme and navigation conventions. It presents the existing Team TBD
+open layout and pet characters, with a black and lime-green connected-workspace theme. It presents the existing Team TBD
 scientific records without modifying the scientific backend, agents, instructions,
 models, budgets, governance, methods or saved history.
 
@@ -19,7 +19,7 @@ Run from the repository root so the branch's `.streamlit/config.toml` is applied
 python3 -m venv .venv
 .venv/bin/python -m pip install -r frontend/requirements.txt
 export TEAM_TBD_CAPSULE="/absolute/path/to/private/team-tbd-results-capsule-2026-09-20-v1"
-.venv/bin/python -m streamlit run frontend/app.py --server.address 127.0.0.1 --server.port 8504 --browser.gatherUsageStats false
+.venv/bin/python -m streamlit run frontend/app.py --server.address 127.0.0.1 --server.port 8504 --browser.gatherUsageStats false --theme.base dark --theme.primaryColor '#d6fb73' --theme.backgroundColor '#080b09' --theme.secondaryBackgroundColor '#101612' --theme.textColor '#f0f5ee'
 ```
 
 Open <http://127.0.0.1:8504>. Port 8504 is a separate frontend process. Leave the
@@ -49,8 +49,10 @@ The read-only guarantees in this document describe the Team TBD connected worksp
 **Frozen replay** is the default. Every scientific value and event comes from the
 sealed capsule. The History slider steps through recorded events; it does not
 simulate new scientific work. The snapshot time and replay status remain visible.
-The picker includes all 12 historical snapshots, with the two current completed
-studies first; failed and blocked runs retain their partial records and statuses.
+The platform picker contains only the two selected completed studies: Ana’s
+GSE28460 diagnosis–relapse study first, then the CAR-T/CD19 investigation. Historical
+capsule records remain intact but are not exposed by the platform picker or old
+run bookmarks. Unknown/older run bookmarks open the Ana study instead.
 
 **Live reads** fetch the selected existing run from its original service. The UI
 labels these as live backend reads, shows the fetch time, and preserves the run's
@@ -70,9 +72,24 @@ Optional `TEAM_TBD_MAIN_URL` and `TEAM_TBD_ANA_URL` overrides must be explicit H
 loopback IP origins. The adapter rejects public origins, hostnames, credentials,
 paths, queries and redirects. No server keys are requested or sent by this frontend.
 
-Bookmarks can choose `?mode=replay` or `?mode=live`, plus `&run=<saved-run-id>`.
+Bookmarks can choose `?mode=replay` or `?mode=live`, plus `&run=<selected-run-id>`
+and `&view=<page-label>`. The two selected run IDs are explicitly allowlisted in
+`CURATED_STUDIES`.
 Artifacts load only when requested and can then be downloaded. Frozen artifact
 bytes come from the capsule; live artifact bytes come from the run's recorded URLs.
+
+## Exploring agent collaboration
+
+The overview includes direct entry points into agent collaboration, findings and
+predictions. **Agent collaboration** is also the second main navigation option.
+Choose an agent to inspect sent and received handoffs, then follow a saved handoff
+into its result, method, limitations, evidence, skill/model receipts and linked
+acceptance evaluation. Upstream and downstream links follow recorded input IDs;
+routes show recorded recipients and do not infer spawning or extra model activity.
+The communication map provides route selection and links back into the same records.
+Findings link directly to individual evidence records. **Decisions & review** retains
+immutable decision versions and governance details; **History** holds event replay
+and usage/model receipts.
 
 ## Adapter contract
 
@@ -172,7 +189,7 @@ The connected UI regressions live in `tests/test_team_tbd_ui.py`. Set
 `TEAM_TBD_TEST_CAPSULE` to the same private capsule to enable actual-data UI checks.
 Live artifact mode-switch tests also require `TEAM_TBD_TEST_LIVE_READS=1`; they make
 GET requests to existing runs only. Default tests use synthetic data and no network.
-The full repository suite passed: 214 tests, with these explicit private-data/read-only opt-ins. Leave the deployment variable TEAM_TBD_CAPSULE unset when running the full suite, so original-interface tests retain their default mode; use TEAM_TBD_TEST_CAPSULE for test-only activation.
+The full repository suite passed: 225 tests, with these explicit private-data/read-only opt-ins. Leave the deployment variable TEAM_TBD_CAPSULE unset when running the full suite, so original-interface tests retain their default mode; use TEAM_TBD_TEST_CAPSULE for test-only activation.
 Browser validation covered overview, findings, team detail, evidence, NVIDIA receipts,
 artifact tables, exact sequences, handoffs/review, history, both live sources, dark
 mode and a 390-pixel mobile breakpoint. Screenshots remain outside Git and are
