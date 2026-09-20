@@ -1,11 +1,12 @@
 # Team TBD: connected pet frontend
 
 This integration starts from `codex/pet-ui-integration` and reuses its pet assets,
-open layout and pet characters, with a black and lime-green connected-workspace theme. It presents the existing Team TBD
+open layout and pet characters, with a black and lime-green connected-workspace theme. Its original simple question composer remains the homepage, with two study buttons
+and a header link opening the saved-study explorer. The explorer presents the existing Team TBD
 scientific records without modifying the scientific backend, agents, instructions,
 models, budgets, governance, methods or saved history.
 
-The connected workspace is read-only. It offers completed studies, findings, team
+The saved-study explorer is read-only. It offers completed studies, findings, team
 work products, evidence, NVIDIA artifacts, exact sequences, handoffs, review,
 proposed next steps and recorded history. Its controls do not launch investigations,
 submit follow-ups, regenerate briefs, discover sequences, attest target retention,
@@ -34,15 +35,21 @@ complete original directory layout. This consumer supports the
 format. Those packages contain the same historical runs under different readers;
 they must not be combined as additional studies.
 
-The connected workspace is enabled only when `TEAM_TBD_CAPSULE` is set. Unset it
-before launching to use the branch's original prompt/running/results interface:
+Setting `TEAM_TBD_CAPSULE` adds the saved-study click-throughs to the original
+prompt/running/results interface. The bare URL opens the composer; a run or view
+bookmark opens the selected study directly. **Back to chat** and the TRACE logo
+return to the composer without clearing its draft or attachments. Unset the capsule
+variable to omit the saved-study entry points:
 
 ```bash
 unset TEAM_TBD_CAPSULE
 ```
 
-The original interface retains its existing backend configuration and behavior.
-The read-only guarantees in this document describe the Team TBD connected workspace.
+The composer retains its existing backend configuration and behavior: Demo mode
+when `TRACE_BACKEND_URL` is absent, or the original compatible investigation API
+when explicitly configured. The Team TBD read sources on 8081/8082 are not assigned
+as new-investigation transports. The read-only guarantees in this document apply
+to the saved-study explorer. Browsing never submits work.
 
 ## Frozen replay and live reads
 
@@ -189,7 +196,7 @@ The connected UI regressions live in `tests/test_team_tbd_ui.py`. Set
 `TEAM_TBD_TEST_CAPSULE` to the same private capsule to enable actual-data UI checks.
 Live artifact mode-switch tests also require `TEAM_TBD_TEST_LIVE_READS=1`; they make
 GET requests to existing runs only. Default tests use synthetic data and no network.
-The full repository suite passed: 225 tests, with these explicit private-data/read-only opt-ins. Leave the deployment variable TEAM_TBD_CAPSULE unset when running the full suite, so original-interface tests retain their default mode; use TEAM_TBD_TEST_CAPSULE for test-only activation.
+The full repository suite passed: 233 tests, with these explicit private-data/read-only opt-ins. Leave the deployment variable TEAM_TBD_CAPSULE unset when running the full suite, so original-interface tests retain their default mode; use TEAM_TBD_TEST_CAPSULE for test-only activation.
 Browser validation covered overview, findings, team detail, evidence, NVIDIA receipts,
 artifact tables, exact sequences, handoffs/review, history, both live sources, dark
 mode and a 390-pixel mobile breakpoint. Screenshots remain outside Git and are

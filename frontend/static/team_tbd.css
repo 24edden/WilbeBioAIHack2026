@@ -367,3 +367,27 @@ body:has(.tbd-marker) [role=option][aria-selected=true] {
   color: var(--ui-accent) !important;
   fill: currentColor;
 }
+
+/* Keep the original question composer as the quiet front door. */
+.stApp:has(.tbd-marker) .st-key-tbd_home_studies {
+  max-width: 770px;
+  margin: 10px auto 30px;
+  padding: 22px 3px 0;
+  border-top: 1px solid var(--ui-border);
+}
+.stApp:has(.tbd-marker) .st-key-tbd_home_studies button p {
+  color: var(--ui-accent) !important;
+}
+.stApp:has(.tbd-marker) .pet-start-heading { margin-top: 20px; }
+.stApp:has(.tbd-marker) .st-key-tbd_home_studies [data-testid=stCaptionContainer] p {
+  font-size: 12px;
+}
+
+.stApp:has(.tbd-marker) .st-key-workspace_header [data-testid=stColumn]:nth-child(2) {
+  flex: 0 0 172px !important;
+}
+@media(max-width:720px) {
+  .stApp:has(.tbd-marker) .st-key-workspace_header [data-testid=stColumn]:nth-child(2) {
+    flex: 0 0 144px !important;
+  }
+}

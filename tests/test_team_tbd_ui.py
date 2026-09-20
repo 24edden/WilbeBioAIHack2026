@@ -4,6 +4,9 @@ TEAM_TBD_TEST_CAPSULE enables local private-data checks. Live checks additionall
 require TEAM_TBD_TEST_LIVE_READS=1 and only read existing runs and artifacts.
 """
 from pathlib import Path
+from copy import deepcopy
+import base64
+import importlib
 import os
 
 import httpx
@@ -130,8 +133,9 @@ def private_capsule(monkeypatch):
 
 @pytest.mark.parametrize("run_id", VISIBLE_RUNS)
 def test_actual_featured_study_renders_all_pages(private_capsule, run_id):
-    app = AppTest.from_file(str(ROOT / "frontend" / "app.py"), default_timeout=30).run()
-    app.selectbox(key="tbd_study").set_value(run_id).run()
+    app = AppTest.from_file(str(ROOT / "frontend" / "app.py"), default_timeout=30)
+    app.query_params["run"] = run_id
+    app.run()
     pages = app.radio(key="tbd_page").options
     assert len(pages) == 8
     for page in pages:
@@ -146,8 +150,9 @@ def test_actual_mode_switch_and_cached_live_artifact(private_capsule):
     if os.environ.get("TEAM_TBD_TEST_LIVE_READS") != "1":
         pytest.skip("Set TEAM_TBD_TEST_LIVE_READS=1 to GET the existing services")
     for run_id in VISIBLE_RUNS:
-        app = AppTest.from_file(str(ROOT / "frontend" / "app.py"), default_timeout=45).run()
-        app.selectbox(key="tbd_study").set_value(run_id).run()
+        app = AppTest.from_file(str(ROOT / "frontend" / "app.py"), default_timeout=45)
+        app.query_params["run"] = run_id
+        app.run()
         app.radio(key="tbd_page").set_value("NVIDIA & sequences").run()
         assert_clean(app)
         next(button for button in app.button if button.label == "Load artifact").click().run()
@@ -165,6 +170,115 @@ def test_actual_mode_switch_and_cached_live_artifact(private_capsule):
         app.selectbox(key="tbd_mode").set_value("Frozen replay").run()
         assert_clean(app)
         assert len(app.get("download_button")) == 1
+
+
+def assert_chat_home(app):
+    assert_clean(app)
+    assert app.session_state["stage"] == "prompt"
+    assert app.session_state["draft"]["appearance"] == "team-tbd"
+    assert any("What are we investigating?" in block.value and "pet-start-heading" in block.value
+               for block in app.markdown)
+    assert app.button(key="home")
+    assert app.button(key="tbd_open_studies").label == "Completed studies"
+    assert app.button(key="tbd_open_ana").label == "Open Ana GSE28460 →"
+    assert app.button(key="tbd_open_cart").label == "Open CAR-T / CD19 →"
+    assert not any(control.key == "tbd_study" for control in app.selectbox)
+    assert not any(control.key == "tbd_page" for control in app.radio)
+
+
+def test_connected_root_keeps_original_chat_without_loading_studies(monkeypatch, tmp_path):
+    monkeypatch.setenv("TEAM_TBD_CAPSULE", str(tmp_path / "unavailable-capsule"))
+    monkeypatch.delenv("TRACE_BACKEND_URL", raising=False)
+    monkeypatch.syspath_prepend(str(ROOT / "frontend"))
+    app = AppTest.from_file(str(ROOT / "frontend" / "app.py"), default_timeout=30).run()
+
+    assert_chat_home(app)
+    assert app.session_state["ui_theme"] == "dark"
+    assert app.session_state["draft"]["question"] == ""
+    assert app.session_state["job"] is None
+    assert "run" not in app.query_params
+    assert "view" not in app.query_params
+
+
+@pytest.mark.parametrize("entry_button, run_id", [
+    ("tbd_open_ana", ANA_RUN),
+    ("tbd_open_cart", CART_RUN),
+    ("tbd_open_studies", ANA_RUN),
+])
+def test_actual_study_clickthrough_and_back_preserve_chat_draft(private_capsule, monkeypatch, entry_button, run_id):
+    def cannot_start(*args, **kwargs):
+        raise AssertionError("Browsing completed studies must not start an investigation")
+    monkeypatch.setattr(importlib.import_module("ui.adapters"), "source_for", cannot_start)
+    app = AppTest.from_file(str(ROOT / "frontend" / "app.py"), default_timeout=30).run()
+    assert_chat_home(app)
+    draft = deepcopy(app.session_state["draft"])
+    draft.update(question="Keep my unfinished investigation question", uploads=[("my-input.csv", b"a,b\n1,2\n")])
+    app.session_state["draft"] = draft
+    app.run()
+    app.button(key=entry_button).click().run()
+
+    assert_clean(app)
+    assert app.selectbox(key="tbd_study").value == run_id
+    assert app.query_params["run"] == [run_id]
+    button_named(app, "Explore agent collaboration →").click().run()
+    assert_clean(app)
+    assert app.radio(key="tbd_page").value == "Agent collaboration"
+    app.button(key="tbd_back_home").click().run()
+
+    assert_chat_home(app)
+    assert app.session_state["draft"]["question"] == draft["question"]
+    assert app.session_state["draft"]["uploads"] == draft["uploads"]
+    assert app.session_state["draft"]["composer_id"] == draft["composer_id"]
+    assert app.session_state["job"] is None
+    assert "run" not in app.query_params
+    assert "view" not in app.query_params
+
+
+@pytest.mark.parametrize("stale_generation", [False, True])
+def test_actual_study_navigation_captures_pending_browser_draft(private_capsule, stale_generation):
+    app = AppTest.from_file(str(ROOT / "frontend" / "app.py"), default_timeout=30).run()
+    saved = deepcopy(app.session_state["draft"])
+    saved.update(question="Already synchronized question", uploads=[("saved.csv", b"a\n1\n")])
+    app.session_state["draft"] = saved
+    app.run()
+    newest_bytes = b"latest,measurement\n1,2\n"
+    pending = {"generation": "older-composer" if stale_generation else saved["composer_id"],
+               "question": "Newest browser text from the navigation blur event",
+               "files": [{"name": "latest.csv", "size": len(newest_bytes),
+                          "data": base64.b64encode(newest_bytes).decode()}]}
+    # The browser's blur and navigation arrive together. The study route skips
+    # rendering the composer, so pending component state must be copied earlier.
+    app.session_state["trace_prompt_composer"] = {"draft": pending}
+    app.button(key="tbd_open_ana").click().run()
+
+    assert_clean(app)
+    assert app.selectbox(key="tbd_study").value == ANA_RUN
+    expected_text = saved["question"] if stale_generation else pending["question"]
+    expected_files = saved["uploads"] if stale_generation else [("latest.csv", newest_bytes)]
+    assert app.session_state["draft"]["question"] == expected_text
+    assert app.session_state["draft"]["uploads"] == expected_files
+    app.button(key="tbd_back_home").click().run()
+
+    assert_chat_home(app)
+    assert app.session_state["draft"]["question"] == expected_text
+    assert app.session_state["draft"]["uploads"] == expected_files
+    assert app.session_state["draft"]["composer_id"] == saved["composer_id"]
+    assert app.session_state["job"] is None
+
+
+@pytest.mark.parametrize("run_id", VISIBLE_RUNS)
+def test_actual_study_deep_link_still_opens_detail_then_logo_returns_chat(private_capsule, run_id):
+    app = AppTest.from_file(str(ROOT / "frontend" / "app.py"), default_timeout=30)
+    app.query_params.update({"run": run_id, "view": "Agent collaboration", "mode": "replay"})
+    app.run()
+
+    assert_clean(app)
+    assert app.selectbox(key="tbd_study").value == run_id
+    assert app.radio(key="tbd_page").value == "Agent collaboration"
+    app.button(key="home").click().run()
+    assert_chat_home(app)
+    assert "run" not in app.query_params
+    assert "view" not in app.query_params
 
 
 @pytest.mark.parametrize("stale_state", [False, True])

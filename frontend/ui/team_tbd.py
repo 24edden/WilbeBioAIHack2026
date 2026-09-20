@@ -80,24 +80,54 @@ def load_bundle(root, mode, source_id, run_id):
     return source.load(run_id), datetime.now(timezone.utc).isoformat(timespec='seconds')
 
 
-def render_workspace():
-    root = os.environ['TEAM_TBD_CAPSULE']
+def render_brand():
     st.markdown('<style>' + (Path(__file__).resolve().parents[1] / 'static' / 'team_tbd.css').read_text() + '</style>', unsafe_allow_html=True)
     st.markdown('<div class="tbd-marker"></div>', unsafe_allow_html=True)
-    try:
-        capsule = capsule_at(root)
-    except Exception as exc:
-        st.error(f'Could not open the configured frozen results: {exc}')
-        return
+
+
+def open_study(run_id=None):
+    run_id = run_id if run_id in CURATED_STUDIES else next(iter(CURATED_STUDIES))
+    mode = st.session_state.get('tbd_last_mode', 'replay')
+    st.session_state.tbd_study = run_id
+    st.session_state.tbd_page = 'Overview'
+    st.session_state.tbd_mode = 'Live reads' if mode == 'live' else 'Frozen replay'
+    st.session_state.pop('_tbd_next_page', None)
+    st.query_params['run'] = run_id
+    st.query_params['view'] = 'Overview'
+    st.query_params['mode'] = mode
+
+
+def return_to_chat():
+    st.session_state.stage = 'prompt'
+    for key in ('run', 'view', 'mode'):
+        if key in st.query_params:
+            del st.query_params[key]
+    st.session_state.pop('_tbd_next_page', None)
+
+
+def render_home_studies():
+    # The homepage stays useful even when the external capsule is unavailable.
+    with st.container(key='tbd_home_studies'):
+        st.caption('EXPLORE COMPLETED STUDIES')
+        ana, cart = st.columns(2)
+        with ana:
+            st.button('Open Ana GSE28460 →', key='tbd_open_ana', on_click=open_study,
+                      args=('f10acf36fcfd4cfc97b84d92c631e8ab',), width='stretch')
+        with cart:
+            st.button('Open CAR-T / CD19 →', key='tbd_open_cart', on_click=open_study,
+                      args=('037a6844bfb54d5a8d9010043d6c0a89',), width='stretch')
+        st.caption('Findings, agent collaboration, evidence and predictions.')
+
+
+def render_workspace():
+    root = os.environ['TEAM_TBD_CAPSULE']
     with st.container(key='workspace_header'):
         brand, identity, settings = st.columns([6, 2, .5], vertical_alignment='center')
         with brand:
             with st.container(key='trace_home'):
-                if st.button('TRACE', help='Return to completed studies'):
-                    st.session_state.tbd_page = 'Overview'
-                    st.rerun()
+                st.button('TRACE', key='home', on_click=return_to_chat, help='Return to the question window')
         with identity:
-            st.markdown('<div class="tbd-brand-note">TEAM TBD / STUDY EXPLORER</div>', unsafe_allow_html=True)
+            st.button('Back to chat', key='tbd_back_home', on_click=return_to_chat)
         with settings:
             with st.popover('Settings', icon=':material/settings:'):
                 st.markdown('<div class="trace-setup-marker"></div>', unsafe_allow_html=True)
@@ -107,6 +137,11 @@ def render_workspace():
                 st.write('Model, agent, skill and governance settings are preserved with each run.')
                 st.caption('Private preview · loopback only')
                 st.link_button('Open original workbench', SOURCES['brev-main'])
+    try:
+        capsule = capsule_at(root)
+    except Exception as exc:
+        st.error(f'Could not open the configured frozen results: {exc}')
+        return
     st.markdown('<div class="tbd-eyebrow">TEAM TBD / COMPLETED STUDIES</div>', unsafe_allow_html=True)
     entries = platform_studies(capsule.runs)
     if not entries:
@@ -126,6 +161,7 @@ def render_workspace():
         mode = st.selectbox('Connection', ['Frozen replay', 'Live reads'], index=1 if st.query_params.get('mode') == 'live' else 0, key='tbd_mode')
     st.query_params['run'] = run_id
     st.query_params['mode'] = 'live' if mode == 'Live reads' else 'replay'
+    st.session_state.tbd_last_mode = st.query_params['mode']
     meta = by_id[run_id]
     if st.session_state.get('_tbd_selected_study') != run_id:
         st.session_state['_tbd_selected_study'] = run_id

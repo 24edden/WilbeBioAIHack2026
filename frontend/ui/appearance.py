@@ -16,17 +16,24 @@ PALETTES = {
         "focus":"#8ad2c0", "halo":"#284039", "shadow":"#00000020",
         "good":"#8bd1a6", "warning":"#e3bd73", "critical":"#f1a0ac",
     },
+    "team-tbd": {
+        "page":"#080b09", "surface":"#101612", "soft":"#172019", "hover":"#243127",
+        "text":"#f0f5ee", "secondary":"#c1cec1", "muted":"#a0b2a1", "border":"#344337",
+        "accent":"#d6fb73", "accent-hover":"#e4ff9a", "on-accent":"#152007",
+        "focus":"#d6fb73", "halo":"#263721", "shadow":"#00000050",
+        "good":"#b5e997", "warning":"#f2cb81", "critical":"#ffa7ad",
+    },
 }
 
 
 def palette(theme):
-    return dict(PALETTES["dark" if theme == "dark" else "light"])
+    return dict(PALETTES[theme if theme in PALETTES else "light"])
 
 
 def stylesheet(theme):
     colors = palette(theme)
     tokens = ";".join(f"--ui-{name}:{value}" for name,value in colors.items())
-    mode = "dark" if theme == "dark" else "light"
+    mode = "dark" if theme in {"dark", "team-tbd"} else "light"
     return "<style>:root,.stApp{"+tokens+f";color-scheme:{mode};"+"}" + (Path(__file__).resolve().parents[1]/"static"/"workspace.css").read_text(encoding='utf-8') + "</style>"
 
 

@@ -445,3 +445,9 @@ in that order, with a black/lime theme. Open **Agent collaboration** to trace
 upstream/downstream work, evidence, skills/model receipts and acceptance checks.
 The overview and findings include direct drilldown buttons. Existing capsule
 histories remain unchanged outside the two-study platform view.
+
+The bare preview URL now keeps the original simple composer as the homepage.
+Use **Completed studies** or the Ana/CAR-T buttons below the composer for saved
+results; **Back to chat** preserves the question and attached files. The composer
+retains the original Demo/TRACE_BACKEND_URL behavior. Do not assign the read-only
+Team TBD study origins as legacy investigation transports.
