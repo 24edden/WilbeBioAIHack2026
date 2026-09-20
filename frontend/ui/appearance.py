@@ -27,7 +27,7 @@ def stylesheet(theme):
     colors = palette(theme)
     tokens = ";".join(f"--ui-{name}:{value}" for name,value in colors.items())
     mode = "dark" if theme == "dark" else "light"
-    return "<style>:root,.stApp{"+tokens+f";color-scheme:{mode};"+"}" + (Path(__file__).resolve().parents[1]/"static"/"workspace.css").read_text() + "</style>"
+    return "<style>:root,.stApp{"+tokens+f";color-scheme:{mode};"+"}" + (Path(__file__).resolve().parents[1]/"static"/"workspace.css").read_text(encoding='utf-8') + "</style>"
 
 
 def toggle_theme():

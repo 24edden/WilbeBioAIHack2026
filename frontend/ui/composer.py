@@ -46,8 +46,8 @@ def validate_action(value):
 def render_composer(draft,*,question,read_only=False,disabled=False,note=''):
     from streamlit.components.v2 import component
     assets=Path(__file__).resolve().parents[1]/'static'
-    composer=component('trace_prompt_composer',html=(assets/'composer.html').read_text(),
-        css=(assets/'composer.css').read_text(),js=(assets/'composer.js').read_text())
+    composer=component('trace_prompt_composer',html=(assets/'composer.html').read_text(encoding='utf-8'),
+        css=(assets/'composer.css').read_text(encoding='utf-8'),js=(assets/'voice_shared.js').read_text(encoding='utf-8')+'\n'+(assets/'microphone.js').read_text(encoding='utf-8')+'\n'+(assets/'composer.js').read_text(encoding='utf-8'))
     result=composer(key='trace_prompt_composer',data={'question':question,'generation':draft['composer_id'],
         'colors':palette(st.session_state.get('ui_theme','light')),'theme':st.session_state.get('ui_theme','light'),
         'readOnly':read_only,'disabled':disabled,'note':note,'extensions':list(PROFILE.input_extensions),

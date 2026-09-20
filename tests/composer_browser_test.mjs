@@ -43,3 +43,8 @@ const failing={...component,setTriggerValue:()=>{throw new Error('Disconnected')
 elements.composer.onsubmit({preventDefault(){}});
 assert.match(elements['composer-error'].textContent,/connection was interrupted/);assert.equal(elements.submit.disabled,false);
 console.log('Late acknowledgements, active-run draft editing, fresh draft reset and connection failure recovery passed.');
+// Switching to a recorded case must display its actual question, without destroying the typed draft.
+component.data.readOnly=true;component.data.question='Recorded question';render(component);
+assert.equal(elements.question.value,'Recorded question');
+elements.composer.onsubmit({preventDefault(){}});assert.equal(action.question,'Recorded question');
+component.data.readOnly=false;render(component);assert.equal(elements.question.value,'Retry my question');

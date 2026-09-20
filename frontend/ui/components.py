@@ -79,7 +79,8 @@ def render_graph(state: RunState) -> None:
               f"<span class='satellite s-two'>{_escape(PROFILE.preview_roles[1]).upper()}</span>"
               f"<span class='satellite s-three'>{_escape(PROFILE.preview_roles[2]).upper()}</span></div>")
         return
-    st.graphviz_chart(build_dot(state, theme="astral" if st.session_state.get("astral_theme", False) else "dark"), width="stretch")
+    # A bounded viewport avoids repeated height negotiation as the live DOT changes.
+    st.graphviz_chart(build_dot(state, theme="astral" if st.session_state.get("astral_theme", False) else "dark"), width="stretch", height=430)
 
 
 def render_progress(state: RunState) -> None:
@@ -117,8 +118,8 @@ def render_stats(state: RunState) -> None:
     tiles = [
         ("Agents", str(len(state.agents)), phase),
         ("Events", str(len(state.raw)), "on the stream"),
-        ("Findings", str(len(state.findings)), "with provenance"),
-        ("Elapsed", f"{state.elapsed_ms / 1000:.1f}s", "run time"),
+        ("Findings", str(len(state.findings)), f"{sum(bool(f.provenance) for f in state.findings)} with references"),
+        ("Event span", f"{state.elapsed_ms / 1000:.1f}s", "recorded timestamps"),
     ]
     cells = "".join(
         f"<div class='stat'><div class='k'>{k}</div>"

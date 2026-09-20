@@ -16,7 +16,14 @@ PATHS = {
 ALIASES = {'planning': 'planner', 'variant_analysis': 'genomics', 'clinical_context': 'clinical',
            'proposal': 'supporting', 'challenge': 'challenging', 'critique': 'critic', 'orchestrator': 'planner', 'synthesis': 'critic', 'advocate': 'supporting',
            'skeptic': 'challenging', 'mechanistic': 'mechanism', 'experimental': 'experiment',
-           'research': 'literature', 'supporter': 'supporting', 'challenger': 'challenging'}
+           'research': 'literature', 'supporter': 'supporting', 'challenger': 'challenging',
+           'clinical_scientist':'clinical','bioinformatician':'genomics','statistician':'stats',
+           'clinical_pharmacologist':'clinical','molecular_scientist':'mechanism',
+           'translational_scientist':'mechanism','assay_scientist':'experiment',
+           'coordinator':'planner','reviewer':'critic','discovery-planning':'planner',
+           'research-interpretation':'literature','molecular-interpretation':'mechanism',
+           'rosalind-informed-workflow':'literature','bionemo-boltz2':'mechanism',
+           'uniprot-skill':'genomics','rcsb-pdb-skill':'mechanism'}
 
 
 def svg_icon(icon_id: str, size: int = 24) -> str:

@@ -16,13 +16,16 @@ export default function render(component) {
   const wrap=el('composer-wrap');
   wrap.style.colorScheme=data.theme==='dark'?'dark':'light';
   for(const [name,color] of Object.entries(data.colors||{}))wrap.style.setProperty('--ui-'+name,color);
-  question.value=state.text;
+  const applyTheme=()=>{const theme=document.documentElement.dataset.petTheme;if(!theme)return;wrap.style.colorScheme=theme;const tokens=getComputedStyle(document.documentElement);for(const name of Object.keys(data.colors||{}))wrap.style.setProperty('--ui-'+name,tokens.getPropertyValue('--ui-'+name));};
+  if(typeof window!=='undefined'){applyTheme();window.addEventListener('trace-pet-theme',applyTheme);}
+  question.value=data.readOnly?data.question:state.text;
   question.disabled=Boolean(data.readOnly);
   picker.accept=(data.extensions||[]).map(e=>'.'+e).join(',');
   attach.hidden=Boolean(data.readOnly);
   el('drop-hint').hidden=Boolean(data.readOnly);
   el('source-note').textContent=data.note||'';
   const sync=()=>setStateValue('draft',{generation:state.generation,question:state.text,files:state.files});
+  const cleanupMicrophone=typeof mountMicrophone==='function'?mountMicrophone({button:el('microphone'),input:question,status:el('microphone-status'),readOnly:data.readOnly,onInput:text=>{state.text=text;},onFinish:sync}):()=>{};
   function refresh(){
     submit.disabled=Boolean(data.disabled||state.busy);attach.disabled=Boolean(data.readOnly||state.busy);demo.disabled=submit.disabled;
     submit.textContent=state.busy?'Preparing…':data.readOnly?'Start replay  →':'Start investigation  →';
@@ -46,7 +49,8 @@ export default function render(component) {
     try{const encoded=await Promise.all(files.map(async f=>({name:f.name,size:f.size,data:await encode(f)})));state.files.push(...encoded);sync();}catch(e){error.textContent=e.message;}finally{state.busy=false;refresh();}
   }
   question.oninput=()=>{state.text=question.value;error.textContent='';};
-  question.onblur=sync;
+  // Clicking dictation must not rerender and tear down a just-started microphone.
+  question.onblur=event=>{if(event.relatedTarget!==el('microphone'))sync();};
   attach.onclick=()=>picker.click();
   picker.onchange=()=>{void add(Array.from(picker.files||[]));picker.value='';};
   form.ondragover=e=>{if(e.dataTransfer?.types.includes('Files')){e.preventDefault();if(!data.readOnly)form.classList.add('is-dragging');}};
@@ -55,9 +59,9 @@ export default function render(component) {
   function send(type){
     if(state.busy||data.disabled)return;
     if(type==='start'&&!question.value.trim()){error.textContent='Enter a scientific question before starting.';question.focus();return;}
-    state.text=question.value;state.busy=true;refresh();
+    if(!data.readOnly)state.text=question.value;state.busy=true;refresh();
     try {
-      setTriggerValue('action',{id:crypto.randomUUID(),generation:state.generation,type,question:state.text,files:state.files});
+      setTriggerValue('action',{id:crypto.randomUUID(),generation:state.generation,type,question:question.value,files:state.files});
     } catch {
       error.textContent='The connection was interrupted. Your draft is still here; try again.';
     } finally {
@@ -67,5 +71,5 @@ export default function render(component) {
   form.onsubmit=e=>{e.preventDefault();send('start');};
   demo.onclick=()=>send('demo');
   refresh();
-  return ()=>{question.oninput=null;question.onblur=null;picker.onchange=null;attach.onclick=null;form.ondragover=null;form.ondragleave=null;form.ondrop=null;form.onsubmit=null;demo.onclick=null;};
+  return ()=>{cleanupMicrophone();if(typeof window!=='undefined')window.removeEventListener('trace-pet-theme',applyTheme);question.oninput=null;question.onblur=null;picker.onchange=null;attach.onclick=null;form.ondragover=null;form.ondragleave=null;form.ondrop=null;form.onsubmit=null;demo.onclick=null;};
 }

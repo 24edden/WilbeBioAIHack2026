@@ -71,7 +71,7 @@ def assert_simple(app):
 def test_initial_page_has_only_composer_and_shared_header(workspace):
     app,source,_=workspace
     assert app.session_state['stage']=='prompt'
-    assert not app.get('file_uploader') and not app.text_area and not source.requests
+    assert app.get('file_uploader')[0].key=='setup_uploads' and not app.text_area and not source.requests
     assert_simple(app)
 
 
@@ -177,6 +177,27 @@ def test_empty_question_cannot_dispatch(workspace):
     assert app.session_state['stage']=='prompt' and not source.requests and app.error
 
 
+def test_network_replay_never_dispatches_or_changes_saved_result(workspace):
+    app,source,release=workspace;submit(app);finish(app,release)
+    saved=deepcopy(app.session_state['run']);request=deepcopy(app.session_state['submitted'])
+    app.button(key='network_replay_start').click().run()
+    assert len(source.requests)==1 and app.session_state['run']==saved
+    app.button(key='network_replay_end').click().run()
+    assert app.session_state['network_playback'] is None
+    assert app.session_state['submitted']==request and app.session_state['run']==saved
+    assert not app.exception
+
+
+def test_setup_changes_do_not_rewrite_an_active_request(workspace):
+    app,source,release=workspace;release.clear();submit(app,'Original',[('old.csv',b'a')])
+    request=deepcopy(app.session_state['submitted']);job=app.session_state['job']
+    app.selectbox(key='setup_source').select('Live').run()
+    app.text_input(key='setup_backend').set_value('http://localhost:9999').run()
+    assert app.session_state['submitted']==request and app.session_state['job'] is job
+    assert len(source.requests)==1
+    finish(app,release)
+
+
 def test_quick_demo_is_explicit_and_does_not_analyze_draft_attachments(workspace):
     app,source,release=workspace
     submit(app,'',[('input.csv',b'my draft')],kind='demo');finish(app,release)
@@ -213,8 +234,9 @@ def test_startup_error_requires_explicit_retry(workspace,monkeypatch):
 
 def test_configured_service_uses_the_same_prompt_and_running_screens(workspace,monkeypatch):
     app,source,release=workspace;release.clear()
-    # Deployment configuration, not a second set of user-facing pages.
-    app.session_state['draft'].update(mode='Live',backend='http://127.0.0.1:9999')
+    # Setup stays in the shared drawer, not a second set of pages.
+    app.selectbox(key='setup_source').select('Live').run()
+    app.text_input(key='setup_backend').set_value('http://127.0.0.1:9999').run()
     submit(app,'My question',[('evidence.csv',b'a,b\n')])
     assert source.requests[0].mode=='Live' and source.requests[0].backend=='http://127.0.0.1:9999'
     assert source.requests[0].uploads==[('evidence.csv',b'a,b\n')]

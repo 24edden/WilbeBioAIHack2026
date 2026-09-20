@@ -50,7 +50,8 @@ def test_planner_configuration_has_no_extra_user_pages(monkeypatch):
     app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/'frontend'/'app.py')).run()
     assert app.session_state['stage']=='prompt'
     assert app.session_state['draft']['config']=={'task_mode':'auto'}
-    assert not app.radio and not app.multiselect and not app.selectbox
+    assert not app.radio and not app.multiselect
+    assert app.selectbox(key='setup_source')
     assert not any(b.key in ('pet_advanced','evidence_next','nav_question') for b in app.button)
     assert not app.exception
     st.cache_data.clear()

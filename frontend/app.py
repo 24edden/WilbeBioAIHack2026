@@ -17,6 +17,11 @@ from ui.pet_start import render_start
 from ui.theme import stylesheet
 from ui.appearance import stylesheet as appearance_stylesheet, toggle_theme
 from ui.workspace import new_draft, normalized_stage, collect_updates, save_result, result_kind
+from ui.setup_drawer import render_setup
+from ui.network_view import render_network
+from ui.replay import Playback
+from ui.voice_settings import render_stage_audio
+from ui.client_controls import render_client_controls
 
 st.set_page_config(page_title=PROFILE.page_title,page_icon=":material/science:",layout="wide",initial_sidebar_state="collapsed")
 st.session_state.setdefault('ui_theme','light')
@@ -55,6 +60,7 @@ def start(request):
     st.session_state.result_id=uuid4().hex
     st.session_state.submitted=deepcopy(request)
     st.session_state.run=RunState()
+    st.session_state.network_playback=None
     st.session_state.job=None
     try:
         source=source_for(request.mode)
@@ -82,13 +88,15 @@ if st.session_state.stage=='running' and not run_active:
     st.session_state.stage='results' if st.session_state.submitted else 'prompt'
 
 with st.container(key='workspace_header'):
-    brand,theme=st.columns([6,1],vertical_alignment='center')
+    brand,theme,settings=st.columns([6,1,.5],vertical_alignment='center')
     with brand:
         with st.container(key='trace_home'):
             st.button(PROFILE.name,key='home',on_click=go_home,help='Return to the question window. An active investigation keeps running.')
     with theme:
         st.button('☾ Dark mode' if st.session_state.ui_theme=='light' else '☀ Light mode',
                   key='theme_toggle',on_click=toggle_theme,help='Use this appearance on all three screens.')
+    with settings:render_setup(st.session_state.draft)
+render_client_controls()
 
 if st.session_state.stage=='prompt':
     if run_active:
@@ -105,6 +113,7 @@ elif st.session_state.stage=='results':
     submitted=st.session_state.submitted
     st.title('Results')
     st.caption(state.question or submitted.question)
+    render_stage_audio('results',st.session_state.result_id)
     if submitted.mode=='Demo' or state.config.get('run_mode')=='mock':
         st.caption('Demo · simulated model outputs, not a validated scientific assessment.')
     elif submitted.mode=='Mock':st.caption('Recorded results · no new analysis was performed.')
@@ -164,13 +173,34 @@ elif st.session_state.stage=='results':
     if st.button('Ask another question',key='new_question'):
         st.session_state.draft=new_draft()
         go_home();st.rerun()
+    with st.container(key='network_replay_controls'):
+        if st.button('Replay agent network',key='network_replay_start',disabled=not state.raw):
+            st.session_state.network_playback=Playback(state.raw)
+            st.session_state.network_playback_owner=st.session_state.result_id
+            st.rerun()
+        replay=st.session_state.get('network_playback')
+        if replay and st.session_state.get('network_playback_owner')==st.session_state.result_id:
+            if st.button('Pause replay' if replay.playing else 'Resume replay',key='network_replay_pause',disabled=replay.finished):
+                replay.pause() if replay.playing else replay.resume();st.rerun()
+            if st.button('Show complete network',key='network_replay_end'):
+                st.session_state.network_playback=None;st.rerun()
 
 
-@st.fragment(run_every=.3 if run_active else None)
+replay=st.session_state.get('network_playback')
+replay_active=bool(replay and replay.playing and st.session_state.stage=='results' and st.session_state.get('network_playback_owner')==st.session_state.result_id)
+@st.fragment(run_every=.5 if run_active or replay_active else None)
 def monitor():
     ended=collect_updates(st.session_state)
     if ended:
         st.rerun()
+    if st.session_state.stage=='results':
+        playback=st.session_state.get('network_playback') if st.session_state.get('network_playback_owner')==st.session_state.result_id else None
+        if playback:
+            was_playing=playback.playing;playback.advance()
+            if was_playing and playback.finished:st.rerun()
+            render_network(playback.state,recorded=True)
+        else:render_network(st.session_state.run)
+        return
     if st.session_state.stage!='running':return
     current_job=st.session_state.job
     if not current_job or not current_job.active:
@@ -184,6 +214,9 @@ def monitor():
     presentation.ingest(state.raw,complete=False)
     presentation.index=max(0,len(presentation.turns)-1)
     render_pet(state,presentation,mode=st.session_state.submitted.mode)
+    active=state.agents.get(state.active_id)
+    render_stage_audio('running',st.session_state.result_id,active.role if active else '')
+    with st.expander('Network and live stats',expanded=True):render_network(state)
     if current_job.cancel_requested or (current_job.can_cancel and (st.session_state.submitted.mode!='Live' or state.run_id)):
         with st.container(key='run_actions'):
             if current_job.cancel_requested:

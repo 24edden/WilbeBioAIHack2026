@@ -380,3 +380,43 @@ change, to avoid mixing cached imports with a new controller. The exact macOS/Py
 
 All pet files are permanently right-facing. They are public static assets; never
 write user uploads or secrets into `frontend/static/`.
+
+### Integrated pet UI (`codex/pet-ui-integration`)
+
+This branch starts at `codex/pet-investigation-ui` and adds a settings drawer for
+evidence, supported agent/model controls and browser voice preferences. Run with
+Streamlit 1.64 or newer using the command above, or use port 8504 to keep the old
+preview running separately. Restart Streamlit after Python module changes.
+
+Theme switching and voice preferences are browser-only. Dictation requires an
+explicit opt-in and click, supported browser speech recognition, and HTTPS or
+localhost. The local volume meter animates the small microphone icon. Dictation
+edits the draft; it never starts an investigation. Spoken updates use installed
+device voices by default; online voices are a separate opt-in.
+
+The network uses a lightweight SVG layout and counters fold observed events. Results can replay saved events
+without executing another analysis. Requests snapshot their evidence and settings;
+changing the drawer cannot rewrite a running request. Both upload surfaces share
+the 20-file, 20 MB per file and 40 MB total limit.
+
+`AgentProfiles/agent-profiles.json` and `source-lock.json` are pinned copies from
+`docs/agent-profiles` at `7f8e31a`. They describe the separate nine-role Brev
+harness, not this repository's local demo engine. The UI resolves descriptions
+for reported skill IDs and provides a clearly labeled configured-profile reference.
+It does not infer model calls, loaded skill versions or accepted NVIDIA results
+from capability metadata. New services should implement the adapter/event contract
+in `frontend/ui/adapters.py` and `frontend/ui/events.py`; importing profiles alone
+does not connect the Brev harness.
+
+Additional checks: `node tests/pet_microphone_test.mjs` exercises permission gating,
+draft handling and media cleanup without accessing a real microphone. Keep API
+keys in server environment configuration, never in browser assets or Git.
+
+Integration validation: 191 Python tests passed before the final SVG replacement;
+the new SVG renderer has a focused edge-attribution/escaping test. Composer, voice,
+microphone and client-control Node checks passed. Browser checks covered the drawer,
+agent selection, profile reference, live updates and unchanged theme geometry.
+Repeated live Graphviz updates caused preview responsiveness problems; the integrated
+network now renders bounded SVG instead. Final end-to-end browser revalidation was
+curtailed at the user's request to ship promptly. Real microphone capture, provider
+inference and 50-user hosting capacity were not exercised in this integration pass.

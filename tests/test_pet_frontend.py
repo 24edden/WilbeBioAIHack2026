@@ -43,7 +43,8 @@ def pet_app(monkeypatch):
 
 def test_prompt_first_submission_preserves_files_and_results(pet_app):
     app,source=pet_app
-    assert not app.get('file_uploader') and not app.text_area
+    assert len(app.get('file_uploader'))==1 and app.get('file_uploader')[0].key=='setup_uploads'
+    assert not app.text_area
     assert not app.multiselect and not source.requests
     files=[('case.vcf',b'##fileformat=VCFv4.2\n')]
     app.session_state['_test_composer_action']={'type':'start','question':'Does this evidence support the hypothesis?','uploads':files}
@@ -69,7 +70,7 @@ def test_quick_demo_and_home_are_explicit(pet_app):
     assert source.requests[0].uploads==[]
     app.button(key='home').click().run()
     assert app.session_state['stage']=='prompt'
-    assert not app.get('file_uploader') and not app.text_area and not app.radio
+    assert app.get('file_uploader')[0].key=='setup_uploads' and not app.text_area and not app.radio
     assert not any(b.key=='pet_advanced' for b in app.button)
     assert len(source.requests)==1 and not app.exception
 
