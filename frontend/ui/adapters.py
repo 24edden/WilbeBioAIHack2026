@@ -55,7 +55,7 @@ class ReplaySource:
 class DemoSource:
     """Run the actual local engine on mock providers; never consult live credentials."""
 
-    mock_latency_scale: float = 0.25
+    mock_latency_scale: float = 1.0
 
     def capabilities(self, backend: str) -> dict:
         root = Path(__file__).resolve().parents[2]
@@ -154,7 +154,7 @@ class DemoSource:
                        else f"Demo could not run: {exc}")
             yield Event(type="error", run_id=run_id, payload={"message": message, "fatal": True})
             yield Event(type="run_complete", run_id=run_id,
-                        payload={"verdict": "Demo failed before a result was available.",
+                        payload={"status": "error", "verdict": "Demo failed before a result was available.",
                                  "abstained": True, "confidence": 0.0, "error": message})
 
 

@@ -8,24 +8,23 @@ export default function render(component) {
   if (!state || state.generation !== data.generation) {
     state = {generation:data.generation, text:data.question||'', serverText:data.question||'', files:data.files||[], busy:false};
     sessions.set(key,state);
-  } else if (data.question !== state.serverText) {
-    state.text = data.question || '';
-    state.serverText = data.question || '';
   }
+  // Within one draft generation, browser edits are authoritative. Late server
+  // acknowledgements must not replace text typed while an upload/theme update was in flight.
   const el=id=>parentElement.querySelector('#'+id);
   const form=el('composer'),question=el('question'),picker=el('files'),submit=el('submit'),attach=el('attach'),demo=el('demo'),error=el('composer-error');
   const wrap=el('composer-wrap');
   wrap.style.colorScheme=data.theme==='dark'?'dark':'light';
   for(const [name,color] of Object.entries(data.colors||{}))wrap.style.setProperty('--ui-'+name,color);
   question.value=state.text;
-  question.disabled=Boolean(data.readOnly||data.disabled);
+  question.disabled=Boolean(data.readOnly);
   picker.accept=(data.extensions||[]).map(e=>'.'+e).join(',');
   attach.hidden=Boolean(data.readOnly);
   el('drop-hint').hidden=Boolean(data.readOnly);
   el('source-note').textContent=data.note||'';
   const sync=()=>setStateValue('draft',{generation:state.generation,question:state.text,files:state.files});
   function refresh(){
-    submit.disabled=Boolean(data.disabled||state.busy);attach.disabled=submit.disabled;demo.disabled=submit.disabled;
+    submit.disabled=Boolean(data.disabled||state.busy);attach.disabled=Boolean(data.readOnly||state.busy);demo.disabled=submit.disabled;
     submit.textContent=state.busy?'Preparing…':data.readOnly?'Start replay  →':'Start investigation  →';
     const list=el('attachments');list.replaceChildren();
     for(let i=0;i<state.files.length&&!data.readOnly;i++){
@@ -37,7 +36,7 @@ export default function render(component) {
   }
   const encode=file=>new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.onerror=()=>reject(new Error('Could not read '+file.name));reader.readAsDataURL(file);});
   async function add(files){
-    if(data.readOnly||state.busy||data.disabled)return;
+    if(data.readOnly||state.busy)return;
     error.textContent='';
     if(files.length+state.files.length>20){error.textContent='Attach up to 20 files.';return;}
     if(files.some(f=>f.size>MAX_FILE)){error.textContent='Each file must be 20 MB or smaller.';return;}
@@ -46,7 +45,7 @@ export default function render(component) {
     state.busy=true;refresh();
     try{const encoded=await Promise.all(files.map(async f=>({name:f.name,size:f.size,data:await encode(f)})));state.files.push(...encoded);sync();}catch(e){error.textContent=e.message;}finally{state.busy=false;refresh();}
   }
-  question.oninput=()=>{state.text=question.value;};
+  question.oninput=()=>{state.text=question.value;error.textContent='';};
   question.onblur=sync;
   attach.onclick=()=>picker.click();
   picker.onchange=()=>{void add(Array.from(picker.files||[]));picker.value='';};
@@ -57,9 +56,13 @@ export default function render(component) {
     if(state.busy||data.disabled)return;
     if(type==='start'&&!question.value.trim()){error.textContent='Enter a scientific question before starting.';question.focus();return;}
     state.text=question.value;state.busy=true;refresh();
-    setTriggerValue('action',{id:crypto.randomUUID(),generation:state.generation,type,question:state.text,files:state.files});
-    // A validation error leaves this component mounted; allow a corrected resubmission.
-    state.busy=false;
+    try {
+      setTriggerValue('action',{id:crypto.randomUUID(),generation:state.generation,type,question:state.text,files:state.files});
+    } catch {
+      error.textContent='The connection was interrupted. Your draft is still here; try again.';
+    } finally {
+      state.busy=false;refresh();
+    }
   }
   form.onsubmit=e=>{e.preventDefault();send('start');};
   demo.onclick=()=>send('demo');

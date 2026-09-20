@@ -58,3 +58,8 @@ h1,h2,h3{color:var(--ui-text)}.stApp a{color:var(--ui-accent)}
 .loading-status{border-color:var(--ui-border);background:var(--ui-soft);color:var(--ui-secondary);border-radius:10px}.loading-status span{background:var(--ui-accent)}
 .trace-help-text{background:var(--ui-surface)!important;color:var(--ui-text)!important;border-color:var(--ui-border)!important}.trace-help-trigger{color:var(--ui-muted)}
 @media(max-width:700px){.st-key-workspace_header [data-testid=stColumn]:last-child{flex:0 0 105px!important}.st-key-workspace_header .flow-brand span{display:none}.st-key-workspace_header{padding-bottom:.8rem!important}.st-key-workspace_header .flow-brand{font-size:23px}}
+/* The logo is the one consistent home action on all three screens. */
+.st-key-trace_home button,.st-key-trace_home button:hover{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;min-height:38px!important;color:var(--ui-text)!important;font-size:25px!important;font-weight:750!important;letter-spacing:-1px!important;transform:none!important}
+.st-key-trace_home button p{font-size:25px!important;font-weight:750!important;letter-spacing:-1px!important}
+.st-key-resume_strip{border:1px solid var(--ui-border);background:var(--ui-soft);border-radius:12px;padding:12px 17px;margin-bottom:18px}
+[data-testid=stToolbar]{visibility:hidden}

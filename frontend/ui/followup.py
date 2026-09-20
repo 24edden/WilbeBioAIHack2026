@@ -54,6 +54,10 @@ class FollowUpSource:
     def cancel(self, request):
         return self.source.cancel(request)
 
+    def interrupt_wait(self):
+        interrupt=getattr(self.source, "interrupt_wait", None)
+        if callable(interrupt):interrupt()
+
     def detach(self):
         if hasattr(self.source, "detach"):
             self.source.detach()

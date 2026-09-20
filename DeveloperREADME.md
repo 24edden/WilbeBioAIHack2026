@@ -92,11 +92,10 @@ pip install -r frontend/requirements.txt
 streamlit run frontend/app.py
 ```
 
-Opens on <http://localhost:8501> with **Try the demo**. This runs the workflow on the
+Opens on <http://localhost:8501> with the single prompt composer and **Play the pet demo**. This runs the workflow on the
 bundled synthetic case with an editable question and agent selection, simulated
 model outputs, and no API keys. Install both root and frontend requirements for this
-mode. Recorded playback remains available. Choose **Investigate my data** in the
-Evidence step once the backend is up on `localhost:8000`. The connected backend can
+mode. Recorded playback remains available. Set `TRACE_BACKEND_URL=http://localhost:8000` before starting the frontend to connect the same three-screen interface to the backend. The connected backend can
 itself run in mock mode; the UI labels simulated output explicitly.
 
 Before pushing frontend changes: `python frontend/smoke_test.py` (headless, no Streamlit).
@@ -350,63 +349,34 @@ BioNeMo; its limited evidence still goes through the existing abstention gate.
 Genomics and Literature also need confirmed BioNeMo NIM paths and request shapes.
 The factory does not silently mix live and mock providers.
 
-## Prompt-first composer and single-pet investigation view
+## Current frontend: three states
 
-The `codex/pet-investigation-ui` workstream builds on `codex/frontend-redesign`.
-The default start screen now uses the original single rounded prompt surface:
-drop files into the prompt, or use its Attach data button. No separate uploader
-panel is shown. The custom Streamlit v2 component needs Streamlit 1.64 or newer;
-it has no JavaScript dependencies or external asset requests.
+The `codex/pet-investigation-ui` branch now exposes only Prompt, Running and Results.
+See [frontend/README.md](frontend/README.md) for setup and [frontend/QA.md](frontend/QA.md)
+for the acceptance audit. The old classic/wizard switch and advanced UI paths have
+been removed. The logo returns home without canceling active work or losing a draft.
 
-Run the combined frontend locally (no separate backend or API key needed for Demo):
+The prompt is the original single rounded composer with integrated drop/picker and
+file chips. It uses a dependency-free Streamlit v2 component (Streamlit 1.64+).
+The UI uses the existing normalized events, source adapters and scientific result
+components. Shared light/dark mode applies everywhere and persists during navigation.
+
+Without `TRACE_BACKEND_URL`, submissions use the local mock engine. The demo sample's
+unmodified public events are delivered over about 25 seconds; its timer is interruptible.
+Real connected runs are never held behind a replay queue. Source completion immediately
+opens the result while watching a run; Home navigation is respected if the user is
+preparing another draft.
+
+Local preview command:
 
 ```bash
-python -m venv .venv
-# Activate .venv for your shell, then:
-python -m pip install -r requirements.txt -r frontend/requirements.txt
 python -m streamlit run frontend/app.py --server.address 127.0.0.1 --server.port 8502 --browser.gatherUsageStats false
 ```
 
-Open http://127.0.0.1:8502 and select **Play the pet demo**, or type a question and
-start an investigation. Demo uses the local engine with explicit mock providers.
-Uploaded files are passed to that engine instead of being discarded for the sample.
-The composer accepts the backend's supported formats, up to 20 files, 20 MB per
-file and 40 MB total. Python validates the component's payload independently.
+Validate with `python -m pytest -q`, `python frontend/smoke_test.py` and
+`node tests/composer_browser_test.mjs`. Restart the dev server when Python interfaces
+change, to avoid mixing cached imports with a new controller. The exact macOS/Python
+3.12 preview packages are recorded in `frontend/requirements-preview.lock.txt`.
 
-One right-facing scientist pet displays a short excerpt from a normalized agent
-event. Presentation controls pause/step the display only, not the underlying job.
-If the engine finishes first, the screen explicitly switches to saved updates and
-the original Results page is immediately available. No report text, confidence
-logic, evidence/provenance model or result renderer was replaced.
-
-`TRACE_START_SCREEN=classic` retains the original setup screens for comparison;
-**Source and advanced options → Open advanced setup** exposes the existing agent
-and model controls without changing the submitted run. Results and their follow-up,
-weak-point, evidence and activity views remain the colleague's original components.
-
-All pet PNG/WebP/GIF files are already mirrored once. The manifest records this;
-never add a second CSS flip. Static serving is enabled for `frontend/static/`.
-Do not place secrets or user uploads in that public asset directory.
-
-Validation:
-
-```bash
-python -m pytest -q
-python frontend/smoke_test.py
-node tests/composer_browser_test.mjs
-```
-
-`frontend/requirements-preview.lock.txt` records the exact packages used for this
-local macOS / Python 3.12 preview. It is a platform-specific reproducibility snapshot;
-the normal cross-platform installation uses the original requirements files above.
-
-### Shared light and dark appearance
-
-The header's **Dark mode / Light mode** button applies to the start composer, pet
-activity, advanced setup, voice controls and Results. Light is the initial default.
-The preference is session-local and survives stage navigation and starting a new
-investigation. It does not submit work, clear draft files, or modify saved reports.
-
-`frontend/ui/appearance.py` owns the shared palette; `frontend/static/workspace.css`
-applies it to TRACE's existing result widgets. The shadow-DOM prompt and voice
-components receive the same palette explicitly. Their shape and behavior are unchanged.
+All pet files are permanently right-facing. They are public static assets; never
+write user uploads or secrets into `frontend/static/`.

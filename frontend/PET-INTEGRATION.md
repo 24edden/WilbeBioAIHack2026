@@ -1,61 +1,52 @@
-# Pet frontend integration
+# Current TRACE pet integration
 
 Base: `codex/frontend-redesign` at `0a02e984b6e52822ca4f9f30fa77755a402a87bc`.
 Work branch: `codex/pet-investigation-ui`.
 
-## Kept from TRACE
+## One application, three states
 
-The backend, normalized Event/RunState contract, all existing data sources,
-background execution, cancellation, reports, evidence/provenance, weak points,
-follow-ups and result renderer are unchanged. `ui/layout.py`, `ui/components.py`,
-`ui/state.py` and `ui/events.py` have no changes in this integration.
+- **Prompt:** the original rounded composer, with integrated file drop/picker and chips.
+- **Running:** one pet presents the latest public agent update while the source is active.
+- **Results:** the preserved scientific conclusion and progressively disclosed evidence,
+  limitations, history and follow-up actions, all on the same page.
 
-## Added
+`app.py` and `ui/workspace.py` own this state machine. Legacy session state names are
+migrated. No classic/wizard fallback, stage-navigation bar, source/model setup page,
+voice-navigation panel or replay controls can open a second interface.
 
-- `static/composer.{html,css,js}` + `ui/composer.py`: the original single prompt/drop
-  surface hosted as a Streamlit v2 component. File chips, picker and full-surface
-  drop are one component. Typed input and file bytes are validated and turned into
-  the existing immutable RunRequest. Action IDs prevent duplicate submission.
-- `ui/pet_start.py`: bridges composer actions to the existing source/mode settings.
-- `ui/pet_activity.py`: a separately paced, single-expert presentation of actual
-  normalized public events. It never changes the report, simulates provider calls,
-  or invents scientific findings. Excerpts use at most two original sentences,
-  with truncation marked and full text preserved in the activity/results views.
-- `ui/pets.py`, `static/pets.css`: the one-pet/one-bubble stage, with local animations
-  and reduced-motion stills. Role names come from the run; unknown roles use the
-  generic pet. Character casting is visual and does not alter expertise.
-- `static/scientist-pets/`: all nine permanently right-facing pets, copied from the
-  user's verified pack. Original animation timing and transparency are preserved.
+TRACE is an accessible Home button. It never cancels or submits work. A draft may
+be prepared while an active run continues; duplicate submission is blocked. Completion
+opens Results when watching the run, but respects deliberate Home navigation. The
+source continues to be drained in the background to preserve events and its lease.
 
-## Important distinctions
+## Kept from the colleague's implementation
 
-Demo runs the existing local engine with mock providers and no separate backend
-server. Mock plays recorded events. Live retains the existing HTTP/SSE adapter;
-no new remote service was configured or verified. Pause/Next expert affect the
-presentation only. Source completion is labeled honestly, and Open results skips
-remaining presentation without rerunning or changing the result.
+The normalized Event/RunState contract, real local engine, backend transport,
+scientific result components, evidence/provenance and weak-point assessments are
+retained. Follow-ups reuse submitted evidence and carry prior claims as untrusted
+context. Reports and request snapshots remain independent of later draft edits.
 
-The upload component transfers draft bytes to this Streamlit frontend session;
-files reach the investigation source only on explicit Start. Browser events are
-untrusted: extension, basename, byte size, decoded size, total size and base64 are
-checked server-side. Run requests keep independent snapshots of the draft.
+## UI additions
 
-## Verification
+- `ui/composer.py` and `static/composer.{html,css,js}`: dependency-free Streamlit v2
+  prompt/drop component. Both browser and Python validate attachment payloads.
+- `ui/pet_activity.py` and `ui/pets.py`: role casting and short public event excerpts.
+  Unknown roles use the generic pet. No private reasoning is exposed or invented.
+- `ui/demo_pacing.py`: mock-only 25-second event delivery. The engine runs once;
+  original payloads/order/outcome are preserved. Errors bypass pacing and cancellation
+  interrupts its wait. **Live sources are never artificially delayed.**
+- `ui/appearance.py` / `static/workspace.css`: a shared session-local light/dark theme.
+- `static/scientist-pets/`: permanently right-facing PNG/WebP/GIF assets. Never flip
+  them again. Reduced-motion uses still PNGs.
 
-Baseline: 175 tests passed, 1 skipped, and frontend smoke checks passed.
-The integration adds coverage for preserved upload bytes and result evidence,
-explicit quick-demo routing, classic setup access, queued event order, pause/step,
-unknown-role fallback, HTML escaping and component attachment validation.
-The JavaScript harness exercises the actual component drop/submit/remove handlers.
+The stale-prompt race in the browser component was removed: within a draft generation,
+late server acknowledgements cannot replace newer typed text. New generations reset
+cleanly. Follow-up drafts are kept per result and open result sections retain state
+through theme changes. Connection errors no longer leave a stuck submit button.
 
-Local browser review covered the prompt, file chips, real local-demo submission,
-pet presentation and original Results. No public deployment is part of this work.
+## Preview and verification
 
-## Unified appearance
-
-A single header button now selects light or dark for every stage. The same session
-preference and palette paint the custom composer, pet view, original result panels,
-forms, popovers and optional voice component. Theme changes preserve drafts, active
-run identity and report contents. Functional Results rendering remains unchanged.
-Added checks cover navigation persistence, no duplicate submission, shadow-component
-file retention during theme updates and normal-text palette contrast.
+See README.md for the single preview command and QA.md for the audit. No remote model
+credentials or live scientific inference were tested. The local sample demonstration
+measured 25.01 seconds, 52 events and five experts. The full suite passed 185 tests;
+smoke checks and the component JavaScript harness passed as well.

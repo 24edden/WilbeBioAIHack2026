@@ -108,6 +108,8 @@ class BackgroundRun:
             self.cancel_requested = True
         if self.request.mode != 'Live':
             self.stop_requested.set()
+            interrupt=getattr(self.source,'interrupt_wait',None)
+            if callable(interrupt):interrupt()
         else:
             # Closing SSE is not cancellation. Wait for the server's terminal event.
             def cancel_remote():

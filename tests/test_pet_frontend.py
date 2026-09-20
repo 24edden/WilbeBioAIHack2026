@@ -53,28 +53,24 @@ def test_prompt_first_submission_preserves_files_and_results(pet_app):
     assert source.requests[0].question=='Does this evidence support the hypothesis?'
     assert source.requests[0].uploads==files and not source.requests[0].sample
     assert app.session_state['run'].complete
-    assert app.session_state['stage']=='investigation'
-    assert app.session_state['pet_activity'].current.role=='genomics'
-    assert any('scientist-pet' in m.value for m in app.markdown)
-    app.button(key='pet_results').click().run()
+    app.session_state['job'].thread.join(1);app.run()
     assert app.session_state['stage']=='results'
-    assert [t.label for t in app.tabs]==['Evidence','Weak points','Agent activity','Run details']
+    assert not app.tabs
     assert any('Preserved TRACE result' in m.value for m in app.markdown)
     assert app.session_state['run'].findings[0].provenance==[{'file':'example.vcf','line':3}]
     assert len(source.requests)==1 and not app.exception
 
 
-def test_quick_demo_and_advanced_setup_are_explicit(pet_app):
+def test_quick_demo_and_home_are_explicit(pet_app):
     app,source=pet_app
     app.session_state['_test_composer_action']={'type':'demo','question':'','uploads':[]}
-    app.run()
+    app.run();app.session_state['job'].thread.join(1);app.run()
     assert source.requests[0].mode=='Demo' and source.requests[0].sample
     assert source.requests[0].uploads==[]
-    app.button(key='pet_results').click().run()
-    app.button(key='results_new').click().run()
-    assert not app.get('file_uploader') and not app.text_area
-    app.button(key='pet_advanced').click().run()
-    assert app.button(key='evidence_next')
+    app.button(key='home').click().run()
+    assert app.session_state['stage']=='prompt'
+    assert not app.get('file_uploader') and not app.text_area and not app.radio
+    assert not any(b.key=='pet_advanced' for b in app.button)
     assert len(source.requests)==1 and not app.exception
 
 
@@ -138,16 +134,16 @@ def test_shared_theme_survives_navigation_and_never_resubmits(pet_app):
     assert not source.requests
     app.session_state['_test_composer_action']={'type':'start','question':'Final question','uploads':files}
     app.run()
-    assert app.session_state['stage']=='investigation' and app.session_state['ui_theme']=='dark'
+    app.session_state['job'].thread.join(1);app.run()
+    assert app.session_state['stage']=='results' and app.session_state['ui_theme']=='dark'
     original=deepcopy(app.session_state['run'])
     app.button(key='theme_toggle').click().run()
     assert app.session_state['ui_theme']=='light' and len(source.requests)==1
-    app.button(key='pet_results').click().run()
     assert app.session_state['stage']=='results' and app.session_state['ui_theme']=='light'
     app.button(key='theme_toggle').click().run()
     assert app.session_state['ui_theme']=='dark'
     assert app.session_state['run']==original and len(source.requests)==1
-    app.button(key='results_new').click().run()
+    app.button(key='new_question').click().run()
     assert app.session_state['ui_theme']=='dark' and not app.exception
 
 

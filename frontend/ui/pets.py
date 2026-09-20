@@ -43,7 +43,7 @@ def render_pet(state, presentation: PetActivity, *, mode="Demo"):
     status = "Preparing the investigation" if current is None else "Presentation paused" if paused else "Recorded working update" if state.complete and working else "Working" if working else "Shared update"
     note = "Saved activity" if state.complete or mode == "Mock" else "Simulated model outputs" if mode == "Demo" or state.config.get("run_mode") == "mock" else "Connected investigation"
     text = current.text if current else "Preparing the evidence and waiting for the first expert update."
-    progress = f"Update {presentation.index+1} of {len(presentation.turns)}" if current else "Preparing"
-    caption = "Showing saved updates. The report is already available." if state.complete else "One expert at a time. The investigation can continue in parallel."
+    progress = f"Update {len(presentation.turns)}" if current else "Preparing"
+    caption = "Expert updates arrive as the analysis runs."
     image = pet_picture(role, animate=working and not paused)
     st.markdown(f'''<div class="pet-live-marker"></div><section class="trace-pet-stage" aria-label="Expert discussion"><header><span>{escape(note)}</span><span>{progress}</span></header><div class="trace-pet-scene"><div class="trace-pet-character"><div class="pet-halo"></div>{image}<strong>{escape(label)}</strong></div><article class="trace-pet-bubble"><div class="pet-status"><span>●</span>{status}</div><p>{escape(text)}</p><div class="pet-bubble-foot">Public event excerpt · full text in Results</div></article></div><footer>{escape(caption)}</footer></section>''', unsafe_allow_html=True)

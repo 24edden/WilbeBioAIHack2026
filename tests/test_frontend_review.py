@@ -41,19 +41,16 @@ def test_message_recipient_can_spawn_later(monkeypatch):
     assert 'Support (1)' in dot
 
 
-def test_actual_catalog_task_controls_and_review_result(monkeypatch):
-    monkeypatch.setenv("TRACE_START_SCREEN", "classic")
+def test_planner_configuration_has_no_extra_user_pages(monkeypatch):
+    monkeypatch.setenv('TRACE_START_SCREEN','classic')
     adapters, states, _, _, _ = modules(monkeypatch)
     from streamlit.testing.v1 import AppTest
     import streamlit as st
     st.cache_data.clear()
-    app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'frontend' / 'app.py')).run()
-    app.button(key='evidence_next').click().run()
-    assert app.selectbox(key='draft_task_mode').value == 'auto'
-    assert not app.multiselect
-    app.selectbox(key='draft_task_mode').set_value('idea_review').run()
-    assert app.session_state['draft']['config'] == {'task_mode': 'idea_review'}
+    app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/'frontend'/'app.py')).run()
+    assert app.session_state['stage']=='prompt'
+    assert app.session_state['draft']['config']=={'task_mode':'auto'}
+    assert not app.radio and not app.multiselect and not app.selectbox
+    assert not any(b.key in ('pet_advanced','evidence_next','nav_question') for b in app.button)
     assert not app.exception
-    app.selectbox(key='draft_task_mode').set_value('investigation').run()
-    assert app.multiselect(key='draft_specialists').value
     st.cache_data.clear()

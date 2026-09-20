@@ -26,3 +26,20 @@ elements.attachments.children[0].children[2].onclick();assert.equal(draft.files.
 elements.composer.ondrop({preventDefault(){},dataTransfer:{files:[{name:'wrong.exe',size:2,contents:'xx'}]}});
 assert.match(elements['composer-error'].textContent,/Supported formats/);
 console.log('Composer drag/drop, exact attachment bytes, removal, invalid type and explicit submit passed.');
+// A server acknowledgement can arrive after the user has typed more text.
+elements.question.value='Newest unsent text';elements.question.oninput();
+component.data.question='Older server acknowledgement';render(component);
+assert.equal(elements.question.value,'Newest unsent text');
+// A running investigation blocks another submit, but the next draft stays editable.
+component.data.disabled=true;render(component);assert.equal(elements.question.disabled,false);assert.equal(elements.attach.disabled,false);assert.equal(elements.submit.disabled,true);
+// A fresh draft generation really does clear old files and text.
+component.data={...component.data,generation:'two',question:'',files:[],disabled:false};render(component);
+assert.equal(elements.question.value,'');assert.equal(elements.attachments.children.length,0);
+elements.composer.onsubmit({preventDefault(){}});assert.match(elements['composer-error'].textContent,/Enter a scientific question/);
+elements.question.value='A valid question';elements.question.oninput();assert.equal(elements['composer-error'].textContent,'');
+// A failed bridge dispatch leaves the draft usable, rather than stuck in Preparing.
+elements.question.value='Retry my question';elements.question.oninput();
+const failing={...component,setTriggerValue:()=>{throw new Error('Disconnected');}};render(failing);
+elements.composer.onsubmit({preventDefault(){}});
+assert.match(elements['composer-error'].textContent,/connection was interrupted/);assert.equal(elements.submit.disabled,false);
+console.log('Late acknowledgements, active-run draft editing, fresh draft reset and connection failure recovery passed.');
