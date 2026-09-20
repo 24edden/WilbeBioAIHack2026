@@ -95,3 +95,7 @@ just ask what its project instructions say.
 - One branch per workstream, merge into `main` when it runs.
 - Write down setup steps as you discover them, in this file. The judging criteria include
   reproducibility by another team, so a working README is worth actual points.
+
+## Frozen scientific results for visual apps
+
+The [Team TBD Results Capsule v1](results-capsules/team-tbd-results-capsule-2026-09-20-v1/README.md) freezes the 12 recorded runs without making new model calls. The full package is private on Brev; this repository provides the safe catalog, schemas, read-only loader and verification instructions. Start from its `manifest.json` and `results.json` after obtaining the private archive. Never replay recorded actions or copy exports into a live runtime database.

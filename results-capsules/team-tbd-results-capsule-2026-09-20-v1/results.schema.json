@@ -1,0 +1,385 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:team-tbd:results-capsule:1.0:results",
+  "title": "Team TBD frozen results capsule",
+  "description": "Frozen results capsule results contract; run views are available in $defs.runView.",
+  "$defs": {
+    "schemaVersion": {
+      "const": "team-tbd-results-capsule/1.0"
+    },
+    "packageId": {
+      "const": "team-tbd-results-capsule-2026-09-20-v1"
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^(?!/)(?!.*[\\\\%?#:\\u0000-\\u001f\\u007f])(?!.*(?:^|/)(?:\\.|\\.\\.)(?:/|$))(?!.*//)(?!.*/$).+$"
+    },
+    "optionalPath": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/relativePath"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "bytes",
+        "media_type"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "media_type": {
+          "$ref": "#/$defs/text"
+        }
+      }
+    },
+    "runRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_id",
+        "source_id",
+        "label",
+        "status",
+        "mode",
+        "case_id",
+        "updated_at",
+        "raw_export_path",
+        "view_path",
+        "report_path",
+        "event_path",
+        "source_content_sha256"
+      ],
+      "properties": {
+        "run_id": {
+          "$ref": "#/$defs/text"
+        },
+        "source_id": {
+          "$ref": "#/$defs/text"
+        },
+        "label": {
+          "$ref": "#/$defs/text"
+        },
+        "status": {
+          "$ref": "#/$defs/text"
+        },
+        "mode": {
+          "$ref": "#/$defs/text"
+        },
+        "case_id": {
+          "$ref": "#/$defs/text"
+        },
+        "updated_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "raw_export_path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "view_path": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "report_path": {
+          "$ref": "#/$defs/optionalPath"
+        },
+        "event_path": {
+          "$ref": "#/$defs/optionalPath"
+        },
+        "source_content_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "package_id",
+        "created_at",
+        "freeze",
+        "entrypoints",
+        "sources",
+        "featured_run_ids",
+        "runs",
+        "counts",
+        "files",
+        "locations",
+        "limitations"
+      ],
+      "properties": {
+        "schema_version": {
+          "$ref": "#/$defs/schemaVersion"
+        },
+        "package_id": {
+          "$ref": "#/$defs/packageId"
+        },
+        "created_at": {
+          "$ref": "#/$defs/text"
+        },
+        "freeze": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "no_new_inference",
+            "source_runs_unchanged"
+          ],
+          "properties": {
+            "kind": {
+              "const": "snapshot"
+            },
+            "no_new_inference": {
+              "const": true
+            },
+            "source_runs_unchanged": {
+              "const": true
+            }
+          }
+        },
+        "entrypoints": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "results",
+            "artifact_index"
+          ],
+          "properties": {
+            "results": {
+              "const": "results.json"
+            },
+            "artifact_index": {
+              "const": "artifact-index.json"
+            }
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "featured_run_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/text"
+          }
+        },
+        "runs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/runRecord"
+          }
+        },
+        "counts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/file"
+          }
+        },
+        "locations": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "runView": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "run_id",
+        "source_id",
+        "label",
+        "status",
+        "mode",
+        "case_id",
+        "scope",
+        "question",
+        "findings",
+        "decisions",
+        "handoffs",
+        "checks",
+        "governance",
+        "skills",
+        "model_receipts",
+        "nvidia",
+        "sequence_discoveries",
+        "research_briefs",
+        "artifacts",
+        "usage",
+        "error",
+        "links"
+      ],
+      "properties": {
+        "run_id": {
+          "$ref": "#/$defs/text"
+        },
+        "source_id": {
+          "$ref": "#/$defs/text"
+        },
+        "label": {
+          "$ref": "#/$defs/text"
+        },
+        "status": {
+          "$ref": "#/$defs/text"
+        },
+        "mode": {
+          "$ref": "#/$defs/text"
+        },
+        "case_id": {
+          "$ref": "#/$defs/text"
+        },
+        "scope": {
+          "type": [
+            "string",
+            "object"
+          ]
+        },
+        "question": {
+          "type": [
+            "string",
+            "object"
+          ]
+        },
+        "findings": {
+          "type": [
+            "object",
+            "array",
+            "null"
+          ]
+        },
+        "decisions": {
+          "type": "array"
+        },
+        "handoffs": {
+          "type": "array"
+        },
+        "checks": {
+          "type": [
+            "array",
+            "object"
+          ]
+        },
+        "governance": {
+          "type": [
+            "object",
+            "array",
+            "null"
+          ]
+        },
+        "skills": {
+          "type": "array"
+        },
+        "model_receipts": {
+          "type": [
+            "array",
+            "object"
+          ]
+        },
+        "nvidia": {
+          "type": [
+            "array",
+            "object"
+          ]
+        },
+        "sequence_discoveries": {
+          "type": "array"
+        },
+        "research_briefs": {
+          "type": "array"
+        },
+        "artifacts": {
+          "type": "array"
+        },
+        "usage": {
+          "type": "object"
+        },
+        "error": {
+          "type": [
+            "null",
+            "string",
+            "object"
+          ]
+        },
+        "links": {
+          "type": "object"
+        }
+      }
+    },
+    "results": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "schema_version",
+        "package_id",
+        "featured_run_ids",
+        "runs"
+      ],
+      "properties": {
+        "schema_version": {
+          "$ref": "#/$defs/schemaVersion"
+        },
+        "package_id": {
+          "$ref": "#/$defs/packageId"
+        },
+        "featured_run_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/text"
+          }
+        },
+        "runs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/runView"
+          }
+        }
+      }
+    }
+  },
+  "$ref": "#/$defs/results"
+}
