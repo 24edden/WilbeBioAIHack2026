@@ -1,0 +1,5 @@
+# Preserve imported/source-pinned bytes, including existing whitespace, verbatim.
+# These exceptions do not apply to new packaging code.
+app/sequence_operations.py whitespace=-blank-at-eol,-blank-at-eof
+tests/test_discovery_planning.py whitespace=-blank-at-eol,-blank-at-eof
+casepacks/sources/** whitespace=-blank-at-eol,-blank-at-eof

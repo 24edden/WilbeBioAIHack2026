@@ -1,0 +1,242 @@
+[
+  {
+    "id": "clinical_scientist",
+    "name": "Clinical question and timeline",
+    "version": "1.2.0",
+    "sha256": "cae86fb33d13ffa9f99714a78715c4bfde6d29c9f68b7f08922ba45e8becb3b9",
+    "path": "scientific/clinical_scientist.md",
+    "roles": [
+      "clinical_scientist"
+    ],
+    "origin": "Team TBD: user-specified specialist architecture",
+    "description": "Define population, endpoint meaning and event timing."
+  },
+  {
+    "id": "bioinformatician",
+    "name": "Source qualification and executable analysis",
+    "version": "1.3.0",
+    "sha256": "0f97074a11811ec5ed5965f39f733aaafc3ae67b488118adff34637dcd529510",
+    "path": "scientific/bioinformatician.md",
+    "roles": [
+      "bioinformatician"
+    ],
+    "origin": "Team TBD: user-specified specialist architecture",
+    "description": "Qualify measured inputs and suggest traceable preparation and executable analyses appropriate to their assay and study design."
+  },
+  {
+    "id": "statistician",
+    "name": "Design and uncertainty review",
+    "version": "1.3.0",
+    "sha256": "9c9b814680a94454b709ad0c693363d41357be0ef7611fde020163a24963ef9c",
+    "path": "scientific/statistician.md",
+    "roles": [
+      "statistician"
+    ],
+    "origin": "Team TBD: user-specified specialist architecture",
+    "description": "Match analysis and validation to the estimand, experimental unit and data-generating design."
+  },
+  {
+    "id": "clinical_pharmacologist",
+    "name": "Exposure qualification",
+    "version": "1.2.0",
+    "sha256": "ca5a82acf0ae934960bd07977e1596fbbdf0eb9330d115c1f68ff1c1775b870f",
+    "path": "scientific/clinical_pharmacologist.md",
+    "roles": [
+      "clinical_pharmacologist"
+    ],
+    "origin": "Team TBD: user-specified specialist architecture",
+    "description": "Require actual dose, concentration and sampling timestamps before reconstructing exposure or PK/PD."
+  },
+  {
+    "id": "molecular_scientist",
+    "name": "Mechanistic and BioNeMo prediction qualification",
+    "version": "1.2.0",
+    "sha256": "674eab4dc5e6460324eee66b800ef3ee586408180cfb77bea1caa7b24c8638b2",
+    "path": "scientific/molecular_scientist.md",
+    "roles": [
+      "molecular_scientist"
+    ],
+    "origin": "Team TBD: user-specified specialist architecture",
+    "description": "Use validated transcript/variant mapping, exact WT/mutant or reference/candidate sequences and provenance."
+  },
+  {
+    "id": "translational_scientist",
+    "name": "Competing mechanism synthesis",
+    "version": "1.3.0",
+    "sha256": "d09baa96ea0bf2df19809e9a18a1e257254413ade22c9847446f5379d56d0d45",
+    "path": "scientific/translational_scientist.md",
+    "roles": [
+      "translational_scientist"
+    ],
+    "origin": "Team TBD: user-specified specialist architecture",
+    "description": "Connect the clinical question to mechanisms and discriminating experiments using accepted omics/statistical/functional evidence."
+  },
+  {
+    "id": "assay_scientist",
+    "name": "Discriminating assay and experimental handoff",
+    "version": "1.3.0",
+    "sha256": "d409cb5b4d675ef7f0118bb41bcb7db2b3de7025f67bab884bd8c6f4390db306",
+    "path": "scientific/assay_scientist.md",
+    "roles": [
+      "assay_scientist"
+    ],
+    "origin": "Team TBD: user-specified specialist architecture",
+    "description": "Check specimen availability, assay fitness, method/version, matched comparisons, controls, endpoints and QC."
+  },
+  {
+    "id": "coordinator",
+    "name": "Evidence integration and bounded investigation",
+    "version": "1.3.0",
+    "sha256": "739ce05df8b82f6225883fbcdda867961354cd3d03b79ce9b9455d182ad14b63",
+    "path": "scientific/coordinator.md",
+    "roles": [
+      "coordinator"
+    ],
+    "origin": "Team TBD: user-specified specialist architecture",
+    "description": "Preserve the supplied hypothesis wording and source; distinguish agent alternatives."
+  },
+  {
+    "id": "reviewer",
+    "name": "Independent challenge and analysis cycle",
+    "version": "1.3.0",
+    "sha256": "68bdcc08dd7d01869583665846aa110b63c0f7f0ac3f24cd1d68363f050d9a1d",
+    "path": "scientific/reviewer.md",
+    "roles": [
+      "reviewer"
+    ],
+    "origin": "Team TBD: user-specified specialist architecture",
+    "description": "Challenge source identities, versions, numeric support, independence, causality and experiment fitness."
+  },
+  {
+    "id": "bionemo-boltz2",
+    "name": "NVIDIA BioNeMo Boltz2 NIM",
+    "version": "bionemo-agent-toolkit-0.1.0",
+    "sha256": "2922790dee8174bce9bd75252789b1ae4080645f96509ae1af031ed7dd6ce8fa",
+    "path": "bionemo-boltz2/SKILL.md",
+    "roles": [
+      "bioinformatician",
+      "statistician",
+      "molecular_scientist",
+      "translational_scientist",
+      "assay_scientist",
+      "coordinator",
+      "reviewer"
+    ],
+    "origin": "Installed NVIDIA BioNeMo agent toolkit; Apache-2.0 AND CC-BY-4.0 attribution retained",
+    "description": "Actual hosted/local prediction contract, input qualification and output interpretation."
+  },
+  {
+    "id": "discovery-planning",
+    "name": "Role-owned discovery and tool selection",
+    "version": "1.2.0",
+    "sha256": "dd0864ec8176d54507c37ec0bbd4c25e21133e11065d73edb330734496309812",
+    "path": "scientific/discovery-planning.md",
+    "roles": [
+      "clinical_scientist",
+      "bioinformatician",
+      "statistician",
+      "clinical_pharmacologist",
+      "molecular_scientist",
+      "translational_scientist",
+      "assay_scientist",
+      "coordinator",
+      "reviewer"
+    ],
+    "origin": "Team TBD: role-specific scientific planning and registered capability contract",
+    "description": "Choose question-driven preparation and available analyses without embedding dataset-specific answers or fixed pipelines."
+  },
+  {
+    "id": "research-interpretation",
+    "name": "Clear findings and working scientific answer",
+    "version": "1.1.0",
+    "sha256": "d718f730bf4af632521b54d77f80e21bcdd11cd40f49717e91bdeb4a8f25a573",
+    "path": "scientific/research-interpretation.md",
+    "roles": [
+      "clinical_scientist",
+      "bioinformatician",
+      "statistician",
+      "clinical_pharmacologist",
+      "molecular_scientist",
+      "translational_scientist",
+      "assay_scientist",
+      "coordinator",
+      "reviewer"
+    ],
+    "origin": "Team TBD: evidence-grounded research interpretation",
+    "description": "Plain-language evidence synthesis, scoped working answers and model-prepared comparison context."
+  },
+  {
+    "id": "molecular-interpretation",
+    "name": "Returned molecular artifact interpretation",
+    "version": "1.0.0",
+    "sha256": "c3084cea922f0d43cec3beba06f78189b1da7012a7a9e12a8f92b3d78c06af39",
+    "path": "scientific/molecular-interpretation.md",
+    "roles": [
+      "bioinformatician",
+      "statistician",
+      "molecular_scientist",
+      "translational_scientist",
+      "coordinator",
+      "reviewer"
+    ],
+    "origin": "Team TBD: evidence-grounded research interpretation",
+    "description": "Exact sequence identity, confidence semantics, settings comparability and scoped structural interpretation."
+  },
+  {
+    "id": "rosalind-informed-workflow",
+    "name": "Rosalind-informed scientific workflow",
+    "version": "1.0.0",
+    "sha256": "c2956266bf526937ab59be0c35ae7ea56a253cb3f341f15a508f6e410904beff",
+    "path": "scientific/rosalind-informed-workflow.md",
+    "roles": [
+      "clinical_scientist",
+      "bioinformatician",
+      "statistician",
+      "clinical_pharmacologist",
+      "molecular_scientist",
+      "translational_scientist",
+      "assay_scientist",
+      "coordinator",
+      "reviewer"
+    ],
+    "origin": "Team TBD-authored guidance informed by OpenAI public Rosalind workflow documentation; not a proprietary Rosalind model skill",
+    "source_url": "https://openai.com/index/introducing-gpt-rosalind/",
+    "description": "Question-driven evidence, tool execution, hypothesis testing and scientific follow-up with truthful source and model attribution."
+  },
+  {
+    "id": "uniprot-skill",
+    "name": "OpenAI Life Sciences: UniProt sequence lookup",
+    "version": "life-sciences-databases-0.1.5",
+    "sha256": "bdeed361ea38f8443b2dc673ea79246450ad0da474418a38da1816e43ca5ef20",
+    "path": "skills/uniprot-skill/SKILL.md",
+    "external_plugin": "life-sciences-databases",
+    "roles": [
+      "bioinformatician",
+      "molecular_scientist",
+      "translational_scientist",
+      "coordinator",
+      "reviewer"
+    ],
+    "origin": "OpenAI-authored installed Life Sciences Databases plugin; private pinned runtime",
+    "source_url": "https://openai.com/index/introducing-gpt-rosalind/",
+    "description": "Actual installed source-specific instructions and bounded REST client used by AI sequence discovery."
+  },
+  {
+    "id": "rcsb-pdb-skill",
+    "name": "OpenAI Life Sciences: RCSB PDB construct lookup",
+    "version": "life-sciences-databases-0.1.5",
+    "sha256": "2f8e74d2e149535834e3576a5dafaf3eb944c24457bf3bb20d962ecbe7130936",
+    "path": "skills/rcsb-pdb-skill/SKILL.md",
+    "external_plugin": "life-sciences-databases",
+    "roles": [
+      "bioinformatician",
+      "molecular_scientist",
+      "translational_scientist",
+      "coordinator",
+      "reviewer"
+    ],
+    "origin": "OpenAI-authored installed Life Sciences Databases plugin; private pinned runtime",
+    "source_url": "https://openai.com/index/introducing-gpt-rosalind/",
+    "description": "Actual installed source-specific instructions and bounded REST client used by AI sequence discovery."
+  }
+]

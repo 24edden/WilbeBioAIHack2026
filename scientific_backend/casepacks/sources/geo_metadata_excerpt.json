@@ -1,0 +1,2230 @@
+{
+  "origin": "outputs/dataset-acquisition/integration/geo_series_attributes.tsv",
+  "origin_sha256": "2ddc27cc04a7508e5f80931d77e7a43c0df533b36dfc0de7ab7632d0690aa8ee",
+  "rows": [
+    {
+      "line_1based": 249,
+      "cells": [
+        "GSE164551",
+        "title",
+        "Biallelic loss of BCMA as a resistance mechanism to CAR T cell therapy in a patient with Multiple Myeloma"
+      ]
+    },
+    {
+      "line_1based": 250,
+      "cells": [
+        "GSE164551",
+        "geo_accession",
+        "GSE164551"
+      ]
+    },
+    {
+      "line_1based": 251,
+      "cells": [
+        "GSE164551",
+        "status",
+        "Public on Jan 11 2021"
+      ]
+    },
+    {
+      "line_1based": 252,
+      "cells": [
+        "GSE164551",
+        "submission_date",
+        "Jan 11 2021"
+      ]
+    },
+    {
+      "line_1based": 253,
+      "cells": [
+        "GSE164551",
+        "last_update_date",
+        "Feb 22 2021"
+      ]
+    },
+    {
+      "line_1based": 254,
+      "cells": [
+        "GSE164551",
+        "pubmed_id",
+        "33558511"
+      ]
+    },
+    {
+      "line_1based": 255,
+      "cells": [
+        "GSE164551",
+        "summary",
+        "BCMA targeting chimeric antigen receptor (CAR) T cell therapy have shown deep and durable responses in multiple myeloma. However, relapse following therapy is frequently observed, and mechanisms of resistance remain ill-defined. We performed single cell genomic characterization of longitudinal samples from a patient who relapsed after initial CAR T cell treatment with lack of response to retreatment."
+      ]
+    },
+    {
+      "line_1based": 256,
+      "cells": [
+        "GSE164551",
+        "overall_design",
+        "A single cell cell RNA sequencing has been done for 8 longititunal samples collected from the same patient."
+      ]
+    },
+    {
+      "line_1based": 257,
+      "cells": [
+        "GSE164551",
+        "overall_design",
+        ""
+      ]
+    },
+    {
+      "line_1based": 258,
+      "cells": [
+        "GSE164551",
+        "overall_design",
+        "*** Submitter states that raw data will be submitted to dbGaP due to patient privacy concerns ***"
+      ]
+    },
+    {
+      "line_1based": 259,
+      "cells": [
+        "GSE164551",
+        "overall_design",
+        ""
+      ]
+    },
+    {
+      "line_1based": 260,
+      "cells": [
+        "GSE164551",
+        "type",
+        "Expression profiling by high throughput sequencing"
+      ]
+    },
+    {
+      "line_1based": 261,
+      "cells": [
+        "GSE164551",
+        "contributor",
+        "Mehmet,K,Samur"
+      ]
+    },
+    {
+      "line_1based": 262,
+      "cells": [
+        "GSE164551",
+        "contributor",
+        "Nikhil,C,Munshi"
+      ]
+    },
+    {
+      "line_1based": 263,
+      "cells": [
+        "GSE164551",
+        "sample_id",
+        "GSM5013821"
+      ]
+    },
+    {
+      "line_1based": 264,
+      "cells": [
+        "GSE164551",
+        "sample_id",
+        "GSM5013822"
+      ]
+    },
+    {
+      "line_1based": 265,
+      "cells": [
+        "GSE164551",
+        "sample_id",
+        "GSM5013823"
+      ]
+    },
+    {
+      "line_1based": 266,
+      "cells": [
+        "GSE164551",
+        "sample_id",
+        "GSM5013824"
+      ]
+    },
+    {
+      "line_1based": 267,
+      "cells": [
+        "GSE164551",
+        "sample_id",
+        "GSM5013825"
+      ]
+    },
+    {
+      "line_1based": 268,
+      "cells": [
+        "GSE164551",
+        "sample_id",
+        "GSM5013826"
+      ]
+    },
+    {
+      "line_1based": 269,
+      "cells": [
+        "GSE164551",
+        "sample_id",
+        "GSM5013827"
+      ]
+    },
+    {
+      "line_1based": 270,
+      "cells": [
+        "GSE164551",
+        "sample_id",
+        "GSM5013828"
+      ]
+    },
+    {
+      "line_1based": 271,
+      "cells": [
+        "GSE164551",
+        "contact_name",
+        "Mehmet,Kemal,Samur"
+      ]
+    },
+    {
+      "line_1based": 272,
+      "cells": [
+        "GSE164551",
+        "contact_email",
+        "Mehmet_Samur@dfci.harvard.edu"
+      ]
+    },
+    {
+      "line_1based": 273,
+      "cells": [
+        "GSE164551",
+        "contact_institute",
+        "Dana Farber Cancer Institute"
+      ]
+    },
+    {
+      "line_1based": 274,
+      "cells": [
+        "GSE164551",
+        "contact_address",
+        "450 Brookline Ave"
+      ]
+    },
+    {
+      "line_1based": 275,
+      "cells": [
+        "GSE164551",
+        "contact_city",
+        "Boston"
+      ]
+    },
+    {
+      "line_1based": 276,
+      "cells": [
+        "GSE164551",
+        "contact_state",
+        "MA"
+      ]
+    },
+    {
+      "line_1based": 277,
+      "cells": [
+        "GSE164551",
+        "contact_zip/postal_code",
+        "02215"
+      ]
+    },
+    {
+      "line_1based": 278,
+      "cells": [
+        "GSE164551",
+        "contact_country",
+        "USA"
+      ]
+    },
+    {
+      "line_1based": 279,
+      "cells": [
+        "GSE164551",
+        "supplementary_file",
+        "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE164nnn/GSE164551/suppl/GSE164551_AllCellsMetaData.txt.gz"
+      ]
+    },
+    {
+      "line_1based": 280,
+      "cells": [
+        "GSE164551",
+        "supplementary_file",
+        "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE164nnn/GSE164551/suppl/GSE164551_CRB_401_MS7856.sorted.rmdup.bam.bqsr.facets.out.txt.gz"
+      ]
+    },
+    {
+      "line_1based": 281,
+      "cells": [
+        "GSE164551",
+        "supplementary_file",
+        "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE164nnn/GSE164551/suppl/GSE164551_CRB_401_MS7856_mergedAll_PASS_DP10.maf.txt.gz"
+      ]
+    },
+    {
+      "line_1based": 282,
+      "cells": [
+        "GSE164551",
+        "supplementary_file",
+        "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE164nnn/GSE164551/suppl/GSE164551_RAW.tar"
+      ]
+    },
+    {
+      "line_1based": 283,
+      "cells": [
+        "GSE164551",
+        "platform_id",
+        "GPL20795"
+      ]
+    },
+    {
+      "line_1based": 284,
+      "cells": [
+        "GSE164551",
+        "platform_taxid",
+        "9606"
+      ]
+    },
+    {
+      "line_1based": 285,
+      "cells": [
+        "GSE164551",
+        "sample_taxid",
+        "9606"
+      ]
+    },
+    {
+      "line_1based": 286,
+      "cells": [
+        "GSE164551",
+        "relation",
+        "BioProject: https://www.ncbi.nlm.nih.gov/bioproject/PRJNA691175"
+      ]
+    },
+    {
+      "line_1based": 287,
+      "cells": [
+        "GSE182891",
+        "title",
+        "Mutations and RNA-binding proteins controlling CD19 splicing and CART-19 therapy resistance: Minigene library DNA-seq"
+      ]
+    },
+    {
+      "line_1based": 288,
+      "cells": [
+        "GSE182891",
+        "geo_accession",
+        "GSE182891"
+      ]
+    },
+    {
+      "line_1based": 289,
+      "cells": [
+        "GSE182891",
+        "status",
+        "Public on Jun 05 2022"
+      ]
+    },
+    {
+      "line_1based": 290,
+      "cells": [
+        "GSE182891",
+        "submission_date",
+        "Aug 26 2021"
+      ]
+    },
+    {
+      "line_1based": 291,
+      "cells": [
+        "GSE182891",
+        "last_update_date",
+        "Sep 28 2022"
+      ]
+    },
+    {
+      "line_1based": 292,
+      "cells": [
+        "GSE182891",
+        "pubmed_id",
+        "36138008"
+      ]
+    },
+    {
+      "line_1based": 293,
+      "cells": [
+        "GSE182891",
+        "summary",
+        "We developed a massively parallel reporter assay to determine the splicing effects of all mutations in the region comprising CD19 exons 1-3. Despite the great success of CART-19 (chimeric antigen receptor-armed autologous T-cells) immunotherapy to treat B-cell acute lymphoblastic leukaemia (B-ALL), many patients relapse due to loss of the targeted CD19 epitope. Since epitope loss can be caused by CD19 exon 2 mis-splicing, we set out to learn the regulatory code that controls CD19 alternative splicing."
+      ]
+    },
+    {
+      "line_1based": 294,
+      "cells": [
+        "GSE182891",
+        "overall_design",
+        "DNA-seq from the CD19 minigene variants transfected into NALM-6 cells"
+      ]
+    },
+    {
+      "line_1based": 295,
+      "cells": [
+        "GSE182891",
+        "type",
+        "Other"
+      ]
+    },
+    {
+      "line_1based": 296,
+      "cells": [
+        "GSE182891",
+        "contributor",
+        "Mariela,,Cort\u00e9s-L\u00f3pez"
+      ]
+    },
+    {
+      "line_1based": 297,
+      "cells": [
+        "GSE182891",
+        "contributor",
+        "Laura,,Schulz"
+      ]
+    },
+    {
+      "line_1based": 298,
+      "cells": [
+        "GSE182891",
+        "contributor",
+        "Mihaela,,Enculescu"
+      ]
+    },
+    {
+      "line_1based": 299,
+      "cells": [
+        "GSE182891",
+        "contributor",
+        "Claudia,,Paret"
+      ]
+    },
+    {
+      "line_1based": 300,
+      "cells": [
+        "GSE182891",
+        "contributor",
+        "Bea,,Spiekermann"
+      ]
+    },
+    {
+      "line_1based": 301,
+      "cells": [
+        "GSE182891",
+        "contributor",
+        "Anke,,Busch"
+      ]
+    },
+    {
+      "line_1based": 302,
+      "cells": [
+        "GSE182891",
+        "contributor",
+        "Anna,,Orekhova"
+      ]
+    },
+    {
+      "line_1based": 303,
+      "cells": [
+        "GSE182891",
+        "contributor",
+        "Fridolin,,Kielisch"
+      ]
+    },
+    {
+      "line_1based": 304,
+      "cells": [
+        "GSE182891",
+        "contributor",
+        "Mathieu,,Quesnel-Valli\u00e8res"
+      ]
+    },
+    {
+      "line_1based": 305,
+      "cells": [
+        "GSE182891",
+        "contributor",
+        "Manuel,,Torres-Diz"
+      ]
+    },
+    {
+      "line_1based": 306,
+      "cells": [
+        "GSE182891",
+        "contributor",
+        "J\u00f6rg,,Faber"
+      ]
+    },
+    {
+      "line_1based": 307,
+      "cells": [
+        "GSE182891",
+        "contributor",
+        "Yoseph,,Barash"
+      ]
+    },
+    {
+      "line_1based": 308,
+      "cells": [
+        "GSE182891",
+        "contributor",
+        "Andrei,,Thomas-Tikhonenko"
+      ]
+    },
+    {
+      "line_1based": 309,
+      "cells": [
+        "GSE182891",
+        "contributor",
+        "Kathi,,Zarnack"
+      ]
+    },
+    {
+      "line_1based": 310,
+      "cells": [
+        "GSE182891",
+        "contributor",
+        "Stefan,,Legewie"
+      ]
+    },
+    {
+      "line_1based": 311,
+      "cells": [
+        "GSE182891",
+        "contributor",
+        "Julian,,K\u00f6nig"
+      ]
+    },
+    {
+      "line_1based": 312,
+      "cells": [
+        "GSE182891",
+        "sample_id",
+        "GSM5542613"
+      ]
+    },
+    {
+      "line_1based": 313,
+      "cells": [
+        "GSE182891",
+        "sample_id",
+        "GSM5542614"
+      ]
+    },
+    {
+      "line_1based": 314,
+      "cells": [
+        "GSE182891",
+        "contact_name",
+        "Julian,,K\u00f6nig"
+      ]
+    },
+    {
+      "line_1based": 315,
+      "cells": [
+        "GSE182891",
+        "contact_email",
+        "j.koenig@imb-mainz.de"
+      ]
+    },
+    {
+      "line_1based": 316,
+      "cells": [
+        "GSE182891",
+        "contact_laboratory",
+        "K\u00f6nig"
+      ]
+    },
+    {
+      "line_1based": 317,
+      "cells": [
+        "GSE182891",
+        "contact_department",
+        "Biology"
+      ]
+    },
+    {
+      "line_1based": 318,
+      "cells": [
+        "GSE182891",
+        "contact_institute",
+        "Institute of Molecular Biology, Mainz"
+      ]
+    },
+    {
+      "line_1based": 319,
+      "cells": [
+        "GSE182891",
+        "contact_address",
+        "Ackermannweg 4"
+      ]
+    },
+    {
+      "line_1based": 320,
+      "cells": [
+        "GSE182891",
+        "contact_city",
+        "Mainz"
+      ]
+    },
+    {
+      "line_1based": 321,
+      "cells": [
+        "GSE182891",
+        "contact_zip/postal_code",
+        "55128"
+      ]
+    },
+    {
+      "line_1based": 322,
+      "cells": [
+        "GSE182891",
+        "contact_country",
+        "Germany"
+      ]
+    },
+    {
+      "line_1based": 323,
+      "cells": [
+        "GSE182891",
+        "supplementary_file",
+        "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE182nnn/GSE182891/suppl/GSE182891_CD19_minigene_variants.tab.gz"
+      ]
+    },
+    {
+      "line_1based": 324,
+      "cells": [
+        "GSE182891",
+        "supplementary_file",
+        "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE182nnn/GSE182891/suppl/GSE182891_README.txt"
+      ]
+    },
+    {
+      "line_1based": 325,
+      "cells": [
+        "GSE182891",
+        "platform_id",
+        "GPL26180"
+      ]
+    },
+    {
+      "line_1based": 326,
+      "cells": [
+        "GSE182891",
+        "platform_taxid",
+        "9606"
+      ]
+    },
+    {
+      "line_1based": 327,
+      "cells": [
+        "GSE182891",
+        "sample_taxid",
+        "9606"
+      ]
+    },
+    {
+      "line_1based": 328,
+      "cells": [
+        "GSE182891",
+        "relation",
+        "SubSeries of: GSE182894"
+      ]
+    },
+    {
+      "line_1based": 329,
+      "cells": [
+        "GSE182891",
+        "relation",
+        "BioProject: https://www.ncbi.nlm.nih.gov/bioproject/PRJNA758171"
+      ]
+    },
+    {
+      "line_1based": 330,
+      "cells": [
+        "GSE182891",
+        "relation",
+        "SRA: https://www.ncbi.nlm.nih.gov/sra?term=SRP334379"
+      ]
+    },
+    {
+      "line_1based": 331,
+      "cells": [
+        "GSE182892",
+        "title",
+        "Mutations and RNA-binding proteins controlling CD19 splicing and CART-19 therapy resistance: Minigene library RNA-seq"
+      ]
+    },
+    {
+      "line_1based": 332,
+      "cells": [
+        "GSE182892",
+        "geo_accession",
+        "GSE182892"
+      ]
+    },
+    {
+      "line_1based": 333,
+      "cells": [
+        "GSE182892",
+        "status",
+        "Public on Jun 05 2022"
+      ]
+    },
+    {
+      "line_1based": 334,
+      "cells": [
+        "GSE182892",
+        "submission_date",
+        "Aug 26 2021"
+      ]
+    },
+    {
+      "line_1based": 335,
+      "cells": [
+        "GSE182892",
+        "last_update_date",
+        "Sep 28 2022"
+      ]
+    },
+    {
+      "line_1based": 336,
+      "cells": [
+        "GSE182892",
+        "pubmed_id",
+        "36138008"
+      ]
+    },
+    {
+      "line_1based": 337,
+      "cells": [
+        "GSE182892",
+        "summary",
+        "We developed a massively parallel reporter assay to determine the splicing effects of all mutations in the region comprising CD19 exons 1-3. Despite the great success of CART-19 (chimeric antigen receptor-armed autologous T-cells) immunotherapy to treat B-cell acute lymphoblastic leukaemia (B-ALL), many patients relapse due to loss of the targeted CD19 epitope. Since epitope loss can be caused by CD19 exon 2 mis-splicing, we set out to learn the regulatory code that controls CD19 alternative splicing."
+      ]
+    },
+    {
+      "line_1based": 338,
+      "cells": [
+        "GSE182892",
+        "overall_design",
+        "PolyA selected RNA from the expressed CD19 minigene variants introduced in NALM-6 cells"
+      ]
+    },
+    {
+      "line_1based": 339,
+      "cells": [
+        "GSE182892",
+        "type",
+        "Expression profiling by high throughput sequencing"
+      ]
+    },
+    {
+      "line_1based": 340,
+      "cells": [
+        "GSE182892",
+        "contributor",
+        "Mariela,,Cort\u00e9s-L\u00f3pez"
+      ]
+    },
+    {
+      "line_1based": 341,
+      "cells": [
+        "GSE182892",
+        "contributor",
+        "Laura,,Schulz"
+      ]
+    },
+    {
+      "line_1based": 342,
+      "cells": [
+        "GSE182892",
+        "contributor",
+        "Mihaela,,Enculescu"
+      ]
+    },
+    {
+      "line_1based": 343,
+      "cells": [
+        "GSE182892",
+        "contributor",
+        "Claudia,,Paret"
+      ]
+    },
+    {
+      "line_1based": 344,
+      "cells": [
+        "GSE182892",
+        "contributor",
+        "Bea,,Spiekermann"
+      ]
+    },
+    {
+      "line_1based": 345,
+      "cells": [
+        "GSE182892",
+        "contributor",
+        "Anke,,Busch"
+      ]
+    },
+    {
+      "line_1based": 346,
+      "cells": [
+        "GSE182892",
+        "contributor",
+        "Anna,,Orekhova"
+      ]
+    },
+    {
+      "line_1based": 347,
+      "cells": [
+        "GSE182892",
+        "contributor",
+        "Fridolin,,Kielisch"
+      ]
+    },
+    {
+      "line_1based": 348,
+      "cells": [
+        "GSE182892",
+        "contributor",
+        "Mathieu,,Quesnel-Valli\u00e8res"
+      ]
+    },
+    {
+      "line_1based": 349,
+      "cells": [
+        "GSE182892",
+        "contributor",
+        "Manuel,,Torres-Diz"
+      ]
+    },
+    {
+      "line_1based": 350,
+      "cells": [
+        "GSE182892",
+        "contributor",
+        "J\u00f6rg,,Faber"
+      ]
+    },
+    {
+      "line_1based": 351,
+      "cells": [
+        "GSE182892",
+        "contributor",
+        "Yoseph,,Barash"
+      ]
+    },
+    {
+      "line_1based": 352,
+      "cells": [
+        "GSE182892",
+        "contributor",
+        "Andrei,,Thomas-Tikhonenko"
+      ]
+    },
+    {
+      "line_1based": 353,
+      "cells": [
+        "GSE182892",
+        "contributor",
+        "Kathi,,Zarnack"
+      ]
+    },
+    {
+      "line_1based": 354,
+      "cells": [
+        "GSE182892",
+        "contributor",
+        "Stefan,,Legewie"
+      ]
+    },
+    {
+      "line_1based": 355,
+      "cells": [
+        "GSE182892",
+        "contributor",
+        "Julian,,K\u00f6nig"
+      ]
+    },
+    {
+      "line_1based": 356,
+      "cells": [
+        "GSE182892",
+        "sample_id",
+        "GSM5542615"
+      ]
+    },
+    {
+      "line_1based": 357,
+      "cells": [
+        "GSE182892",
+        "sample_id",
+        "GSM5542616"
+      ]
+    },
+    {
+      "line_1based": 358,
+      "cells": [
+        "GSE182892",
+        "contact_name",
+        "Julian,,K\u00f6nig"
+      ]
+    },
+    {
+      "line_1based": 359,
+      "cells": [
+        "GSE182892",
+        "contact_email",
+        "j.koenig@imb-mainz.de"
+      ]
+    },
+    {
+      "line_1based": 360,
+      "cells": [
+        "GSE182892",
+        "contact_laboratory",
+        "K\u00f6nig"
+      ]
+    },
+    {
+      "line_1based": 361,
+      "cells": [
+        "GSE182892",
+        "contact_department",
+        "Biology"
+      ]
+    },
+    {
+      "line_1based": 362,
+      "cells": [
+        "GSE182892",
+        "contact_institute",
+        "Institute of Molecular Biology, Mainz"
+      ]
+    },
+    {
+      "line_1based": 363,
+      "cells": [
+        "GSE182892",
+        "contact_address",
+        "Ackermannweg 4"
+      ]
+    },
+    {
+      "line_1based": 364,
+      "cells": [
+        "GSE182892",
+        "contact_city",
+        "Mainz"
+      ]
+    },
+    {
+      "line_1based": 365,
+      "cells": [
+        "GSE182892",
+        "contact_zip/postal_code",
+        "55128"
+      ]
+    },
+    {
+      "line_1based": 366,
+      "cells": [
+        "GSE182892",
+        "contact_country",
+        "Germany"
+      ]
+    },
+    {
+      "line_1based": 367,
+      "cells": [
+        "GSE182892",
+        "supplementary_file",
+        "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE182nnn/GSE182892/suppl/GSE182892_CD19_minigene_isoforms.txt.gz"
+      ]
+    },
+    {
+      "line_1based": 368,
+      "cells": [
+        "GSE182892",
+        "supplementary_file",
+        "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE182nnn/GSE182892/suppl/GSE182892_README.txt"
+      ]
+    },
+    {
+      "line_1based": 369,
+      "cells": [
+        "GSE182892",
+        "platform_id",
+        "GPL15520"
+      ]
+    },
+    {
+      "line_1based": 370,
+      "cells": [
+        "GSE182892",
+        "platform_taxid",
+        "9606"
+      ]
+    },
+    {
+      "line_1based": 371,
+      "cells": [
+        "GSE182892",
+        "sample_taxid",
+        "9606"
+      ]
+    },
+    {
+      "line_1based": 372,
+      "cells": [
+        "GSE182892",
+        "relation",
+        "SubSeries of: GSE182894"
+      ]
+    },
+    {
+      "line_1based": 373,
+      "cells": [
+        "GSE182892",
+        "relation",
+        "BioProject: https://www.ncbi.nlm.nih.gov/bioproject/PRJNA758173"
+      ]
+    },
+    {
+      "line_1based": 374,
+      "cells": [
+        "GSE182892",
+        "relation",
+        "SRA: https://www.ncbi.nlm.nih.gov/sra?term=SRP334380"
+      ]
+    },
+    {
+      "line_1based": 457,
+      "cells": [
+        "GSE197215",
+        "title",
+        "Single-cell antigen-specific landscape of CAR T infusion product identifies  determinants of CD19-positive relapse in patients with ALL"
+      ]
+    },
+    {
+      "line_1based": 458,
+      "cells": [
+        "GSE197215",
+        "geo_accession",
+        "GSE197215"
+      ]
+    },
+    {
+      "line_1based": 459,
+      "cells": [
+        "GSE197215",
+        "status",
+        "Public on Jun 08 2022"
+      ]
+    },
+    {
+      "line_1based": 460,
+      "cells": [
+        "GSE197215",
+        "submission_date",
+        "Feb 22 2022"
+      ]
+    },
+    {
+      "line_1based": 461,
+      "cells": [
+        "GSE197215",
+        "last_update_date",
+        "Jun 27 2022"
+      ]
+    },
+    {
+      "line_1based": 462,
+      "cells": [
+        "GSE197215",
+        "pubmed_id",
+        "35675405"
+      ]
+    },
+    {
+      "line_1based": 463,
+      "cells": [
+        "GSE197215",
+        "summary",
+        "We report 101,326 single cell transcriptomes and surface protein landscape from the Chimeric antigen receptor-modified (CAR) T infusion  products of 12 pediatric ALL patients upon CAR antigen-specific stimulation in comparison with  TCR-mediated activation and controls."
+      ]
+    },
+    {
+      "line_1based": 464,
+      "cells": [
+        "GSE197215",
+        "overall_design",
+        "By combining scRNA-seq and CITE-seq, CAR T cells in infusion products were analyzed upon CARspecific  stimulation with human CD19-expressing antigen presenting cells (APCs), and compared  them to 3 additional conditions: TCR-mediated stimulation, non-target APC stimulation, and  unstimulated controls"
+      ]
+    },
+    {
+      "line_1based": 465,
+      "cells": [
+        "GSE197215",
+        "type",
+        "Expression profiling by high throughput sequencing"
+      ]
+    },
+    {
+      "line_1based": 466,
+      "cells": [
+        "GSE197215",
+        "type",
+        "Other"
+      ]
+    },
+    {
+      "line_1based": 467,
+      "cells": [
+        "GSE197215",
+        "contributor",
+        "Zhiliang,,Bai"
+      ]
+    },
+    {
+      "line_1based": 468,
+      "cells": [
+        "GSE197215",
+        "contributor",
+        "Steven,,Woodhouse"
+      ]
+    },
+    {
+      "line_1based": 469,
+      "cells": [
+        "GSE197215",
+        "contributor",
+        "Pablo,G,Camara"
+      ]
+    },
+    {
+      "line_1based": 470,
+      "cells": [
+        "GSE197215",
+        "contributor",
+        "J.Joseph,,Melenhorst"
+      ]
+    },
+    {
+      "line_1based": 471,
+      "cells": [
+        "GSE197215",
+        "contributor",
+        "Rong,,Fan"
+      ]
+    },
+    {
+      "line_1based": 472,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911097"
+      ]
+    },
+    {
+      "line_1based": 473,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911098"
+      ]
+    },
+    {
+      "line_1based": 474,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911099"
+      ]
+    },
+    {
+      "line_1based": 475,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911100"
+      ]
+    },
+    {
+      "line_1based": 476,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911101"
+      ]
+    },
+    {
+      "line_1based": 477,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911102"
+      ]
+    },
+    {
+      "line_1based": 478,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911103"
+      ]
+    },
+    {
+      "line_1based": 479,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911104"
+      ]
+    },
+    {
+      "line_1based": 480,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911105"
+      ]
+    },
+    {
+      "line_1based": 481,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911106"
+      ]
+    },
+    {
+      "line_1based": 482,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911107"
+      ]
+    },
+    {
+      "line_1based": 483,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911108"
+      ]
+    },
+    {
+      "line_1based": 484,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911109"
+      ]
+    },
+    {
+      "line_1based": 485,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911110"
+      ]
+    },
+    {
+      "line_1based": 486,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911111"
+      ]
+    },
+    {
+      "line_1based": 487,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911112"
+      ]
+    },
+    {
+      "line_1based": 488,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911113"
+      ]
+    },
+    {
+      "line_1based": 489,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911114"
+      ]
+    },
+    {
+      "line_1based": 490,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911115"
+      ]
+    },
+    {
+      "line_1based": 491,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911116"
+      ]
+    },
+    {
+      "line_1based": 492,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911117"
+      ]
+    },
+    {
+      "line_1based": 493,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911118"
+      ]
+    },
+    {
+      "line_1based": 494,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911119"
+      ]
+    },
+    {
+      "line_1based": 495,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911120"
+      ]
+    },
+    {
+      "line_1based": 496,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911121"
+      ]
+    },
+    {
+      "line_1based": 497,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911122"
+      ]
+    },
+    {
+      "line_1based": 498,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911123"
+      ]
+    },
+    {
+      "line_1based": 499,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911124"
+      ]
+    },
+    {
+      "line_1based": 500,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911125"
+      ]
+    },
+    {
+      "line_1based": 501,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911126"
+      ]
+    },
+    {
+      "line_1based": 502,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911127"
+      ]
+    },
+    {
+      "line_1based": 503,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911128"
+      ]
+    },
+    {
+      "line_1based": 504,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911129"
+      ]
+    },
+    {
+      "line_1based": 505,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911130"
+      ]
+    },
+    {
+      "line_1based": 506,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911131"
+      ]
+    },
+    {
+      "line_1based": 507,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911132"
+      ]
+    },
+    {
+      "line_1based": 508,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911133"
+      ]
+    },
+    {
+      "line_1based": 509,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911134"
+      ]
+    },
+    {
+      "line_1based": 510,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911135"
+      ]
+    },
+    {
+      "line_1based": 511,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911136"
+      ]
+    },
+    {
+      "line_1based": 512,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911137"
+      ]
+    },
+    {
+      "line_1based": 513,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911138"
+      ]
+    },
+    {
+      "line_1based": 514,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911139"
+      ]
+    },
+    {
+      "line_1based": 515,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911140"
+      ]
+    },
+    {
+      "line_1based": 516,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911141"
+      ]
+    },
+    {
+      "line_1based": 517,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911142"
+      ]
+    },
+    {
+      "line_1based": 518,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911143"
+      ]
+    },
+    {
+      "line_1based": 519,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911144"
+      ]
+    },
+    {
+      "line_1based": 520,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911145"
+      ]
+    },
+    {
+      "line_1based": 521,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911146"
+      ]
+    },
+    {
+      "line_1based": 522,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911147"
+      ]
+    },
+    {
+      "line_1based": 523,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911148"
+      ]
+    },
+    {
+      "line_1based": 524,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911149"
+      ]
+    },
+    {
+      "line_1based": 525,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911150"
+      ]
+    },
+    {
+      "line_1based": 526,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911151"
+      ]
+    },
+    {
+      "line_1based": 527,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911152"
+      ]
+    },
+    {
+      "line_1based": 528,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911153"
+      ]
+    },
+    {
+      "line_1based": 529,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911154"
+      ]
+    },
+    {
+      "line_1based": 530,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911155"
+      ]
+    },
+    {
+      "line_1based": 531,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911156"
+      ]
+    },
+    {
+      "line_1based": 532,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911157"
+      ]
+    },
+    {
+      "line_1based": 533,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911158"
+      ]
+    },
+    {
+      "line_1based": 534,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911159"
+      ]
+    },
+    {
+      "line_1based": 535,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911160"
+      ]
+    },
+    {
+      "line_1based": 536,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911161"
+      ]
+    },
+    {
+      "line_1based": 537,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911162"
+      ]
+    },
+    {
+      "line_1based": 538,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911163"
+      ]
+    },
+    {
+      "line_1based": 539,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911164"
+      ]
+    },
+    {
+      "line_1based": 540,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911165"
+      ]
+    },
+    {
+      "line_1based": 541,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911166"
+      ]
+    },
+    {
+      "line_1based": 542,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911167"
+      ]
+    },
+    {
+      "line_1based": 543,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911168"
+      ]
+    },
+    {
+      "line_1based": 544,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911169"
+      ]
+    },
+    {
+      "line_1based": 545,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911170"
+      ]
+    },
+    {
+      "line_1based": 546,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911171"
+      ]
+    },
+    {
+      "line_1based": 547,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911172"
+      ]
+    },
+    {
+      "line_1based": 548,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911173"
+      ]
+    },
+    {
+      "line_1based": 549,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911174"
+      ]
+    },
+    {
+      "line_1based": 550,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911175"
+      ]
+    },
+    {
+      "line_1based": 551,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911176"
+      ]
+    },
+    {
+      "line_1based": 552,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911177"
+      ]
+    },
+    {
+      "line_1based": 553,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911178"
+      ]
+    },
+    {
+      "line_1based": 554,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911179"
+      ]
+    },
+    {
+      "line_1based": 555,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911180"
+      ]
+    },
+    {
+      "line_1based": 556,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911181"
+      ]
+    },
+    {
+      "line_1based": 557,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911182"
+      ]
+    },
+    {
+      "line_1based": 558,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911183"
+      ]
+    },
+    {
+      "line_1based": 559,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911184"
+      ]
+    },
+    {
+      "line_1based": 560,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911185"
+      ]
+    },
+    {
+      "line_1based": 561,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911186"
+      ]
+    },
+    {
+      "line_1based": 562,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911187"
+      ]
+    },
+    {
+      "line_1based": 563,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911188"
+      ]
+    },
+    {
+      "line_1based": 564,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911189"
+      ]
+    },
+    {
+      "line_1based": 565,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911190"
+      ]
+    },
+    {
+      "line_1based": 566,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911191"
+      ]
+    },
+    {
+      "line_1based": 567,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911192"
+      ]
+    },
+    {
+      "line_1based": 568,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911193"
+      ]
+    },
+    {
+      "line_1based": 569,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911194"
+      ]
+    },
+    {
+      "line_1based": 570,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911195"
+      ]
+    },
+    {
+      "line_1based": 571,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911196"
+      ]
+    },
+    {
+      "line_1based": 572,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911197"
+      ]
+    },
+    {
+      "line_1based": 573,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911198"
+      ]
+    },
+    {
+      "line_1based": 574,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911199"
+      ]
+    },
+    {
+      "line_1based": 575,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911200"
+      ]
+    },
+    {
+      "line_1based": 576,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911201"
+      ]
+    },
+    {
+      "line_1based": 577,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911202"
+      ]
+    },
+    {
+      "line_1based": 578,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911203"
+      ]
+    },
+    {
+      "line_1based": 579,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911204"
+      ]
+    },
+    {
+      "line_1based": 580,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911205"
+      ]
+    },
+    {
+      "line_1based": 581,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911206"
+      ]
+    },
+    {
+      "line_1based": 582,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911207"
+      ]
+    },
+    {
+      "line_1based": 583,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911208"
+      ]
+    },
+    {
+      "line_1based": 584,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911209"
+      ]
+    },
+    {
+      "line_1based": 585,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911210"
+      ]
+    },
+    {
+      "line_1based": 586,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911211"
+      ]
+    },
+    {
+      "line_1based": 587,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911212"
+      ]
+    },
+    {
+      "line_1based": 588,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911213"
+      ]
+    },
+    {
+      "line_1based": 589,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911214"
+      ]
+    },
+    {
+      "line_1based": 590,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911215"
+      ]
+    },
+    {
+      "line_1based": 591,
+      "cells": [
+        "GSE197215",
+        "sample_id",
+        "GSM5911216"
+      ]
+    },
+    {
+      "line_1based": 592,
+      "cells": [
+        "GSE197215",
+        "contact_name",
+        "Rong,,Fan"
+      ]
+    },
+    {
+      "line_1based": 593,
+      "cells": [
+        "GSE197215",
+        "contact_email",
+        "rong.fan@yale.edu"
+      ]
+    },
+    {
+      "line_1based": 594,
+      "cells": [
+        "GSE197215",
+        "contact_department",
+        "Biomedical Engineering"
+      ]
+    },
+    {
+      "line_1based": 595,
+      "cells": [
+        "GSE197215",
+        "contact_institute",
+        "Yale University"
+      ]
+    },
+    {
+      "line_1based": 596,
+      "cells": [
+        "GSE197215",
+        "contact_address",
+        "55 Prospect St."
+      ]
+    },
+    {
+      "line_1based": 597,
+      "cells": [
+        "GSE197215",
+        "contact_city",
+        "New Haven"
+      ]
+    },
+    {
+      "line_1based": 598,
+      "cells": [
+        "GSE197215",
+        "contact_state",
+        "Connecticut"
+      ]
+    },
+    {
+      "line_1based": 599,
+      "cells": [
+        "GSE197215",
+        "contact_zip/postal_code",
+        "06511"
+      ]
+    },
+    {
+      "line_1based": 600,
+      "cells": [
+        "GSE197215",
+        "contact_country",
+        "USA"
+      ]
+    },
+    {
+      "line_1based": 601,
+      "cells": [
+        "GSE197215",
+        "supplementary_file",
+        "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE197nnn/GSE197215/suppl/GSE197215_Integrated_object_of_CD19_3T3_condition.rds.gz"
+      ]
+    },
+    {
+      "line_1based": 602,
+      "cells": [
+        "GSE197215",
+        "supplementary_file",
+        "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE197nnn/GSE197215/suppl/GSE197215_Integrated_object_of_CD3_CD28_beads_condition.rds.gz"
+      ]
+    },
+    {
+      "line_1based": 603,
+      "cells": [
+        "GSE197215",
+        "supplementary_file",
+        "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE197nnn/GSE197215/suppl/GSE197215_Integrated_object_of_mesothelin_3T3_condition.rds.gz"
+      ]
+    },
+    {
+      "line_1based": 604,
+      "cells": [
+        "GSE197215",
+        "supplementary_file",
+        "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE197nnn/GSE197215/suppl/GSE197215_Integrated_object_of_unstimulated_condition.rds.gz"
+      ]
+    },
+    {
+      "line_1based": 605,
+      "cells": [
+        "GSE197215",
+        "platform_id",
+        "GPL20301"
+      ]
+    },
+    {
+      "line_1based": 606,
+      "cells": [
+        "GSE197215",
+        "platform_taxid",
+        "9606"
+      ]
+    },
+    {
+      "line_1based": 607,
+      "cells": [
+        "GSE197215",
+        "sample_taxid",
+        "9606"
+      ]
+    },
+    {
+      "line_1based": 608,
+      "cells": [
+        "GSE197215",
+        "relation",
+        "BioProject: https://www.ncbi.nlm.nih.gov/bioproject/PRJNA809371"
+      ]
+    }
+  ]
+}

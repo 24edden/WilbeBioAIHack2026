@@ -1,0 +1,23 @@
+# Private runtime, credentials, optional proprietary installed plugin and local inputs.
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+runtime/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+dist/
+.DS_Store
+._*
+*.sqlite*
+*.db
+*.log
+# Public raw source inputs are hydrated privately and verified against MANIFEST.json.
+casepacks/sources/**/*.gz
+casepacks/sources/**/*.xlsx
+casepacks/sources/bcma/post_second_infusion_variants.tsv
+casepacks/sources/cd19-discovery/paper.xml
+casepacks/sources/cd19-discovery/author_isoforms_predicted_translational_features.csv

@@ -1,0 +1,45 @@
+### ====================================
+All scripts can be found in: https://github.com/mcortes-lopez/CD19_splicing_mutagenesis/tree/main/demultiplexing_scripts/DNAseq
+###=======================================
+
+##----------------------------------------------------------
+## barcode pattern matching and trimming:
+## 
+##    - keep all reads between 1150 and 1500 nt in lenght, 
+##      this exclude concatenates and incomplete fragments,
+##
+##    - find anchor sequences (pattern match), in sense and 
+##      antisense strands, extract barcodes, 
+## 
+##    - remove front of read incl. barcode, anchors and primer and add 
+##      barcode to read names
+##
+## used tool: R (v3.5.0)
+##----------------------------------------------------------
+
+mkdir -p PROCESSDIR/
+mkdir -p PROCESSDIR/rds
+
+R CMD BATCH --vanilla --inputPath="RAWDATADIR" --outputPath="PROCESSDIR/" --rdsPath="DEMULTIDIR/rds" --Read="ccs_results.fastq.gz" --barcodelength=15 --minlengthread=1150 --maxlengthread=1500 patternmatching.dna.barcodes.R patternmatch.dna.barcodes.log
+
+
+
+
+##----------------------------------------------------------
+##
+## demultiplex
+##
+## tool: R (v3.5.0)
+## 
+##----------------------------------------------------------
+
+mkdir -p DEMULTIDIR/
+
+
+R CMD BATCH --vanilla --inputfolder="PROCESSDIR/" --outputfolder="DEMULTIDIR/" --fastqfile="ccs_results.fastq.gz" --lib="LIBNAME" separate.dna.barcodes.R separated_barcodes.output
+
+
+
+##----------------------------------- CD19 genome sequence ---------------------------------------------------
+>chr1
+GACCACCGCCTTCCTCTCTGGGGGGACTGCCTGCCGCCCCCGCAGACACCCATGGTTGAGTGCCCTCCAGGCCCCTGCCTGCCCCAGCATCCCCTGCGCGAAGCTGGGTGCCCCGGAGAGTCTGACCACCATGCCACCTCCTCGCCTCCTCTTCTTCCTCCTCTTCCTCACCCCCATGGAAGTCAGGCCCGAGGAACCTCTAGTGGTGAAGGTGGAAGGTATGTCCAAAGGGCAGAAAGGGAAGGGATTGAGGCTGGAAACTTGAGTTGTGGCTGGGTGTCCTTGGCTGAGTAACTTACCCTCTCTGAGCCTCCATTTTCTTATTTGTAAAATTCAGGAAAGGGTTGGAAGGACTCTGCCGGCTCCTCCACTCCCAGCTTTTGGAGTCCTCTGCTCTATAACCTGGTGTGAGGAGTCGGGGGGCTTGGAGGTCCCCCCCACCCATGCCCACACCTCTCTCCCTCTCTCTCCACAGAGGGAGATAACGCTGTGCTGCAGTGCCTCAAGGGGACCTCAGATGGCCCCACTCAGCAGCTGACCTGGTCTCGGGAGTCCCCGCTTAAACCCTTCTTAAAACTCAGCCTGGGGCTGCCAGGCCTGGGAATCCACATGAGGCCCCTGGCCATCTGGCTTTTCATCTTCAACGTCTCTCAACAGATGGGGGGCTTCTACCTGTGCCAGCCGGGGCCCCCCTCTGAGAAGGCCTGGCAGCCTGGCTGGACAGTCAATGTGGAGGGCAGCGGTGAGGGCCGGGCTGGGGCAGGGGCAGGAGGAGAGAAGGGAGGCCACCATGGACAGAAGAGGTCCGCGGCCACAATGGAGCTGGAGAGAGGGGCTGGAGGGATTGAGGGCGAAACTCGGAGCTAGGTGGGCAGACTCCTGGGGCTTCGTGGCTTCAGTATGAGCTGCTTCCTGTCCCTCTACCTCTCACTGTCTTCTCTCTCTCTGCGGGTCTTTGTCTCTATTTATCTCTGTCTTTGAGTCTCTATCTCTCTCCCTCTCCTGGGTGTCTCTGCATTTGGTTCTGGGTCTCTTCCCAGGGGAGCTGTTCCGGTGGAATGTTTCGGACCTAGGTGGCCTGGGCTGTGGCCTGAAGAACAGGTCCTCAGAGGGCCCCAGCTCCCCTTCCGGGAAGCTCATGAGCCCCAAGCTGTATGTGTGGGCCAAAGACCGCCCTGAGATCTGGGAGGGAGAGCCTCCGTGTCTCCCACCGAGGGACAGCCTGAACCAGAGCCTCAGCCAGGGTATGGTGATGACTGGGGAGATGCCGGGAA

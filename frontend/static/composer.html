@@ -1,0 +1,18 @@
+<div class="composer-wrap" id="composer-wrap">
+  <form id="composer" class="composer" novalidate>
+    <label class="sr-only" for="question">Scientific question</label>
+    <textarea id="question" rows="5" maxlength="12000" placeholder="Why did this treatment fail, and what should we test next?"></textarea>
+    <div id="attachments" class="attachments" aria-label="Attached files"></div>
+    <div class="composer-toolbar">
+      <button id="attach" class="attach-button" type="button" aria-label="Attach data files"><span aria-hidden="true">＋</span> Attach data</button>
+      <input id="files" type="file" multiple hidden aria-label="Choose evidence files">
+      <span id="drop-hint" class="drop-hint">or drop files here</span>
+      <button id="microphone" class="microphone-button" type="button" aria-label="Dictate question" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/></svg><span class="mic-wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="mic-tip" role="tooltip">Dictate your question</span></button>
+      <button id="submit" class="submit-button" type="submit">Start investigation <span aria-hidden="true">→</span></button>
+    </div>
+    <div id="composer-error" class="composer-error" role="alert"></div>
+    <div id="microphone-status" class="microphone-status" role="status" aria-live="polite"></div>
+  </form>
+  <p id="source-note" class="source-note"></p>
+  <button id="demo" class="quick-demo" type="button">▷ &nbsp; Play the pet demo <span>No backend needed</span></button>
+</div>

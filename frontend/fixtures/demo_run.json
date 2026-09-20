@@ -1,0 +1,267 @@
+{
+  "name": "Acquired resistance (verdict)",
+  "description": "Full three-specialist investigation that reaches a confident verdict, with the critic discounting one weak finding.",
+  "events": [
+    {
+      "type": "run_started",
+      "ts": 0,
+      "run_id": "demo-b2m-0001",
+      "agent_id": null,
+      "agent_role": null,
+      "parent_id": null,
+      "payload": {
+        "question": "Why did this patient fail pembrolizumab therapy?",
+        "files": ["patient_04.vcf", "labs_04.csv", "notes_04.txt"]
+      }
+    },
+    {
+      "type": "agent_spawned",
+      "ts": 320,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "orchestrator-0",
+      "agent_role": "orchestrator",
+      "parent_id": null,
+      "payload": {"message": "Planner online."}
+    },
+    {
+      "type": "agent_message",
+      "ts": 1150,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "orchestrator-0",
+      "agent_role": "orchestrator",
+      "parent_id": null,
+      "payload": {
+        "message": "Bundle has a tumour VCF, 14 months of labs and 3 clinic notes. Decomposing into three parallel lines: tumour genomics, clinical trajectory, literature precedent."
+      }
+    },
+    {
+      "type": "agent_spawned",
+      "ts": 1600,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "genomics-1",
+      "agent_role": "genomics",
+      "parent_id": "orchestrator-0",
+      "payload": {"message": "Assigned: resistance-associated variants in the tumour VCF."}
+    },
+    {
+      "type": "agent_spawned",
+      "ts": 1820,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "clinical-1",
+      "agent_role": "clinical",
+      "parent_id": "orchestrator-0",
+      "payload": {"message": "Assigned: response pattern from labs and notes."}
+    },
+    {
+      "type": "agent_spawned",
+      "ts": 2010,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "literature-1",
+      "agent_role": "literature",
+      "parent_id": "orchestrator-0",
+      "payload": {"message": "Assigned: supporting and contradicting precedent."}
+    },
+    {
+      "type": "tool_call",
+      "ts": 2450,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "genomics-1",
+      "agent_role": "genomics",
+      "parent_id": "orchestrator-0",
+      "payload": {
+        "tool": "bionemo.variant_effect",
+        "args": {"vcf": "patient_04.vcf", "panel": "immune_escape_v2", "assembly": "GRCh38"}
+      }
+    },
+    {
+      "type": "tool_call",
+      "ts": 2680,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "clinical-1",
+      "agent_role": "clinical",
+      "parent_id": "orchestrator-0",
+      "payload": {
+        "tool": "labs.trajectory",
+        "args": {"analytes": ["LDH", "ALT", "TSH"], "window_days": 420}
+      }
+    },
+    {
+      "type": "tool_call",
+      "ts": 2910,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "literature-1",
+      "agent_role": "literature",
+      "parent_id": "orchestrator-0",
+      "payload": {
+        "tool": "bionemo.embed_search",
+        "args": {"query": "acquired anti-PD-1 resistance antigen presentation loss", "corpus": "pubmed_immuno", "k": 20}
+      }
+    },
+    {
+      "type": "tool_result",
+      "ts": 4100,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "clinical-1",
+      "agent_role": "clinical",
+      "parent_id": "orchestrator-0",
+      "payload": {"result": "LDH 212 → 448 U/L between week 8 and week 14; ALT and TSH flat."}
+    },
+    {
+      "type": "tool_result",
+      "ts": 4850,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "genomics-1",
+      "agent_role": "genomics",
+      "parent_id": "orchestrator-0",
+      "payload": {"result": "2 of 41 panel genes hit: B2M frameshift (VAF 0.94), JAK1 synonymous."}
+    },
+    {
+      "type": "tool_result",
+      "ts": 5400,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "literature-1",
+      "agent_role": "literature",
+      "parent_id": "orchestrator-0",
+      "payload": {"result": "20 passages retrieved; 12 supporting, 2 contradicting, 6 off-target."}
+    },
+    {
+      "type": "agent_message",
+      "ts": 5900,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "clinical-1",
+      "agent_role": "clinical",
+      "parent_id": "orchestrator-0",
+      "payload": {"message": "Notes record a partial response at week 8, then progression at week 14. That ordering matters: this is acquired, not primary, resistance."}
+    },
+    {
+      "type": "finding",
+      "ts": 6600,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "genomics-1",
+      "agent_role": "genomics",
+      "parent_id": "orchestrator-0",
+      "payload": {
+        "finding": "Biallelic B2M loss of function (chr15:44,711,487 frameshift, VAF 0.94 with regional LOH). B2M is required for MHC-I surface assembly; losing it removes the antigen presentation that anti-PD-1 therapy depends on.",
+        "confidence": 0.82,
+        "provenance": [
+          {"source": "patient_04.vcf", "line": 1423, "locus": "chr15:44711487", "vaf": 0.94},
+          {"source": "nim:variant-effect-v1", "output_id": "ve_8831", "score": 0.91}
+        ]
+      }
+    },
+    {
+      "type": "finding",
+      "ts": 7250,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "clinical-1",
+      "agent_role": "clinical",
+      "parent_id": "orchestrator-0",
+      "payload": {
+        "finding": "Response-then-progression at week 14 with LDH rising 2.1× over the same window and no interval immune-related adverse event. That is the trajectory of acquired resistance rather than a patient who never responded.",
+        "confidence": 0.74,
+        "provenance": [
+          {"source": "labs_04.csv", "rows": "88-133", "analyte": "LDH"},
+          {"source": "notes_04.txt", "line": 61, "quote": "partial response on restaging CT"}
+        ]
+      }
+    },
+    {
+      "type": "finding",
+      "ts": 7900,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "clinical-1",
+      "agent_role": "clinical",
+      "parent_id": "orchestrator-0",
+      "payload": {
+        "finding": "Concurrent proton-pump inhibitor use through the treatment window; PPIs have been associated with reduced checkpoint-inhibitor efficacy via microbiome shift.",
+        "confidence": 0.31,
+        "provenance": [
+          {"source": "notes_04.txt", "line": 22, "quote": "omeprazole 20mg daily, ongoing"}
+        ]
+      }
+    },
+    {
+      "type": "finding",
+      "ts": 8550,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "literature-1",
+      "agent_role": "literature",
+      "parent_id": "orchestrator-0",
+      "payload": {
+        "finding": "12 of 20 retrieved passages tie B2M loss of function to acquired checkpoint-inhibitor resistance in melanoma. The 2 contradicting passages both describe heterozygous loss with retained response, which does not apply here.",
+        "confidence": 0.69,
+        "provenance": [
+          {"source": "PMID:27433843", "sentence": "Loss-of-function mutations in B2M were found in tumours with acquired resistance to PD-1 blockade."},
+          {"source": "PMID:29070816", "sentence": "Truncating B2M alterations abolished surface MHC class I expression."},
+          {"source": "PMID:31942075", "sentence": "Monoallelic B2M loss was compatible with durable response in 2 of 9 cases."}
+        ]
+      }
+    },
+    {
+      "type": "agent_spawned",
+      "ts": 9100,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "critic-2",
+      "agent_role": "critic",
+      "parent_id": "orchestrator-0",
+      "payload": {"message": "Cross-checking four findings from three specialists."}
+    },
+    {
+      "type": "agent_message",
+      "ts": 9800,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "critic-2",
+      "agent_role": "critic",
+      "parent_id": "genomics-1",
+      "payload": {"message": "Zygosity is load-bearing here. Heterozygous B2M loss would not support this verdict, so what is the evidence for biallelic?"}
+    },
+    {
+      "type": "agent_message",
+      "ts": 10600,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "genomics-1",
+      "agent_role": "genomics",
+      "parent_id": "critic-2",
+      "payload": {"message": "VAF 0.94 against tumour purity 0.71, plus copy-number loss across chr15q21. That is biallelic, not a heterozygous call inflated by purity."}
+    },
+    {
+      "type": "agent_message",
+      "ts": 11400,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "critic-2",
+      "agent_role": "critic",
+      "parent_id": "clinical-1",
+      "payload": {"message": "Discounting the PPI finding: single retrospective association, no dosing or microbiome data in the bundle, and it cannot explain the response-then-progression shape. Excluded from the verdict."}
+    },
+    {
+      "type": "finding",
+      "ts": 12300,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "critic-2",
+      "agent_role": "critic",
+      "parent_id": "orchestrator-0",
+      "payload": {
+        "finding": "Three independent lines converge on the same mechanism and the timing fits. One weak finding (PPI use) is excluded for insufficient evidence rather than folded in.",
+        "confidence": 0.78,
+        "provenance": [
+          {"source": "run:demo-b2m-0001", "findings_used": 3, "findings_excluded": 1}
+        ]
+      }
+    },
+    {
+      "type": "run_complete",
+      "ts": 13100,
+      "run_id": "demo-b2m-0001",
+      "agent_id": "critic-2",
+      "agent_role": "critic",
+      "parent_id": null,
+      "payload": {
+        "verdict": "The patient most likely failed pembrolizumab through acquired resistance driven by biallelic B2M loss of function, which abolishes MHC-I antigen presentation. The clinical course (response at week 8, progression at week 14, LDH rising 2.1×) matches acquired rather than primary resistance, and the genomic finding is supported by 12 of 20 retrieved literature passages. Concurrent PPI use was considered and excluded as insufficiently evidenced.",
+        "confidence": 0.78,
+        "abstained": false,
+        "findings_used": ["genomics-1", "clinical-1", "literature-1"],
+        "findings_excluded": ["clinical-1:ppi"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "format_version": "1.0.0",
+  "original_workbook": "Source Data main figures.xlsx",
+  "original_workbook_sha256": "45a7abce2c7a5d5d9ad22a756856b3f4f104a3f31b26c7fdbc5ac97b64e700b4",
+  "source_url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-022-31818-y/MediaObjects/41467_2022_31818_MOESM11_ESM.zip",
+  "paper_doi": "10.1038/s41467-022-31818-y",
+  "license": "CC BY 4.0; credited third-party exceptions apply",
+  "sheet": "Fig. 6d-f ",
+  "cells": [
+    {
+      "cell": "B1",
+      "value": "MHHCALL4_siSCR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C1",
+      "value": "MHHCALL4_siPTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D1",
+      "value": "P493-6_siSCR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E1",
+      "value": "P493-6_siPTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "A2",
+      "value": "replicate 1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B2",
+      "value": "11736",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C2",
+      "value": "10306",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "D2",
+      "value": "11612",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "E2",
+      "value": "8650",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A3",
+      "value": "replicate 2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B3",
+      "value": "11600",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C3",
+      "value": "9593",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "D3",
+      "value": "13454",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "E3",
+      "value": "7663",
+      "type": null,
+      "formula": null
+    }
+  ],
+  "transformation": "Lossless selection of all nonempty cells in named sheet from qualified OOXML extraction; original cell address, source text, type and formula retained; no numerical endpoint calculation.",
+  "acquisition_extract_sha256": "64791e1c8d8d823ea55467a25661a30f2371a64222aaf3a79183b0ae623e77b6"
+}

@@ -1,0 +1,67 @@
+{
+  "publication_doi": "10.1038/s41467-022-31818-y",
+  "author_repository_commit": "edd69ccba3a193ca13ee66a5a4b191d980a940a1",
+  "retrieved_at": "2026-09-19",
+  "sources": [
+    {
+      "path": "sources/cd19-discovery/paper.xml",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9500061/fullTextXML",
+      "bytes": 220988,
+      "sha256": "9f0955da414495f649181a5e3904a275fcb4567e74f697918273cee0a498ce70"
+    },
+    {
+      "path": "sources/cd19-discovery/CD19_WT.minigene.fa",
+      "url": "https://raw.githubusercontent.com/mcortes-lopez/CD19_splicing_mutagenesis/edd69ccba3a193ca13ee66a5a4b191d980a940a1/minigene_annotation/CD19_WT.minigene.fa",
+      "bytes": 1281,
+      "sha256": "0718f3e82821c6460294068a1ea2db6d26e707e60cd57500139836ae544223a0"
+    },
+    {
+      "path": "sources/cd19-discovery/CD19_WT.minigene.anno.gtf",
+      "url": "https://raw.githubusercontent.com/mcortes-lopez/CD19_splicing_mutagenesis/edd69ccba3a193ca13ee66a5a4b191d980a940a1/minigene_annotation/CD19_WT.minigene.anno.gtf",
+      "bytes": 373,
+      "sha256": "6e1cc2ba37c7b159f403fd44487c958ecd1840b692f876bfc009292eb7096b55"
+    },
+    {
+      "path": "sources/cd19-discovery/author_variant_table_for_RNASeq_analysis.R",
+      "url": "https://raw.githubusercontent.com/mcortes-lopez/CD19_splicing_mutagenesis/edd69ccba3a193ca13ee66a5a4b191d980a940a1/VariantCalling_DNAseq/variant_table_for_RNASeq_analysis.R",
+      "bytes": 2131,
+      "sha256": "bb27862eed94d20b842b4bfe6b2eadcb82382a6c43cca143f699706bab4f6fa0"
+    },
+    {
+      "path": "sources/cd19-discovery/author_isoform_translational_features.Rmd",
+      "url": "https://raw.githubusercontent.com/mcortes-lopez/CD19_splicing_mutagenesis/edd69ccba3a193ca13ee66a5a4b191d980a940a1/CrypticIsoforms/Isoform_translational_features.Rmd",
+      "bytes": 7161,
+      "sha256": "4ce16e288b5516580bb3386de452c2e74e15f226825ddff8ed4d6bdb0f93b140"
+    },
+    {
+      "path": "sources/cd19-discovery/author_isoforms_predicted_translational_features.csv",
+      "url": "https://raw.githubusercontent.com/mcortes-lopez/CD19_splicing_mutagenesis/edd69ccba3a193ca13ee66a5a4b191d980a940a1/CrypticIsoforms/output/isoforms_predicted_translational_features.csv",
+      "bytes": 109087,
+      "sha256": "82d597d646e9f569964d83dcdc58703e11e8f94b009300351e9f578dd50db7c1"
+    },
+    {
+      "path": "sources/cd19-discovery/author_LICENSE.md",
+      "url": "https://raw.githubusercontent.com/mcortes-lopez/CD19_splicing_mutagenesis/edd69ccba3a193ca13ee66a5a4b191d980a940a1/LICENSE.md",
+      "bytes": 1079,
+      "sha256": "019bfb84ac44d9103ac2c1526cc100d2a915c88d543d73bd827ba28075510a94"
+    },
+    {
+      "path": "sources/cd19-discovery/GSE182891_README.txt",
+      "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE182nnn/GSE182891/suppl/GSE182891_README.txt",
+      "bytes": 2815,
+      "sha256": "66dc319ecc7a35e31261de04bf121bc7c1bf7cf7ac31f59dc2c2f9d31350fd62"
+    },
+    {
+      "path": "sources/cd19-discovery/GSE182892_README.txt",
+      "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE182nnn/GSE182892/suppl/GSE182892_README.txt",
+      "bytes": 4982,
+      "sha256": "7369a08ddb23221d6d6e220110c62fc5278e7d5f3a520c472cc9a7f5cb48f6c6"
+    },
+    {
+      "path": "sources/cd19-discovery/P15391.json",
+      "url": "https://rest.uniprot.org/uniprotkb/P15391.json",
+      "bytes": 65677,
+      "sha256": "a000a6a2049d4fd263c8af16fe0c0e85f97293aaf3d76b9f61db88f196fb3545"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.pytest_cache/
+uploads/
+*.egg-info/
+.streamlit/secrets.toml
+.deploy/
+
+# Scientific deployment state and private external inputs
+.env.*
+!.env.example
+!.env.legacy.example
+runtime/
+*.sqlite
+*.sqlite-*
+*.db
+team-tbd-results-capsule*/
+team-tbd-frozen-runs*/

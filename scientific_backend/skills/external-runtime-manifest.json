@@ -1,0 +1,19 @@
+{
+  "plugin": "life-sciences-databases",
+  "version": "0.1.5",
+  "author": "OpenAI",
+  "license": "Proprietary",
+  "installation": "Private installed plugin runtime; excluded from redistributable source bundle",
+  "files": {
+    ".codex-plugin/plugin.json": "57927c62350ad6850564b21cf7527e3906f9ef003f33b53f09a6923e88c7983b",
+    "README.md": "fc9b1be8f3fa349d5f73cb77554e09cbd5549d1c38fc650d3fad1692005bb61c",
+    "scripts/database_rest_client.py": "9274fa3925b07c42222f11e814df703be08d8cf33932e4e6c9f911c4b0c64486",
+    "scripts/database_source_contract.py": "95e3d40134eb9965108decbe6e92a6bf00462fbe1f5971b8826acaa9ec1029ef",
+    "references/source-links.json": "224d098120813c6af42307b79eb7a430ab12c489f7fc5aecfce5ccb83ba0a028",
+    "references/source-presentation.md": "85584fc09530979dd001f5c908c19984659695af5c231b660914d187d5c8503a",
+    "skills/uniprot-skill/SKILL.md": "bdeed361ea38f8443b2dc673ea79246450ad0da474418a38da1816e43ca5ef20",
+    "skills/uniprot-skill/scripts/rest_request.py": "ebd7c860aee32c21897192bbfab676345dc3f595781fe7a36fc0e1610e1d126b",
+    "skills/rcsb-pdb-skill/SKILL.md": "2f8e74d2e149535834e3576a5dafaf3eb944c24457bf3bb20d962ecbe7130936",
+    "skills/rcsb-pdb-skill/scripts/rest_request.py": "ebd7c860aee32c21897192bbfab676345dc3f595781fe7a36fc0e1610e1d126b"
+  }
+}

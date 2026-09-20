@@ -1,0 +1,210 @@
+{
+  "id": "alk-l1196m",
+  "title": "ALK L1196M",
+  "subtitle": "Adjudicate drug-specific assay evidence",
+  "hypothesis": "ALK L1196M has a drug-specific resistance phenotype in the source assay, rather than equal resistance to every tested ALK inhibitor.",
+  "hypothesis_source": {
+    "name": "HYPOTHESIS_01_EASY_ALK_L1196M.md",
+    "url": "",
+    "locator": "Question and hypotheses > Primary hypothesis",
+    "sha256": "c7af4d968f0802a267e31a0931f01c5510a23ccc9078e078787c9efdc6c8d24a",
+    "path": "sources/alk/HYPOTHESIS_01_EASY_ALK_L1196M.md"
+  },
+  "description": "Exact source cells from the published ALK atlas, including source scores and a clear phenotype-versus-mechanism boundary.",
+  "data_mode": "public_evidence",
+  "evidence_count": 4,
+  "evidence": [
+    {
+      "id": "ALK-01",
+      "title": "Exact variant identity",
+      "kind": "measured",
+      "summary": "Table S2 identifies ALK_E23_C70A as missense L1196M.",
+      "source": {
+        "name": "13059_2026_3977_MOESM2_ESM.xlsx",
+        "url": "https://doi.org/10.1186/s13059-026-03977-4",
+        "locator": "Table S2; A1331:C1331; keyed by ALK_E23_C70A",
+        "sha256": "f160f2a451a581d37f54bcbb321705a6f51429ca6f10a93bd6ce51e1f86abe78",
+        "path": "sources/alk/13059_2026_3977_MOESM2_ESM.xlsx"
+      },
+      "values": {
+        "source_key": "ALK_E23_C70A",
+        "amino_acid_change": "L1196M",
+        "variant_type": "Missense"
+      }
+    },
+    {
+      "id": "ALK-02",
+      "title": "Drug-specific source classifications",
+      "kind": "measured",
+      "summary": "The source classifies L1196M as Resistance for alectinib and lorlatinib, and Sensitive for zotizalkib. Scores retain source precision; they are not IC50s or resistance probabilities.",
+      "source": {
+        "name": "13059_2026_3977_MOESM2_ESM.xlsx",
+        "url": "https://doi.org/10.1186/s13059-026-03977-4",
+        "locator": "Table S2; D1331:I1331; field headers D2:I2",
+        "sha256": "f160f2a451a581d37f54bcbb321705a6f51429ca6f10a93bd6ce51e1f86abe78",
+        "path": "sources/alk/13059_2026_3977_MOESM2_ESM.xlsx"
+      },
+      "values": {
+        "drugs": [
+          {
+            "drug": "Alectinib",
+            "classification": "Resistance",
+            "resistance_score": "7.7445209372741202",
+            "classification_cell": "D1331",
+            "score_cell": "E1331"
+          },
+          {
+            "drug": "Lorlatinib",
+            "classification": "Resistance",
+            "resistance_score": "11.4128982028548",
+            "classification_cell": "F1331",
+            "score_cell": "G1331"
+          },
+          {
+            "drug": "Zotizalkib",
+            "classification": "Sensitive",
+            "resistance_score": "0.23868446278806199",
+            "classification_cell": "H1331",
+            "score_cell": "I1331"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ALK-03",
+      "title": "Fitness is a separate endpoint",
+      "kind": "measured",
+      "summary": "The source reports Fitness_Score separately from drug resistance; it cannot be substituted for a drug-response measurement.",
+      "source": {
+        "name": "13059_2026_3977_MOESM2_ESM.xlsx",
+        "url": "https://doi.org/10.1186/s13059-026-03977-4",
+        "locator": "Table S2; J1331; header J2",
+        "sha256": "f160f2a451a581d37f54bcbb321705a6f51429ca6f10a93bd6ce51e1f86abe78",
+        "path": "sources/alk/13059_2026_3977_MOESM2_ESM.xlsx"
+      },
+      "values": {
+        "Fitness_Score": "-0.106903137030655"
+      }
+    },
+    {
+      "id": "ALK-04",
+      "title": "Exposure and causal interpretation remain bounded",
+      "kind": "inference",
+      "summary": "The project case document records a Table S5 concentration-header versus supplementary-legend discrepancy and requires independent expression/editing checks. This pack does not resolve that discrepancy or extract independent validation assays.",
+      "source": {
+        "name": "HYPOTHESIS_01_EASY_ALK_L1196M.md",
+        "url": "https://doi.org/10.1186/s13059-026-03977-4",
+        "locator": "Analysis plan items 3–5; Falsification and next experiment",
+        "sha256": "c7af4d968f0802a267e31a0931f01c5510a23ccc9078e078787c9efdc6c8d24a",
+        "path": "sources/alk/HYPOTHESIS_01_EASY_ALK_L1196M.md"
+      },
+      "values": {}
+    }
+  ],
+  "limitations": [
+    "Functional assay evidence, not a patient treatment recommendation.",
+    "Resistance scores are not IC50s, probabilities, or necessarily comparable across drugs.",
+    "Table S5 concentration-header/legend discrepancy remains unresolved; no absolute exposure claim is supported.",
+    "Independent biological replicates, variant expression and orthogonal validation are not adjudicated in this compact pack.",
+    "No qualified ALK/ligand structures or live molecular predictions are included."
+  ],
+  "readiness": [
+    {
+      "label": "Source assay",
+      "status": "ready",
+      "detail": "Workbook hashed; identity keyed by ALK_E23_C70A and L1196M asserted."
+    },
+    {
+      "label": "Exposure interpretation",
+      "status": "limited",
+      "detail": "Concentration discrepancy remains unresolved."
+    },
+    {
+      "label": "BioNeMo molecular comparison",
+      "status": "blocked",
+      "detail": "Exact qualified WT/mutant constructs, residue mapping and ligand input are missing."
+    }
+  ],
+  "demo_decision": {
+    "summary": "The atlas supports a drug-specific source-assay phenotype: Resistance for alectinib and lorlatinib, Sensitive for zotizalkib. It does not by itself establish an interaction mechanism or clinical benefit.",
+    "assessment": "Supported within the source assay",
+    "claims": [
+      {
+        "text": "Table S2 identifies ALK_E23_C70A as missense L1196M.",
+        "evidence_ids": [
+          "ALK-01"
+        ],
+        "kind": "measured"
+      },
+      {
+        "text": "The source classifies L1196M as Resistance for alectinib and lorlatinib, and Sensitive for zotizalkib. Scores retain source precision; they are not IC50s or resistance probabilities.",
+        "evidence_ids": [
+          "ALK-02"
+        ],
+        "kind": "measured"
+      },
+      {
+        "text": "Differing source labels support the narrow hypothesis; causal transfer needs matched validation and exposure clarification.",
+        "evidence_ids": [
+          "ALK-02",
+          "ALK-03",
+          "ALK-04"
+        ],
+        "kind": "inference"
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Assay and model context",
+        "reason": "Exposure, baseline growth or expression can affect phenotype."
+      },
+      {
+        "title": "Editing or guide artifact",
+        "reason": "Source labels do not replace edit identity and independent validation."
+      }
+    ],
+    "limitations": [
+      "Functional assay evidence, not a patient treatment recommendation.",
+      "Resistance scores are not IC50s, probabilities, or necessarily comparable across drugs.",
+      "Table S5 concentration-header/legend discrepancy remains unresolved; no absolute exposure claim is supported.",
+      "Independent biological replicates, variant expression and orthogonal validation are not adjudicated in this compact pack.",
+      "No qualified ALK/ligand structures or live molecular predictions are included."
+    ],
+    "next_experiment": {
+      "title": "Matched WT, L1196M and revertant validation",
+      "design": "Compare verified constructs with matched expression, controls and independent biological replicates; assess within-drug response together with pathway inhibition. Resolve concentration meaning and predeclare effect criteria.",
+      "positive": "A reproducible mutation-associated within-drug effect that reverts supports a causal phenotype.",
+      "negative": "Failure to reproduce or revert weakens a mutation-specific interpretation.",
+      "inconclusive": "Unmatched expression, exposure ambiguity or an unidentifiable response curve prevents causal comparison."
+    },
+    "rd_handoff": {
+      "objective": "Test whether the source phenotype survives a matched orthogonal assay before making a molecular design claim.",
+      "status": "awaiting_experiment",
+      "reference": "WT ALK construct; exact construct artifact and ligand identity still required.",
+      "candidates": [
+        {
+          "design_key": "alk-matched-validation",
+          "name": "Matched ALK phenotype validation",
+          "type": "experimental_arm",
+          "status": "planned",
+          "rationale": "Test WT, L1196M and revertant assay arms with verified identity and matched expression; qualify exposure before interpreting a mutation effect.",
+          "endpoint": "Within-drug response or pathway inhibition; identify construct, drug, exposure and units with each result.",
+          "exact_sequences": "Not supplied. This is a planned assay arm, not a qualified or modeled molecular construct."
+        }
+      ],
+      "modeling": {
+        "status": "blocked",
+        "reason": "Qualified sequence/construct, residue mapping and ligand input are absent. A predicted structure cannot overwrite an assay label.",
+        "artifacts": []
+      },
+      "experiment_id": "ALK-MATCHED-VALIDATION-001",
+      "return_requirements": [
+        "Construct/edit identity and source hashes",
+        "Drug, concentration units, exposure time and discrepancy resolution",
+        "Independent biological replicate IDs and matched expression controls",
+        "Raw response and pathway data with QC",
+        "Prespecified effect criterion and inconclusive/failure reasons"
+      ]
+    }
+  }
+}

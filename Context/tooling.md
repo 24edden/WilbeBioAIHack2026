@@ -99,10 +99,12 @@ load-bearing component from each.
 
 Ask a mentor or TA, then update this file:
 
-- **What is GPT-Rosalind, concretely?** Is it an API, a hosted workbench UI, or both? Can
-  it be called programmatically from inside a workflow, or is it an interactive research
-  environment? This determines whether it can be a *component* of our system or only a
-  tool we used while thinking. That distinction is worth real points on criterion 2.
+- **GPT-Rosalind API route confirmed on 19 September 2026.** OpenAI lists
+  `gpt-rosalind-research` for approved internal life-sciences research. The backend
+  now has a Responses adapter; the separate Workbench is a ChatGPT interface.
+  Our approved-project key, entitlement and successful live generation still need
+  verification. See [rosalind-integration.md](rosalind-integration.md) for primary
+  sources and reproducible setup/check commands.
 - **Which BioNeMo models are available to us on Brev during the event**, and are they
   pre-pulled? NIM containers are large; a first-time pull can eat a meaningful chunk of a
   weekend.

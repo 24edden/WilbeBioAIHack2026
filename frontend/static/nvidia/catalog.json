@@ -1,0 +1,20 @@
+[
+  {
+    "image": "cd19-wild-type.png",
+    "title": "CD19 \u00b7 Wild type",
+    "source_sha256": "ec0667e5dbe57c4666938e7fa78b09820f84f16b4632bcc8b3a668156f050b0a",
+    "image_sha256": "855a14f30a3d6aa64f08c2776dc0d781cb477ecf6b63c8cabe97a6de5766045c",
+    "model": "NVIDIA Boltz-2",
+    "renderer": "Mol* 5.11.0",
+    "scope": "Saved target-monomer prediction; not a binding or clinical result."
+  },
+  {
+    "image": "cd19-exon-2-deleted.png",
+    "title": "CD19 \u00b7 Exon 2 deleted",
+    "source_sha256": "61be3a4739d6d6a436f67bee4b023f3763cb1eafe1bcb4d80b30b83ef2652641",
+    "image_sha256": "3f9155eb46d4d1d97bab802684d93b8151beab181c21e00b27e8ac76018702b6",
+    "model": "NVIDIA Boltz-2",
+    "renderer": "Mol* 5.11.0",
+    "scope": "Saved target-monomer prediction; not a binding or clinical result."
+  }
+]

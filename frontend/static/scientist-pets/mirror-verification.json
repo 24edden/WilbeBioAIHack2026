@@ -1,0 +1,168 @@
+{
+  "verified": true,
+  "pixelComparison": "Exact visible RGBA, preserving alpha, frame count, per-frame timing and looping",
+  "files": [
+    {
+      "file": "generic-scientist.png",
+      "frames": 1,
+      "durationMs": 0,
+      "sha256": "a578a87dcb14e08ad5c604800d88ce3240e12b673fd5694d805439649db12e87"
+    },
+    {
+      "file": "generic-scientist.webp",
+      "frames": 7,
+      "durationMs": 2310,
+      "sha256": "e2485c006130362556d1baae8e679ca0560bd2f7372b2ca31276323be4be1589"
+    },
+    {
+      "file": "generic-scientist.gif",
+      "frames": 7,
+      "durationMs": 2310,
+      "sha256": "b1e57b7bf54ac8eb24e83dcc1153fb43bc93aeef078e7c7727d179fb7b2b8d68"
+    },
+    {
+      "file": "bioinformatician.png",
+      "frames": 1,
+      "durationMs": 0,
+      "sha256": "7479f0d1240975cba3c922e5ae0cb2663d16a36403d4813298d899493eefe365"
+    },
+    {
+      "file": "bioinformatician.webp",
+      "frames": 7,
+      "durationMs": 2310,
+      "sha256": "0122986144f5e93b601efa196324e7e358c97c1c333abe7c11860c4111435fb9"
+    },
+    {
+      "file": "bioinformatician.gif",
+      "frames": 7,
+      "durationMs": 2310,
+      "sha256": "bef4b6a867b0b6ffa5b493eb0f538eba948da54025d1082223c69028d7451942"
+    },
+    {
+      "file": "statistician.png",
+      "frames": 1,
+      "durationMs": 0,
+      "sha256": "93b195f35c2f0b4c1a2d82c49096ae507303ba39e629a3b1c0be4aa32308006c"
+    },
+    {
+      "file": "statistician.webp",
+      "frames": 7,
+      "durationMs": 2310,
+      "sha256": "952b8275041e738c2c71be930471e6d498b18f98836218437fd2cfb3f5b75b5f"
+    },
+    {
+      "file": "statistician.gif",
+      "frames": 7,
+      "durationMs": 2310,
+      "sha256": "3044de778b510910ca9c89a1399af048522fbc11fe79159f9c145fc679959b74"
+    },
+    {
+      "file": "clinical-scientist.png",
+      "frames": 1,
+      "durationMs": 0,
+      "sha256": "95a78c39b04d01efc1414f77df7d2df219d052f085d8aa117f42ad6599376cbf"
+    },
+    {
+      "file": "clinical-scientist.webp",
+      "frames": 7,
+      "durationMs": 2310,
+      "sha256": "f3ed64e319d376af38513dc42ba7ff57106014a4999dd20539dc4d6d3120811b"
+    },
+    {
+      "file": "clinical-scientist.gif",
+      "frames": 7,
+      "durationMs": 2310,
+      "sha256": "b454b1739bff807a35e5dd1198db46e52ebae03fed236dfb12cb7b28c44fc23f"
+    },
+    {
+      "file": "computational-biologist.png",
+      "frames": 1,
+      "durationMs": 0,
+      "sha256": "6a7abaf9a84b904a09c98cff806f713b10a9b1e5044424bcbf14883408f96af0"
+    },
+    {
+      "file": "computational-biologist.webp",
+      "frames": 7,
+      "durationMs": 2310,
+      "sha256": "1da22085df18f15240a0d3e80ff70b2042955b1acff458bab731ac28b761ddbb"
+    },
+    {
+      "file": "computational-biologist.gif",
+      "frames": 7,
+      "durationMs": 2310,
+      "sha256": "49d124d85d05185ec3686598935ebd5640d61f4be08e10c90f825c36c3a883db"
+    },
+    {
+      "file": "epidemiologist.png",
+      "frames": 1,
+      "durationMs": 0,
+      "sha256": "699dee63d965db1babfc4746d29ece65d159c384e5e64507d5f8a852a8b48176"
+    },
+    {
+      "file": "epidemiologist.webp",
+      "frames": 7,
+      "durationMs": 2310,
+      "sha256": "d1f7b0c1f36754565f1771426ec2c103c65731e1331d9d6fd03f551b21d11401"
+    },
+    {
+      "file": "epidemiologist.gif",
+      "frames": 7,
+      "durationMs": 2310,
+      "sha256": "70cb4076ca8235643bdd47a03dbd48a0b5053d83c2d38d00b5e6ec763f9e0379"
+    },
+    {
+      "file": "immunologist.png",
+      "frames": 1,
+      "durationMs": 0,
+      "sha256": "218e351f36ebd312bb9701c31ba355ea34bebcb424a3d17f0424de1de37a090c"
+    },
+    {
+      "file": "immunologist.webp",
+      "frames": 7,
+      "durationMs": 2310,
+      "sha256": "bdc1a5ae571ca84805beac7b84a4b34b371d292f0cf4732138210f0e475726df"
+    },
+    {
+      "file": "immunologist.gif",
+      "frames": 7,
+      "durationMs": 2310,
+      "sha256": "4899adf9a6486bfcee1bad89ecfe9f0df519e484f6fb1ccee128c501bf29b304"
+    },
+    {
+      "file": "synthetic-biologist.png",
+      "frames": 1,
+      "durationMs": 0,
+      "sha256": "5a96ae186a97af29d06aab7add0e0a10c57056956a3842eb45f1972fc1262edf"
+    },
+    {
+      "file": "synthetic-biologist.webp",
+      "frames": 7,
+      "durationMs": 2310,
+      "sha256": "eb723ed5fe22c38797910d058a1974c1791a9fa2838232c9fddd1f272adcfda5"
+    },
+    {
+      "file": "synthetic-biologist.gif",
+      "frames": 7,
+      "durationMs": 2310,
+      "sha256": "d6ce12d5cc0bc65fe7bf7816002c113b0f2019eed143e13be426faa20956a6b7"
+    },
+    {
+      "file": "pharmacologist.png",
+      "frames": 1,
+      "durationMs": 0,
+      "sha256": "ff2a0c3bb440499a04410d8e76dbc0dcbdca0339cea78ff89ebd7cd7da176bb0"
+    },
+    {
+      "file": "pharmacologist.webp",
+      "frames": 7,
+      "durationMs": 2310,
+      "sha256": "d206332a9fa01d6a363369e0fa0c962d6c8c5282c024eca6502a4edda1db7b96"
+    },
+    {
+      "file": "pharmacologist.gif",
+      "frames": 7,
+      "durationMs": 2310,
+      "sha256": "c90ad0202e46ffb280d53f0c27e58554e26bd5242461017e5ee16c761e4b4192"
+    }
+  ]
+}

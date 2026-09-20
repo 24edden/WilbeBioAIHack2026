@@ -1,0 +1,26 @@
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    env_file: ../.env
+    environment:
+      ROSALIND_EMBEDDED_WORKER: "0"
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - ../runtime:/app/runtime
+    mem_limit: 1g
+    cpus: 0.5
+    restart: unless-stopped
+  worker:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    env_file: ../.env
+    command: ["python", "-m", "app", "worker"]
+    volumes:
+      - ../runtime:/app/runtime
+    mem_limit: 2g
+    cpus: 1.5
+    restart: unless-stopped

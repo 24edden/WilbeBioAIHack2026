@@ -1,0 +1,161 @@
+{
+  "name": "Thin evidence (abstains)",
+  "description": "The same machinery on a question the bundle cannot answer. The critic refuses to produce a verdict. This is the honesty case. Keep it in the demo.",
+  "events": [
+    {
+      "type": "run_started",
+      "ts": 0,
+      "run_id": "demo-tmb-0002",
+      "agent_id": null,
+      "agent_role": null,
+      "parent_id": null,
+      "payload": {
+        "question": "Did this patient fail because of low tumour mutational burden?",
+        "files": ["patient_11.vcf"]
+      }
+    },
+    {
+      "type": "agent_spawned",
+      "ts": 300,
+      "run_id": "demo-tmb-0002",
+      "agent_id": "orchestrator-0",
+      "agent_role": "orchestrator",
+      "parent_id": null,
+      "payload": {"message": "Planner online."}
+    },
+    {
+      "type": "agent_message",
+      "ts": 1100,
+      "run_id": "demo-tmb-0002",
+      "agent_id": "orchestrator-0",
+      "agent_role": "orchestrator",
+      "parent_id": null,
+      "payload": {"message": "Bundle contains a VCF only: no labs, no notes, no treatment dates. The clinical line of investigation has nothing to run on. Proceeding with genomics and literature, and flagging the gap."}
+    },
+    {
+      "type": "agent_spawned",
+      "ts": 1550,
+      "run_id": "demo-tmb-0002",
+      "agent_id": "genomics-1",
+      "agent_role": "genomics",
+      "parent_id": "orchestrator-0",
+      "payload": {"message": "Assigned: estimate TMB from the VCF."}
+    },
+    {
+      "type": "agent_spawned",
+      "ts": 1780,
+      "run_id": "demo-tmb-0002",
+      "agent_id": "literature-1",
+      "agent_role": "literature",
+      "parent_id": "orchestrator-0",
+      "payload": {"message": "Assigned: TMB thresholds for this indication."}
+    },
+    {
+      "type": "tool_call",
+      "ts": 2300,
+      "run_id": "demo-tmb-0002",
+      "agent_id": "genomics-1",
+      "agent_role": "genomics",
+      "parent_id": "orchestrator-0",
+      "payload": {"tool": "genomics.estimate_tmb", "args": {"vcf": "patient_11.vcf"}}
+    },
+    {
+      "type": "tool_result",
+      "ts": 3600,
+      "run_id": "demo-tmb-0002",
+      "agent_id": "genomics-1",
+      "agent_role": "genomics",
+      "parent_id": "orchestrator-0",
+      "payload": {"result": "Targeted panel (41 genes), not WES. Panel size below the threshold for a calibrated TMB estimate."}
+    },
+    {
+      "type": "agent_message",
+      "ts": 4300,
+      "run_id": "demo-tmb-0002",
+      "agent_id": "genomics-1",
+      "agent_role": "genomics",
+      "parent_id": "orchestrator-0",
+      "payload": {"message": "I can give you a mutation count, but calling it TMB would be wrong, because a 41-gene panel does not support a per-megabase estimate. Reporting the limitation instead of a number."}
+    },
+    {
+      "type": "finding",
+      "ts": 5200,
+      "run_id": "demo-tmb-0002",
+      "agent_id": "genomics-1",
+      "agent_role": "genomics",
+      "parent_id": "orchestrator-0",
+      "payload": {
+        "finding": "TMB is not estimable from this bundle. The VCF comes from a 41-gene targeted panel; calibrated TMB requires whole-exome or a panel above ~1 Mb of coding territory.",
+        "confidence": 0.28,
+        "provenance": [
+          {"source": "patient_11.vcf", "header": "##source=TargetedPanel_v2", "genes": 41}
+        ]
+      }
+    },
+    {
+      "type": "finding",
+      "ts": 6100,
+      "run_id": "demo-tmb-0002",
+      "agent_id": "literature-1",
+      "agent_role": "literature",
+      "parent_id": "orchestrator-0",
+      "payload": {
+        "finding": "Published TMB thresholds vary by assay and indication, and are not transferable across panel sizes. Without the assay used at treatment time, no threshold can be applied.",
+        "confidence": 0.35,
+        "provenance": [
+          {"source": "PMID:32919526", "sentence": "TMB cut-points are assay-specific and require harmonisation before cross-panel comparison."}
+        ]
+      }
+    },
+    {
+      "type": "agent_spawned",
+      "ts": 6800,
+      "run_id": "demo-tmb-0002",
+      "agent_id": "critic-2",
+      "agent_role": "critic",
+      "parent_id": "orchestrator-0",
+      "payload": {"message": "Cross-checking two low-confidence findings."}
+    },
+    {
+      "type": "agent_message",
+      "ts": 7500,
+      "run_id": "demo-tmb-0002",
+      "agent_id": "critic-2",
+      "agent_role": "critic",
+      "parent_id": "genomics-1",
+      "payload": {"message": "Is there any path to a TMB estimate from what we hold, any way to bound it at all?"}
+    },
+    {
+      "type": "agent_message",
+      "ts": 8300,
+      "run_id": "demo-tmb-0002",
+      "agent_id": "genomics-1",
+      "agent_role": "genomics",
+      "parent_id": "critic-2",
+      "payload": {"message": "No. A bound from 41 genes would be so wide it would include both sides of every published threshold. It would look like an answer without being one."}
+    },
+    {
+      "type": "agent_message",
+      "ts": 9100,
+      "run_id": "demo-tmb-0002",
+      "agent_id": "critic-2",
+      "agent_role": "critic",
+      "parent_id": "orchestrator-0",
+      "payload": {"message": "Both findings are below threshold, there is no clinical trajectory to corroborate against, and the question names a specific cause we cannot measure. Abstaining."}
+    },
+    {
+      "type": "run_complete",
+      "ts": 10000,
+      "run_id": "demo-tmb-0002",
+      "agent_id": "critic-2",
+      "agent_role": "critic",
+      "parent_id": null,
+      "payload": {
+        "verdict": "ABSTAIN. This bundle cannot answer the question. TMB is not estimable from a 41-gene targeted panel, published thresholds are assay-specific and non-transferable, and no clinical trajectory was supplied to corroborate against. To answer it, supply whole-exome sequencing or the TMB value from the assay used at treatment time, plus treatment dates and response assessments.",
+        "confidence": 0.24,
+        "abstained": true,
+        "missing": ["whole-exome or calibrated TMB", "treatment dates", "response assessments"]
+      }
+    }
+  ]
+}

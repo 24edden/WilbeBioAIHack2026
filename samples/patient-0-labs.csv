@@ -1,0 +1,11 @@
+date,test,value,unit,ref_low,ref_high
+2025-01-12,CEA,4.1,ng/mL,0,5
+2025-01-12,Neutrophils,3.4,10^9/L,2.0,7.5
+2025-03-02,CEA,18.6,ng/mL,0,5
+2025-03-02,Neutrophils,0.8,10^9/L,2.0,7.5
+2025-03-02,Platelets,96,10^9/L,150,400
+2025-03-02,ALT,62,U/L,7,56
+2025-04-20,CEA,47.3,ng/mL,0,5
+2025-04-20,Albumin,31,g/L,35,50
+2025-04-20,Hemoglobin,9.8,g/dL,13.0,17.0
+2025-04-20,Neutrophils,1.1,10^9/L,2.0,7.5

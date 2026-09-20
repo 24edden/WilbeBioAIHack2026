@@ -1,0 +1,9193 @@
+{
+  "format_version": "1.0.0",
+  "original_workbook": "Source Data supplementary figures.xlsx",
+  "original_workbook_sha256": "9222a5ad9f3ce37234dc3369d58c44632c38a16189cba5c0705e193a84b60bb7",
+  "source_url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-022-31818-y/MediaObjects/41467_2022_31818_MOESM11_ESM.zip",
+  "paper_doi": "10.1038/s41467-022-31818-y",
+  "license": "CC BY 4.0; credited third-party exceptions apply",
+  "sheet": "Fig. S9c",
+  "cells": [
+    {
+      "cell": "A1",
+      "value": "Well",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B1",
+      "value": "Well Position",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C1",
+      "value": "Sample Name",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D1",
+      "value": "Target Name",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E1",
+      "value": "Reporter",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F1",
+      "value": "Quencher",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G1",
+      "value": "CT",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "H1",
+      "value": "Ct Mean",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "I1",
+      "value": "Ct SD",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "A2",
+      "value": "43",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B2",
+      "value": "B19",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C2",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D2",
+      "value": "ACTB",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E2",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F2",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G2",
+      "value": "16.007059097290039",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H2",
+      "value": "16.003616000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I2",
+      "value": "6.6853603000000001E-3",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A3",
+      "value": "44",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B3",
+      "value": "B20",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C3",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D3",
+      "value": "ACTB",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E3",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F3",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G3",
+      "value": "15.995911598205566",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H3",
+      "value": "16.003616000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I3",
+      "value": "6.6853603000000001E-3",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A4",
+      "value": "45",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B4",
+      "value": "B21",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C4",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D4",
+      "value": "ACTB",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E4",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F4",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G4",
+      "value": "16.007879257202148",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H4",
+      "value": "16.003616000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I4",
+      "value": "6.6853603000000001E-3",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A5",
+      "value": "91",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B5",
+      "value": "D19",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C5",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D5",
+      "value": "ACTB",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E5",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F5",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G5",
+      "value": "16.028633117675781",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H5",
+      "value": "16.034034999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I5",
+      "value": "1.1813466E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A6",
+      "value": "92",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B6",
+      "value": "D20",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C6",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D6",
+      "value": "ACTB",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E6",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F6",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G6",
+      "value": "16.047582626342773",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H6",
+      "value": "16.034034999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I6",
+      "value": "1.1813466E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A7",
+      "value": "93",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B7",
+      "value": "D21",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C7",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D7",
+      "value": "ACTB",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E7",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F7",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G7",
+      "value": "16.025886535644531",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H7",
+      "value": "16.034034999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I7",
+      "value": "1.1813466E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A8",
+      "value": "19",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B8",
+      "value": "A19",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C8",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D8",
+      "value": "ACTB",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E8",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F8",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G8",
+      "value": "16.067817687988281",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H8",
+      "value": "16.109062000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I8",
+      "value": "5.8328539999999998E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A9",
+      "value": "20",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B9",
+      "value": "A20",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C9",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D9",
+      "value": "ACTB",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E9",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F9",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G9",
+      "value": "16.150306701660156",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H9",
+      "value": "16.109062000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I9",
+      "value": "5.8328539999999998E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A10",
+      "value": "67",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B10",
+      "value": "C19",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C10",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D10",
+      "value": "ACTB",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E10",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F10",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G10",
+      "value": "16.188529968261719",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H10",
+      "value": "16.176613",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I10",
+      "value": "1.6854694E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A11",
+      "value": "69",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B11",
+      "value": "C21",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C11",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D11",
+      "value": "ACTB",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E11",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F11",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G11",
+      "value": "16.164693832397461",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H11",
+      "value": "16.176613",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I11",
+      "value": "1.6854694E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A12",
+      "value": "140",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B12",
+      "value": "F20",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C12",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D12",
+      "value": "ACTB",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E12",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F12",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G12",
+      "value": "15.55647087097168",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H12",
+      "value": "15.614178000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I12",
+      "value": "8.1609786000000004E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A13",
+      "value": "141",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B13",
+      "value": "F21",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C13",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D13",
+      "value": "ACTB",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E13",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F13",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G13",
+      "value": "15.671884536743164",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H13",
+      "value": "15.614178000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I13",
+      "value": "8.1609786000000004E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A14",
+      "value": "187",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B14",
+      "value": "H19",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C14",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D14",
+      "value": "ACTB",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E14",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F14",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G14",
+      "value": "15.381339073181152",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H14",
+      "value": "15.389613000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I14",
+      "value": "1.1701314000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A15",
+      "value": "188",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B15",
+      "value": "H20",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C15",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D15",
+      "value": "ACTB",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E15",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F15",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G15",
+      "value": "15.397887229919434",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H15",
+      "value": "15.389613000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I15",
+      "value": "1.1701314000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A16",
+      "value": "115",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B16",
+      "value": "E19",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C16",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D16",
+      "value": "ACTB",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E16",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F16",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G16",
+      "value": "15.456007957458496",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H16",
+      "value": "15.434915",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I16",
+      "value": "2.9830527999999999E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A17",
+      "value": "116",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B17",
+      "value": "E20",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C17",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D17",
+      "value": "ACTB",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E17",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F17",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G17",
+      "value": "15.413821220397949",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H17",
+      "value": "15.434915",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I17",
+      "value": "2.9830527999999999E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A18",
+      "value": "163",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B18",
+      "value": "G19",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C18",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D18",
+      "value": "ACTB",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E18",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F18",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G18",
+      "value": "15.040386199951172",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H18",
+      "value": "15.13678",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I18",
+      "value": "9.6688659999999996E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A19",
+      "value": "164",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B19",
+      "value": "G20",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C19",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D19",
+      "value": "ACTB",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E19",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F19",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G19",
+      "value": "15.233760833740234",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H19",
+      "value": "15.13678",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I19",
+      "value": "9.6688659999999996E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A20",
+      "value": "165",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B20",
+      "value": "G21",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C20",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D20",
+      "value": "ACTB",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E20",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F20",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G20",
+      "value": "15.136192321777344",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H20",
+      "value": "15.13678",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I20",
+      "value": "9.6688659999999996E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A21",
+      "value": "28",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B21",
+      "value": "B4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C21",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D21",
+      "value": "CD19_E10E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E21",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F21",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G21",
+      "value": "19.179416656494141",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H21",
+      "value": "19.198784",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I21",
+      "value": "2.7390731000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A22",
+      "value": "30",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B22",
+      "value": "B6",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C22",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D22",
+      "value": "CD19_E10E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E22",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F22",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G22",
+      "value": "19.21815299987793",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H22",
+      "value": "19.198784",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I22",
+      "value": "2.7390731000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A23",
+      "value": "77",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B23",
+      "value": "D5",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C23",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D23",
+      "value": "CD19_E10E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E23",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F23",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G23",
+      "value": "19.14192008972168",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H23",
+      "value": "19.161076000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I23",
+      "value": "2.7089972E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A24",
+      "value": "78",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B24",
+      "value": "D6",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C24",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D24",
+      "value": "CD19_E10E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E24",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F24",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G24",
+      "value": "19.180231094360352",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H24",
+      "value": "19.161076000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I24",
+      "value": "2.7089972E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A25",
+      "value": "4",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B25",
+      "value": "A4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C25",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D25",
+      "value": "CD19_E10E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E25",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F25",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G25",
+      "value": "19.451276779174805",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H25",
+      "value": "19.432585",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I25",
+      "value": "2.6434503000000002E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A26",
+      "value": "6",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B26",
+      "value": "A6",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C26",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D26",
+      "value": "CD19_E10E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E26",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F26",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G26",
+      "value": "19.41389274597168",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H26",
+      "value": "19.432585",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I26",
+      "value": "2.6434503000000002E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A27",
+      "value": "52",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B27",
+      "value": "C4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C27",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D27",
+      "value": "CD19_E10E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E27",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F27",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G27",
+      "value": "19.60400390625",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H27",
+      "value": "19.527360000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I27",
+      "value": "8.1009739999999997E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A28",
+      "value": "53",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B28",
+      "value": "C5",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C28",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D28",
+      "value": "CD19_E10E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E28",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F28",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G28",
+      "value": "19.442596435546875",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H28",
+      "value": "19.527360000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I28",
+      "value": "8.1009739999999997E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A29",
+      "value": "54",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B29",
+      "value": "C6",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C29",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D29",
+      "value": "CD19_E10E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E29",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F29",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G29",
+      "value": "19.535484313964844",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H29",
+      "value": "19.527360000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I29",
+      "value": "8.1009739999999997E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A30",
+      "value": "124",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B30",
+      "value": "F4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C30",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D30",
+      "value": "CD19_E10E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E30",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F30",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G30",
+      "value": "22.981191635131836",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H30",
+      "value": "23.058634000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I30",
+      "value": "6.7447454000000004E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A31",
+      "value": "125",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B31",
+      "value": "F5",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C31",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D31",
+      "value": "CD19_E10E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E31",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F31",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G31",
+      "value": "23.10450553894043",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H31",
+      "value": "23.058634000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I31",
+      "value": "6.7447454000000004E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A32",
+      "value": "126",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B32",
+      "value": "F6",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C32",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D32",
+      "value": "CD19_E10E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E32",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F32",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G32",
+      "value": "23.090206146240234",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H32",
+      "value": "23.058634000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I32",
+      "value": "6.7447454000000004E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A33",
+      "value": "172",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B33",
+      "value": "H4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C33",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D33",
+      "value": "CD19_E10E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E33",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F33",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G33",
+      "value": "22.049282073974609",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H33",
+      "value": "22.001342999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I33",
+      "value": "6.7796410000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A34",
+      "value": "173",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B34",
+      "value": "H5",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C34",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D34",
+      "value": "CD19_E10E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E34",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F34",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G34",
+      "value": "21.953403472900391",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H34",
+      "value": "22.001342999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I34",
+      "value": "6.7796410000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A35",
+      "value": "101",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B35",
+      "value": "E5",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C35",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D35",
+      "value": "CD19_E10E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E35",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F35",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G35",
+      "value": "23.382423400878906",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H35",
+      "value": "23.373756",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I35",
+      "value": "1.2258326999999999E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A36",
+      "value": "102",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B36",
+      "value": "E6",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C36",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D36",
+      "value": "CD19_E10E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E36",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F36",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G36",
+      "value": "23.365087509155273",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H36",
+      "value": "23.373756",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I36",
+      "value": "1.2258326999999999E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A37",
+      "value": "148",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B37",
+      "value": "G4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C37",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D37",
+      "value": "CD19_E10E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E37",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F37",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G37",
+      "value": "22.263103485107422",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H37",
+      "value": "22.296188000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I37",
+      "value": "3.9253051999999997E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A38",
+      "value": "149",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B38",
+      "value": "G5",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C38",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D38",
+      "value": "CD19_E10E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E38",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F38",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G38",
+      "value": "22.339561462402344",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H38",
+      "value": "22.296188000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I38",
+      "value": "3.9253051999999997E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A39",
+      "value": "150",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B39",
+      "value": "G6",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C39",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D39",
+      "value": "CD19_E10E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E39",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F39",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G39",
+      "value": "22.285903930664062",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H39",
+      "value": "22.296188000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I39",
+      "value": "3.9253051999999997E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A40",
+      "value": "37",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B40",
+      "value": "B13",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C40",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D40",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E40",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F40",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G40",
+      "value": "21.942630767822266",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H40",
+      "value": "21.878402999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I40",
+      "value": "6.5496100000000002E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A41",
+      "value": "38",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B41",
+      "value": "B14",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C41",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D41",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E41",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F41",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G41",
+      "value": "21.880874633789062",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H41",
+      "value": "21.878402999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I41",
+      "value": "6.5496100000000002E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A42",
+      "value": "39",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B42",
+      "value": "B15",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C42",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D42",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E42",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F42",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G42",
+      "value": "21.811708450317383",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H42",
+      "value": "21.878402999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I42",
+      "value": "6.5496100000000002E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A43",
+      "value": "85",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B43",
+      "value": "D13",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C43",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D43",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E43",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F43",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G43",
+      "value": "21.864492416381836",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H43",
+      "value": "21.854136",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I43",
+      "value": "1.0532761999999999E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A44",
+      "value": "86",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B44",
+      "value": "D14",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C44",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D44",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E44",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F44",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G44",
+      "value": "21.85447883605957",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H44",
+      "value": "21.854136",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I44",
+      "value": "1.0532761999999999E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A45",
+      "value": "87",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B45",
+      "value": "D15",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C45",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D45",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E45",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F45",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G45",
+      "value": "21.843435287475586",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H45",
+      "value": "21.854136",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I45",
+      "value": "1.0532761999999999E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A46",
+      "value": "13",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B46",
+      "value": "A13",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C46",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D46",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E46",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F46",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G46",
+      "value": "21.321367263793945",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H46",
+      "value": "21.277906000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I46",
+      "value": "5.1203374000000003E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A47",
+      "value": "14",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B47",
+      "value": "A14",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C47",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D47",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E47",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F47",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G47",
+      "value": "21.221460342407227",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H47",
+      "value": "21.277906000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I47",
+      "value": "5.1203374000000003E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A48",
+      "value": "15",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B48",
+      "value": "A15",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C48",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D48",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E48",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F48",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G48",
+      "value": "21.290889739990234",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H48",
+      "value": "21.277906000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I48",
+      "value": "5.1203374000000003E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A49",
+      "value": "61",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B49",
+      "value": "C13",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C49",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D49",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E49",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F49",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G49",
+      "value": "21.454277038574219",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H49",
+      "value": "21.480336999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I49",
+      "value": "3.5337064000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A50",
+      "value": "62",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B50",
+      "value": "C14",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C50",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D50",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E50",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F50",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G50",
+      "value": "21.520557403564453",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H50",
+      "value": "21.480336999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I50",
+      "value": "3.5337064000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A51",
+      "value": "63",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B51",
+      "value": "C15",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C51",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D51",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E51",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F51",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G51",
+      "value": "21.46617317199707",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H51",
+      "value": "21.480336999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I51",
+      "value": "3.5337064000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A52",
+      "value": "133",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B52",
+      "value": "F13",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C52",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D52",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E52",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F52",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G52",
+      "value": "25.158283233642578",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H52",
+      "value": "25.179584999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I52",
+      "value": "3.0123194999999998E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A53",
+      "value": "134",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B53",
+      "value": "F14",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C53",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D53",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E53",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F53",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G53",
+      "value": "25.200883865356445",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H53",
+      "value": "25.179584999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I53",
+      "value": "3.0123194999999998E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A54",
+      "value": "181",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B54",
+      "value": "H13",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C54",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D54",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E54",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F54",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G54",
+      "value": "24.511236190795898",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H54",
+      "value": "24.483281999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I54",
+      "value": "5.2466012999999999E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A55",
+      "value": "182",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B55",
+      "value": "H14",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C55",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D55",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E55",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F55",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G55",
+      "value": "24.515848159790039",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H55",
+      "value": "24.483281999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I55",
+      "value": "5.2466012999999999E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A56",
+      "value": "183",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B56",
+      "value": "H15",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C56",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D56",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E56",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F56",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G56",
+      "value": "24.422756195068359",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H56",
+      "value": "24.483281999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I56",
+      "value": "5.2466012999999999E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A57",
+      "value": "109",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B57",
+      "value": "E13",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C57",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D57",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E57",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F57",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G57",
+      "value": "25.081024169921875",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H57",
+      "value": "25.032876999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I57",
+      "value": "4.4614559999999998E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A58",
+      "value": "110",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B58",
+      "value": "E14",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C58",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D58",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E58",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F58",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G58",
+      "value": "24.99293327331543",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H58",
+      "value": "25.032876999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I58",
+      "value": "4.4614559999999998E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A59",
+      "value": "111",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B59",
+      "value": "E15",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C59",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D59",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E59",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F59",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G59",
+      "value": "25.024675369262695",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H59",
+      "value": "25.032876999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I59",
+      "value": "4.4614559999999998E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A60",
+      "value": "157",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B60",
+      "value": "G13",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C60",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D60",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E60",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F60",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G60",
+      "value": "23.963760375976562",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H60",
+      "value": "23.900289999999998",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I60",
+      "value": "6.2552659999999996E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A61",
+      "value": "158",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B61",
+      "value": "G14",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C61",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D61",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E61",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F61",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G61",
+      "value": "23.83869743347168",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H61",
+      "value": "23.900289999999998",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I61",
+      "value": "6.2552659999999996E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A62",
+      "value": "159",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B62",
+      "value": "G15",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C62",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D62",
+      "value": "CD19_E2E3_1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E62",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F62",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G62",
+      "value": "23.898408889770508",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H62",
+      "value": "23.900289999999998",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I62",
+      "value": "6.2552659999999996E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A63",
+      "value": "40",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B63",
+      "value": "B16",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C63",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D63",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E63",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F63",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G63",
+      "value": "26.568349838256836",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H63",
+      "value": "26.546225",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I63",
+      "value": "1.9227732000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A64",
+      "value": "41",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B64",
+      "value": "B17",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C64",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D64",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E64",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F64",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G64",
+      "value": "26.536762237548828",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H64",
+      "value": "26.546225",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I64",
+      "value": "1.9227732000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A65",
+      "value": "42",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B65",
+      "value": "B18",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C65",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D65",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E65",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F65",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G65",
+      "value": "26.533561706542969",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H65",
+      "value": "26.546225",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I65",
+      "value": "1.9227732000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A66",
+      "value": "88",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B66",
+      "value": "D16",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C66",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D66",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E66",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F66",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G66",
+      "value": "26.367431640625",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H66",
+      "value": "26.483912",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I66",
+      "value": "0.101629004",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A67",
+      "value": "89",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B67",
+      "value": "D17",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C67",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D67",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E67",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F67",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G67",
+      "value": "26.554512023925781",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H67",
+      "value": "26.483912",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I67",
+      "value": "0.101629004",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A68",
+      "value": "90",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B68",
+      "value": "D18",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C68",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D68",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E68",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F68",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G68",
+      "value": "26.529790878295898",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H68",
+      "value": "26.483912",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I68",
+      "value": "0.101629004",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A69",
+      "value": "16",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B69",
+      "value": "A16",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C69",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D69",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E69",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F69",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G69",
+      "value": "25.978597640991211",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H69",
+      "value": "25.953402000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I69",
+      "value": "3.9463945E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A70",
+      "value": "17",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B70",
+      "value": "A17",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C70",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D70",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E70",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F70",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G70",
+      "value": "25.973686218261719",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H70",
+      "value": "25.953402000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I70",
+      "value": "3.9463945E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A71",
+      "value": "18",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B71",
+      "value": "A18",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C71",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D71",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E71",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F71",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G71",
+      "value": "25.907920837402344",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H71",
+      "value": "25.953402000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I71",
+      "value": "3.9463945E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A72",
+      "value": "65",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B72",
+      "value": "C17",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C72",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D72",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E72",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F72",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G72",
+      "value": "26.021381378173828",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H72",
+      "value": "26.087016999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I72",
+      "value": "9.2821520000000005E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A73",
+      "value": "66",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B73",
+      "value": "C18",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C73",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D73",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E73",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F73",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G73",
+      "value": "26.152650833129883",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H73",
+      "value": "26.087016999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I73",
+      "value": "9.2821520000000005E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A74",
+      "value": "136",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B74",
+      "value": "F16",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C74",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D74",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E74",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F74",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G74",
+      "value": "29.903757095336914",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H74",
+      "value": "29.822469999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I74",
+      "value": "8.5534304000000005E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A75",
+      "value": "137",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B75",
+      "value": "F17",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C75",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D75",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E75",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F75",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G75",
+      "value": "29.733242034912109",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H75",
+      "value": "29.822469999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I75",
+      "value": "8.5534304000000005E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A76",
+      "value": "138",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B76",
+      "value": "F18",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C76",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D76",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E76",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F76",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G76",
+      "value": "29.830408096313477",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H76",
+      "value": "29.822469999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I76",
+      "value": "8.5534304000000005E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A77",
+      "value": "184",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B77",
+      "value": "H16",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C77",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D77",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E77",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F77",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G77",
+      "value": "28.879058837890625",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H77",
+      "value": "29.127365000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I77",
+      "value": "0.35115674000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A78",
+      "value": "185",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B78",
+      "value": "H17",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C78",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D78",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E78",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F78",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G78",
+      "value": "29.375669479370117",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H78",
+      "value": "29.127365000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I78",
+      "value": "0.35115674000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A79",
+      "value": "113",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B79",
+      "value": "E17",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C79",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D79",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E79",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F79",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G79",
+      "value": "29.975555419921875",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H79",
+      "value": "29.711382",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I79",
+      "value": "0.37359777",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A80",
+      "value": "114",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B80",
+      "value": "E18",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C80",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D80",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E80",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F80",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G80",
+      "value": "29.447208404541016",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H80",
+      "value": "29.711382",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I80",
+      "value": "0.37359777",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A81",
+      "value": "160",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B81",
+      "value": "G16",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C81",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D81",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E81",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F81",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G81",
+      "value": "28.475656509399414",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H81",
+      "value": "28.470697000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I81",
+      "value": "7.0132357000000003E-3",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A82",
+      "value": "161",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B82",
+      "value": "G17",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C82",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D82",
+      "value": "CD19_E2E3_2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E82",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F82",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G82",
+      "value": "28.465738296508789",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H82",
+      "value": "28.470697000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I82",
+      "value": "7.0132357000000003E-3",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A83",
+      "value": "32",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B83",
+      "value": "B8",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C83",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D83",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E83",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F83",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G83",
+      "value": "22.612600326538086",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H83",
+      "value": "22.560860000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I83",
+      "value": "7.3172319999999999E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A84",
+      "value": "33",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B84",
+      "value": "B9",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C84",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D84",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E84",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F84",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G84",
+      "value": "22.509119033813477",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H84",
+      "value": "22.560860000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I84",
+      "value": "7.3172319999999999E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A85",
+      "value": "79",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B85",
+      "value": "D7",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C85",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D85",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E85",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F85",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G85",
+      "value": "21.735898971557617",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H85",
+      "value": "21.860880000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I85",
+      "value": "0.12322265",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A86",
+      "value": "80",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B86",
+      "value": "D8",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C86",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D86",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E86",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F86",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G86",
+      "value": "21.864479064941406",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H86",
+      "value": "21.860880000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I86",
+      "value": "0.12322265",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A87",
+      "value": "81",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B87",
+      "value": "D9",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C87",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D87",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E87",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F87",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G87",
+      "value": "21.982265472412109",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H87",
+      "value": "21.860880000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I87",
+      "value": "0.12322265",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A88",
+      "value": "7",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B88",
+      "value": "A7",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C88",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D88",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E88",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F88",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G88",
+      "value": "23.091716766357422",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H88",
+      "value": "23.103470000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I88",
+      "value": "0.14286099999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A89",
+      "value": "8",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B89",
+      "value": "A8",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C89",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D89",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E89",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F89",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G89",
+      "value": "22.966846466064453",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H89",
+      "value": "23.103470000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I89",
+      "value": "0.14286099999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A90",
+      "value": "9",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B90",
+      "value": "A9",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C90",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D90",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E90",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F90",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G90",
+      "value": "23.251842498779297",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H90",
+      "value": "23.103470000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I90",
+      "value": "0.14286099999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A91",
+      "value": "55",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B91",
+      "value": "C7",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C91",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D91",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E91",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F91",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G91",
+      "value": "23.471975326538086",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H91",
+      "value": "23.23733",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I91",
+      "value": "0.23266152000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A92",
+      "value": "56",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B92",
+      "value": "C8",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C92",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D92",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E92",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F92",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G92",
+      "value": "23.006704330444336",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H92",
+      "value": "23.23733",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I92",
+      "value": "0.23266152000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A93",
+      "value": "57",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B93",
+      "value": "C9",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C93",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D93",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E93",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F93",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G93",
+      "value": "23.233312606811523",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H93",
+      "value": "23.23733",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I93",
+      "value": "0.23266152000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A94",
+      "value": "127",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B94",
+      "value": "F7",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C94",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D94",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E94",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F94",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G94",
+      "value": "27.574893951416016",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H94",
+      "value": "27.537649999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I94",
+      "value": "8.7695010000000004E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A95",
+      "value": "128",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B95",
+      "value": "F8",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C95",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D95",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E95",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F95",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G95",
+      "value": "27.600574493408203",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H95",
+      "value": "27.537649999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I95",
+      "value": "8.7695010000000004E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A96",
+      "value": "129",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B96",
+      "value": "F9",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C96",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D96",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E96",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F96",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G96",
+      "value": "27.437479019165039",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H96",
+      "value": "27.537649999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I96",
+      "value": "8.7695010000000004E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A97",
+      "value": "175",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B97",
+      "value": "H7",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C97",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D97",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E97",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F97",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G97",
+      "value": "25.406063079833984",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H97",
+      "value": "25.733709999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I97",
+      "value": "0.36084315",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A98",
+      "value": "176",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B98",
+      "value": "H8",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C98",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D98",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E98",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F98",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G98",
+      "value": "26.120452880859375",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H98",
+      "value": "25.733709999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I98",
+      "value": "0.36084315",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A99",
+      "value": "177",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B99",
+      "value": "H9",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C99",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D99",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E99",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F99",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G99",
+      "value": "25.67460823059082",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H99",
+      "value": "25.733709999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I99",
+      "value": "0.36084315",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A100",
+      "value": "103",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B100",
+      "value": "E7",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C100",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D100",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E100",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F100",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G100",
+      "value": "27.827859878540039",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H100",
+      "value": "27.894338999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I100",
+      "value": "7.3740059999999996E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A101",
+      "value": "104",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B101",
+      "value": "E8",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C101",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D101",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E101",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F101",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G101",
+      "value": "27.881498336791992",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H101",
+      "value": "27.894338999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I101",
+      "value": "7.3740059999999996E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A102",
+      "value": "105",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B102",
+      "value": "E9",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C102",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D102",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E102",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F102",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G102",
+      "value": "27.973653793334961",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H102",
+      "value": "27.894338999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I102",
+      "value": "7.3740059999999996E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A103",
+      "value": "151",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B103",
+      "value": "G7",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C103",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D103",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E103",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F103",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G103",
+      "value": "25.992044448852539",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H103",
+      "value": "26.092752000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I103",
+      "value": "8.7417120000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A104",
+      "value": "152",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B104",
+      "value": "G8",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C104",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D104",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E104",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F104",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G104",
+      "value": "26.149023056030273",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H104",
+      "value": "26.092752000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I104",
+      "value": "8.7417120000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A105",
+      "value": "153",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B105",
+      "value": "G9",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C105",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D105",
+      "value": "CD19_e2i2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E105",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F105",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G105",
+      "value": "26.13719367980957",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H105",
+      "value": "26.092752000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I105",
+      "value": "8.7417120000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A106",
+      "value": "25",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B106",
+      "value": "B1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C106",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D106",
+      "value": "CD19_E3E4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E106",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F106",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G106",
+      "value": "17.552825927734375",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H106",
+      "value": "17.542051000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I106",
+      "value": "1.5587408000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A107",
+      "value": "26",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B107",
+      "value": "B2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C107",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D107",
+      "value": "CD19_E3E4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E107",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F107",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G107",
+      "value": "17.549148559570312",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H107",
+      "value": "17.542051000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I107",
+      "value": "1.5587408000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A108",
+      "value": "27",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B108",
+      "value": "B3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C108",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D108",
+      "value": "CD19_E3E4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E108",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F108",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G108",
+      "value": "17.524177551269531",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H108",
+      "value": "17.542051000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I108",
+      "value": "1.5587408000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A109",
+      "value": "73",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B109",
+      "value": "D1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C109",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D109",
+      "value": "CD19_E3E4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E109",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F109",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G109",
+      "value": "17.249317169189453",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H109",
+      "value": "17.362203999999998",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I109",
+      "value": "0.15964550999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A110",
+      "value": "74",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B110",
+      "value": "D2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C110",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D110",
+      "value": "CD19_E3E4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E110",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F110",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G110",
+      "value": "17.475090026855469",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H110",
+      "value": "17.362203999999998",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I110",
+      "value": "0.15964550999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A111",
+      "value": "2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B111",
+      "value": "A2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C111",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D111",
+      "value": "CD19_E3E4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E111",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F111",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G111",
+      "value": "17.538484573364258",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H111",
+      "value": "17.580870000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I111",
+      "value": "5.9941585999999998E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A112",
+      "value": "3",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B112",
+      "value": "A3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C112",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D112",
+      "value": "CD19_E3E4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E112",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F112",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G112",
+      "value": "17.623254776000977",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H112",
+      "value": "17.580870000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I112",
+      "value": "5.9941585999999998E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A113",
+      "value": "50",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B113",
+      "value": "C2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C113",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D113",
+      "value": "CD19_E3E4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E113",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F113",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G113",
+      "value": "17.832576751708984",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H113",
+      "value": "17.825351999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I113",
+      "value": "1.0217745E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A114",
+      "value": "51",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B114",
+      "value": "C3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C114",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D114",
+      "value": "CD19_E3E4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E114",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F114",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G114",
+      "value": "17.818126678466797",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H114",
+      "value": "17.825351999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I114",
+      "value": "1.0217745E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A115",
+      "value": "121",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B115",
+      "value": "F1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C115",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D115",
+      "value": "CD19_E3E4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E115",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F115",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G115",
+      "value": "21.202383041381836",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H115",
+      "value": "21.235516000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I115",
+      "value": "4.6857856000000003E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A116",
+      "value": "123",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B116",
+      "value": "F3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C116",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D116",
+      "value": "CD19_E3E4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E116",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F116",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G116",
+      "value": "21.268650054931641",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H116",
+      "value": "21.235516000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I116",
+      "value": "4.6857856000000003E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A117",
+      "value": "170",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B117",
+      "value": "H2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C117",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D117",
+      "value": "CD19_E3E4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E117",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F117",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G117",
+      "value": "20.087358474731445",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H117",
+      "value": "20.107620000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I117",
+      "value": "2.865581E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A118",
+      "value": "171",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B118",
+      "value": "H3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C118",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D118",
+      "value": "CD19_E3E4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E118",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F118",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G118",
+      "value": "20.127883911132812",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H118",
+      "value": "20.107620000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I118",
+      "value": "2.865581E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A119",
+      "value": "97",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B119",
+      "value": "E1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C119",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D119",
+      "value": "CD19_E3E4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E119",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F119",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G119",
+      "value": "21.485231399536133",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H119",
+      "value": "21.565760000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I119",
+      "value": "7.3339539999999995E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A120",
+      "value": "98",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B120",
+      "value": "E2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C120",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D120",
+      "value": "CD19_E3E4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E120",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F120",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G120",
+      "value": "21.583328247070312",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H120",
+      "value": "21.565760000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I120",
+      "value": "7.3339539999999995E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A121",
+      "value": "99",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B121",
+      "value": "E3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C121",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D121",
+      "value": "CD19_E3E4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E121",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F121",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G121",
+      "value": "21.628719329833984",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H121",
+      "value": "21.565760000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I121",
+      "value": "7.3339539999999995E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A122",
+      "value": "145",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B122",
+      "value": "G1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C122",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D122",
+      "value": "CD19_E3E4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E122",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F122",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G122",
+      "value": "20.229862213134766",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H122",
+      "value": "20.211092000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I122",
+      "value": "2.6545096000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A123",
+      "value": "147",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B123",
+      "value": "G3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C123",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D123",
+      "value": "CD19_E3E4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E123",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F123",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G123",
+      "value": "20.19232177734375",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H123",
+      "value": "20.211092000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I123",
+      "value": "2.6545096000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A124",
+      "value": "34",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B124",
+      "value": "B10",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C124",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D124",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E124",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F124",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G124",
+      "value": "21.069517135620117",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H124",
+      "value": "21.031207999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I124",
+      "value": "5.4175895000000002E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A125",
+      "value": "35",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B125",
+      "value": "B11",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C125",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D125",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E125",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F125",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G125",
+      "value": "20.992900848388672",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H125",
+      "value": "21.031207999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I125",
+      "value": "5.4175895000000002E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A126",
+      "value": "82",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B126",
+      "value": "D10",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C126",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D126",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E126",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F126",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G126",
+      "value": "20.864297866821289",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H126",
+      "value": "20.890236000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I126",
+      "value": "2.5162245999999999E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A127",
+      "value": "83",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B127",
+      "value": "D11",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C127",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D127",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E127",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F127",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G127",
+      "value": "20.891864776611328",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H127",
+      "value": "20.890236000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I127",
+      "value": "2.5162245999999999E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A128",
+      "value": "84",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B128",
+      "value": "D12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C128",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D128",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E128",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F128",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G128",
+      "value": "20.914543151855469",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H128",
+      "value": "20.890236000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I128",
+      "value": "2.5162245999999999E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A129",
+      "value": "10",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B129",
+      "value": "A10",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C129",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D129",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E129",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F129",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G129",
+      "value": "21.501554489135742",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H129",
+      "value": "21.489660000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I129",
+      "value": "1.4383885000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A130",
+      "value": "11",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B130",
+      "value": "A11",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C130",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D130",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E130",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F130",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G130",
+      "value": "21.493749618530273",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H130",
+      "value": "21.489660000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I130",
+      "value": "1.4383885000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A131",
+      "value": "12",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B131",
+      "value": "A12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C131",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D131",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E131",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F131",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G131",
+      "value": "21.473672866821289",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H131",
+      "value": "21.489660000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I131",
+      "value": "1.4383885000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A132",
+      "value": "58",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B132",
+      "value": "C10",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C132",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D132",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E132",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F132",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G132",
+      "value": "21.602783203125",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H132",
+      "value": "21.671053000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I132",
+      "value": "6.411588E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A133",
+      "value": "59",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B133",
+      "value": "C11",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C133",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D133",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E133",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F133",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G133",
+      "value": "21.729991912841797",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H133",
+      "value": "21.671053000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I133",
+      "value": "6.411588E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A134",
+      "value": "60",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B134",
+      "value": "C12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C134",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D134",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E134",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F134",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G134",
+      "value": "21.680387496948242",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H134",
+      "value": "21.671053000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I134",
+      "value": "6.411588E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A135",
+      "value": "130",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B135",
+      "value": "F10",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C135",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D135",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E135",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F135",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G135",
+      "value": "25.705121994018555",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H135",
+      "value": "25.696263999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I135",
+      "value": "5.301674E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A136",
+      "value": "131",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B136",
+      "value": "F11",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C136",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D136",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E136",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F136",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G136",
+      "value": "25.639375686645508",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H136",
+      "value": "25.696263999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I136",
+      "value": "5.301674E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A137",
+      "value": "132",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B137",
+      "value": "F12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C137",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D137",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E137",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F137",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G137",
+      "value": "25.744293212890625",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H137",
+      "value": "25.696263999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I137",
+      "value": "5.301674E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A138",
+      "value": "178",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B138",
+      "value": "H10",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C138",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D138",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E138",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F138",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G138",
+      "value": "24.144691467285156",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H138",
+      "value": "24.15869",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I138",
+      "value": "0.11790956",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A139",
+      "value": "179",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B139",
+      "value": "H11",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C139",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D139",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E139",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F139",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G139",
+      "value": "24.048402786254883",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H139",
+      "value": "24.15869",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I139",
+      "value": "0.11790956",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A140",
+      "value": "180",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B140",
+      "value": "H12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C140",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D140",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E140",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F140",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G140",
+      "value": "24.28297233581543",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H140",
+      "value": "24.15869",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I140",
+      "value": "0.11790956",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A141",
+      "value": "106",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B141",
+      "value": "E10",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C141",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D141",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E141",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F141",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G141",
+      "value": "26.172645568847656",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H141",
+      "value": "26.259150000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I141",
+      "value": "8.8331229999999997E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A142",
+      "value": "107",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B142",
+      "value": "E11",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C142",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D142",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E142",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F142",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G142",
+      "value": "26.349201202392578",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H142",
+      "value": "26.259150000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I142",
+      "value": "8.8331229999999997E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A143",
+      "value": "108",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B143",
+      "value": "E12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C143",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D143",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E143",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F143",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G143",
+      "value": "26.255603790283203",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H143",
+      "value": "26.259150000000002",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I143",
+      "value": "8.8331229999999997E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A144",
+      "value": "154",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B144",
+      "value": "G10",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C144",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D144",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E144",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F144",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G144",
+      "value": "24.702617645263672",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H144",
+      "value": "24.612518000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I144",
+      "value": "0.112315886",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A145",
+      "value": "155",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B145",
+      "value": "G11",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C145",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D145",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E145",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F145",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G145",
+      "value": "24.48668098449707",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H145",
+      "value": "24.612518000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I145",
+      "value": "0.112315886",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A146",
+      "value": "156",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B146",
+      "value": "G12",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C146",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D146",
+      "value": "CD19_i2e3",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E146",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F146",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G146",
+      "value": "24.648250579833984",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H146",
+      "value": "24.612518000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I146",
+      "value": "0.112315886",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A147",
+      "value": "46",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B147",
+      "value": "B22",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C147",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D147",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E147",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F147",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G147",
+      "value": "16.860025405883789",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H147",
+      "value": "16.960664999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I147",
+      "value": "9.0010380000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A148",
+      "value": "47",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B148",
+      "value": "B23",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C148",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D148",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E148",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F148",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G148",
+      "value": "17.033470153808594",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H148",
+      "value": "16.960664999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I148",
+      "value": "9.0010380000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A149",
+      "value": "48",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B149",
+      "value": "B24",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C149",
+      "value": "MHHCALL4_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D149",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E149",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F149",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G149",
+      "value": "16.988500595092773",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H149",
+      "value": "16.960664999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I149",
+      "value": "9.0010380000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A150",
+      "value": "94",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B150",
+      "value": "D22",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C150",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D150",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E150",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F150",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G150",
+      "value": "16.960929870605469",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H150",
+      "value": "16.974667",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I150",
+      "value": "5.4595560000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A151",
+      "value": "95",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B151",
+      "value": "D23",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C151",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D151",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E151",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F151",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G151",
+      "value": "17.034818649291992",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H151",
+      "value": "16.974667",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I151",
+      "value": "5.4595560000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A152",
+      "value": "96",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B152",
+      "value": "D24",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C152",
+      "value": "MHHCALL4_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D152",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E152",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F152",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G152",
+      "value": "16.928251266479492",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H152",
+      "value": "16.974667",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I152",
+      "value": "5.4595560000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A153",
+      "value": "22",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B153",
+      "value": "A22",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C153",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D153",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E153",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F153",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G153",
+      "value": "16.815397262573242",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H153",
+      "value": "16.854696000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I153",
+      "value": "0.23644330999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A154",
+      "value": "23",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B154",
+      "value": "A23",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C154",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D154",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E154",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F154",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G154",
+      "value": "16.640363693237305",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H154",
+      "value": "16.854696000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I154",
+      "value": "0.23644330999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A155",
+      "value": "24",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B155",
+      "value": "A24",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C155",
+      "value": "MHHCALL4_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D155",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E155",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F155",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G155",
+      "value": "17.108325958251953",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H155",
+      "value": "16.854696000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I155",
+      "value": "0.23644330999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A156",
+      "value": "70",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B156",
+      "value": "C22",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C156",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D156",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E156",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F156",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G156",
+      "value": "16.930099487304688",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H156",
+      "value": "16.895689000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I156",
+      "value": "3.6893784999999998E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A157",
+      "value": "71",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B157",
+      "value": "C23",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C157",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D157",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E157",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F157",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G157",
+      "value": "16.900236129760742",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H157",
+      "value": "16.895689000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I157",
+      "value": "3.6893784999999998E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A158",
+      "value": "72",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B158",
+      "value": "C24",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C158",
+      "value": "MHHCALL4_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D158",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E158",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F158",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G158",
+      "value": "16.856733322143555",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H158",
+      "value": "16.895689000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I158",
+      "value": "3.6893784999999998E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A159",
+      "value": "142",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B159",
+      "value": "F22",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C159",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D159",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E159",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F159",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G159",
+      "value": "17.187936782836914",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H159",
+      "value": "17.180516999999998",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I159",
+      "value": "2.8816135999999999E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A160",
+      "value": "143",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B160",
+      "value": "F23",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C160",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D160",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E160",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F160",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G160",
+      "value": "17.204896926879883",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H160",
+      "value": "17.180516999999998",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I160",
+      "value": "2.8816135999999999E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A161",
+      "value": "144",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B161",
+      "value": "F24",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C161",
+      "value": "P493_siPTBP1_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D161",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E161",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F161",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G161",
+      "value": "17.148715972900391",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H161",
+      "value": "17.180516999999998",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I161",
+      "value": "2.8816135999999999E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A162",
+      "value": "190",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B162",
+      "value": "H22",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C162",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D162",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E162",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F162",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G162",
+      "value": "16.630041122436523",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H162",
+      "value": "16.665503000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I162",
+      "value": "3.5060316000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A163",
+      "value": "191",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B163",
+      "value": "H23",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C163",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D163",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E163",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F163",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G163",
+      "value": "16.70014762878418",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H163",
+      "value": "16.665503000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I163",
+      "value": "3.5060316000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A164",
+      "value": "192",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B164",
+      "value": "H24",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C164",
+      "value": "P493_siPTBP1_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D164",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E164",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F164",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G164",
+      "value": "16.666313171386719",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H164",
+      "value": "16.665503000000001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I164",
+      "value": "3.5060316000000001E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A165",
+      "value": "118",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B165",
+      "value": "E22",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C165",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D165",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E165",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F165",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G165",
+      "value": "17.242813110351562",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H165",
+      "value": "17.168372999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I165",
+      "value": "6.500918E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A166",
+      "value": "119",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B166",
+      "value": "E23",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C166",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D166",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E166",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F166",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G166",
+      "value": "17.122774124145508",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H166",
+      "value": "17.168372999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I166",
+      "value": "6.500918E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A167",
+      "value": "120",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B167",
+      "value": "E24",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C167",
+      "value": "P493_siSCR_rep1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D167",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E167",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F167",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G167",
+      "value": "17.139532089233398",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H167",
+      "value": "17.168372999999999",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I167",
+      "value": "6.500918E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A168",
+      "value": "166",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B168",
+      "value": "G22",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C168",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D168",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E168",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F168",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G168",
+      "value": "16.799867630004883",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H168",
+      "value": "16.554634",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I168",
+      "value": "0.23606057",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A169",
+      "value": "167",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B169",
+      "value": "G23",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C169",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D169",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E169",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F169",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G169",
+      "value": "16.328964233398438",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H169",
+      "value": "16.554634",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I169",
+      "value": "0.23606057",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A170",
+      "value": "168",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "B170",
+      "value": "G24",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C170",
+      "value": "P493_siSCR_rep2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D170",
+      "value": "GAPDH",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "E170",
+      "value": "SYBR",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "F170",
+      "value": "None",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "G170",
+      "value": "16.535068511962891",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "H170",
+      "value": "16.554634",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "I170",
+      "value": "0.23606057",
+      "type": null,
+      "formula": null
+    }
+  ],
+  "transformation": "Lossless selection of all nonempty cells in named sheet from qualified OOXML extraction; original cell address, source text, type and formula retained; no numerical endpoint calculation.",
+  "acquisition_extract_sha256": "64791e1c8d8d823ea55467a25661a30f2371a64222aaf3a79183b0ae623e77b6"
+}
