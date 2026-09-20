@@ -155,21 +155,27 @@ def test_actual_mode_switch_and_cached_live_artifact(private_capsule):
         app.run()
         app.radio(key="tbd_page").set_value("NVIDIA & sequences").run()
         assert_clean(app)
+        structure_count = sum(a.get("name", "").endswith(".cif") for a in private_capsule.load(run_id)["artifacts"])
+        assert len(app.get("download_button")) == structure_count
         next(button for button in app.button if button.label == "Load artifact").click().run()
         assert_clean(app)
-        assert len(app.get("download_button")) == 1
+        frozen_keys = {item.key for item in app.get("download_button")}
+        assert len(frozen_keys) == structure_count + 1
 
         app.selectbox(key="tbd_mode").set_value("Live reads").run()
         assert_clean(app)
-        assert not app.get("download_button")  # Replay bytes must not stand in for a live read.
+        live_keys = {item.key for item in app.get("download_button")}
+        assert len(live_keys) == structure_count  # CIFs now load automatically from this source.
+        assert not (frozen_keys & live_keys)  # Replay bytes must never stand in for live reads.
         assert any("LIVE BACKEND READ" in item.value for item in app.caption)
         next(button for button in app.button if button.label == "Load artifact").click().run()
         assert_clean(app)
-        assert len(app.get("download_button")) == 1
+        assert len(app.get("download_button")) == structure_count + 1
 
         app.selectbox(key="tbd_mode").set_value("Frozen replay").run()
         assert_clean(app)
-        assert len(app.get("download_button")) == 1
+        assert {item.key for item in app.get("download_button")} == frozen_keys
+
 
 
 def assert_chat_home(app):

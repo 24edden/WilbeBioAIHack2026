@@ -400,7 +400,7 @@ def render_nvidia(run, brief, artifacts, source):
     if structures:
         st.subheader('NVIDIA structure files (.cif)', anchor='nvidia-structure-files')
         render_structure_previews(structures, run['id'], heading=False)
-        st.caption('Images load automatically. Open the details below for the original structure files and receipts.')
+        st.caption('Saved image previews appear above when available. Original structure files are prepared automatically below.')
     for i, artifact in enumerate(structures + other_artifacts):
         if i == len(structures):
             st.subheader('Other saved artifacts' if structures else 'Artifacts')

@@ -82,11 +82,11 @@ paths, queries and redirects. No server keys are requested or sent by this front
 Bookmarks can choose `?mode=replay` or `?mode=live`, plus `&run=<selected-run-id>`
 and `&view=<page-label>`. The two selected run IDs are explicitly allowlisted in
 `CURATED_STUDIES`.
-Artifacts load only when requested and can then be downloaded. Frozen artifact
+CIF structure bytes are verified and prepared for download automatically. Other artifacts load when requested. Frozen artifact
 bytes come from the capsule; live artifact bytes come from the run's recorded URLs.
 For the CAR-T study, open **NVIDIA & sequences → NVIDIA structure files (.cif)**.
 Saved NVIDIA structure images load automatically on Overview and NVIDIA & sequences when the run records the exact matching CIF hashes. The wild-type and exon-2-deleted CD19 files appear before other artifacts. Open a
-filename, choose **Load artifact**, then **Download verified artifact**. These are
+filename and choose **Download verified artifact**; verified CIF downloads are prepared automatically. These are
 3D structure files; the automatically displayed images are previously rendered views of those same predictions, not new inference.
 
 The connected homepage and study header use the original `TRACE_logo.png` from
