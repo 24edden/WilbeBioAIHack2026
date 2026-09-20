@@ -18,7 +18,7 @@ excluded from Git/archive even when privately hydrated. The proprietary source
 client is never part of the public source tree.
 
 The final network-blocking safe runner passed **797 tests and 25 subtests**,
-including the unchanged 776-test scientific suite, nine packaging/integrity
+including the unchanged 776-test scientific suite, eight packaging/integrity
 checks and all public-profile source-lock/regeneration checks. The case builder
 verified all three derived packs against their original source pins. The public
 source archive was generated after private input hydration and still excluded
