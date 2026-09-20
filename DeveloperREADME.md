@@ -2,6 +2,10 @@
 
 Working notes for the team. Setup and run instructions go here once we have something to run.
 
+## Import frozen investigation results
+
+Use the [run archive guide](docs/run-archives/README.md) and its versioned contract to build visualizations from saved investigations without launching agents or making provider calls. Full trace bundles are retained in the local and shared Brev workspaces; this public repository carries the safe run index and import materials. Verify the bundle and asset SHA-256 checksums, preserve original run status and execution environment, and distinguish source content hashes from Git commit identities.
+
 ## Context files
 
 `Context/` holds the event material we want agents to know about:

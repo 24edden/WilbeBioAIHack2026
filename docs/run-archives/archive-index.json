@@ -1,0 +1,128 @@
+{
+  "schema_version": "team-tbd-public-run-index/1.0.0",
+  "bundle_id": "team-tbd-frozen-runs-20260920T110942Z",
+  "frozen_at": "2026-09-20T11:16:38.130597+00:00",
+  "recommended_run_ids": [
+    "f10acf36fcfd4cfc97b84d92c631e8ab",
+    "037a6844bfb54d5a8d9010043d6c0a89",
+    "b5898d6c3b3940ee9eac90f01b8b8e19"
+  ],
+  "runs": [
+    {
+      "run_id": "037a6844bfb54d5a8d9010043d6c0a89",
+      "environment_id": "brev-original",
+      "title": "CD19 CAR-T",
+      "case_id": "cd19-car-t",
+      "status": "completed",
+      "decision_count": 2,
+      "view_path": "runs/037a6844bfb54d5a8d9010043d6c0a89/view.json"
+    },
+    {
+      "run_id": "b5898d6c3b3940ee9eac90f01b8b8e19",
+      "environment_id": "brev-original",
+      "title": "CD19 CAR-T",
+      "case_id": "cd19-car-t",
+      "status": "completed",
+      "decision_count": 3,
+      "view_path": "runs/b5898d6c3b3940ee9eac90f01b8b8e19/view.json"
+    },
+    {
+      "run_id": "5c3ab9433a454d1d82d80dea00a925bc",
+      "environment_id": "brev-original",
+      "title": "CD19 CAR-T",
+      "case_id": "cd19-car-t",
+      "status": "blocked",
+      "decision_count": 0,
+      "view_path": "runs/5c3ab9433a454d1d82d80dea00a925bc/view.json"
+    },
+    {
+      "run_id": "a90a027775ad4342a7bc32620e6174f2",
+      "environment_id": "brev-original",
+      "title": "CD19 CAR-T",
+      "case_id": "cd19-car-t",
+      "status": "completed",
+      "decision_count": 2,
+      "view_path": "runs/a90a027775ad4342a7bc32620e6174f2/view.json"
+    },
+    {
+      "run_id": "ff3c4fd47f1d408ab5bcdc89d1a07744",
+      "environment_id": "brev-original",
+      "title": "CD19 CAR-T",
+      "case_id": "cd19-car-t",
+      "status": "completed",
+      "decision_count": 2,
+      "view_path": "runs/ff3c4fd47f1d408ab5bcdc89d1a07744/view.json"
+    },
+    {
+      "run_id": "a01769d0494a48fe84a2805208366b2e",
+      "environment_id": "brev-original",
+      "title": "CAR-T discovery workspace",
+      "case_id": "cart-discovery",
+      "status": "completed",
+      "decision_count": 1,
+      "view_path": "runs/a01769d0494a48fe84a2805208366b2e/view.json"
+    },
+    {
+      "run_id": "d2085baaac544b4eb0bf8a22c710110d",
+      "environment_id": "brev-original",
+      "title": "CAR-T discovery workspace",
+      "case_id": "cart-discovery",
+      "status": "budget_exhausted",
+      "decision_count": 0,
+      "view_path": "runs/d2085baaac544b4eb0bf8a22c710110d/view.json"
+    },
+    {
+      "run_id": "34d67c24810841e9b6e3e14231c5600b",
+      "environment_id": "brev-original",
+      "title": "CAR-T discovery workspace",
+      "case_id": "cart-discovery",
+      "status": "budget_exhausted",
+      "decision_count": 0,
+      "view_path": "runs/34d67c24810841e9b6e3e14231c5600b/view.json"
+    },
+    {
+      "run_id": "f3d94dc7889c432380542d7467b525ed",
+      "environment_id": "brev-original",
+      "title": "CAR-T discovery workspace",
+      "case_id": "cart-discovery",
+      "status": "failed",
+      "decision_count": 0,
+      "view_path": "runs/f3d94dc7889c432380542d7467b525ed/view.json"
+    },
+    {
+      "run_id": "9b79483501f64cc9a658c58f42ef5221",
+      "environment_id": "brev-original",
+      "title": "CAR-T discovery workspace",
+      "case_id": "cart-discovery",
+      "status": "failed",
+      "decision_count": 0,
+      "view_path": "runs/9b79483501f64cc9a658c58f42ef5221/view.json"
+    },
+    {
+      "run_id": "f10acf36fcfd4cfc97b84d92c631e8ab",
+      "environment_id": "mac-ana-isolated",
+      "title": "Ana \u00b7 paired B-ALL relapse investigation",
+      "case_id": "gse28460-relapse",
+      "status": "completed",
+      "decision_count": 1,
+      "view_path": "runs/f10acf36fcfd4cfc97b84d92c631e8ab/view.json"
+    },
+    {
+      "run_id": "a1d590d7cad2439291eb213eb81debba",
+      "environment_id": "mac-ana-isolated",
+      "title": "Ana \u00b7 paired B-ALL relapse investigation",
+      "case_id": "gse28460-relapse",
+      "status": "failed",
+      "decision_count": 0,
+      "view_path": "runs/a1d590d7cad2439291eb213eb81debba/view.json"
+    }
+  ],
+  "archive": {
+    "zip_filename": "team-tbd-frozen-runs-20260920T110942Z.zip",
+    "zip_bytes": 33666287,
+    "zip_sha256": "5da9f98f2857de91d9f0e93e3cf3bbc204e293bb58bbbaa2f523496831bb10d6",
+    "manifest_sha256": "68c450d7636bde8cff63577cde998fb17b6f1c92f91e5b2067c6aa72f70daa31",
+    "brev_path": "/home/ubuntu/team-tbd-frozen-runs/team-tbd-frozen-runs-20260920T110942Z.zip",
+    "access": "private authenticated Brev workspace; not a public download"
+  }
+}
