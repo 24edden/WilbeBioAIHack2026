@@ -90,6 +90,46 @@ text on the page.
 In Claude Code, run `/context` and confirm `CLAUDE.md` appears under **Memory files**, or
 just ask what its project instructions say.
 
+## Agent profile snapshot
+
+[AgentProfiles/README.md](AgentProfiles/README.md) documents the nine-role scientific
+harness audited on 20 September 2026. The machine-readable JSON and browser page
+contain public capability metadata only. The application source and its private
+runtime are maintained separately; this repository does not include the deployed
+application, credentials, installed plugin instructions or saved investigations.
+
+Read the Markdown directly on GitHub, or serve the page locally with Python 3:
+
+```sh
+python3 -m http.server 8766 --bind 127.0.0.1 --directory AgentProfiles
+```
+
+Open `http://127.0.0.1:8766`. The page reads only the adjacent profile JSON and does
+not contact model providers. Opening the HTML as a local file may block that fetch.
+
+To validate the published metadata without application source:
+
+```sh
+python3 -m unittest discover -s AgentProfiles -p test_profiles.py
+```
+
+To regenerate from the separately maintained application source:
+
+```sh
+python3 AgentProfiles/build_profiles.py --source /path/to/rosalind-demo --output AgentProfiles
+TEAM_TBD_PROFILE_SOURCE=/path/to/rosalind-demo python3 -m unittest discover -s AgentProfiles -p test_profiles.py
+```
+
+`source-lock.json` pins the audited source files. Regeneration refuses changed
+sources: review the affected role/skill/tool policy, update the profile version,
+snapshot date and source lock, regenerate, then revalidate. The exporter reads no
+environment credentials or run data and imports no application code. A snapshot
+does not verify a live deployment or replace its recorded execution receipts.
+
+The same browser assets can be placed in the application's
+`static/agent-profiles/` directory and linked from its navigation. Use the existing
+service's documented clean stop/update/start procedure and preserve private state.
+
 ## Conventions
 
 - One branch per workstream, merge into `main` when it runs.

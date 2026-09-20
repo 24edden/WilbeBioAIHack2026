@@ -1,0 +1,864 @@
+{
+  "schema_version": "team-tbd-agent-profiles-1",
+  "profile_version": "1.0.0",
+  "snapshot_date": "2026-09-20",
+  "scope": "Audited configured capabilities in the separate Brev application. This snapshot is descriptive metadata, not an authorization policy or a record of executed work.",
+  "source": {
+    "application": "Team TBD research workbench",
+    "deployment_type": "Source directory; no Git branch recorded",
+    "files": [
+      {
+        "path": "app/providers.py",
+        "sha256": "f2a6736a38fef631618d3465142d8e166f83ed75e683d24ced8bf2cd748adc04"
+      },
+      {
+        "path": "app/process_contract.py",
+        "sha256": "3636f266fde8e1fc0c09daa503312fb3afd0f5dab8cb8a13af436175680b68f0"
+      },
+      {
+        "path": "app/scientific_skills.py",
+        "sha256": "d3c86498fdb5dd047098cdf190244c0af6c47e734fdafb320b5d47fc6a78589b"
+      },
+      {
+        "path": "app/sequence_discovery.py",
+        "sha256": "9ed821d10b06f5477063e105e6c1b953e900c082f519d2ecf61bbab196952d4f"
+      },
+      {
+        "path": "app/research_brief.py",
+        "sha256": "c36314e17aba9e7573a55ae438096484ea565f1221432f0752f7543741dade40"
+      },
+      {
+        "path": "app/worker.py",
+        "sha256": "b02975ff3b09213d12bf39a6e981d5d449a86c77f577b948ec396e7ab63de4bd"
+      },
+      {
+        "path": "skills/manifest.json",
+        "sha256": "e96dda19716ded3164ea7249b5da21238a679cf147c85a7df007de7e34c8aaa9"
+      }
+    ],
+    "instructions_embedded": false,
+    "private_run_data_embedded": false
+  },
+  "model_policy": {
+    "provider": "OpenAI",
+    "default_model": "gpt-6-astra",
+    "selection": "TEAM_TBD_MODEL, then ROSALIND_MODEL, then the source default. All nine main roles share the selected model within a session.",
+    "identity_note": "Rosalind-informed guidance is Team TBD-authored instruction content, not proof of GPT-Rosalind access. Requested and provider-returned model identities belong in the run's call receipts. No model was called to generate these profiles.",
+    "gpt_6_astra_reasoning_effort": "high",
+    "live_configuration_checked": false
+  },
+  "skill_categories": [
+    {
+      "id": "custom",
+      "label": "Custom project skills",
+      "description": "Team TBD-authored scientific role and workflow instructions."
+    },
+    {
+      "id": "rosalind_informed",
+      "label": "Rosalind-informed guidance",
+      "description": "Team TBD-authored workflow informed by public OpenAI documentation; not a proprietary model skill."
+    },
+    {
+      "id": "nvidia_bionemo",
+      "label": "NVIDIA BioNeMo",
+      "description": "Pinned Boltz2 NIM guidance from the installed NVIDIA toolkit. Loading it does not grant submission authority."
+    },
+    {
+      "id": "openai_life_sciences",
+      "label": "OpenAI Life Sciences",
+      "description": "Registered UniProt and RCSB PDB plugin skills. Use requires the separately installed, verified private runtime."
+    }
+  ],
+  "skills": [
+    {
+      "id": "clinical_scientist",
+      "name": "Clinical question and timeline",
+      "version": "1.2.0",
+      "sha256": "cae86fb33d13ffa9f99714a78715c4bfde6d29c9f68b7f08922ba45e8becb3b9",
+      "origin": "Team TBD: user-specified specialist architecture",
+      "description": "Define population, endpoint meaning and event timing.",
+      "category": "custom",
+      "eligible_roles": [
+        "clinical_scientist"
+      ],
+      "instruction_path": "scientific/clinical_scientist.md"
+    },
+    {
+      "id": "bioinformatician",
+      "name": "Source qualification and executable analysis",
+      "version": "1.3.0",
+      "sha256": "0f97074a11811ec5ed5965f39f733aaafc3ae67b488118adff34637dcd529510",
+      "origin": "Team TBD: user-specified specialist architecture",
+      "description": "Qualify measured inputs and suggest traceable preparation and executable analyses appropriate to their assay and study design.",
+      "category": "custom",
+      "eligible_roles": [
+        "bioinformatician"
+      ],
+      "instruction_path": "scientific/bioinformatician.md"
+    },
+    {
+      "id": "statistician",
+      "name": "Design and uncertainty review",
+      "version": "1.3.0",
+      "sha256": "9c9b814680a94454b709ad0c693363d41357be0ef7611fde020163a24963ef9c",
+      "origin": "Team TBD: user-specified specialist architecture",
+      "description": "Match analysis and validation to the estimand, experimental unit and data-generating design.",
+      "category": "custom",
+      "eligible_roles": [
+        "statistician"
+      ],
+      "instruction_path": "scientific/statistician.md"
+    },
+    {
+      "id": "clinical_pharmacologist",
+      "name": "Exposure qualification",
+      "version": "1.2.0",
+      "sha256": "ca5a82acf0ae934960bd07977e1596fbbdf0eb9330d115c1f68ff1c1775b870f",
+      "origin": "Team TBD: user-specified specialist architecture",
+      "description": "Require actual dose, concentration and sampling timestamps before reconstructing exposure or PK/PD.",
+      "category": "custom",
+      "eligible_roles": [
+        "clinical_pharmacologist"
+      ],
+      "instruction_path": "scientific/clinical_pharmacologist.md"
+    },
+    {
+      "id": "molecular_scientist",
+      "name": "Mechanistic and BioNeMo prediction qualification",
+      "version": "1.2.0",
+      "sha256": "674eab4dc5e6460324eee66b800ef3ee586408180cfb77bea1caa7b24c8638b2",
+      "origin": "Team TBD: user-specified specialist architecture",
+      "description": "Use validated transcript/variant mapping, exact WT/mutant or reference/candidate sequences and provenance.",
+      "category": "custom",
+      "eligible_roles": [
+        "molecular_scientist"
+      ],
+      "instruction_path": "scientific/molecular_scientist.md"
+    },
+    {
+      "id": "translational_scientist",
+      "name": "Competing mechanism synthesis",
+      "version": "1.3.0",
+      "sha256": "d09baa96ea0bf2df19809e9a18a1e257254413ade22c9847446f5379d56d0d45",
+      "origin": "Team TBD: user-specified specialist architecture",
+      "description": "Connect the clinical question to mechanisms and discriminating experiments using accepted omics/statistical/functional evidence.",
+      "category": "custom",
+      "eligible_roles": [
+        "translational_scientist"
+      ],
+      "instruction_path": "scientific/translational_scientist.md"
+    },
+    {
+      "id": "assay_scientist",
+      "name": "Discriminating assay and experimental handoff",
+      "version": "1.3.0",
+      "sha256": "d409cb5b4d675ef7f0118bb41bcb7db2b3de7025f67bab884bd8c6f4390db306",
+      "origin": "Team TBD: user-specified specialist architecture",
+      "description": "Check specimen availability, assay fitness, method/version, matched comparisons, controls, endpoints and QC.",
+      "category": "custom",
+      "eligible_roles": [
+        "assay_scientist"
+      ],
+      "instruction_path": "scientific/assay_scientist.md"
+    },
+    {
+      "id": "coordinator",
+      "name": "Evidence integration and bounded investigation",
+      "version": "1.3.0",
+      "sha256": "739ce05df8b82f6225883fbcdda867961354cd3d03b79ce9b9455d182ad14b63",
+      "origin": "Team TBD: user-specified specialist architecture",
+      "description": "Preserve the supplied hypothesis wording and source; distinguish agent alternatives.",
+      "category": "custom",
+      "eligible_roles": [
+        "coordinator"
+      ],
+      "instruction_path": "scientific/coordinator.md"
+    },
+    {
+      "id": "reviewer",
+      "name": "Independent challenge and analysis cycle",
+      "version": "1.3.0",
+      "sha256": "68bdcc08dd7d01869583665846aa110b63c0f7f0ac3f24cd1d68363f050d9a1d",
+      "origin": "Team TBD: user-specified specialist architecture",
+      "description": "Challenge source identities, versions, numeric support, independence, causality and experiment fitness.",
+      "category": "custom",
+      "eligible_roles": [
+        "reviewer"
+      ],
+      "instruction_path": "scientific/reviewer.md"
+    },
+    {
+      "id": "bionemo-boltz2",
+      "name": "NVIDIA BioNeMo Boltz2 NIM",
+      "version": "bionemo-agent-toolkit-0.1.0",
+      "sha256": "2922790dee8174bce9bd75252789b1ae4080645f96509ae1af031ed7dd6ce8fa",
+      "origin": "Installed NVIDIA BioNeMo agent toolkit; Apache-2.0 AND CC-BY-4.0 attribution retained",
+      "description": "Actual hosted/local prediction contract, input qualification and output interpretation.",
+      "category": "nvidia_bionemo",
+      "eligible_roles": [
+        "bioinformatician",
+        "statistician",
+        "molecular_scientist",
+        "translational_scientist",
+        "assay_scientist",
+        "coordinator",
+        "reviewer"
+      ],
+      "instruction_path": "bionemo-boltz2/SKILL.md"
+    },
+    {
+      "id": "discovery-planning",
+      "name": "Role-owned discovery and tool selection",
+      "version": "1.2.0",
+      "sha256": "dd0864ec8176d54507c37ec0bbd4c25e21133e11065d73edb330734496309812",
+      "origin": "Team TBD: role-specific scientific planning and registered capability contract",
+      "description": "Choose question-driven preparation and available analyses without embedding dataset-specific answers or fixed pipelines.",
+      "category": "custom",
+      "eligible_roles": [
+        "clinical_scientist",
+        "bioinformatician",
+        "statistician",
+        "clinical_pharmacologist",
+        "molecular_scientist",
+        "translational_scientist",
+        "assay_scientist",
+        "coordinator",
+        "reviewer"
+      ],
+      "instruction_path": "scientific/discovery-planning.md"
+    },
+    {
+      "id": "research-interpretation",
+      "name": "Clear findings and working scientific answer",
+      "version": "1.1.0",
+      "sha256": "d718f730bf4af632521b54d77f80e21bcdd11cd40f49717e91bdeb4a8f25a573",
+      "origin": "Team TBD: evidence-grounded research interpretation",
+      "description": "Plain-language evidence synthesis, scoped working answers and model-prepared comparison context.",
+      "category": "custom",
+      "eligible_roles": [
+        "clinical_scientist",
+        "bioinformatician",
+        "statistician",
+        "clinical_pharmacologist",
+        "molecular_scientist",
+        "translational_scientist",
+        "assay_scientist",
+        "coordinator",
+        "reviewer"
+      ],
+      "instruction_path": "scientific/research-interpretation.md"
+    },
+    {
+      "id": "molecular-interpretation",
+      "name": "Returned molecular artifact interpretation",
+      "version": "1.0.0",
+      "sha256": "c3084cea922f0d43cec3beba06f78189b1da7012a7a9e12a8f92b3d78c06af39",
+      "origin": "Team TBD: evidence-grounded research interpretation",
+      "description": "Exact sequence identity, confidence semantics, settings comparability and scoped structural interpretation.",
+      "category": "custom",
+      "eligible_roles": [
+        "bioinformatician",
+        "statistician",
+        "molecular_scientist",
+        "translational_scientist",
+        "coordinator",
+        "reviewer"
+      ],
+      "instruction_path": "scientific/molecular-interpretation.md"
+    },
+    {
+      "id": "rosalind-informed-workflow",
+      "name": "Rosalind-informed scientific workflow",
+      "version": "1.0.0",
+      "sha256": "c2956266bf526937ab59be0c35ae7ea56a253cb3f341f15a508f6e410904beff",
+      "origin": "Team TBD-authored guidance informed by OpenAI public Rosalind workflow documentation; not a proprietary Rosalind model skill",
+      "description": "Question-driven evidence, tool execution, hypothesis testing and scientific follow-up with truthful source and model attribution.",
+      "category": "rosalind_informed",
+      "eligible_roles": [
+        "clinical_scientist",
+        "bioinformatician",
+        "statistician",
+        "clinical_pharmacologist",
+        "molecular_scientist",
+        "translational_scientist",
+        "assay_scientist",
+        "coordinator",
+        "reviewer"
+      ],
+      "instruction_path": "scientific/rosalind-informed-workflow.md",
+      "source_url": "https://openai.com/index/introducing-gpt-rosalind/"
+    },
+    {
+      "id": "uniprot-skill",
+      "name": "OpenAI Life Sciences: UniProt sequence lookup",
+      "version": "life-sciences-databases-0.1.5",
+      "sha256": "bdeed361ea38f8443b2dc673ea79246450ad0da474418a38da1816e43ca5ef20",
+      "origin": "OpenAI-authored installed Life Sciences Databases plugin; private pinned runtime",
+      "description": "Actual installed source-specific instructions and bounded REST client used by AI sequence discovery.",
+      "category": "openai_life_sciences",
+      "eligible_roles": [
+        "bioinformatician",
+        "molecular_scientist",
+        "translational_scientist",
+        "coordinator",
+        "reviewer"
+      ],
+      "instruction_path": "skills/uniprot-skill/SKILL.md",
+      "source_url": "https://openai.com/index/introducing-gpt-rosalind/",
+      "external_plugin": "life-sciences-databases"
+    },
+    {
+      "id": "rcsb-pdb-skill",
+      "name": "OpenAI Life Sciences: RCSB PDB construct lookup",
+      "version": "life-sciences-databases-0.1.5",
+      "sha256": "2f8e74d2e149535834e3576a5dafaf3eb944c24457bf3bb20d962ecbe7130936",
+      "origin": "OpenAI-authored installed Life Sciences Databases plugin; private pinned runtime",
+      "description": "Actual installed source-specific instructions and bounded REST client used by AI sequence discovery.",
+      "category": "openai_life_sciences",
+      "eligible_roles": [
+        "bioinformatician",
+        "molecular_scientist",
+        "translational_scientist",
+        "coordinator",
+        "reviewer"
+      ],
+      "instruction_path": "skills/rcsb-pdb-skill/SKILL.md",
+      "source_url": "https://openai.com/index/introducing-gpt-rosalind/",
+      "external_plugin": "life-sciences-databases"
+    }
+  ],
+  "agents": [
+    {
+      "id": "clinical_scientist",
+      "name": "Clinical scientist",
+      "recipients": [
+        "translational_scientist",
+        "statistician",
+        "clinical_pharmacologist"
+      ],
+      "inputs": [
+        "Treatment and response timeline",
+        "Patient/sample/timepoint map"
+      ],
+      "work_product": "Population, phenotype, clinical question, timing and competing explanations",
+      "acceptance": "No patient-level inference from a reporter library or functional assay.",
+      "kind": "model_agent",
+      "purpose": "Define population, endpoint meaning and event timing.",
+      "model_policy_ref": "model_policy",
+      "main_investigation": {
+        "automatic_skills": [
+          "clinical_scientist",
+          "discovery-planning",
+          "rosalind-informed-workflow",
+          "research-interpretation"
+        ],
+        "optional_skills": [],
+        "tools": [
+          "get_case_readiness",
+          "read_evidence",
+          "load_scientific_skill",
+          "list_available_followups",
+          "propose_followup"
+        ],
+        "conditional_tools": []
+      },
+      "additional_workflows": [],
+      "nvidia": {
+        "can_request_matched_comparison": false,
+        "can_propose_registered_followup": true,
+        "submission_owner": "Trusted durable application executor",
+        "note": "Can propose a registered follow-up; has no direct NVIDIA comparison request tool. NVIDIA skill access supports planning or interpretation."
+      }
+    },
+    {
+      "id": "bioinformatician",
+      "name": "Bioinformatician",
+      "recipients": [
+        "statistician",
+        "molecular_scientist"
+      ],
+      "inputs": [
+        "Assay matrices or variant calls",
+        "Sample mapping and metadata"
+      ],
+      "work_product": "Versioned analysis table, feature definitions, exclusions and QC",
+      "acceptance": "Hash-qualified sources; explicit joins, units and exclusions.",
+      "kind": "model_agent",
+      "purpose": "Qualify measured inputs and suggest traceable preparation and executable analyses appropriate to their assay and study design.",
+      "model_policy_ref": "model_policy",
+      "main_investigation": {
+        "automatic_skills": [
+          "bioinformatician",
+          "discovery-planning",
+          "rosalind-informed-workflow",
+          "research-interpretation",
+          "molecular-interpretation"
+        ],
+        "optional_skills": [
+          "bionemo-boltz2",
+          "uniprot-skill",
+          "rcsb-pdb-skill"
+        ],
+        "tools": [
+          "get_case_readiness",
+          "read_evidence",
+          "load_scientific_skill",
+          "list_available_followups",
+          "propose_followup",
+          "analysis_catalog",
+          "run_case_analysis"
+        ],
+        "conditional_tools": [
+          {
+            "when": "case_id == cart-discovery",
+            "tools": [
+              "list_datasets",
+              "get_dataset",
+              "inspect_data_file",
+              "analyze_data_file"
+            ]
+          }
+        ]
+      },
+      "additional_workflows": [],
+      "nvidia": {
+        "can_request_matched_comparison": false,
+        "can_propose_registered_followup": true,
+        "submission_owner": "Trusted durable application executor",
+        "note": "Can propose a registered follow-up; has no direct NVIDIA comparison request tool. NVIDIA skill access supports planning or interpretation."
+      }
+    },
+    {
+      "id": "statistician",
+      "name": "Statistician",
+      "recipients": [
+        "clinical_scientist",
+        "translational_scientist"
+      ],
+      "inputs": [
+        "Bioinformatics work product",
+        "Endpoint and analysis specification"
+      ],
+      "work_product": "Estimates, design diagnostics and interpretation limits",
+      "acceptance": "Independent unit and missingness declared; numerical values resolve to deterministic tool results.",
+      "kind": "model_agent",
+      "purpose": "Match analysis and validation to the estimand, experimental unit and data-generating design.",
+      "model_policy_ref": "model_policy",
+      "main_investigation": {
+        "automatic_skills": [
+          "statistician",
+          "discovery-planning",
+          "rosalind-informed-workflow",
+          "research-interpretation",
+          "molecular-interpretation"
+        ],
+        "optional_skills": [
+          "bionemo-boltz2"
+        ],
+        "tools": [
+          "get_case_readiness",
+          "read_evidence",
+          "load_scientific_skill",
+          "list_available_followups",
+          "propose_followup"
+        ],
+        "conditional_tools": []
+      },
+      "additional_workflows": [],
+      "nvidia": {
+        "can_request_matched_comparison": false,
+        "can_propose_registered_followup": true,
+        "submission_owner": "Trusted durable application executor",
+        "note": "Can propose a registered follow-up; has no direct NVIDIA comparison request tool. NVIDIA skill access supports planning or interpretation."
+      }
+    },
+    {
+      "id": "clinical_pharmacologist",
+      "name": "Clinical pharmacologist",
+      "recipients": [
+        "clinical_scientist",
+        "translational_scientist"
+      ],
+      "inputs": [
+        "Actual dosing",
+        "Sampling times and concentrations"
+      ],
+      "work_product": "Supported, weakened or unresolved exposure explanation",
+      "acceptance": "No exposure model without actual dosing/sampling evidence; reference labels are not administered dose.",
+      "kind": "model_agent",
+      "purpose": "Require actual dose, concentration and sampling timestamps before reconstructing exposure or PK/PD.",
+      "model_policy_ref": "model_policy",
+      "main_investigation": {
+        "automatic_skills": [
+          "clinical_pharmacologist",
+          "discovery-planning",
+          "rosalind-informed-workflow",
+          "research-interpretation"
+        ],
+        "optional_skills": [],
+        "tools": [
+          "get_case_readiness",
+          "read_evidence",
+          "load_scientific_skill",
+          "list_available_followups",
+          "propose_followup"
+        ],
+        "conditional_tools": []
+      },
+      "additional_workflows": [],
+      "nvidia": {
+        "can_request_matched_comparison": false,
+        "can_propose_registered_followup": true,
+        "submission_owner": "Trusted durable application executor",
+        "note": "Can propose a registered follow-up; has no direct NVIDIA comparison request tool. NVIDIA skill access supports planning or interpretation."
+      }
+    },
+    {
+      "id": "molecular_scientist",
+      "name": "Molecular / structural scientist",
+      "recipients": [
+        "translational_scientist",
+        "assay_scientist"
+      ],
+      "inputs": [
+        "Validated mapping",
+        "Exact sequences/constructs",
+        "Functional evidence"
+      ],
+      "work_product": "Qualified prediction, mechanistic limits and discriminators",
+      "acceptance": "Matched binders require exact constructs and target-retained scope; public monomers require their own pinned sequence mapping. Structural confidence is not efficacy.",
+      "kind": "model_agent",
+      "purpose": "Use validated transcript/variant mapping, exact WT/mutant or reference/candidate sequences and provenance.",
+      "model_policy_ref": "model_policy",
+      "main_investigation": {
+        "automatic_skills": [
+          "molecular_scientist",
+          "discovery-planning",
+          "rosalind-informed-workflow",
+          "research-interpretation",
+          "molecular-interpretation",
+          "bionemo-boltz2"
+        ],
+        "optional_skills": [
+          "uniprot-skill",
+          "rcsb-pdb-skill"
+        ],
+        "tools": [
+          "get_case_readiness",
+          "read_evidence",
+          "load_scientific_skill",
+          "list_available_followups",
+          "propose_followup",
+          "qualify_molecular_inputs",
+          "request_molecular_comparison"
+        ],
+        "conditional_tools": []
+      },
+      "additional_workflows": [
+        {
+          "id": "public_sequence_discovery",
+          "name": "Public sequence discovery",
+          "automatic_skills": [
+            "molecular_scientist",
+            "rosalind-informed-workflow",
+            "research-interpretation",
+            "molecular-interpretation",
+            "bionemo-boltz2",
+            "uniprot-skill",
+            "rcsb-pdb-skill"
+          ],
+          "tools": [
+            "search_uniprot",
+            "fetch_uniprot",
+            "search_structures",
+            "fetch_structure"
+          ],
+          "note": "Separate workflow. Finds public sequence/construct candidates; no NVIDIA submission or assertion of target retention. A loaded reviewer skill does not prove the reviewer model ran."
+        }
+      ],
+      "nvidia": {
+        "can_request_matched_comparison": true,
+        "can_propose_registered_followup": true,
+        "submission_owner": "Trusted durable application executor",
+        "note": "Can request a qualified matched comparison through the application. Exact inputs, provenance and readiness gates still apply."
+      }
+    },
+    {
+      "id": "translational_scientist",
+      "name": "Translational scientist",
+      "recipients": [
+        "assay_scientist",
+        "coordinator"
+      ],
+      "inputs": [
+        "Clinical, statistical, molecular and exposure work products"
+      ],
+      "work_product": "Evidence matrix, contradictions and ranked discriminating questions",
+      "acceptance": "Preserve alternatives and contrary evidence; do not count repeated analyses as independent evidence.",
+      "kind": "model_agent",
+      "purpose": "Connect the clinical question to mechanisms and discriminating experiments using accepted omics/statistical/functional evidence.",
+      "model_policy_ref": "model_policy",
+      "main_investigation": {
+        "automatic_skills": [
+          "translational_scientist",
+          "discovery-planning",
+          "rosalind-informed-workflow",
+          "research-interpretation",
+          "molecular-interpretation"
+        ],
+        "optional_skills": [
+          "bionemo-boltz2",
+          "uniprot-skill",
+          "rcsb-pdb-skill"
+        ],
+        "tools": [
+          "get_case_readiness",
+          "read_evidence",
+          "load_scientific_skill",
+          "list_available_followups",
+          "propose_followup"
+        ],
+        "conditional_tools": []
+      },
+      "additional_workflows": [],
+      "nvidia": {
+        "can_request_matched_comparison": false,
+        "can_propose_registered_followup": true,
+        "submission_owner": "Trusted durable application executor",
+        "note": "Can propose a registered follow-up; has no direct NVIDIA comparison request tool. NVIDIA skill access supports planning or interpretation."
+      }
+    },
+    {
+      "id": "assay_scientist",
+      "name": "Assay / wet-lab scientist",
+      "recipients": [
+        "reviewer",
+        "coordinator"
+      ],
+      "inputs": [
+        "Mechanism and discriminating objective",
+        "Specimen/method/control constraints"
+      ],
+      "work_product": "Protocol proposal, matched comparisons, controls and result-to-hypothesis rules",
+      "acceptance": "Protocol proposal is not an executed experiment; returned results require identity and QC qualification.",
+      "kind": "model_agent",
+      "purpose": "Check specimen availability, assay fitness, method/version, matched comparisons, controls, endpoints and QC.",
+      "model_policy_ref": "model_policy",
+      "main_investigation": {
+        "automatic_skills": [
+          "assay_scientist",
+          "discovery-planning",
+          "rosalind-informed-workflow",
+          "research-interpretation"
+        ],
+        "optional_skills": [
+          "bionemo-boltz2"
+        ],
+        "tools": [
+          "get_case_readiness",
+          "read_evidence",
+          "load_scientific_skill",
+          "list_available_followups",
+          "propose_followup"
+        ],
+        "conditional_tools": []
+      },
+      "additional_workflows": [],
+      "nvidia": {
+        "can_request_matched_comparison": false,
+        "can_propose_registered_followup": true,
+        "submission_owner": "Trusted durable application executor",
+        "note": "Can propose a registered follow-up; has no direct NVIDIA comparison request tool. NVIDIA skill access supports planning or interpretation."
+      }
+    },
+    {
+      "id": "coordinator",
+      "name": "Coordinator",
+      "inputs": [
+        "Accepted specialist work products",
+        "Original scientist hypothesis"
+      ],
+      "work_product": "Integrated evidence assessment, decision and proposed next steps",
+      "recipients": [
+        "reviewer",
+        "scientist"
+      ],
+      "acceptance": "Preserve the original hypothesis; integrate accepted evidence; decisions pass independent review and application validation.",
+      "kind": "model_agent",
+      "purpose": "Preserve the supplied hypothesis wording and source; distinguish agent alternatives.",
+      "model_policy_ref": "model_policy",
+      "main_investigation": {
+        "automatic_skills": [
+          "coordinator",
+          "discovery-planning",
+          "rosalind-informed-workflow",
+          "research-interpretation",
+          "molecular-interpretation"
+        ],
+        "optional_skills": [
+          "bionemo-boltz2",
+          "uniprot-skill",
+          "rcsb-pdb-skill"
+        ],
+        "tools": [
+          "get_case_readiness",
+          "read_evidence",
+          "load_scientific_skill",
+          "list_available_followups",
+          "propose_followup"
+        ],
+        "conditional_tools": []
+      },
+      "additional_workflows": [
+        {
+          "id": "research_brief",
+          "name": "Research interpretation addendum",
+          "automatic_skills": [
+            "coordinator",
+            "research-interpretation",
+            "molecular-interpretation",
+            "bionemo-boltz2"
+          ],
+          "tools": [],
+          "note": "Separate synthesis and review of accepted outputs; no new NVIDIA prediction or raw-data analysis. This is an addendum to the preserved decision."
+        }
+      ],
+      "nvidia": {
+        "can_request_matched_comparison": false,
+        "can_propose_registered_followup": true,
+        "submission_owner": "Trusted durable application executor",
+        "note": "Can propose a registered follow-up; has no direct NVIDIA comparison request tool. NVIDIA skill access supports planning or interpretation."
+      }
+    },
+    {
+      "id": "reviewer",
+      "name": "Independent reviewer",
+      "inputs": [
+        "Coordinator decision",
+        "Specialist products and accepted evidence"
+      ],
+      "work_product": "Challenge, corrections and qualified governance follow-up selection",
+      "recipients": [
+        "coordinator",
+        "assay_scientist",
+        "scientist"
+      ],
+      "acceptance": "Challenge source identity, causality, evidence independence and readiness; only registered qualified follow-ups may enter execution.",
+      "kind": "model_agent",
+      "purpose": "Challenge source identities, versions, numeric support, independence, causality and experiment fitness.",
+      "model_policy_ref": "model_policy",
+      "main_investigation": {
+        "automatic_skills": [
+          "reviewer",
+          "discovery-planning",
+          "rosalind-informed-workflow",
+          "research-interpretation",
+          "molecular-interpretation"
+        ],
+        "optional_skills": [
+          "bionemo-boltz2",
+          "uniprot-skill",
+          "rcsb-pdb-skill"
+        ],
+        "tools": [
+          "get_case_readiness",
+          "read_evidence",
+          "load_scientific_skill",
+          "list_available_followups",
+          "propose_followup",
+          "analysis_catalog",
+          "request_followup_analysis"
+        ],
+        "conditional_tools": [
+          {
+            "when": "case_id == cart-discovery and no synthesis checkpoint",
+            "tools": [
+              "list_datasets",
+              "get_dataset",
+              "inspect_data_file",
+              "request_data_followup"
+            ]
+          }
+        ]
+      },
+      "additional_workflows": [
+        {
+          "id": "public_sequence_discovery",
+          "name": "Public sequence discovery",
+          "automatic_skills": [
+            "reviewer",
+            "rosalind-informed-workflow",
+            "research-interpretation",
+            "molecular-interpretation",
+            "bionemo-boltz2",
+            "uniprot-skill",
+            "rcsb-pdb-skill"
+          ],
+          "tools": [
+            "search_uniprot",
+            "fetch_uniprot",
+            "search_structures",
+            "fetch_structure"
+          ],
+          "note": "Separate workflow. Finds public sequence/construct candidates; no NVIDIA submission or assertion of target retention. A loaded reviewer skill does not prove the reviewer model ran."
+        },
+        {
+          "id": "research_brief",
+          "name": "Research interpretation addendum",
+          "automatic_skills": [
+            "reviewer",
+            "research-interpretation",
+            "molecular-interpretation",
+            "bionemo-boltz2"
+          ],
+          "tools": [],
+          "note": "Separate synthesis and review of accepted outputs; no new NVIDIA prediction or raw-data analysis. This is an addendum to the preserved decision."
+        }
+      ],
+      "nvidia": {
+        "can_request_matched_comparison": false,
+        "can_propose_registered_followup": true,
+        "submission_owner": "Trusted durable application executor",
+        "note": "Can propose a registered follow-up; has no direct NVIDIA comparison request tool. NVIDIA skill access supports planning or interpretation."
+      }
+    }
+  ],
+  "participants": [
+    {
+      "id": "scientist",
+      "name": "Scientist / customer",
+      "kind": "human",
+      "role": "Supplies the hypothesis, feedback, exact inputs and returned measurements; can select a registered follow-up.",
+      "note": "A human participant with no model or automatic skill grants. Scientist review and feedback must be recorded, not inferred from agent consensus."
+    },
+    {
+      "id": "executor",
+      "name": "Application executor",
+      "kind": "deterministic_application",
+      "role": "Validates inputs, journals intent, submits authorized provider work and accepts validated outputs.",
+      "note": "Executes qualified molecular requests or reviewed governance/scientist-selected registered follow-ups. No automatic repeat of unknown same-input external work. NVIDIA prediction model: mit/boltz2; Brev hosts the harness and is not itself evidence of inference."
+    },
+    {
+      "id": "jev",
+      "name": "Jev advisory pilot",
+      "kind": "external_pilot",
+      "role": "Separate review/scoring of saved outputs; not an agent in the deployed nine-role harness.",
+      "note": "No registered harness skills, tool authority or automatic decision override. Multiple-choice hypothesis assessments must include None of the above. Pilot scores do not establish biological truth or replace the existing review process."
+    }
+  ],
+  "interpretation_notes": [
+    "Automatic skills are loaded when that role's model execution is attempted. Optional skills are eligible for explicit loading; eligibility alone is not usage.",
+    "If exposure inputs are missing, the clinical pharmacologist can return a deterministic blocked work product with only its role skill loaded and no model call.",
+    "Synthesis checkpoint recovery reuses specialist work; only coordinator/reviewer make fresh synthesis calls. The reviewer then receives only common tools. Repair passes have no tools.",
+    "UniProt/PDB skill eligibility in the main investigation does not expose public sequence tools there; those tools belong to the separate sequence-discovery workflow.",
+    "Current skill versions must never be applied retrospectively to a saved run. Its own version/hash/role/operation load receipts are authoritative for instruction use.",
+    "Tool counts and model requests include attempts or blocked outcomes. A completed NVIDIA call requires its provider receipt and validated output artifact; a configured key, loaded skill or proposal is insufficient.",
+    "Governance judgment is evidence-qualified and scope-limited. This profile snapshot neither asserts scientific truth nor changes the decision rules."
+  ],
+  "execution_evidence": {
+    "skill_loaded": "Stored skill_receipts with skill_id, version, sha256, role and operation/purpose.",
+    "model_called": "Operation-specific provider request receipts with agent, requested_model, returned_model and status; reused handoffs do not prove a fresh call.",
+    "nvidia_completed": "Molecular/follow-up provider receipt plus accepted, validated returned artifact; retain requesting context, operation, model and input/output hashes.",
+    "historical_run_data": "Intentionally excluded from this public profile snapshot. Inspect the selected investigation's own receipts in the private workbench."
+  }
+}
