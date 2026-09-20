@@ -1,0 +1,55 @@
+sample_id,patient_id,timepoint,lineage,original_title,cohort,source_description,relapse_group_deposited,relapse_time_deposited,months_to_relapse,all_subtype,sex_deposited
+GSM461013,GSE18497_5189,diagnosis,Precursor-B-ALL,Patient_5189_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,22,Pre-B-ALL,male
+GSM461014,GSE18497_5260,diagnosis,Precursor-B-ALL,Patient_5260_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,44,Pre-B-ALL,male
+GSM461015,GSE18497_5361,diagnosis,Precursor-B-ALL,Patient_5361_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,39,Common ALL,female
+GSM461017,GSE18497_5449,diagnosis,Precursor-B-ALL,Patient_5449_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,24,Common ALL,male
+GSM461018,GSE18497_5500,diagnosis,Precursor-B-ALL,Patient_5500_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,18,Pre-B-ALL,male
+GSM461019,GSE18497_5513,diagnosis,Precursor-B-ALL,Patient_5513_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,23,Common ALL,female
+GSM461022,GSE18497_5864,diagnosis,Precursor-B-ALL,Patient_5864_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,9,Common ALL,female
+GSM461023,GSE18497_5978,diagnosis,Precursor-B-ALL,Patient_5978_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,8,Pro-B-ALL,male
+GSM461026,GSE18497_6145,diagnosis,Precursor-B-ALL,Patient_6145_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,44,Common ALL,male
+GSM461027,GSE18497_6190,diagnosis,Precursor-B-ALL,Patient_6190_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,104,Common ALL,male
+GSM461028,GSE18497_6285,diagnosis,Precursor-B-ALL,Patient_6285_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,35,Pre-B-ALL,male
+GSM461029,GSE18497_6309,diagnosis,Precursor-B-ALL,Patient_6309_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,32,Common ALL,male
+GSM461031,GSE18497_6345,diagnosis,Precursor-B-ALL,Patient_6345_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,32,Common ALL,female
+GSM461032,GSE18497_6411,diagnosis,Precursor-B-ALL,Patient_6411_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,31,Common ALL,male
+GSM461033,GSE18497_6417,diagnosis,Precursor-B-ALL,Patient_6417_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,63,Pre-B-ALL,male
+GSM461034,GSE18497_6449,diagnosis,Precursor-B-ALL,Patient_6449_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,8,Common ALL,male
+GSM461035,GSE18497_6475,diagnosis,Precursor-B-ALL,Patient_6475_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,40,Common ALL,male
+GSM461036,GSE18497_6557,diagnosis,Precursor-B-ALL,Patient_6557_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,19,Common ALL,female
+GSM461037,GSE18497_6558,diagnosis,Precursor-B-ALL,Patient_6558_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,33,Common ALL,male
+GSM461039,GSE18497_6633,diagnosis,Precursor-B-ALL,Patient_6633_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,68,Pro-B-ALL,male
+GSM461040,GSE18497_6892,diagnosis,Precursor-B-ALL,Patient_6892_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,34,Common ALL,female
+GSM461041,GSE18497_6991,diagnosis,Precursor-B-ALL,Patient_6991_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,19,Pro-B-ALL,male
+GSM461042,GSE18497_7170,diagnosis,Precursor-B-ALL,Patient_7170_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,18,Common ALL,male
+GSM461043,GSE18497_7263,diagnosis,Precursor-B-ALL,Patient_7263_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,21,Common ALL,male
+GSM461045,GSE18497_7304,diagnosis,Precursor-B-ALL,Patient_7304_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,38,Common ALL,male
+GSM461049,GSE18497_8237,diagnosis,Precursor-B-ALL,Patient_8237_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,13,Pre-B-ALL,female
+GSM461050,GSE18497_8549,diagnosis,Precursor-B-ALL,Patient_8549_diagnosis,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,9,Common ALL,male
+GSM461054,GSE18497_5189,relapse,Precursor-B-ALL,Patient_5189_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,22,Pre-B-ALL,male
+GSM461055,GSE18497_5260,relapse,Precursor-B-ALL,Patient_5260_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,44,Pre-B-ALL,male
+GSM461056,GSE18497_5361,relapse,Precursor-B-ALL,Patient_5361_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,39,Common ALL,female
+GSM461058,GSE18497_5449,relapse,Precursor-B-ALL,Patient_5449_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,24,Common ALL,male
+GSM461059,GSE18497_5500,relapse,Precursor-B-ALL,Patient_5500_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,18,Pre-B-ALL,male
+GSM461060,GSE18497_5513,relapse,Precursor-B-ALL,Patient_5513_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,23,Common ALL,female
+GSM461063,GSE18497_5864,relapse,Precursor-B-ALL,Patient_5864_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,9,Common ALL,female
+GSM461064,GSE18497_5978,relapse,Precursor-B-ALL,Patient_5978_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,8,Pro-B-ALL,male
+GSM461067,GSE18497_6145,relapse,Precursor-B-ALL,Patient_6145_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,44,Common ALL,male
+GSM461068,GSE18497_6190,relapse,Precursor-B-ALL,Patient_6190_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,104,Common ALL,male
+GSM461069,GSE18497_6285,relapse,Precursor-B-ALL,Patient_6285_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,35,Pre-B-ALL,male
+GSM461070,GSE18497_6309,relapse,Precursor-B-ALL,Patient_6309_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,32,Common ALL,male
+GSM461072,GSE18497_6345,relapse,Precursor-B-ALL,Patient_6345_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,32,Common ALL,female
+GSM461073,GSE18497_6411,relapse,Precursor-B-ALL,Patient_6411_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,31,Common ALL,male
+GSM461074,GSE18497_6417,relapse,Precursor-B-ALL,Patient_6417_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,63,Pre-B-ALL,male
+GSM461075,GSE18497_6449,relapse,Precursor-B-ALL,Patient_6449_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,8,Common ALL,male
+GSM461076,GSE18497_6475,relapse,Precursor-B-ALL,Patient_6475_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,40,Common ALL,male
+GSM461077,GSE18497_6557,relapse,Precursor-B-ALL,Patient_6557_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,19,Common ALL,female
+GSM461078,GSE18497_6558,relapse,Precursor-B-ALL,Patient_6558_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,33,Common ALL,male
+GSM461080,GSE18497_6633,relapse,Precursor-B-ALL,Patient_6633_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,68,Pro-B-ALL,male
+GSM461081,GSE18497_6892,relapse,Precursor-B-ALL,Patient_6892_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,34,Common ALL,female
+GSM461082,GSE18497_6991,relapse,Precursor-B-ALL,Patient_6991_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,19,Pro-B-ALL,male
+GSM461083,GSE18497_7170,relapse,Precursor-B-ALL,Patient_7170_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,18,Common ALL,male
+GSM461084,GSE18497_7263,relapse,Precursor-B-ALL,Patient_7263_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,21,Common ALL,male
+GSM461086,GSE18497_7304,relapse,Precursor-B-ALL,Patient_7304_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,38,Common ALL,male
+GSM461090,GSE18497_8237,relapse,Precursor-B-ALL,Patient_8237_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,13,Pre-B-ALL,female
+GSM461091,GSE18497_8549,relapse,Precursor-B-ALL,Patient_8549_relapse,GSE18497,"leukemic cells, purified using CD19 beads on autoMACS",,,9,Common ALL,male

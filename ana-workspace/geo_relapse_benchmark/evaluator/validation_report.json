@@ -1,0 +1,87 @@
+{
+  "python": "3.13.5 (v3.13.5:6cb20a219a8, Jun 11 2025, 12:23:45) [Clang 16.0.0 (clang-1600.0.26.6)]",
+  "numpy": "2.2.1",
+  "pandas": "2.2.3",
+  "annotation_mapping": {
+    "multiple_symbols": 2214,
+    "single_symbol": 42904,
+    "missing": 9557
+  },
+  "source": {
+    "GSE28460": {
+      "samples": 98,
+      "patients": 49,
+      "probes": 54675,
+      "missing_or_nonfinite_values": 0,
+      "original_signal_quantiles_0_1_50_99_100_percent": [
+        15.11902536,
+        21.32155694,
+        111.7357294,
+        9360.443912559998,
+        42313.94755
+      ],
+      "all_pairs_complete": true,
+      "lineages_by_patient": {
+        "Precursor-B-ALL": 49
+      },
+      "deposited_relapse_group_by_patient": {
+        "E": 29,
+        "L": 20
+      }
+    },
+    "GSE18497": {
+      "samples": 82,
+      "patients": 41,
+      "probes": 54675,
+      "missing_or_nonfinite_values": 0,
+      "original_signal_quantiles_0_1_50_99_100_percent": [
+        6.63,
+        10.23,
+        45.55,
+        2876.3554999999888,
+        26803.99
+      ],
+      "all_pairs_complete": true,
+      "lineages_by_patient": {
+        "T-ALL": 14,
+        "Precursor-B-ALL": 27
+      },
+      "deposited_relapse_group_by_patient": {
+        "": 41
+      }
+    }
+  },
+  "agent_groups": {
+    "discovery_B_ALL": {
+      "patients": 49,
+      "samples": 98,
+      "probes": 54675,
+      "lineages": {
+        "Precursor-B-ALL": 49
+      },
+      "all_pairs_complete": true,
+      "roundtrip_passed": true
+    },
+    "validation_B_ALL": {
+      "patients": 27,
+      "samples": 54,
+      "probes": 54675,
+      "lineages": {
+        "Precursor-B-ALL": 27
+      },
+      "all_pairs_complete": true,
+      "roundtrip_passed": true
+    },
+    "optional_T_ALL": {
+      "patients": 14,
+      "samples": 28,
+      "probes": 54675,
+      "lineages": {
+        "T-ALL": 14
+      },
+      "all_pairs_complete": true,
+      "roundtrip_passed": true
+    }
+  },
+  "known_discrepancy": "GSE28460 deposited metadata label 29 patients E and 20 L; the primary paper reports 27 early and 22 late in the 49-patient expression cohort. Do not silently relabel. Use all 49 paired patients for the primary contrast; exclude timing subgroups until reconciled."
+}
