@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Agent Profiles · Team TBD</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#profiles">Skip to agent profiles</a>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Team TBD, top of page"><span class="brand-mark" aria-hidden="true">T</span>Team TBD <span class="brand-divider">/</span> Research workbench</a>
+    <span class="reference-label">Harness reference</span>
+  </header>
+  <main id="top">
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">People, agents & scientific tools</p>
+        <h1 id="page-title">Agent profiles</h1>
+        <p class="lede">Who does what, which skills they receive, and how NVIDIA requests reach the executor.</p>
+        <p class="secondary">This snapshot describes configured capabilities. Each investigation’s receipts show the skills, models and provider calls actually used.</p>
+        <p class="snapshot" id="snapshot">Loading the published profile snapshot…</p>
+      </div>
+      <div class="artifact-links">
+        <a class="button primary" href="./agent-profiles.json" download>Download metadata <span aria-hidden="true">↗</span></a>
+        <a class="button" href="./README.md">Read the guide <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+    <div id="load-error" class="load-error" role="alert" hidden></div>
+    <noscript><p class="load-error">This page uses JavaScript to read the profile metadata. You can also read <a href="./README.md">the guide</a> or <a href="./agent-profiles.json">the JSON file</a>.</p></noscript>
+    <div id="content" hidden>
+      <section class="model-panel" aria-labelledby="model-title">
+        <div><p class="eyebrow">Model identity</p><h2 id="model-title">Source default model</h2><p id="model-name" class="model-name"></p></div>
+        <div><p id="model-note"></p><p id="model-selection" class="secondary"></p></div>
+      </section>
+      <section class="source-section" aria-labelledby="source-title">
+        <div class="section-heading"><h2 id="source-title">Where the skills come from</h2><p>Skill origin and model identity are separate.</p></div>
+        <div id="categories" class="category-grid"></div>
+      </section>
+      <section id="profiles" aria-labelledby="profiles-title">
+        <div class="section-heading"><div><p class="eyebrow">The scientific team</p><h2 id="profiles-title">Agent responsibilities</h2></div><p id="profile-count" role="status" aria-live="polite"></p></div>
+        <form class="filters" role="search" onsubmit="return false">
+          <div class="search-field"><label for="search">Find an agent, skill or tool</label><input id="search" type="search" placeholder="For example: molecular, Boltz2, evidence" autocomplete="off"></div>
+          <div class="category-field"><label for="category-filter">Skill source</label><select id="category-filter"><option value="all">All sources</option></select></div>
+        </form>
+        <div id="agent-grid" class="agent-grid"></div>
+        <p id="empty-state" class="empty-state" hidden>No profiles match. Try a different role, skill or tool.</p>
+      </section>
+      <section class="participants-section" aria-labelledby="participants-title">
+        <div class="section-heading"><div><p class="eyebrow">Around the scientific team</p><h2 id="participants-title">Other participants & execution</h2></div><p>Review authority, advisory scoring and submission ownership.</p></div>
+        <div id="participants" class="participant-grid"></div>
+      </section>
+      <section class="notes-panel" aria-labelledby="notes-title"><h2 id="notes-title">How to read these profiles</h2><ul id="notes"></ul></section>
+    </div>
+  </main>
+  <footer><p>Team TBD · Agent Profiles</p><p>Read-only reference. This page does not call models or submit scientific jobs.</p></footer>
+</body>
+</html>

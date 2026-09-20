@@ -1,0 +1,262 @@
+{
+  "id": "cd19-car-t",
+  "title": "CD19 CAR-T",
+  "subtitle": "Antigen escape or a retained-target failure?",
+  "hypothesis": "Is therapy failure more consistent with loss of functional CD19 recognition, or with inadequate antigen-specific CAR-T activity, persistence or expansion?\n\nH1: A CD19 sequence change creates an alternatively spliced isoform that removes or disrupts the CAR-recognised epitope. Variant-to-isoform association; junction/isoform evidence; reduced surface CD19 despite tumour-cell presence. Normal full-length, surface-accessible CD19 in relapse tumour cells. Targeted long-read RNA or junction assay plus surface-CD19 flow cytometry.\nH2: RNA-binding regulation, including PTBP1-linked regulation, changes CD19 splicing without a causal CD19 sequence variant. Differential RNA-binding or perturbation evidence with concordant isoform change. No isoform change, or a sequence variant explains the measured isoform outcome. Perturb the nominated RNA-binding factor and measure CD19 isoforms and surface protein.\nH3: CD19 remains functionally present, but the CAR-T product has poor antigen-specific activation, expansion or persistence. Weaker response under CD19 stimulation than appropriate matched controls; dysfunctional state programs. Robust antigen-specific activation and persistence with continued tumour growth. Donor-aware CD19-versus-non-target stimulation and serial CAR-T abundance/function assay.\nH4: Relapse is driven by CAR-T exhaustion or suppressive microenvironment rather than antigen escape. Exhaustion/dysfunction signatures, poor expansion, inhibitory microenvironment evidence while CD19 is retained. Tumour cells lack functional CD19 recognition. Matched tumour/CAR-T co-culture with exhaustion and killing readouts.\nH5: Apparent CD19 loss is caused by tumour purity, lineage composition, batch, or assay-identity error. Target signal tracks sample composition or technical factor rather than malignant cells. Cell-resolved tumour measurements show reproducible loss. Verify sample/assay metadata and quantify CD19 within annotated malignant cells.",
+  "hypothesis_source": {
+    "name": "CD19_CAR_T_.txt",
+    "url": "",
+    "locator": "Entire source file, preserved byte-for-byte",
+    "sha256": "03918c91a6905f28249ae9d4b5069548e5b18d10e5543a11c6293a8bea395a88",
+    "path": "sources/cd19/CD19_CAR_T_.txt",
+    "origin": "/home/ubuntu/ana-workspace/hypothesis/CD19_CAR_T_.txt"
+  },
+  "description": "Your Brev CD19 hypothesis, grounded in real public minigene evidence, with a separate CAR-T dysfunction alternative and an explicit R&D route.",
+  "data_mode": "public_evidence",
+  "evidence_count": 5,
+  "evidence": [
+    {
+      "id": "CD19-01",
+      "title": "Public minigene RNA evidence",
+      "kind": "measured",
+      "summary": "The pinned RNA table contains 19,043 barcode–replicate rows and 9,722 distinct barcodes across replicate labels 1, 2. These are a reporter library, not patient samples.",
+      "source": {
+        "name": "GSE182892_CD19_minigene_isoforms.txt.gz",
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE182892",
+        "locator": "All data rows; distinct barcode and replicate columns",
+        "sha256": "a7fbe062d414f45d398658c6c79356cc1ff589a561b5b0263c64522d077cc7db",
+        "path": "sources/cd19/GSE182892_CD19_minigene_isoforms.txt.gz"
+      },
+      "values": {
+        "rows": 19043,
+        "distinct_barcodes": 9722,
+        "replicate_rows": {
+          "1": 9671,
+          "2": 9372
+        },
+        "total_readcount": 21866465
+      }
+    },
+    {
+      "id": "CD19-02",
+      "title": "DNA/RNA join distinguishes variants from unmutated controls",
+      "kind": "measured",
+      "summary": "Exact DNA RNA_BARCODE-to-RNA barcode matching covers 9,527 of 9,722 RNA barcodes. All 195 barcodes absent from the variant table are explicitly annotated mutations='-' in RNA; they are unmutated controls, not failed mutant joins. The RNA table has 195/194 controls in the two replicates; paper Methods independently states these counts.",
+      "source": {
+        "name": "GSE182891_CD19_minigene_variants.tab.gz",
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE182891",
+        "locator": "All rows; RNA_BARCODE set intersected with GSE182892 barcode set; second source CD19-01",
+        "sha256": "17cf79b3880d6a331f8223f7e20fd42998bc27b2a328cadfe0d823333a2568cb",
+        "path": "sources/cd19/GSE182891_CD19_minigene_variants.tab.gz"
+      },
+      "values": {
+        "dna_variant_rows": 100135,
+        "dna_rna_barcodes": 10295,
+        "joined_barcodes": 9527,
+        "unmatched_rna_barcodes": 195,
+        "explicit_unmutated_control_barcodes": 195,
+        "control_rows_by_replicate": {
+          "1": 195,
+          "2": 194
+        },
+        "control_basis": "RNA mutations='-'; corroborated by paper Methods: Estimation of single-mutation effects",
+        "paper_doi": "https://doi.org/10.1038/s41467-022-31818-y"
+      }
+    },
+    {
+      "id": "CD19-03",
+      "title": "One exact barcode has multiple variants",
+      "kind": "measured",
+      "summary": "Barcode AAAAAAAGCACGTGG has six listed mutations and distinct junction-count profiles in two replicate rows. A multi-variant construct cannot establish one mutation's causal effect without a qualified analysis.",
+      "source": {
+        "name": "GSE182892_CD19_minigene_isoforms.txt.gz",
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE182892",
+        "locator": "barcode=AAAAAAAGCACGTGG; decompressed TSV lines 2 and 9673 (header is line 1)",
+        "sha256": "a7fbe062d414f45d398658c6c79356cc1ff589a561b5b0263c64522d077cc7db",
+        "path": "sources/cd19/GSE182892_CD19_minigene_isoforms.txt.gz"
+      },
+      "values": {
+        "records": [
+          {
+            "line_1based": 2,
+            "replicate": "1",
+            "barcode": "AAAAAAAGCACGTGG",
+            "mutations": "T162C,A728T,G1005A,T1106C,A1148C,T1251C",
+            "readcount": "1295",
+            "(219 475)(743 1040)": "96",
+            "(219 1040)": "26",
+            "(219 475)": "486",
+            "discarded": "39"
+          },
+          {
+            "line_1based": 9673,
+            "replicate": "2",
+            "barcode": "AAAAAAAGCACGTGG",
+            "mutations": "T162C,A728T,G1005A,T1106C,A1148C,T1251C",
+            "readcount": "1645",
+            "(219 475)(743 1040)": "111",
+            "(219 1040)": "70",
+            "(219 475)": "771",
+            "discarded": "45"
+          }
+        ],
+        "variant_count": 6,
+        "selection_rule": "First data-row barcode, selected before reviewing junction outcomes"
+      }
+    },
+    {
+      "id": "CD19-04",
+      "title": "Escape mechanism is a study hypothesis",
+      "kind": "literature",
+      "summary": "GSE182891/2 study metadata describes a CD19 exon 1–3 minigene assay in NALM-6 cells designed to investigate how sequence and splicing relate to epitope loss. This is mechanistic background, not proof of escape in a supplied patient.",
+      "source": {
+        "name": "geo_metadata_excerpt.json",
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE182892",
+        "locator": "GSE182892; original TSV lines 331, 336, 337, 338; fields title, summary, overall_design, pubmed_id",
+        "sha256": "8451668aa146a5529529430ce1a613c232a22776e643f2483836767a1c89478a",
+        "path": "sources/geo_metadata_excerpt.json",
+        "origin": "outputs/dataset-acquisition/integration/geo_series_attributes.tsv",
+        "origin_sha256": "2ddc27cc04a7508e5f80931d77e7a43c0df533b36dfc0de7ab7632d0690aa8ee"
+      },
+      "values": {}
+    },
+    {
+      "id": "CD19-05",
+      "title": "A distinct retained-target alternative exists",
+      "kind": "literature",
+      "summary": "GSE197215 describes infusion-product CAR-T responses under CD19 stimulation, TCR stimulation, non-target stimulation and unstimulated controls. The expression object has not been analyzed in this compact pack; this cohort must not be joined to the minigene library as matched patients.",
+      "source": {
+        "name": "geo_metadata_excerpt.json",
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE197215",
+        "locator": "GSE197215; original TSV lines 457, 462, 463, 464; fields title, summary, overall_design, pubmed_id",
+        "sha256": "8451668aa146a5529529430ce1a613c232a22776e643f2483836767a1c89478a",
+        "path": "sources/geo_metadata_excerpt.json",
+        "origin": "outputs/dataset-acquisition/integration/geo_series_attributes.tsv",
+        "origin_sha256": "2ddc27cc04a7508e5f80931d77e7a43c0df533b36dfc0de7ab7632d0690aa8ee"
+      },
+      "values": {}
+    }
+  ],
+  "limitations": [
+    "No individual relapse tumor, surface-CD19 measurement, CAR construct or patient-specific variant was supplied in this pack.",
+    "Reporter-library data and infusion-product study metadata are different studies, not paired patient observations.",
+    "RNA counts do not establish surface-accessible CD19, recognition, affinity or CAR-T killing.",
+    "No fitted variant-to-splicing model, clinical mechanism classification or BioNeMo prediction is represented as completed."
+  ],
+  "readiness": [
+    {
+      "label": "Hypothesis preserved",
+      "status": "ready",
+      "detail": "Original Brev question and all five hypotheses are pinned."
+    },
+    {
+      "label": "Source data verified",
+      "status": "ready",
+      "detail": "DNA and RNA source bytes are pinned and joined explicitly."
+    },
+    {
+      "label": "Clinical adjudication",
+      "status": "limited",
+      "detail": "Patient-specific matched tumor and CAR-T observations are missing."
+    },
+    {
+      "label": "BioNeMo binder comparison",
+      "status": "blocked",
+      "detail": "Requires retained accessible target plus exact reference/candidate constructs, target sequence and matched prediction specification."
+    }
+  ],
+  "demo_decision": {
+    "summary": "The supplied evidence can investigate CD19 splicing, but cannot choose antigen escape over CAR-T dysfunction for a particular failure. Measure functional target retention before selecting a design branch.",
+    "assessment": "Unresolved — discriminating measurements required",
+    "claims": [
+      {
+        "text": "The pinned RNA table contains 19,043 barcode–replicate rows and 9,722 distinct barcodes across replicate labels 1, 2. These are a reporter library, not patient samples.",
+        "evidence_ids": [
+          "CD19-01"
+        ],
+        "kind": "measured"
+      },
+      {
+        "text": "Exact DNA RNA_BARCODE-to-RNA barcode matching covers 9,527 of 9,722 RNA barcodes. All 195 barcodes absent from the variant table are explicitly annotated mutations='-' in RNA; they are unmutated controls, not failed mutant joins. The RNA table has 195/194 controls in the two replicates; paper Methods independently states these counts.",
+        "evidence_ids": [
+          "CD19-01",
+          "CD19-02"
+        ],
+        "kind": "measured"
+      },
+      {
+        "text": "The selected multi-variant barcode cannot isolate one causal mutation, and these reporter-library rows do not show a patient's mechanism.",
+        "evidence_ids": [
+          "CD19-03",
+          "CD19-04"
+        ],
+        "kind": "inference"
+      },
+      {
+        "text": "Antigen escape and target-retained functional failure remain separate alternatives; the current sources do not adjudicate between them in one individual.",
+        "evidence_ids": [
+          "CD19-04",
+          "CD19-05"
+        ],
+        "kind": "inference"
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "H1/H2 — CD19 splicing or RNA regulation",
+        "reason": "The library enables mechanistic investigation; patient-specific isoforms and surface recognition remain absent."
+      },
+      {
+        "title": "H3/H4 — Retained target with CAR-T dysfunction",
+        "reason": "Antigen-specific activity, expansion/persistence and microenvironment measurements are needed."
+      },
+      {
+        "title": "H5 — Composition or assay identity",
+        "reason": "Cell identity, timing, technical effects and exact barcode joins can change the interpretation."
+      }
+    ],
+    "limitations": [
+      "No individual relapse tumor, surface-CD19 measurement, CAR construct or patient-specific variant was supplied in this pack.",
+      "Reporter-library data and infusion-product study metadata are different studies, not paired patient observations.",
+      "RNA counts do not establish surface-accessible CD19, recognition, affinity or CAR-T killing.",
+      "No fitted variant-to-splicing model, clinical mechanism classification or BioNeMo prediction is represented as completed."
+    ],
+    "next_experiment": {
+      "title": "Distinguish antigen escape from retained-target CAR-T dysfunction",
+      "design": "First qualify matched tumor and CAR-T sample identities. Obtain tumor-cell-resolved CD19 isoform/junction evidence and surface-accessible CD19 recognition, alongside antigen-specific CAR-T activity with CD19-present, CD19-absent and non-target controls. Define the independent sample unit and acceptance criteria before interpreting new results.",
+      "positive": "Loss of functional surface recognition together with concordant isoform evidence supports the escape branch; retained recognition with impaired antigen-specific activity supports a CAR-T functional branch.",
+      "negative": "Retained surface recognition and robust antigen-specific activity weaken both leading explanations and motivate a microenvironment or sampling review.",
+      "inconclusive": "Unmatched timing, uncertain malignant-cell identity, missing controls, or RNA-only non-detection cannot distinguish these mechanisms."
+    },
+    "rd_handoff": {
+      "objective": "Choose a testable design objective after establishing whether functional CD19 recognition is retained.",
+      "status": "awaiting_discriminating_measurements",
+      "reference": "No reference CAR antigen-binding construct has been supplied.",
+      "candidates": [
+        {
+          "design_key": "cd19-target-retention",
+          "name": "CD19 target-retention assay",
+          "type": "experimental_arm",
+          "status": "planned",
+          "rationale": "Measure surface-accessible CD19 in identified tumor cells to choose the escape or retained-target branch. Include matched target-present, target-absent and assay controls.",
+          "endpoint": "Surface-accessible CD19 recognition; specify assay, units, timing and controls with the returned result.",
+          "exact_sequences": "Not supplied. This is a planned assay arm, not a qualified or modeled molecular construct."
+        }
+      ],
+      "modeling": {
+        "status": "blocked",
+        "reason": "No qualified target-retained reference/candidate pair. Improving binding to an absent epitope is not a supported rescue. Boltz-2 may compare a qualified molecular interface after target retention and sequence/construct gates pass; it cannot simulate a whole CAR-T cell.",
+        "artifacts": []
+      },
+      "experiment_id": "CD19-TARGET-RETENTION-001",
+      "return_requirements": [
+        "Experiment ID, source case/version and preserved hypothesis ID",
+        "Matched sample/construct IDs, timing and malignant-cell identity",
+        "Raw-data artifact/hash, measurement units, replicate unit and QC",
+        "Surface recognition, isoform/junction and antigen-specific activity results with controls",
+        "If retained-target design is justified: exact target, reference and candidate sequences, format, boundaries and provenance",
+        "Prespecified endpoint and positive, negative or inconclusive assessment"
+      ]
+    }
+  }
+}

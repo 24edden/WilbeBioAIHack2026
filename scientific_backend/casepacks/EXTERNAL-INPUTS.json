@@ -1,0 +1,50 @@
+{
+  "schema": "team-tbd-external-inputs/1.0",
+  "source_of_truth": "MANIFEST.json",
+  "inputs": [
+    {
+      "path": "sources/alk/13059_2026_3977_MOESM2_ESM.xlsx",
+      "bytes": 968855,
+      "sha256": "f160f2a451a581d37f54bcbb321705a6f51429ca6f10a93bd6ce51e1f86abe78",
+      "url": "https://static-content.springer-cdn.com/esm/art%3A10.1186%2Fs13059-026-03977-4/MediaObjects/13059_2026_3977_MOESM2_ESM.xlsx"
+    },
+    {
+      "path": "sources/bcma/post_second_infusion_variants.tsv",
+      "bytes": 61749,
+      "sha256": "72007e8b5bfa71bff7e75edf36ab3c4c866ca1274058b3b16eb15e66a70881d7",
+      "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE164nnn/GSE164551/suppl/GSE164551_CRB_401_MS7856_mergedAll_PASS_DP10.maf.txt.gz",
+      "preparation": {
+        "kind": "bcma-pinned-column-projection-v1",
+        "bytes": 108945,
+        "sha256": "0cd18f59458d24a89e6308b033b2333ee4ead15e6b296a99c104e8afd89f7e3b",
+        "rows": 585,
+        "source_provenance": "Original GSE164551 preparation script and source manifest; column projection independently reproduced exact pinned output on 2026-09-20 without modifying source data",
+        "study_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE164551"
+      }
+    },
+    {
+      "path": "sources/cd19/GSE182891_CD19_minigene_variants.tab.gz",
+      "bytes": 552085,
+      "sha256": "17cf79b3880d6a331f8223f7e20fd42998bc27b2a328cadfe0d823333a2568cb",
+      "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE182nnn/GSE182891/suppl/GSE182891_CD19_minigene_variants.tab.gz"
+    },
+    {
+      "path": "sources/cd19/GSE182892_CD19_minigene_isoforms.txt.gz",
+      "bytes": 1076956,
+      "sha256": "a7fbe062d414f45d398658c6c79356cc1ff589a561b5b0263c64522d077cc7db",
+      "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE182nnn/GSE182892/suppl/GSE182892_CD19_minigene_isoforms.txt.gz"
+    },
+    {
+      "path": "sources/cd19-discovery/author_isoforms_predicted_translational_features.csv",
+      "bytes": 109087,
+      "sha256": "82d597d646e9f569964d83dcdc58703e11e8f94b009300351e9f578dd50db7c1",
+      "url": "https://raw.githubusercontent.com/mcortes-lopez/CD19_splicing_mutagenesis/edd69ccba3a193ca13ee66a5a4b191d980a940a1/CrypticIsoforms/output/isoforms_predicted_translational_features.csv"
+    },
+    {
+      "path": "sources/cd19-discovery/paper.xml",
+      "bytes": 220988,
+      "sha256": "9f0955da414495f649181a5e3904a275fcb4567e74f697918273cee0a498ce70",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9500061/fullTextXML"
+    }
+  ]
+}

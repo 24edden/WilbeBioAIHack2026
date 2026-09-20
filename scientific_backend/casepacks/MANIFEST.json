@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0",
+  "generated_by": "casepacks/build_cases.py",
+  "data_mode": "public_evidence",
+  "source_files": [
+    {
+      "path": "sources/alk/13059_2026_3977_MOESM2_ESM.xlsx",
+      "bytes": 968855,
+      "sha256": "f160f2a451a581d37f54bcbb321705a6f51429ca6f10a93bd6ce51e1f86abe78"
+    },
+    {
+      "path": "sources/alk/HYPOTHESIS_01_EASY_ALK_L1196M.md",
+      "bytes": 5475,
+      "sha256": "c7af4d968f0802a267e31a0931f01c5510a23ccc9078e078787c9efdc6c8d24a"
+    },
+    {
+      "path": "sources/bcma/case.json",
+      "bytes": 3432,
+      "sha256": "a8f2cbbced2357d30d825ba77435fea37934e0094ffe668810cdf326682b3c8c"
+    },
+    {
+      "path": "sources/bcma/post_second_infusion_variants.tsv",
+      "bytes": 61749,
+      "sha256": "72007e8b5bfa71bff7e75edf36ab3c4c866ca1274058b3b16eb15e66a70881d7"
+    },
+    {
+      "path": "sources/bcma/sample_manifest.tsv",
+      "bytes": 2771,
+      "sha256": "30364ccf30a991921fbe869f7c13b4138fbb5bde9455e6ff8db047b9af52ec3b"
+    },
+    {
+      "path": "sources/brev-cart-catalog.json",
+      "bytes": 521885,
+      "sha256": "0295018e8188d31444a4e3bb1ae1fd481d32f417f1502fd40feac2ed876115bc"
+    },
+    {
+      "path": "sources/cd19/CD19_CAR_T_.txt",
+      "bytes": 1968,
+      "sha256": "03918c91a6905f28249ae9d4b5069548e5b18d10e5543a11c6293a8bea395a88"
+    },
+    {
+      "path": "sources/cd19/GSE182891_CD19_minigene_variants.tab.gz",
+      "bytes": 552085,
+      "sha256": "17cf79b3880d6a331f8223f7e20fd42998bc27b2a328cadfe0d823333a2568cb"
+    },
+    {
+      "path": "sources/cd19/GSE182892_CD19_minigene_isoforms.txt.gz",
+      "bytes": 1076956,
+      "sha256": "a7fbe062d414f45d398658c6c79356cc1ff589a561b5b0263c64522d077cc7db"
+    },
+    {
+      "path": "sources/cd19-discovery/CD19_WT.minigene.anno.gtf",
+      "bytes": 373,
+      "sha256": "6e1cc2ba37c7b159f403fd44487c958ecd1840b692f876bfc009292eb7096b55"
+    },
+    {
+      "path": "sources/cd19-discovery/CD19_WT.minigene.fa",
+      "bytes": 1281,
+      "sha256": "0718f3e82821c6460294068a1ea2db6d26e707e60cd57500139836ae544223a0"
+    },
+    {
+      "path": "sources/cd19-discovery/GSE182891_README.txt",
+      "bytes": 2815,
+      "sha256": "66dc319ecc7a35e31261de04bf121bc7c1bf7cf7ac31f59dc2c2f9d31350fd62"
+    },
+    {
+      "path": "sources/cd19-discovery/GSE182892_README.txt",
+      "bytes": 4982,
+      "sha256": "7369a08ddb23221d6d6e220110c62fc5278e7d5f3a520c472cc9a7f5cb48f6c6"
+    },
+    {
+      "path": "sources/cd19-discovery/P15391.json",
+      "bytes": 65677,
+      "sha256": "a000a6a2049d4fd263c8af16fe0c0e85f97293aaf3d76b9f61db88f196fb3545"
+    },
+    {
+      "path": "sources/cd19-discovery/SOURCES.json",
+      "bytes": 3437,
+      "sha256": "ab8f331cd03eec335989ed3f9cb74f37b9b2ce153cfb1a19db668380774395c3"
+    },
+    {
+      "path": "sources/cd19-discovery/author_LICENSE.md",
+      "bytes": 1079,
+      "sha256": "019bfb84ac44d9103ac2c1526cc100d2a915c88d543d73bd827ba28075510a94"
+    },
+    {
+      "path": "sources/cd19-discovery/author_isoform_translational_features.Rmd",
+      "bytes": 7161,
+      "sha256": "4ce16e288b5516580bb3386de452c2e74e15f226825ddff8ed4d6bdb0f93b140"
+    },
+    {
+      "path": "sources/cd19-discovery/author_isoforms_predicted_translational_features.csv",
+      "bytes": 109087,
+      "sha256": "82d597d646e9f569964d83dcdc58703e11e8f94b009300351e9f578dd50db7c1"
+    },
+    {
+      "path": "sources/cd19-discovery/author_variant_table_for_RNASeq_analysis.R",
+      "bytes": 2131,
+      "sha256": "bb27862eed94d20b842b4bfe6b2eadcb82382a6c43cca143f699706bab4f6fa0"
+    },
+    {
+      "path": "sources/cd19-discovery/paper.xml",
+      "bytes": 220988,
+      "sha256": "9f0955da414495f649181a5e3904a275fcb4567e74f697918273cee0a498ce70"
+    },
+    {
+      "path": "sources/cd19-released-endpoints/clinical-rbp-expression.json",
+      "bytes": 20823,
+      "sha256": "05622439704937f2ef701a2bac4597440db62d200989efeb9c517c2b9d8b5cc6"
+    },
+    {
+      "path": "sources/cd19-released-endpoints/clinical-retention.json",
+      "bytes": 6703,
+      "sha256": "411264188340ad2503d5fa7805b33c8fae562b190cd431a7e98f0c73b36008b8"
+    },
+    {
+      "path": "sources/cd19-released-endpoints/qpcr-wells.json",
+      "bytes": 161443,
+      "sha256": "5cba914d84bb21f782f947027fb55f62e88eef9749336f9ef201eedc2409eebd"
+    },
+    {
+      "path": "sources/cd19-released-endpoints/surface-staining.json",
+      "bytes": 2213,
+      "sha256": "7924e11909edbe2013836b378ba60d7f5d14bdb82bdc68774753b4e9c2c46945"
+    },
+    {
+      "path": "sources/geo_metadata_excerpt.json",
+      "bytes": 40639,
+      "sha256": "8451668aa146a5529529430ce1a613c232a22776e643f2483836767a1c89478a"
+    }
+  ],
+  "case_files": [
+    {
+      "path": "cd19-car-t.json",
+      "sha256": "5a19a6441ccbe637a7420fdd25be1c7c0241f91cf11bcefc0be697920eec6298"
+    },
+    {
+      "path": "alk-l1196m.json",
+      "sha256": "7e1a25e784629862587c22f3fa174281ee7ca86f6ba6a3cd489392fc1b80c1e1"
+    },
+    {
+      "path": "bcma-gse164551.json",
+      "sha256": "73c91f2131c3fc6d2b52ad4ce67afd67742fef72c74c8d6c9a1c0352acbc4ff8"
+    }
+  ],
+  "notes": [
+    "Brev CD19 hypothesis and BCMA compact sources copied and hash-checked against originals on 2026-09-19.",
+    "No patient-level CD19 result, synthetic measurement or BioNeMo prediction has been invented.",
+    "Derived pack summaries are curated demonstration decisions; live model decisions are recorded separately."
+  ]
+}

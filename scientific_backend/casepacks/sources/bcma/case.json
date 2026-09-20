@@ -1,0 +1,41 @@
+{
+  "case_id": "rosalind_development_case_001",
+  "independent_patients": 1,
+  "disease": "Relapsed/refractory multiple myeloma",
+  "question": "Why did this patient relapse after an initial response and fail retreatment with the same CAR-T product? Rank competing mechanisms, link each claim to measured evidence, and propose a discriminating next experiment.",
+  "treatment": {
+    "product": "Idecabtagene vicleucel (ide-cel; bb2121)",
+    "target": "BCMA",
+    "first_infusion_car_positive_cells": 150000000,
+    "second_infusion_car_positive_cells": 450000000,
+    "lymphodepletion": "The publication reports fludarabine plus cyclophosphamide before both infusions."
+  },
+  "clinical_events": [
+    {"event": "first_infusion", "relative_time": "day 0", "source_record": "clinical_results_paragraph_1"},
+    {"event": "partial_response", "relative_time": "by month 3 after first infusion", "source_record": "clinical_results_paragraph_1"},
+    {"event": "clinical_relapse", "relative_time": "month 9 after first infusion", "source_record": "clinical_results_paragraph_2"},
+    {"event": "second_infusion", "relative_time": "following relapse; exact day not provided here", "source_record": "clinical_results_paragraph_2"},
+    {"event": "no_response_to_second_infusion", "relative_time": "after second infusion; exact response-assessment date not provided here", "source_record": "clinical_results_paragraph_2"}
+  ],
+  "failure_label_basis": "Clinical response and relapse reported in the primary publication, independent of the molecular hypothesis being investigated. This is an individual treatment failure, not a claim that the overall trial failed.",
+  "specimens": "Eight longitudinal bone-marrow RNA samples. The first was depleted of CD138-positive cells. Post-second-infusion CD138-positive tumor WES has a matched germline control.",
+  "genomic_sample_timing": "The published methods link the WES to two weeks after the second infusion. It is not pretreatment DNA and is not available evidence for a prospective pre-retreatment prediction.",
+  "files": {
+    "sample_manifest": "sample_manifest.tsv",
+    "single_cell_counts": "sample_01.h5 through sample_08.h5 (10x HDF5)",
+    "cell_metadata": "cell_metadata.tsv.gz",
+    "all_cell_pseudobulk_counts": "gene_counts_by_sample.tsv.gz",
+    "post_treatment_variants": "post_second_infusion_variants.tsv",
+    "allele_counts": "post_second_infusion_allele_counts.csv.gz"
+  },
+  "constraints": [
+    "Count one patient, not eight patients or thousands of independent clinical replicates.",
+    "Do not infer loss of tumor expression by comparing an unbiased tumor sample with the CD138-depleted baseline.",
+    "Use sample_manifest.tsv for sample identity; source S5/S6 names disagree across files and have been reconciled by all retained barcodes.",
+    "Post-treatment variant presence does not establish that it was absent before treatment.",
+    "The allele-count table is input to copy-number inference, not a table of final copy-number calls. File1/File2 orientation and analysis parameters must be established before running that inference.",
+    "All-cell pseudobulk mixes changing cell populations; analyze appropriate cell types before mechanistic interpretation.",
+    "RNA non-detection is not a surface-protein measurement.",
+    "Report contradictions and unmeasured alternatives, and distinguish a supported explanation from exclusive causal proof."
+  ]
+}

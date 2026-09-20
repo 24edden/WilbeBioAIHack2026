@@ -1,0 +1,1189 @@
+{
+  "format_version": "1.0.0",
+  "original_workbook": "Source Data main figures.xlsx",
+  "original_workbook_sha256": "45a7abce2c7a5d5d9ad22a756856b3f4f104a3f31b26c7fdbc5ac97b64e700b4",
+  "source_url": "https://static-content.springer.com/esm/art%3A10.1038%2Fs41467-022-31818-y/MediaObjects/41467_2022_31818_MOESM11_ESM.zip",
+  "paper_doi": "10.1038/s41467-022-31818-y",
+  "license": "CC BY 4.0; credited third-party exceptions apply",
+  "sheet": "Fig. 6b",
+  "cells": [
+    {
+      "cell": "A1",
+      "value": "RBP",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B1",
+      "value": "Patient",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "C1",
+      "value": "Stage",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D1",
+      "value": "logRPKM",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "A2",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B2",
+      "value": "1",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C2",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D2",
+      "value": "5.4433354950177701",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A3",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B3",
+      "value": "1",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C3",
+      "value": "Relapse",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D3",
+      "value": "5.5502818137067598",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A4",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B4",
+      "value": "2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C4",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D4",
+      "value": "5.3806189909100697",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A5",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B5",
+      "value": "2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C5",
+      "value": "Month7",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D5",
+      "value": "5.1971362625729798",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A6",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B6",
+      "value": "2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C6",
+      "value": "Relapse",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D6",
+      "value": "5.29879970782964",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A7",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B7",
+      "value": "3",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C7",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D7",
+      "value": "5.5952746984572199",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A8",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B8",
+      "value": "4",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C8",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D8",
+      "value": "5.6027622848851797",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A9",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B9",
+      "value": "4",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C9",
+      "value": "Relapse",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D9",
+      "value": "5.3340698792530796",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A10",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B10",
+      "value": "5",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C10",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D10",
+      "value": "4.9124338456121599",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A11",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B11",
+      "value": "5",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C11",
+      "value": "Month4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D11",
+      "value": "4.8007346773934403",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A12",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B12",
+      "value": "5",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C12",
+      "value": "Relapse",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D12",
+      "value": "5.4941612066799301",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A13",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B13",
+      "value": "6",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C13",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D13",
+      "value": "5.2810886926720997",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A14",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B14",
+      "value": "6",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C14",
+      "value": "Relapse",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D14",
+      "value": "6.0474287731446701",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A15",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B15",
+      "value": "9",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C15",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D15",
+      "value": "5.4606439397548101",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A16",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B16",
+      "value": "9",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C16",
+      "value": "Relapse",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D16",
+      "value": "6.3580070775113198",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A17",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B17",
+      "value": "10",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C17",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D17",
+      "value": "5.4256067591196704",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A18",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B18",
+      "value": "12",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C18",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D18",
+      "value": "5.3632505487775397",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A19",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B19",
+      "value": "13",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C19",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D19",
+      "value": "5.46017884271944",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A20",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B20",
+      "value": "14",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C20",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D20",
+      "value": "5.63816659581894",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A21",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B21",
+      "value": "14",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C21",
+      "value": "Relapse",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D21",
+      "value": "5.5642300523735502",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A22",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B22",
+      "value": "15",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C22",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D22",
+      "value": "4.6824681560212502",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A23",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B23",
+      "value": "15",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C23",
+      "value": "Relapse",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D23",
+      "value": "5.1840962382058997",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A24",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B24",
+      "value": "16",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C24",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D24",
+      "value": "5.6341988840690798",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A25",
+      "value": "PTBP1",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B25",
+      "value": "16",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C25",
+      "value": "Relapse",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D25",
+      "value": "5.0706056874973902",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A26",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B26",
+      "value": "1",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C26",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D26",
+      "value": "1.27867178143772",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A27",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B27",
+      "value": "1",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C27",
+      "value": "Relapse",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D27",
+      "value": "2.5946905664709901",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A28",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B28",
+      "value": "2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C28",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D28",
+      "value": "2.4689955799408798",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A29",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B29",
+      "value": "2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C29",
+      "value": "Month7",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D29",
+      "value": "1.5931470046652001",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A30",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B30",
+      "value": "2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C30",
+      "value": "Relapse",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D30",
+      "value": "1.06668574957857",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A31",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B31",
+      "value": "3",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C31",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D31",
+      "value": "1.76597537627044",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A32",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B32",
+      "value": "4",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C32",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D32",
+      "value": "9.6982621941877706E-2",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A33",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B33",
+      "value": "4",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C33",
+      "value": "Relapse",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D33",
+      "value": "2.8447711092751899",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A34",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B34",
+      "value": "5",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C34",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D34",
+      "value": "2.3806339329836601",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A35",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B35",
+      "value": "5",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C35",
+      "value": "Month4",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D35",
+      "value": "1.53145986632593",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A36",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B36",
+      "value": "5",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C36",
+      "value": "Relapse",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D36",
+      "value": "4.16600133853927",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A37",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B37",
+      "value": "6",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C37",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D37",
+      "value": "1.33785432861381",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A38",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B38",
+      "value": "6",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C38",
+      "value": "Relapse",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D38",
+      "value": "3.4518264821214202",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A39",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B39",
+      "value": "9",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C39",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D39",
+      "value": "1.2036868607636599",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A40",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B40",
+      "value": "9",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C40",
+      "value": "Relapse",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D40",
+      "value": "4.7030480959371896",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A41",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B41",
+      "value": "10",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C41",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D41",
+      "value": "1.6127479336792601",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A42",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B42",
+      "value": "12",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C42",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D42",
+      "value": "1.19372131424509",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A43",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B43",
+      "value": "13",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C43",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D43",
+      "value": "0.86822304985093701",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A44",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B44",
+      "value": "14",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C44",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D44",
+      "value": "2.2973788007160501",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A45",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B45",
+      "value": "14",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C45",
+      "value": "Relapse",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D45",
+      "value": "2.5371195405992601",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A46",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B46",
+      "value": "15",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C46",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D46",
+      "value": "2.9842797246771799",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A47",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B47",
+      "value": "15",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C47",
+      "value": "Relapse",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D47",
+      "value": "2.35733019931115",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A48",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B48",
+      "value": "16",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C48",
+      "value": "Screening",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D48",
+      "value": "1.87580337393612",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "A49",
+      "value": "PTBP2",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "B49",
+      "value": "16",
+      "type": null,
+      "formula": null
+    },
+    {
+      "cell": "C49",
+      "value": "Relapse",
+      "type": "s",
+      "formula": null
+    },
+    {
+      "cell": "D49",
+      "value": "2.83197603637108",
+      "type": null,
+      "formula": null
+    }
+  ],
+  "transformation": "Lossless selection of all nonempty cells in named sheet from qualified OOXML extraction; original cell address, source text, type and formula retained; no numerical endpoint calculation.",
+  "acquisition_extract_sha256": "64791e1c8d8d823ea55467a25661a30f2371a64222aaf3a79183b0ae623e77b6"
+}

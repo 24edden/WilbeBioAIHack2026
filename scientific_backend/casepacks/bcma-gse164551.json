@@ -1,0 +1,253 @@
+{
+  "id": "bcma-gse164551",
+  "title": "BCMA relapse",
+  "subtitle": "One patient, longitudinal evidence, antigen-loss routing",
+  "hypothesis": "Why did this patient relapse after an initial response and fail retreatment with the same CAR-T product? Rank competing mechanisms, link each claim to measured evidence, and propose a discriminating next experiment.",
+  "hypothesis_source": {
+    "name": "case.json",
+    "url": "",
+    "locator": "question",
+    "sha256": "a8f2cbbced2357d30d825ba77435fea37934e0094ffe668810cdf326682b3c8c",
+    "path": "sources/bcma/case.json",
+    "origin": "/home/ubuntu/leon-workspace/bcma-gse164551-2026-09-19/input/case.json"
+  },
+  "description": "A real prepared Brev packet that tests identity correction, post-treatment timing and the boundary between truncating variants and binder redesign.",
+  "data_mode": "public_evidence",
+  "evidence_count": 4,
+  "evidence": [
+    {
+      "id": "BCMA-01",
+      "title": "One patient; eight longitudinal samples",
+      "kind": "literature",
+      "summary": "The prepared case describes one patient and eight longitudinal bone-marrow RNA samples. The baseline was depleted of CD138-positive cells and is not an unbiased baseline tumor sample.",
+      "source": {
+        "name": "case.json",
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE164551",
+        "locator": "independent_patients, specimens, genomic_sample_timing and constraints",
+        "sha256": "a8f2cbbced2357d30d825ba77435fea37934e0094ffe668810cdf326682b3c8c",
+        "path": "sources/bcma/case.json",
+        "origin": "/home/ubuntu/leon-workspace/bcma-gse164551-2026-09-19/input/case.json"
+      },
+      "values": {
+        "independent_patients": 1,
+        "sample_count": 8,
+        "baseline_note": "CD138-positive cells depleted; not an unbiased pretreatment tumor sample"
+      }
+    },
+    {
+      "id": "BCMA-02",
+      "title": "Corrected S5/S6 sample identities",
+      "kind": "measured",
+      "summary": "The prepared manifest maps sample_05/GSM5013825 to matrix S6 and metadata S5, and sample_06/GSM5013826 to matrix S5 and metadata S6. These mapped samples must not be interchanged by filename.",
+      "source": {
+        "name": "sample_manifest.tsv",
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE164551",
+        "locator": "Rows where alias_disagreement=True; sample_05 and sample_06",
+        "sha256": "30364ccf30a991921fbe869f7c13b4138fbb5bde9455e6ff8db047b9af52ec3b",
+        "path": "sources/bcma/sample_manifest.tsv",
+        "origin": "/home/ubuntu/leon-workspace/bcma-gse164551-2026-09-19/input/sample_manifest.tsv"
+      },
+      "values": {
+        "corrected_samples": [
+          {
+            "sample_id": "sample_05",
+            "gsm": "GSM5013825",
+            "matrix_alias": "S6",
+            "source_metadata_alias": "S5",
+            "timepoint": "eight_months_after_first_infusion",
+            "barcode_join_fraction": "1.0"
+          },
+          {
+            "sample_id": "sample_06",
+            "gsm": "GSM5013826",
+            "matrix_alias": "S5",
+            "source_metadata_alias": "S6",
+            "timepoint": "relapse_after_first_infusion",
+            "barcode_join_fraction": "1.0"
+          }
+        ],
+        "qualification": "Prepared-manifest measurements retained; large H5 objects not reprocessed in the demo."
+      }
+    },
+    {
+      "id": "BCMA-03",
+      "title": "Post-treatment TNFRSF17 truncating variant",
+      "kind": "measured",
+      "summary": "The post-second-infusion source table reports TNFRSF17 p.Q38* (Nonsense_Mutation), PASS, tumor alternate count 10 of depth 41. This is post-treatment evidence and does not establish when the alteration arose or biallelic loss by itself.",
+      "source": {
+        "name": "post_second_infusion_variants.tsv",
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE164551",
+        "locator": "TSV line 438; Hugo_Symbol=TNFRSF17; HGVSp_Short=p.Q38*",
+        "sha256": "72007e8b5bfa71bff7e75edf36ab3c4c866ca1274058b3b16eb15e66a70881d7",
+        "path": "sources/bcma/post_second_infusion_variants.tsv",
+        "origin": "/home/ubuntu/leon-workspace/bcma-gse164551-2026-09-19/input/post_second_infusion_variants.tsv"
+      },
+      "values": {
+        "Hugo_Symbol": "TNFRSF17",
+        "NCBI_Build": "GRCh38",
+        "Chromosome": "chr16",
+        "Start_Position": "11965436",
+        "End_Position": "11965436",
+        "Reference_Allele": "C",
+        "Tumor_Seq_Allele2": "T",
+        "Variant_Classification": "Nonsense_Mutation",
+        "HGVSc": "c.112C>T",
+        "HGVSp_Short": "p.Q38*",
+        "Transcript_ID": "ENST00000053243",
+        "t_depth": "41",
+        "t_ref_count": "31",
+        "t_alt_count": "10",
+        "n_depth": "441",
+        "n_ref_count": "440",
+        "n_alt_count": "1",
+        "FILTER": "PASS"
+      }
+    },
+    {
+      "id": "BCMA-04",
+      "title": "Copy number and surface protein remain unresolved here",
+      "kind": "inference",
+      "summary": "The prepared case explicitly requires qualified copy-number inference and warns that RNA non-detection is not surface-protein measurement. A truncating variant plus this metadata does not establish an exclusive resistance mechanism.",
+      "source": {
+        "name": "case.json",
+        "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE164551",
+        "locator": "constraints items 4–8; genomic_sample_timing",
+        "sha256": "a8f2cbbced2357d30d825ba77435fea37934e0094ffe668810cdf326682b3c8c",
+        "path": "sources/bcma/case.json",
+        "origin": "/home/ubuntu/leon-workspace/bcma-gse164551-2026-09-19/input/case.json"
+      },
+      "values": {}
+    }
+  ],
+  "limitations": [
+    "Count one patient, not eight patients or thousands of independent clinical replicates.",
+    "Do not infer loss of tumor expression by comparing an unbiased tumor sample with the CD138-depleted baseline.",
+    "Use sample_manifest.tsv for sample identity; source S5/S6 names disagree across files and have been reconciled by all retained barcodes.",
+    "Post-treatment variant presence does not establish that it was absent before treatment.",
+    "The allele-count table is input to copy-number inference, not a table of final copy-number calls. File1/File2 orientation and analysis parameters must be established before running that inference.",
+    "All-cell pseudobulk mixes changing cell populations; analyze appropriate cell types before mechanistic interpretation.",
+    "RNA non-detection is not a surface-protein measurement.",
+    "Report contradictions and unmeasured alternatives, and distinguish a supported explanation from exclusive causal proof.",
+    "Only compact case metadata, sample manifest and mutation table are bundled; H5, cell metadata and allele-count matrices remain on Brev.",
+    "This is open-book development, not a blinded evaluation against the published mechanism."
+  ],
+  "readiness": [
+    {
+      "label": "Case and sample identity",
+      "status": "ready",
+      "detail": "Original prepared case and corrected S5/S6 sample mapping pinned."
+    },
+    {
+      "label": "Tumor variant",
+      "status": "ready",
+      "detail": "TNFRSF17 p.Q38* extracted from exact post-treatment source row."
+    },
+    {
+      "label": "Antigen-loss adjudication",
+      "status": "limited",
+      "detail": "Requires qualified tumor-cell expression, copy number and accessible surface protein evidence."
+    },
+    {
+      "label": "BioNeMo missense/binder routing",
+      "status": "blocked",
+      "detail": "The observed variant is truncating, not a missense pair; retained target and exact binder constructs have not been qualified."
+    }
+  ],
+  "demo_decision": {
+    "summary": "A post-treatment TNFRSF17 truncating variant makes antigen escape plausible, but this compact packet cannot establish biallelic loss, its timing, or exclusive causality. Qualify target presence before proposing a same-target design.",
+    "assessment": "Plausible mechanism; incomplete causal evidence",
+    "claims": [
+      {
+        "text": "The prepared case describes one patient and eight longitudinal bone-marrow RNA samples. The baseline was depleted of CD138-positive cells and is not an unbiased baseline tumor sample.",
+        "evidence_ids": [
+          "BCMA-01"
+        ],
+        "kind": "literature"
+      },
+      {
+        "text": "The prepared manifest maps sample_05/GSM5013825 to matrix S6 and metadata S5, and sample_06/GSM5013826 to matrix S5 and metadata S6. These mapped samples must not be interchanged by filename.",
+        "evidence_ids": [
+          "BCMA-02"
+        ],
+        "kind": "measured"
+      },
+      {
+        "text": "The post-second-infusion source table reports TNFRSF17 p.Q38* (Nonsense_Mutation), PASS, tumor alternate count 10 of depth 41. This is post-treatment evidence and does not establish when the alteration arose or biallelic loss by itself.",
+        "evidence_ids": [
+          "BCMA-03"
+        ],
+        "kind": "measured"
+      },
+      {
+        "text": "Binder structural comparison does not address complete absence of accessible target, and a truncating alteration is not the supported missense-pair use case.",
+        "evidence_ids": [
+          "BCMA-03",
+          "BCMA-04"
+        ],
+        "kind": "inference"
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "BCMA escape",
+        "reason": "Truncation is relevant, but copy number and surface expression must be qualified."
+      },
+      {
+        "title": "CAR-T activity or persistence",
+        "reason": "Functional and longitudinal CAR-T evidence is not established by this compact packet."
+      },
+      {
+        "title": "Composition or timing",
+        "reason": "Depleted baseline, corrected sample aliases and post-retreatment DNA constrain comparison."
+      }
+    ],
+    "limitations": [
+      "Count one patient, not eight patients or thousands of independent clinical replicates.",
+      "Do not infer loss of tumor expression by comparing an unbiased tumor sample with the CD138-depleted baseline.",
+      "Use sample_manifest.tsv for sample identity; source S5/S6 names disagree across files and have been reconciled by all retained barcodes.",
+      "Post-treatment variant presence does not establish that it was absent before treatment.",
+      "The allele-count table is input to copy-number inference, not a table of final copy-number calls. File1/File2 orientation and analysis parameters must be established before running that inference.",
+      "All-cell pseudobulk mixes changing cell populations; analyze appropriate cell types before mechanistic interpretation.",
+      "RNA non-detection is not a surface-protein measurement.",
+      "Report contradictions and unmeasured alternatives, and distinguish a supported explanation from exclusive causal proof.",
+      "Only compact case metadata, sample manifest and mutation table are bundled; H5, cell metadata and allele-count matrices remain on Brev.",
+      "This is open-book development, not a blinded evaluation against the published mechanism."
+    ],
+    "next_experiment": {
+      "title": "Resolve accessible BCMA and allelic context",
+      "design": "Validate tumor-cell identity, surface-accessible BCMA and allele/copy-number state at matched timepoints; interpret CAR-T activity with target-present and target-absent controls.",
+      "positive": "Concordant loss of accessible BCMA with qualified allelic evidence supports an antigen-selection or multi-target research objective.",
+      "negative": "Retained accessible BCMA weakens a complete target-loss explanation and shifts attention to functional alternatives.",
+      "inconclusive": "RNA-only evidence, uncertain cell identity or unqualified allele-count orientation cannot establish functional antigen loss."
+    },
+    "rd_handoff": {
+      "objective": "Establish functional target availability, then select an antigen-selection or qualified retained-target design objective.",
+      "status": "awaiting_discriminating_measurements",
+      "reference": "Original ide-cel target is BCMA; no exact reference/candidate construct is bundled.",
+      "candidates": [
+        {
+          "design_key": "bcma-target-retention",
+          "name": "BCMA target-retention assay",
+          "type": "experimental_arm",
+          "status": "planned",
+          "rationale": "Measure surface-accessible BCMA in correctly identified tumor samples; retain sample timing and required allelic evidence before selecting a design branch.",
+          "endpoint": "Surface-accessible BCMA recognition; specify sample, infusion-relative timing, units and controls.",
+          "exact_sequences": "Not supplied. This is a planned assay arm, not a qualified or modeled molecular construct."
+        }
+      ],
+      "modeling": {
+        "status": "blocked",
+        "reason": "Observed p.Q38* is truncating. No missense comparison or supported affinity rescue can be inferred; a target-retained binder comparison requires a separately qualified construct packet.",
+        "artifacts": []
+      },
+      "experiment_id": "BCMA-RETENTION-001",
+      "return_requirements": [
+        "Sample/experiment IDs and timing relative to the correct infusion",
+        "Tumor-cell identity and corrected manifest mapping",
+        "Surface recognition and copy-number/allelic artifacts with QC",
+        "Independent replicate definition, units and controls",
+        "If using a retained-target scenario: separate manifest and exact target/reference/candidate constructs"
+      ]
+    }
+  }
+}
