@@ -1,3 +1,5 @@
+> **Historical prototype deployment.** These commands launch the earlier backend and `frontend/legacy_app.py`. For the current scientific release use [the root startup guide](../README.md) and [scientific backend setup](../scientific_backend/SETUP.md).
+
 # Single-host demo deployment
 
 Deployment configuration for the Streamlit and FastAPI services. It uses an existing

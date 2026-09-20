@@ -1,3 +1,5 @@
+> **Historical prototype deployment.** These commands launch the earlier backend and `frontend/legacy_app.py`. For the current scientific release use [the root startup guide](../README.md) and [scientific backend setup](../scientific_backend/SETUP.md).
+
 # Public Brev access and presentation QR
 
 Checked on 20 September 2026 using the installed authenticated Brev CLI.

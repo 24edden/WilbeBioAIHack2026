@@ -1,3 +1,5 @@
+> **Earlier pet integration.** The default app now uses the authoritative scientific engine. See [current integration](../docs/FULL-STACK.md) and [startup](../README.md). This document applies to `frontend/legacy_app.py`.
+
 # Current TRACE pet integration
 
 Base: `codex/frontend-redesign` at `0a02e984b6e52822ca4f9f30fa77755a402a87bc`.

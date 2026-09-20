@@ -1,3 +1,5 @@
+> **Earlier pet prototype.** The default app now uses the authoritative scientific engine. See [current integration](../docs/FULL-STACK.md) and [startup](../README.md). This document applies to `frontend/legacy_app.py`.
+
 # TRACE frontend
 
 TRACE has exactly three screens:
@@ -21,7 +23,7 @@ From the repository root:
 python -m venv .venv
 # Activate the environment for your shell.
 python -m pip install -r requirements.txt -r frontend/requirements.txt
-python -m streamlit run frontend/app.py --server.address 127.0.0.1 --server.port 8502 --browser.gatherUsageStats false
+python -m streamlit run frontend/legacy_app.py --server.address 127.0.0.1 --server.port 8502 --browser.gatherUsageStats false
 ```
 
 Open http://127.0.0.1:8502. **Play the pet demo** needs no backend server, GPU or API

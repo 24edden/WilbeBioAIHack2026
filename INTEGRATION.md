@@ -1,3 +1,5 @@
+> **Earlier investigation API contract.** The default app now uses the authoritative scientific engine. See [current integration](docs/FULL-STACK.md) and [startup](README.md). This document applies to `frontend/legacy_app.py`.
+
 # Changing the datasets, backend, and interface
 
 The current patient-failure investigation is one implementation, not a schema the

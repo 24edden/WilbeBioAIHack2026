@@ -13,6 +13,7 @@ RUN groupadd --gid 10001 trace && useradd --uid 10001 --gid trace --create-home 
 # Deliberate copies: no local environment, credentials or untracked uploads.
 COPY app ./app
 COPY frontend ./frontend
+COPY AgentProfiles ./AgentProfiles
 COPY fixtures ./fixtures
 COPY samples ./samples
 COPY eval ./eval

@@ -33,14 +33,14 @@ def decode_files(items):
     return result
 
 
-def validate_action(value):
+def validate_action(value, *, preserve_question=False):
     if not isinstance(value,dict):return None
     if value.get('type') not in ('start','demo'):return None
     if not isinstance(value.get('id'),str) or not 1<=len(value['id'])<=160:return None
     question=value.get('question','')
     if not isinstance(question,str) or len(question)>MAX_QUESTION:raise ValueError('Question must be 12,000 characters or fewer.')
     if value['type']=='start' and not question.strip():raise ValueError('Enter a scientific question before starting.')
-    return {**value,'question':question.strip(),'uploads':decode_files(value.get('files',[]))}
+    return {**value,'question':question if preserve_question else question.strip(),'uploads':decode_files(value.get('files',[]))}
 
 
 def apply_composer_draft(draft, pending):
@@ -66,14 +66,14 @@ def capture_composer_draft(draft):
         apply_composer_draft(draft, component_state.get('draft'))
 
 
-def render_composer(draft,*,question,read_only=False,disabled=False,note=''):
+def render_composer(draft,*,question,read_only=False,disabled=False,note='',allow_uploads=True,allow_demo=True,preserve_question=False):
     from streamlit.components.v2 import component
     assets=Path(__file__).resolve().parents[1]/'static'
     composer=component('trace_prompt_composer',html=(assets/'composer.html').read_text(encoding='utf-8'),
         css=(assets/'composer.css').read_text(encoding='utf-8'),js=(assets/'voice_shared.js').read_text(encoding='utf-8')+'\n'+(assets/'microphone.js').read_text(encoding='utf-8')+'\n'+(assets/'composer.js').read_text(encoding='utf-8'))
     result=composer(key='trace_prompt_composer',data={'question':question,'generation':draft['composer_id'],
         'colors':palette('team-tbd' if draft.get('appearance')=='team-tbd' else st.session_state.get('ui_theme','light')),'theme':st.session_state.get('ui_theme','light'),
-        'readOnly':read_only,'disabled':disabled,'note':note,'extensions':list(PROFILE.input_extensions),
+        'readOnly':read_only,'disabled':disabled,'allowUploads':allow_uploads,'allowDemo':allow_demo,'note':note,'extensions':list(PROFILE.input_extensions),
         'files':[{'name':name,'size':len(data),'data':base64.b64encode(data).decode()} for name,data in draft['uploads']]},
         on_action_change=lambda:None,on_draft_change=lambda:capture_composer_draft(draft))
     pending=getattr(result,'draft',None)
@@ -81,7 +81,7 @@ def render_composer(draft,*,question,read_only=False,disabled=False,note=''):
         apply_composer_draft(draft, pending)
     raw_action=getattr(result,'action',None)
     if not isinstance(raw_action,dict) or raw_action.get('generation')!=draft['composer_id']:return None
-    try:action=validate_action(raw_action)
+    try:action=validate_action(raw_action, preserve_question=preserve_question)
     except ValueError as exc:st.error(str(exc));return None
     if not action or st.session_state.get('_pet_composer_action')==action['id']:return None
     st.session_state._pet_composer_action=action['id']

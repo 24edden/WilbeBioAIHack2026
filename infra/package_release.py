@@ -1,4 +1,4 @@
-"""Package the current working source for deployment, excluding local secrets/data.
+"""Package the historical prototype working source for deployment, excluding local secrets/data.
 
 Run from any directory: python infra/package_release.py
 The archive contains a file-hash manifest, including uncommitted source changes.
@@ -14,13 +14,13 @@ import subprocess
 import tarfile
 
 ROOT = Path(__file__).resolve().parents[1]
-DIRECTORIES = ("app", "frontend", "fixtures", "samples", "eval", "scripts", "infra", "tests", "Presentation")
+DIRECTORIES = ("app", "AgentProfiles", "frontend", "fixtures", "samples", "eval", "scripts", "infra", "tests", "Presentation")
 ROOT_FILES = ("requirements.txt", "pyproject.toml", "README.md", "DeveloperREADME.md",
               "INTEGRATION.md", "ARCHITECTURE.md", "AGENTS.md", ".env.example", ".streamlit/config.toml",
               "Context/rosalind-integration.md", "Context/judgingCriteria.md", "Context/tooling.md",
               "Plan/model-evaluation.md", "Plan/hosting-and-demo.md", "Plan/public-demo-hosting.md",
               "Plan/architecture-review.md", "Plan/performance-check.json")
-SUFFIXES = {".py", ".json", ".toml", ".md", ".txt", ".csv", ".tsv", ".vcf", ".yaml", ".yml", ".dockerignore", ".sh", ".js", ".mjs", ".css", ".html", ".svg"}
+SUFFIXES = {".py", ".json", ".toml", ".md", ".txt", ".csv", ".tsv", ".vcf", ".yaml", ".yml", ".dockerignore", ".sh", ".js", ".mjs", ".css", ".html", ".svg", ".png", ".webp"}
 EXCLUDED = {"__pycache__", ".venv", "venv", "uploads", "results", ".git", ".deploy"}
 
 

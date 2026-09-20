@@ -47,7 +47,7 @@ def test_planner_configuration_has_no_extra_user_pages(monkeypatch):
     from streamlit.testing.v1 import AppTest
     import streamlit as st
     st.cache_data.clear()
-    app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/'frontend'/'app.py')).run()
+    app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/'frontend'/'legacy_app.py')).run()
     assert app.session_state['stage']=='prompt'
     assert app.session_state['draft']['config']=={'task_mode':'auto'}
     assert not app.radio and not app.multiselect

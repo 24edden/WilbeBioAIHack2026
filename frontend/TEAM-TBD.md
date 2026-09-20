@@ -35,21 +35,21 @@ complete original directory layout. This consumer supports the
 format. Those packages contain the same historical runs under different readers;
 they must not be combined as additional studies.
 
-Setting `TEAM_TBD_CAPSULE` adds the saved-study click-throughs to the original
-prompt/running/results interface. The bare URL opens the composer; a run or view
+Setting `TEAM_TBD_CAPSULE` enables the saved-study click-throughs from the question homepage. The bare URL opens the composer; a run or view
 bookmark opens the selected study directly. **Back to chat** and the TRACE logo
-return to the composer without clearing its draft or attachments. Unset the capsule
-variable to omit the saved-study entry points:
+return to the composer without clearing its draft or attachments. The capsule is optional for new live work. Unsetting it makes saved capsule routes
+show an explicit unavailable message:
 
 ```bash
 unset TEAM_TBD_CAPSULE
 ```
 
-The composer retains its existing backend configuration and behavior: Demo mode
-when `TRACE_BACKEND_URL` is absent, or the original compatible investigation API
-when explicitly configured. The Team TBD read sources on 8081/8082 are not assigned
-as new-investigation transports. The read-only guarantees in this document apply
-to the saved-study explorer. Browsing never submits work.
+The composer now uses the authoritative `/api/runs` scientific service configured
+by `TEAM_TBD_BACKEND_URL`. It preserves exact question wording and original source,
+and opens a durable live investigation with separate guarded controls. It has no
+legacy upload, model override, automatic demo, or fallback backend. The earlier
+investigation API remains only in `legacy_app.py`. See [the full integration
+contract](../docs/FULL-STACK.md) for mutation and recovery behavior.
 
 ## Frozen replay and live reads
 
@@ -85,9 +85,9 @@ and `&view=<page-label>`. The two selected run IDs are explicitly allowlisted in
 Artifacts load only when requested and can then be downloaded. Frozen artifact
 bytes come from the capsule; live artifact bytes come from the run's recorded URLs.
 For the CAR-T study, open **NVIDIA & sequences → NVIDIA structure files (.cif)**.
-The wild-type and exon-2-deleted CD19 files appear before other artifacts. Open a
+Saved NVIDIA structure images load automatically on Overview and NVIDIA & sequences when the run records the exact matching CIF hashes. The wild-type and exon-2-deleted CD19 files appear before other artifacts. Open a
 filename, choose **Load artifact**, then **Download verified artifact**. These are
-3D structure files; this page does not render molecular image previews.
+3D structure files; the automatically displayed images are previously rendered views of those same predictions, not new inference.
 
 The connected homepage and study header use the original `TRACE_logo.png` from
 the project Drive folder, saved unchanged in `static/brand/TRACE_logo.png`.
@@ -180,7 +180,10 @@ provenance. The UI does not upgrade instruction provenance into model entitlemen
 When studies share a cohort, the overview discloses this rather than implying
 independent replication. Contract acceptance does not establish scientific validity.
 
-## Validation
+## Earlier saved-study validation
+
+Current release validation is recorded in [RELEASE-VALIDATION.md](../docs/RELEASE-VALIDATION.md).
+
 
 Install the test runner in the same environment, then run the focused checks:
 

@@ -1,3 +1,5 @@
+> **Earlier prototype architecture.** The default app now uses the authoritative scientific engine. See [current integration](docs/FULL-STACK.md) and [startup](README.md). This document applies to `frontend/legacy_app.py`.
+
 # TRACE architecture
 
 Implementation snapshot, 19 September 2026. Read [INTEGRATION.md](INTEGRATION.md)

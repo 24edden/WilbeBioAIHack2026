@@ -35,7 +35,7 @@ def pet_app(monkeypatch):
             draft['question']=action['question'];draft['uploads']=action['uploads']
         return action
     monkeypatch.setattr(start_module,'render_composer',browser_component)
-    app=AppTest.from_file(str(ROOT/'frontend/app.py'),default_timeout=15).run()
+    app=AppTest.from_file(str(ROOT/'frontend/legacy_app.py'),default_timeout=15).run()
     assert not app.exception
     yield app,source
     st.cache_data.clear()

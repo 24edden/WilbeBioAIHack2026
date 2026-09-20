@@ -19,3 +19,6 @@ textarea::placeholder{color:var(--ui-muted)}textarea:disabled{opacity:.8}.compos
 .mic-tip{position:absolute;visibility:hidden;bottom:calc(100% + 9px);right:0;min-width:110px;padding:7px 10px;border:1px solid var(--ui-border);border-radius:7px;background:var(--ui-surface);color:var(--ui-text);font-size:12px;box-shadow:0 2px 8px #0001;white-space:nowrap;z-index:4;pointer-events:none}.microphone-button:hover .mic-tip,.microphone-button:focus-visible .mic-tip{visibility:visible}
 .microphone-status{min-height:0;color:var(--ui-muted);font-size:12px;line-height:1.5}.microphone-status:not(:empty){padding:0 25px 16px}
 @media(prefers-reduced-motion:reduce){.microphone-button[data-listening=true]{box-shadow:0 0 0 3px color-mix(in srgb,var(--ui-accent),transparent 80%)}.mic-wave i{height:10px!important;transition:none}}
+
+/* Author display rules must not resurrect unavailable scientific controls. */
+.composer-wrap [hidden] { display: none !important; }

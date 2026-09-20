@@ -18,6 +18,7 @@ import streamlit as st
 from .pets import pet_picture, LABELS
 from .network_svg import network_svg
 from .team_tbd_adapter import Capsule, LiveSource
+from .team_tbd_structure_preview import render_structure_previews
 
 PAGES = ['Overview', 'Agent collaboration', 'Findings', 'Evidence', 'NVIDIA & sequences', 'Decisions & review', 'Next steps', 'History']
 CURATED_STUDIES = {
@@ -90,6 +91,8 @@ def render_brand():
 
 
 def open_study(run_id=None):
+    for key in ('active_run', 'service'):
+        st.query_params.pop(key, None)
     run_id = run_id if run_id in CURATED_STUDIES else next(iter(CURATED_STUDIES))
     mode = st.session_state.get('tbd_last_mode', 'replay')
     st.session_state.tbd_study = run_id
@@ -207,6 +210,10 @@ def render_workspace():
             location = 'Brev via private tunnel' if meta['source_id'] == 'brev-main' else 'Mac · independent Ana service'
             st.caption(f'LIVE BACKEND READ · {location} · Fetched {checked} · Run {run.get("status", "unknown")} · No new analysis')
         source = capsule if mode == 'Frozen replay' else live_source_at(SOURCES[meta['source_id']])
+        if mode == 'Live reads' and st.button('Open live investigation controls', key='tbd_live_controls'):
+            from .scientific_workspace import open_live
+            open_live(run_id, meta['source_id'])
+            st.rerun(scope='app')
         render_page(page, bundle, source)
         st.markdown('<div class="tbd-footer">Team TBD · Saved scientific work products and execution records · Research use</div>', unsafe_allow_html=True)
     body()
@@ -215,13 +222,22 @@ def render_workspace():
 def render_page(page, bundle, source):
     run, view, evidence = bundle['run'], bundle['view'], bundle['evidence']
     brief = view.get('findings') or {}
+    latest_decision = (run.get('decisions') or [{}])[-1]
+    latest_brief = (run.get('research_briefs') or [{}])[-1]
+    brief_version = latest_brief.get('source_decision_version')
+    current_version = latest_decision.get('version')
+    if brief:
+        st.caption(f'Research brief basis: decision {brief_version or "unrecorded"} · Current saved decision: {current_version or "none"}')
+        if brief_version != current_version:
+            st.warning('This research brief is a historical interpretation. It does not describe the latest decision. Open Decisions & review for the current assessment.')
     if page == 'Overview':
         question = view.get('question') or run.get('hypothesis') or {}
-        headline = brief.get('headline') or 'No completed research brief is available'
-        summary = brief.get('plain_summary') or run.get('error') or 'Inspect the preserved status, partial work and evidence in this historical run.'
-        st.markdown(f'<section class="trace-pet-stage tbd-summary"><div class="trace-pet-scene"><div class="trace-pet-character">{pet_picture("coordinator")}<strong>Team TBD</strong></div><article><div class="tbd-eyebrow">{escape(run.get("status", "unknown"))} · SAVED FINDING</div><h1>{escape(headline)}</h1><p>{escape(summary)}</p></article></div></section>', unsafe_allow_html=True)
+        headline = brief.get('headline') or (f'Decision {current_version} · recorded assessment' if current_version else 'Investigation records')
+        summary = brief.get('plain_summary') or latest_decision.get('summary') or run.get('error') or 'Inspect the preserved status, partial work and evidence in this run.'
+        st.markdown(f'<section class="trace-pet-stage tbd-summary"><div class="trace-pet-scene"><div class="trace-pet-character">{pet_picture("coordinator")}<strong>Team TBD</strong></div><article><div class="tbd-eyebrow">{escape(run.get("status", "unknown"))} · RECORDED SCIENTIFIC WORK</div><h1>{escape(headline)}</h1><p>{escape(summary)}</p></article></div></section>', unsafe_allow_html=True)
         answer = brief.get('proposed_answer') or {}
         prose(answer.get('scope'), css='tbd-scope')
+        render_structure_previews(bundle['artifacts'], run['id'])
         st.subheader('Explore the work behind this study')
         with st.container(key='tbd_shortcuts'):
             collab, findings, predictions = st.columns(3)
@@ -251,7 +267,8 @@ def render_page(page, bundle, source):
             prose(answer.get('statement'))
             prose(answer.get('caveat'))
             prose(answer.get('strongest_alternative'))
-        st.caption('Both featured studies reuse GSE28460. They are different questions about the same cohort, not independent replication.')
+        if run.get('id') in CURATED_STUDIES:
+            st.caption('Both featured studies reuse GSE28460. They are different questions about the same cohort, not independent replication.')
     elif page == 'Findings':
         st.title('What the evidence says')
         prose(brief.get('plain_summary'))
@@ -268,7 +285,7 @@ def render_page(page, bundle, source):
         if st.button('See the agents behind these findings →'):
             open_page('Agent collaboration')
         if not brief:
-            st.info('This historical run has no research brief. Its partial records remain available in the other views.')
+            st.info('This run has no research brief. Its partial records remain available in the other views.')
     elif page == 'Agent collaboration':
         from .team_tbd_collaboration import render_collaboration
         render_collaboration(run, brief, evidence)
@@ -363,7 +380,8 @@ def render_team(run, brief, evidence):
 
 def render_nvidia(run, brief, artifacts, source):
     st.title('NVIDIA predictions & exact inputs')
-    st.caption('Saved target-monomer predictions are exploratory structural evidence. They do not measure binding, patient causation or clinical efficacy.')
+    render_structure_previews(artifacts, run['id'])
+    st.caption('Predictions are exploratory structural evidence. Inspect each receipt for its scope; they do not establish patient causation or clinical efficacy.')
     structures = [a for a in artifacts if a.get('name', '').lower().endswith('.cif')]
     other_artifacts = [a for a in artifacts if a not in structures]
     if structures:
@@ -382,7 +400,7 @@ def render_nvidia(run, brief, artifacts, source):
             prose(item)
     if structures:
         st.subheader('NVIDIA structure files (.cif)', anchor='nvidia-structure-files')
-        st.caption('The saved CD19 predictions are here: wild type and exon-2-deleted. These are 3D structure files, not image previews. Open a file, choose Load artifact, then Download verified artifact.')
+        st.caption('Recorded 3D structure files. Open a file, choose Load artifact, then Download verified artifact. Each receipt retains its exact construct and scope.')
     for i, artifact in enumerate(structures + other_artifacts):
         if i == len(structures):
             st.subheader('Other saved artifacts' if structures else 'Artifacts')

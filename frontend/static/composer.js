@@ -21,8 +21,9 @@ export default function render(component) {
   question.value=data.readOnly?data.question:state.text;
   question.disabled=Boolean(data.readOnly);
   picker.accept=(data.extensions||[]).map(e=>'.'+e).join(',');
-  attach.hidden=Boolean(data.readOnly);
-  el('drop-hint').hidden=Boolean(data.readOnly);
+  attach.hidden=Boolean(data.readOnly||data.allowUploads===false);
+  demo.hidden=data.allowDemo===false;
+  el('drop-hint').hidden=Boolean(data.readOnly||data.allowUploads===false);
   el('source-note').textContent=data.note||'';
   const sync=()=>setStateValue('draft',{generation:state.generation,question:state.text,files:state.files});
   const cleanupMicrophone=typeof mountMicrophone==='function'?mountMicrophone({button:el('microphone'),input:question,status:el('microphone-status'),readOnly:data.readOnly,onInput:text=>{state.text=text;},onFinish:sync}):()=>{};
@@ -39,7 +40,7 @@ export default function render(component) {
   }
   const encode=file=>new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.onerror=()=>reject(new Error('Could not read '+file.name));reader.readAsDataURL(file);});
   async function add(files){
-    if(data.readOnly||state.busy)return;
+    if(data.readOnly||data.allowUploads===false||state.busy)return;
     error.textContent='';
     if(files.length+state.files.length>20){error.textContent='Attach up to 20 files.';return;}
     if(files.some(f=>f.size>MAX_FILE)){error.textContent='Each file must be 20 MB or smaller.';return;}
@@ -57,7 +58,7 @@ export default function render(component) {
   form.ondragleave=e=>{if(!form.contains(e.relatedTarget))form.classList.remove('is-dragging');};
   form.ondrop=e=>{if(e.dataTransfer?.files.length){e.preventDefault();form.classList.remove('is-dragging');void add(Array.from(e.dataTransfer.files));}};
   function send(type){
-    if(state.busy||data.disabled)return;
+    if(state.busy||data.disabled||(type==='demo'&&data.allowDemo===false))return;
     if(type==='start'&&!question.value.trim()){error.textContent='Enter a scientific question before starting.';question.focus();return;}
     if(!data.readOnly)state.text=question.value;state.busy=true;refresh();
     try {

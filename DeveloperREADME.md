@@ -1,6 +1,16 @@
 # Developer README
 
-Working notes for the team.
+The current release uses the durable Team TBD engine. Follow
+[scientific backend setup](scientific_backend/SETUP.md), [current startup](README.md)
+and [full-stack contract](docs/FULL-STACK.md). Use separate environments/cwds for
+the scientific engine and the historical `app` package. Run the frontend through
+`scripts/start_scientific_frontend.sh`; preserve existing services and external
+sealed capsules when choosing ports. The backend's setup now includes pinned
+source hydration and optional licensed scientific tool installation. Do not copy
+private runtime or installed plugin bytes into Git.
+
+The notes below document the **earlier prototype** and its explicit
+`frontend/legacy_app.py` entry point.
 
 ## Responsive execution and profiling
 

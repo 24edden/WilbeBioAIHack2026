@@ -40,7 +40,7 @@ def workspace(monkeypatch):
         if action:draft.update(question=action['question'],uploads=deepcopy(action['uploads']))
         return action
     monkeypatch.setattr(pet_start,'render_composer',composer)
-    app=AppTest.from_file(str(FRONTEND/'app.py'),default_timeout=12).run()
+    app=AppTest.from_file(str(FRONTEND/'legacy_app.py'),default_timeout=12).run()
     assert not app.exception
     yield app,source,release
     release.set()

@@ -54,7 +54,7 @@ services:
       - -m
       - streamlit
       - run
-      - frontend/app.py
+      - frontend/legacy_app.py
       - --server.address=0.0.0.0
       - --server.port=8501
       - --server.headless=true
