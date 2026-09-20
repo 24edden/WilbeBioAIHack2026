@@ -1,0 +1,135 @@
+{
+  "schema_version": "team-tbd-results-capsule/1.0",
+  "package_id": "team-tbd-results-capsule-2026-09-20-v1",
+  "created_at": "2026-09-20T11:12:03.037081+00:00",
+  "visibility": "public_contract_private_results",
+  "counts": {
+    "runs": 12,
+    "completed_runs": 6,
+    "decisions": 11,
+    "handoffs": 123,
+    "artifact_records": 17,
+    "unique_artifact_contents": 6,
+    "structure_previews": 8
+  },
+  "featured_run_ids": [
+    "037a6844bfb54d5a8d9010043d6c0a89",
+    "f10acf36fcfd4cfc97b84d92c631e8ab"
+  ],
+  "manifest_sha256": "f4d2e23facf93916ff3721c0051f989292b6a38de7138bf297c0a5f32d786e30",
+  "archive_sha256": "4ecf2389cb0e904a641dc1753383f0c0279ef49ccbd59c3ccd64809089e3f551",
+  "archive_name": "team-tbd-results-capsule-2026-09-20-v1.zip",
+  "private_brev_directory": "/home/ubuntu/team-tbd-frozen-results/team-tbd-results-capsule-2026-09-20-v1",
+  "private_brev_archive": "/home/ubuntu/team-tbd-frozen-results/team-tbd-results-capsule-2026-09-20-v1.zip",
+  "runs": [
+    {
+      "run_id": "037a6844bfb54d5a8d9010043d6c0a89",
+      "source_id": "brev-main",
+      "label": "CD19 investigation with Ana relapse context and AI sequence discovery",
+      "status": "completed",
+      "mode": "live",
+      "case_id": "cd19-car-t",
+      "source_content_sha256": "4979c9adb2e321b61ea050dffc8d5426ef02a9d09e50e2e963141c5538173cbc"
+    },
+    {
+      "run_id": "b5898d6c3b3940ee9eac90f01b8b8e19",
+      "source_id": "brev-main",
+      "label": "CD19 governance and NVIDIA follow-ups: earlier completed study",
+      "status": "completed",
+      "mode": "live",
+      "case_id": "cd19-car-t",
+      "source_content_sha256": "e3c7b0586988b27baa8fd5f23970726d89c344b122bb97b740475ceb9101b4d0"
+    },
+    {
+      "run_id": "5c3ab9433a454d1d82d80dea00a925bc",
+      "source_id": "brev-main",
+      "label": "CD19 CAR-T \u2014 historical blocked attempt",
+      "status": "blocked",
+      "mode": "live",
+      "case_id": "cd19-car-t",
+      "source_content_sha256": "473c01d7378a6f60681050e10bc8de57999e32e0a5ebdc145706e596c57547ca"
+    },
+    {
+      "run_id": "a90a027775ad4342a7bc32620e6174f2",
+      "source_id": "brev-main",
+      "label": "CD19 public-data reproduction: earlier completed study",
+      "status": "completed",
+      "mode": "live",
+      "case_id": "cd19-car-t",
+      "source_content_sha256": "d3cccd6c7dbd3b062dbdf60458c67290181ac981b51a615402a7d88b3faa7782"
+    },
+    {
+      "run_id": "ff3c4fd47f1d408ab5bcdc89d1a07744",
+      "source_id": "brev-main",
+      "label": "CD19 discovery and structural follow-up: earlier completed study",
+      "status": "completed",
+      "mode": "live",
+      "case_id": "cd19-car-t",
+      "source_content_sha256": "7b4a2077adc5d60db804126a741792752089acbafefc4f96ef0bddc001dc0040"
+    },
+    {
+      "run_id": "a01769d0494a48fe84a2805208366b2e",
+      "source_id": "brev-main",
+      "label": "CAR-T discovery: initial completed study",
+      "status": "completed",
+      "mode": "live",
+      "case_id": "cart-discovery",
+      "source_content_sha256": "3a61de71d0e2f11d60a31cbc8ee461000f34275d88b5d9340a87dad29f7efef5"
+    },
+    {
+      "run_id": "d2085baaac544b4eb0bf8a22c710110d",
+      "source_id": "brev-main",
+      "label": "CAR-T discovery workspace \u2014 historical budget exhausted attempt",
+      "status": "budget_exhausted",
+      "mode": "live",
+      "case_id": "cart-discovery",
+      "source_content_sha256": "0b4b332ea7f33a5d20ee61c5551a26b9b981e8ec9c6259c96893af3bc12f197b"
+    },
+    {
+      "run_id": "34d67c24810841e9b6e3e14231c5600b",
+      "source_id": "brev-main",
+      "label": "CAR-T discovery workspace \u2014 historical budget exhausted attempt",
+      "status": "budget_exhausted",
+      "mode": "live",
+      "case_id": "cart-discovery",
+      "source_content_sha256": "c3bdd9f4384adbc925539b16dc286b34b53f147a00826ed7dc9ffe08c67b13af"
+    },
+    {
+      "run_id": "f3d94dc7889c432380542d7467b525ed",
+      "source_id": "brev-main",
+      "label": "CAR-T discovery workspace \u2014 historical failed attempt",
+      "status": "failed",
+      "mode": "live",
+      "case_id": "cart-discovery",
+      "source_content_sha256": "7ba02bcf23872a5b67ffc44ed646930bed894dc44e45f2e0983900f2da6f20eb"
+    },
+    {
+      "run_id": "9b79483501f64cc9a658c58f42ef5221",
+      "source_id": "brev-main",
+      "label": "CAR-T discovery workspace \u2014 historical failed attempt",
+      "status": "failed",
+      "mode": "live",
+      "case_id": "cart-discovery",
+      "source_content_sha256": "7c63178d2b70275b5189c3fca5066946a1fde6eb767f5d45d9be86d3cc0b7f9e"
+    },
+    {
+      "run_id": "f10acf36fcfd4cfc97b84d92c631e8ab",
+      "source_id": "mac-ana-isolated",
+      "label": "Ana paired diagnosis\u2013relapse study: independent investigation",
+      "status": "completed",
+      "mode": "live",
+      "case_id": "gse28460-relapse",
+      "source_content_sha256": "bbe7748a4db1a3f5932e68048d60bd29adf7b0fca80b4504af91088d56e47b8c"
+    },
+    {
+      "run_id": "a1d590d7cad2439291eb213eb81debba",
+      "source_id": "mac-ana-isolated",
+      "label": "Ana \u00b7 paired B-ALL relapse investigation \u2014 historical failed attempt",
+      "status": "failed",
+      "mode": "live",
+      "case_id": "gse28460-relapse",
+      "source_content_sha256": "3acd6e3b80cdc8b1c67b7c5a0e0d029564177922b7f1c73317d11ce15fedda10"
+    }
+  ],
+  "publication_scope": "Format, read-only loader, verification utility and safe run catalog only. Full traces, provider/account identifiers, research text, sequence bytes and artifact payloads are private."
+}
