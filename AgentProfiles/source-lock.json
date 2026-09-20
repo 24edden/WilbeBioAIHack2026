@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-09-20",
+  "files": {
+    "app/providers.py": "f2a6736a38fef631618d3465142d8e166f83ed75e683d24ced8bf2cd748adc04",
+    "app/process_contract.py": "3636f266fde8e1fc0c09daa503312fb3afd0f5dab8cb8a13af436175680b68f0",
+    "app/scientific_skills.py": "d3c86498fdb5dd047098cdf190244c0af6c47e734fdafb320b5d47fc6a78589b",
+    "app/sequence_discovery.py": "9ed821d10b06f5477063e105e6c1b953e900c082f519d2ecf61bbab196952d4f",
+    "app/research_brief.py": "c36314e17aba9e7573a55ae438096484ea565f1221432f0752f7543741dade40",
+    "app/worker.py": "b02975ff3b09213d12bf39a6e981d5d449a86c77f577b948ec396e7ab63de4bd",
+    "skills/manifest.json": "e96dda19716ded3164ea7249b5da21238a679cf147c85a7df007de7e34c8aaa9"
+  }
+}

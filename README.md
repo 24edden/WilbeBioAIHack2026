@@ -8,6 +8,10 @@ Project idea is TBD. Notes on the event brief, tracks, and judging criteria are 
 Team setup notes and how to load the context files into Claude, Codex, or a web UI are in
 [DeveloperREADME.md](DeveloperREADME.md).
 
+The implemented scientific team's [agent profiles](AgentProfiles/README.md) map all
+nine roles to their custom, Rosalind-informed, NVIDIA and OpenAI Life Sciences
+skills, with tool permissions and machine-readable metadata.
+
 ## Setup
 
 TBD.
@@ -17,6 +21,7 @@ TBD.
 ```
 Context/           event brief, judging criteria, tooling prep
 Plan/              idea candidates, scoring, and execution plans
+AgentProfiles/     audited agent skills, permissions and browsable metadata
 AGENTS.md          project instructions for coding agents (edit this one)
 CLAUDE.md          one-line import of AGENTS.md, for Claude Code
 ```
