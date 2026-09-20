@@ -100,3 +100,9 @@ Source and input inventories describe what is available at the freeze point. If 
 ## Scope and interpretation
 
 A successful integrity check shows that the files match the frozen snapshot. It does not validate a biological mechanism, endorse a model conclusion, or make an unsuccessful run successful. The scientific conclusions and limitations remain those recorded in each run's decisions and reviews. For service attribution, display the actual recorded model and actual executed NVIDIA tools; a skill being available or consulted is distinct from a service being executed.
+
+## Compact parallel format
+
+[Results Capsule v1 in draft PR #3](https://github.com/24edden/WilbeBioAIHack2026/pull/3) packages the same 12 run histories in a compact visual-app format (`team-tbd-results-capsule/1.0`). This guide describes the expanded archive (`team-tbd-archive/1.0.0`), which also includes supporting result payloads and the eight GSE input files.
+
+These are alternate formats for the same scientific histories, not additional experiments. Use each manifest with its matching reader and schema. Do not concatenate run counts across packages. Evidence IDs and decision versions are scoped to their run; use run ID plus evidence ID or version when constructing visual-app keys. The sealed archives remain unchanged; this cross-reference is publication documentation.
