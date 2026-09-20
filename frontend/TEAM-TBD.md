@@ -84,6 +84,14 @@ and `&view=<page-label>`. The two selected run IDs are explicitly allowlisted in
 `CURATED_STUDIES`.
 Artifacts load only when requested and can then be downloaded. Frozen artifact
 bytes come from the capsule; live artifact bytes come from the run's recorded URLs.
+For the CAR-T study, open **NVIDIA & sequences → NVIDIA structure files (.cif)**.
+The wild-type and exon-2-deleted CD19 files appear before other artifacts. Open a
+filename, choose **Load artifact**, then **Download verified artifact**. These are
+3D structure files; this page does not render molecular image previews.
+
+The connected homepage and study header use the original `TRACE_logo.png` from
+the project Drive folder, saved unchanged in `static/brand/TRACE_logo.png`.
+Source: https://drive.google.com/file/d/14XOjkHmpJxY0s-LxkjIPRx0618WURWDg/view
 
 ## Exploring agent collaboration
 

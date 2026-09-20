@@ -5,6 +5,7 @@ No scientific execution controls or backend mutations are exposed here.
 from collections import Counter
 from datetime import datetime, timezone
 from html import escape
+import base64
 import io
 import hashlib
 import json
@@ -81,7 +82,10 @@ def load_bundle(root, mode, source_id, run_id):
 
 
 def render_brand():
-    st.markdown('<style>' + (Path(__file__).resolve().parents[1] / 'static' / 'team_tbd.css').read_text() + '</style>', unsafe_allow_html=True)
+    static = Path(__file__).resolve().parents[1] / 'static'
+    logo = base64.b64encode((static / 'brand' / 'TRACE_logo.png').read_bytes()).decode('ascii')
+    css = (static / 'team_tbd.css').read_text().replace('__TRACE_LOGO_URL__', 'data:image/png;base64,' + logo)
+    st.markdown('<style>' + css + '</style>', unsafe_allow_html=True)
     st.markdown('<div class="tbd-marker"></div>', unsafe_allow_html=True)
 
 
@@ -360,6 +364,10 @@ def render_team(run, brief, evidence):
 def render_nvidia(run, brief, artifacts, source):
     st.title('NVIDIA predictions & exact inputs')
     st.caption('Saved target-monomer predictions are exploratory structural evidence. They do not measure binding, patient causation or clinical efficacy.')
+    structures = [a for a in artifacts if a.get('name', '').lower().endswith('.cif')]
+    other_artifacts = [a for a in artifacts if a not in structures]
+    if structures:
+        st.markdown('[Jump to NVIDIA structure files (.cif)](#nvidia-structure-files)')
     prose((brief.get('nvidia') or {}).get('summary'))
     for operation in run.get('followup_operations', []):
         receipts = operation.get('provider_receipts', [])
@@ -372,9 +380,17 @@ def render_nvidia(run, brief, artifacts, source):
     for section in ['learned', 'not_established']:
         for item in (brief.get('nvidia') or {}).get(section, []):
             prose(item)
-    st.subheader('Artifacts')
-    for i, artifact in enumerate(artifacts):
+    if structures:
+        st.subheader('NVIDIA structure files (.cif)', anchor='nvidia-structure-files')
+        st.caption('The saved CD19 predictions are here: wild type and exon-2-deleted. These are 3D structure files, not image previews. Open a file, choose Load artifact, then Download verified artifact.')
+    for i, artifact in enumerate(structures + other_artifacts):
+        if i == len(structures):
+            st.subheader('Other saved artifacts' if structures else 'Artifacts')
         with st.expander(artifact.get('name', f'Artifact {i+1}')):
+            label = {'wild_type_prediction.cif': 'Wild-type CD19 · NVIDIA Boltz-2 prediction',
+                     'exon2_deleted_prediction.cif': 'Exon-2-deleted CD19 · NVIDIA Boltz-2 prediction'}.get(artifact.get('name'))
+            if label:
+                st.caption(label)
             prose(artifact.get('scope'))
             st.caption('Artifact bytes are retrieved only when requested and checked against recorded hashes where available.')
             identity = [str(getattr(source, 'base', getattr(source, 'root', ''))), run['id'], artifact.get('url', artifact.get('path')), artifact.get('sha256')]

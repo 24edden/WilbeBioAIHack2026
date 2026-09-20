@@ -351,6 +351,32 @@ body:has(.tbd-marker) [role=option][aria-selected=true] {
 .stApp:has(.tbd-marker) .st-key-trace_home button p {
   color: var(--ui-accent) !important;
 }
+/* Original Drive logo, displayed without changing its pixels. Keep the native
+   button label available to assistive technology and its home action intact. */
+.stApp:has(.tbd-marker) .st-key-trace_home button,
+.stApp:has(.tbd-marker) .st-key-trace_home button:hover {
+  width: 148px;
+  height: 94px;
+  background: #000 url('__TRACE_LOGO_URL__') center / 148px 148px no-repeat !important;
+  border-radius: 8px !important;
+}
+.stApp:has(.tbd-marker) .st-key-trace_home button p {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+@media(max-width:720px) {
+  .stApp:has(.tbd-marker) .st-key-trace_home button,
+  .stApp:has(.tbd-marker) .st-key-trace_home button:hover {
+    width: 108px;
+    height: 72px;
+    background-size: 108px 108px !important;
+  }
+}
 .stApp:has(.tbd-marker) .st-key-tbd_shortcuts button[kind=primary] p {
   color: var(--ui-accent) !important;
 }
