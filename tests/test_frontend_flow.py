@@ -14,6 +14,7 @@ FRONTEND = Path(__file__).resolve().parents[1] / "frontend"
 
 @pytest.fixture
 def wizard(monkeypatch):
+    monkeypatch.setenv("TRACE_START_SCREEN", "classic")
     monkeypatch.syspath_prepend(str(FRONTEND))
     adapters = importlib.import_module("ui.adapters")
     event_type = importlib.import_module("ui.events").Event

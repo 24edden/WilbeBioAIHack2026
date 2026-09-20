@@ -3,6 +3,7 @@ from copy import deepcopy
 from dataclasses import replace
 from pathlib import Path
 from uuid import uuid4
+import os
 import streamlit as st
 
 from ui import components as C
@@ -18,19 +19,26 @@ from ui.runtime import BackgroundRun
 from ui.voice import render_voice_controls
 from ui.replay import Playback
 from ui.followup import FollowUpSource, context_for
+from ui.pet_activity import PetActivity
+from ui.pets import render_pet, stylesheet as pet_stylesheet
+from ui.pet_start import render_start
 
 st.set_page_config(page_title=PROFILE.page_title, page_icon=":material/science:", layout="wide", initial_sidebar_state="collapsed")
 st.session_state.setdefault("astral_theme", False)
 theme = "astral" if st.session_state.astral_theme else "dark"
 st.markdown(stylesheet(theme), unsafe_allow_html=True)
+st.markdown(pet_stylesheet(), unsafe_allow_html=True)
+PET_UI = os.environ.get("TRACE_START_SCREEN", "pets") != "classic"
 
 
 def new_draft():
-    return dict(mode="Demo", backend=DEFAULT_BACKEND, fixture=None, speed=1.5,
-                uploads=[], question=PROFILE.default_question, config={}, sample=False, question_only=False)
+    return dict(composer_id=uuid4().hex, mode="Demo", backend=DEFAULT_BACKEND, fixture=None, speed=1.5,
+                uploads=[], question="" if PET_UI else PROFILE.default_question, config={}, sample=False, question_only=False)
 
 
 st.session_state.setdefault("stage", "evidence")
+st.session_state.setdefault("pet_composer", PET_UI)
+st.session_state.setdefault("pet_activity", PetActivity())
 st.session_state.setdefault("draft", new_draft())
 st.session_state.setdefault("run", RunState())
 st.session_state.setdefault("submitted", None)
@@ -40,6 +48,7 @@ st.session_state.setdefault("playback", None)
 st.session_state.setdefault("previous_runs", [])
 st.session_state.setdefault("result_id", uuid4().hex)
 draft = st.session_state.draft
+draft.setdefault("composer_id", uuid4().hex)
 
 
 def seed(key, value):
@@ -103,6 +112,7 @@ def start(request):
     st.session_state.submitted = deepcopy(request)
     st.session_state.pending = None
     st.session_state.run = RunState()
+    st.session_state.pet_activity = PetActivity()
     st.session_state.voice_agent_stage = ""
     capabilities, _ = backend_capabilities(request.backend, request.mode)
     source = source_for(request.mode)
@@ -130,86 +140,105 @@ if job:
         st.session_state.run.apply(event)
 run_active = bool(job and job.active)
 
-with st.container(key="workspace_header"):
-    brand_column, theme_column = st.columns([4, 1], vertical_alignment="center")
-    with brand_column:
-        st.markdown(f"<div class='flow-brand'>{C._escape(PROFILE.name)}<span>{C._escape(PROFILE.eyebrow)}</span></div>", unsafe_allow_html=True)
-    with theme_column:
-        H.widget(st.toggle, "Astral light", key="astral_theme",
-                  help="Switch between the dark workspace and a white, blue and violet constellation theme. Your choice stays with this session.")
-stages = ["evidence", "question", "investigation", "results"]
-labels = ["Evidence", "Question & agents", "Investigation", "Results"]
-current = stages.index(st.session_state.stage)
+pet_starting = PET_UI and st.session_state.pet_composer and st.session_state.stage == "evidence"
+pet_live = PET_UI and st.session_state.stage == "investigation"
 header_target = None
-available = {"evidence": True, "question": evidence_ready(),
-             "investigation": st.session_state.submitted is not None,
-             "results": st.session_state.run.complete}
-with st.container(key="stage_navigation"):
-    for index, column in enumerate(st.columns(4)):
-        stage = stages[index]
-        active = index == current
-        with column:
-            if st.button(f"{index + 1:02} {labels[index]}" + (" (current)" if active else ""),
-                         key=f"nav_{stage}", type="primary" if active else "secondary",
-                         disabled=not available[stage],
-                         width="stretch"):
-                header_target = stage
+if pet_starting or pet_live:
+    brand, links = st.columns([4, 1])
+    with brand:
+        st.markdown("<div class='pet-brand'>TRACE <span>Your research companions</span></div>", unsafe_allow_html=True)
+    with links:
+        if st.session_state.run.complete:
+            if st.button("View results", key="pet_header_results"):
+                navigate("results")
+else:
+    with st.container(key="workspace_header"):
+        brand_column, theme_column = st.columns([4, 1], vertical_alignment="center")
+        with brand_column:
+            st.markdown(f"<div class='flow-brand'>{C._escape(PROFILE.name)}<span>{C._escape(PROFILE.eyebrow)}</span></div>", unsafe_allow_html=True)
+        with theme_column:
+            H.widget(st.toggle, "Astral light", key="astral_theme",
+                      help="Switch between the dark workspace and a white, blue and violet constellation theme. Your choice stays with this session.")
+    stages = ["evidence", "question", "investigation", "results"]
+    labels = ["Evidence", "Question & agents", "Investigation", "Results"]
+    current = stages.index(st.session_state.stage)
+    header_target = None
+    available = {"evidence": True, "question": evidence_ready(),
+                 "investigation": st.session_state.submitted is not None,
+                 "results": st.session_state.run.complete}
+    with st.container(key="stage_navigation"):
+        for index, column in enumerate(st.columns(4)):
+            stage = stages[index]
+            active = index == current
+            with column:
+                if st.button(f"{index + 1:02} {labels[index]}" + (" (current)" if active else ""),
+                             key=f"nav_{stage}", type="primary" if active else "secondary",
+                             disabled=not available[stage],
+                             width="stretch"):
+                    header_target = stage
 
-editor_mode = st.session_state.get("draft_mode", draft["mode"]) if st.session_state.stage == "evidence" else draft["mode"]
-voice_action = render_voice_controls(st.session_state.stage, draft["question"],
-    phase=st.session_state.run.status if st.session_state.run.complete else ("running" if run_active else "error" if st.session_state.run.errors else ""),
-    run_id=st.session_state.run.run_id, agent_stage=st.session_state.get("voice_agent_stage", ""),
-    dictation_enabled=editor_mode != "Mock")
-if voice_action:
-    if voice_action["type"] == "dictation" and editor_mode != "Mock":
-        draft["question"] = voice_action["text"]
-        st.session_state.draft_question = voice_action["text"]
-    elif voice_action["type"] == "navigate":
-        header_target = voice_action["target"]
-with st.expander("Research question", expanded=st.session_state.stage == "question"):
-    submitted = st.session_state.submitted
-    if submitted:
-        st.caption("Question submitted for the current run")
-        st.write(submitted.question)
-    if editor_mode == "Mock":
-        fixture_path = st.session_state.get("draft_fixture", draft["fixture"]) if st.session_state.stage == "evidence" else draft["fixture"]
-        if not fixture_path:
-            available_fixtures = list_fixtures()
-            fixture_path = next((path for path in available_fixtures if path.stem == PROFILE.default_fixture),
-                                available_fixtures[0] if available_fixtures else None)
-        question, _ = recorded_context(Path(fixture_path) if fixture_path else None, PROFILE.default_question)
-        st.session_state.recorded_question = question
-        H.widget(st.text_area, "Recorded question", disabled=True, key="recorded_question", height=110, help=HELP["recorded_question"])
-        st.caption("A recording uses its saved question. Use the interactive demo to ask a different question.")
-        if st.button("Use an editable demo", key="edit_recording_question"):
-            draft["mode"] = "Demo"
-            draft["question"] = question
-            st.session_state.draft_mode = "Demo"
-            st.session_state.draft_question = question
-            navigate("question")
-    else:
-        seed("draft_question", draft["question"])
-        draft["question"] = H.widget(st.text_area, "Research question", key="draft_question", height=110, help=HELP["question"])
-        question = draft["question"]
+    editor_mode = st.session_state.get("draft_mode", draft["mode"]) if st.session_state.stage == "evidence" else draft["mode"]
+    voice_action = render_voice_controls(st.session_state.stage, draft["question"],
+        phase=st.session_state.run.status if st.session_state.run.complete else ("running" if run_active else "error" if st.session_state.run.errors else ""),
+        run_id=st.session_state.run.run_id, agent_stage=st.session_state.get("voice_agent_stage", ""),
+        dictation_enabled=editor_mode != "Mock")
+    if voice_action:
+        if voice_action["type"] == "dictation" and editor_mode != "Mock":
+            draft["question"] = voice_action["text"]
+            st.session_state.draft_question = voice_action["text"]
+        elif voice_action["type"] == "navigate":
+            header_target = voice_action["target"]
+    with st.expander("Research question", expanded=st.session_state.stage == "question"):
+        submitted = st.session_state.submitted
         if submitted:
-            st.caption("Edits apply only when you explicitly start another investigation. The current run and its results remain unchanged.")
+            st.caption("Question submitted for the current run")
+            st.write(submitted.question)
+        if editor_mode == "Mock":
+            fixture_path = st.session_state.get("draft_fixture", draft["fixture"]) if st.session_state.stage == "evidence" else draft["fixture"]
+            if not fixture_path:
+                available_fixtures = list_fixtures()
+                fixture_path = next((path for path in available_fixtures if path.stem == PROFILE.default_fixture),
+                                    available_fixtures[0] if available_fixtures else None)
+            question, _ = recorded_context(Path(fixture_path) if fixture_path else None, PROFILE.default_question)
+            st.session_state.recorded_question = question
+            H.widget(st.text_area, "Recorded question", disabled=True, key="recorded_question", height=110, help=HELP["recorded_question"])
+            st.caption("A recording uses its saved question. Use the interactive demo to ask a different question.")
+            if st.button("Use an editable demo", key="edit_recording_question"):
+                draft["mode"] = "Demo"
+                draft["question"] = question
+                st.session_state.draft_mode = "Demo"
+                st.session_state.draft_question = question
+                navigate("question")
         else:
-            st.caption("Edit this draft from any section. Nothing runs until you select Start investigation.")
+            seed("draft_question", draft["question"])
+            draft["question"] = H.widget(st.text_area, "Research question", key="draft_question", height=110, help=HELP["question"])
+            question = draft["question"]
+            if submitted:
+                st.caption("Edits apply only when you explicitly start another investigation. The current run and its results remain unchanged.")
+            else:
+                st.caption("Edit this draft from any section. Nothing runs until you select Start investigation.")
 
-if st.session_state.stage in ("investigation", "results"):
-    submitted = st.session_state.submitted
-    if submitted and submitted.mode == "Mock":
-        st.caption("Recorded replay. These are saved outputs from the selected case.")
-    elif submitted and submitted.mode == "Demo":
-        st.caption("Interactive demo. Your question and agent selection drive the workflow with simulated model outputs.")
-    elif st.session_state.run.config.get("run_mode") == "mock":
-        st.caption("Mock execution. The workflow runs on your inputs with simulated model outputs.")
+    if st.session_state.stage in ("investigation", "results"):
+        submitted = st.session_state.submitted
+        if submitted and submitted.mode == "Mock":
+            st.caption("Recorded replay. These are saved outputs from the selected case.")
+        elif submitted and submitted.mode == "Demo":
+            st.caption("Interactive demo. Your question and agent selection drive the workflow with simulated model outputs.")
+        elif st.session_state.run.config.get("run_mode") == "mock":
+            st.caption("Mock execution. The workflow runs on your inputs with simulated model outputs.")
 
 view_previous = False
-if st.session_state.stage in ("evidence", "question") and st.session_state.run.complete:
+if st.session_state.stage in ("evidence", "question") and st.session_state.run.complete and not pet_starting:
     view_previous = st.button("View previous result", key="view_previous_result")
 
-if st.session_state.stage == "evidence":
+if pet_starting:
+    launch_action = render_start(draft, capture_uploads=capture_uploads, run_active=run_active)
+    if launch_action == "advanced":
+        st.session_state.pet_composer = False
+        st.rerun()
+    elif isinstance(launch_action, RunRequest):
+        start(launch_action)
+elif st.session_state.stage == "evidence":
     st.title("Choose your evidence")
     st.caption("Try the sample dataset, select a recording or add your own files.")
     seed("draft_mode", draft["mode"])
@@ -303,7 +332,8 @@ elif st.session_state.stage == "question":
                     uploads=[] if mode == "Demo" or draft.get("question_only") else deepcopy(draft["uploads"]), config=deepcopy(agent_config)))
 
 elif st.session_state.stage == "investigation":
-    st.title("Investigation")
+    if not PET_UI:
+        st.title("Investigation")
     if st.session_state.run.complete and not run_active and not st.session_state.playback:
         if st.button("Replay agent activity", key="investigation_replay"):
             st.session_state.playback = Playback(st.session_state.run.raw)
@@ -364,16 +394,54 @@ elif st.session_state.stage == "results":
     with new:
         if st.button("Start a new investigation", key="results_new"):
             st.session_state.draft = new_draft()
+            st.session_state.pet_composer = PET_UI
             for key in list(st.session_state):
                 if key.startswith("draft_"):
                     del st.session_state[key]
             navigate("evidence")
 
+def paint_pet_panel(state, slot, request, *, replay=False):
+    if replay:
+        presentation = PetActivity()
+        presentation.ingest(state.raw, complete=state.complete)
+        presentation.index = max(0, len(presentation.turns)-1)
+        presentation.playing = st.session_state.playback.playing
+    else:
+        presentation = st.session_state.pet_activity
+        presentation.ingest(state.raw, complete=state.complete)
+        presentation.advance()
+    with slot.container():
+        if state.question:
+            st.markdown(f"<div class='pet-question'><small>YOUR QUESTION</small>{C._escape(state.question)}</div>", unsafe_allow_html=True)
+        for error in state.errors:
+            st.error(error)
+        render_pet(state, presentation, mode=request.mode if request else "Mock")
+        if not replay:
+            with st.container(key="pet_controls"):
+                pause, step, result = st.columns([1,1,1])
+                with pause:
+                    if st.button("Pause updates" if presentation.playing else "Play updates", key="pet_pause"):
+                        presentation.pause() if presentation.playing else presentation.resume()
+                        st.rerun()
+                with step:
+                    if st.button("Next expert", key="pet_step", disabled=not presentation.current):
+                        presentation.step()
+                        st.rerun()
+                with result:
+                    if st.button("Open results", key="pet_results", type="primary", disabled=not state.complete):
+                        navigate("results")
+                st.caption("Presentation controls only. Pausing the pets does not pause or cancel the investigation.")
+        with st.expander("Full investigation activity"):
+            C.render_timeline(state)
+    return None
+
 activity_slot = st.empty()
 
 replay_active = bool(st.session_state.playback and st.session_state.playback.playing and st.session_state.stage == "investigation")
 
-@st.fragment(run_every=0.3 if run_active or replay_active else None)
+pet_presenting = PET_UI and st.session_state.stage == "investigation" and st.session_state.pet_activity.playing and not st.session_state.pet_activity.finished
+
+@st.fragment(run_every=0.3 if run_active or replay_active or pet_presenting else None)
 def poll_investigation():
     playback = st.session_state.playback
     if playback and st.session_state.stage == "investigation":
@@ -399,7 +467,10 @@ def poll_investigation():
         if speed != playback.speed:
             playback.set_speed(speed)
         st.progress(playback.index / max(1, len(playback.events)), text=f"{playback.index} of {len(playback.events)} saved events")
-        paint_live(playback.state, st.empty())
+        if PET_UI:
+            paint_pet_panel(playback.state, st.empty(), st.session_state.submitted, replay=True)
+        else:
+            paint_live(playback.state, st.empty())
         if playback.finished:
             st.caption("Replay complete. The original result is available in Results.")
             if replay_active:
@@ -417,7 +488,8 @@ def poll_investigation():
         phase = "Cancellation requested. Waiting for cleanup." if current_job.cancel_requested else (
             "Agents are investigating" if state.agents else "Preparing evidence and starting the investigation")
         st.markdown(f"<div class='loading-status'><span></span>{phase}</div>", unsafe_allow_html=True)
-        st.caption("You can switch sections and edit the next question while this run continues.")
+        if not PET_UI:
+            st.caption("You can switch sections and edit the next question while this run continues.")
         if current_job.can_cancel and (current_job.request.mode != "Live" or state.run_id):
             if st.button("Cancel investigation", key="cancel_run", disabled=current_job.cancel_requested):
                 current_job.request_cancel()
@@ -425,7 +497,10 @@ def poll_investigation():
     if st.session_state.stage == "investigation":
         # Fragment reruns clear their output. Repaint at the bounded polling rate
         # even when idle, keeping the graph visible between incoming batches.
-        paint_live(state, activity_slot)
+        if PET_UI:
+            paint_pet_panel(state, activity_slot, st.session_state.submitted)
+        else:
+            paint_live(state, activity_slot)
         current_job.render_batches = getattr(current_job, "render_batches", 0) + 1
         if not active and not state.complete:
             st.warning("This run has not produced a completed result. Edit the setup or explicitly start a new attempt.")
@@ -436,16 +511,17 @@ def poll_investigation():
             with edit:
                 if st.button("Edit setup", key="investigation_edit"):
                     navigate("question")
-        elif state.complete:
+        elif state.complete and not PET_UI:
             st.caption("This run has ended. Open Results to review its outcome and evidence.")
-    if not active and not current_job.completion_announced:
+    pet_waiting = PET_UI and st.session_state.stage == "investigation" and state.complete and state.status not in ("cancelled", "error") and not st.session_state.pet_activity.finished
+    if not active and not current_job.completion_announced and not pet_waiting:
         current_job.completion_announced = True
         if header_target or view_previous:
             return  # Explicit navigation wins; draft controls have already saved.
         if state.complete and st.session_state.stage == "investigation":
             st.session_state.stage = "results"
         st.rerun()
-    if active and not header_target and not view_previous:
+    if active and not PET_UI and not header_target and not view_previous:
         roles = {agent.role for agent in state.agents.values()}
         milestone = "critic" if "critic" in roles else "orchestrator" if "orchestrator" in roles else ""
         if milestone and milestone != st.session_state.get("voice_agent_stage", ""):

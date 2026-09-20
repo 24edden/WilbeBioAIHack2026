@@ -1,0 +1,16 @@
+<div class="composer-wrap">
+  <form id="composer" class="composer" novalidate>
+    <label class="sr-only" for="question">Scientific question</label>
+    <textarea id="question" rows="5" maxlength="12000" placeholder="Why did this treatment fail, and what should we test next?"></textarea>
+    <div id="attachments" class="attachments" aria-label="Attached files"></div>
+    <div class="composer-toolbar">
+      <button id="attach" class="attach-button" type="button" aria-label="Attach data files"><span aria-hidden="true">＋</span> Attach data</button>
+      <input id="files" type="file" multiple hidden aria-label="Choose evidence files">
+      <span id="drop-hint" class="drop-hint">or drop files here</span>
+      <button id="submit" class="submit-button" type="submit">Start investigation <span aria-hidden="true">→</span></button>
+    </div>
+    <div id="composer-error" class="composer-error" role="alert"></div>
+  </form>
+  <p id="source-note" class="source-note"></p>
+  <button id="demo" class="quick-demo" type="button">▷ &nbsp; Play the pet demo <span>No backend needed</span></button>
+</div>

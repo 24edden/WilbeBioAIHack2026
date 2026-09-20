@@ -349,3 +349,53 @@ degrading into invented output. A clinical-only run exercises Rosalind without
 BioNeMo; its limited evidence still goes through the existing abstention gate.
 Genomics and Literature also need confirmed BioNeMo NIM paths and request shapes.
 The factory does not silently mix live and mock providers.
+
+## Prompt-first composer and single-pet investigation view
+
+The `codex/pet-investigation-ui` workstream builds on `codex/frontend-redesign`.
+The default start screen now uses the original single rounded prompt surface:
+drop files into the prompt, or use its Attach data button. No separate uploader
+panel is shown. The custom Streamlit v2 component needs Streamlit 1.64 or newer;
+it has no JavaScript dependencies or external asset requests.
+
+Run the combined frontend locally (no separate backend or API key needed for Demo):
+
+```bash
+python -m venv .venv
+# Activate .venv for your shell, then:
+python -m pip install -r requirements.txt -r frontend/requirements.txt
+python -m streamlit run frontend/app.py --server.address 127.0.0.1 --server.port 8502 --browser.gatherUsageStats false
+```
+
+Open http://127.0.0.1:8502 and select **Play the pet demo**, or type a question and
+start an investigation. Demo uses the local engine with explicit mock providers.
+Uploaded files are passed to that engine instead of being discarded for the sample.
+The composer accepts the backend's supported formats, up to 20 files, 20 MB per
+file and 40 MB total. Python validates the component's payload independently.
+
+One right-facing scientist pet displays a short excerpt from a normalized agent
+event. Presentation controls pause/step the display only, not the underlying job.
+If the engine finishes first, the screen explicitly switches to saved updates and
+the original Results page is immediately available. No report text, confidence
+logic, evidence/provenance model or result renderer was replaced.
+
+`TRACE_START_SCREEN=classic` retains the original setup screens for comparison;
+**Source and advanced options → Open advanced setup** exposes the existing agent
+and model controls without changing the submitted run. Results and their follow-up,
+weak-point, evidence and activity views remain the colleague's original components.
+
+All pet PNG/WebP/GIF files are already mirrored once. The manifest records this;
+never add a second CSS flip. Static serving is enabled for `frontend/static/`.
+Do not place secrets or user uploads in that public asset directory.
+
+Validation:
+
+```bash
+python -m pytest -q
+python frontend/smoke_test.py
+node tests/composer_browser_test.mjs
+```
+
+`frontend/requirements-preview.lock.txt` records the exact packages used for this
+local macOS / Python 3.12 preview. It is a platform-specific reproducibility snapshot;
+the normal cross-platform installation uses the original requirements files above.

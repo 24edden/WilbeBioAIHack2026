@@ -42,6 +42,7 @@ def test_message_recipient_can_spawn_later(monkeypatch):
 
 
 def test_actual_catalog_task_controls_and_review_result(monkeypatch):
+    monkeypatch.setenv("TRACE_START_SCREEN", "classic")
     adapters, states, _, _, _ = modules(monkeypatch)
     from streamlit.testing.v1 import AppTest
     import streamlit as st

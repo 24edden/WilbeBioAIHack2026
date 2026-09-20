@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "width": 288,
+  "height": 288,
+  "loopDurationMs": 2310,
+  "defaultFormat": "webp",
+  "fallback": "generic-scientist",
+  "pets": {
+    "generic-scientist": {
+      "label": "Generic scientist",
+      "gif": "generic-scientist.gif",
+      "webp": "generic-scientist.webp",
+      "png": "generic-scientist.png"
+    },
+    "bioinformatician": {
+      "label": "Bioinformatician",
+      "gif": "bioinformatician.gif",
+      "webp": "bioinformatician.webp",
+      "png": "bioinformatician.png"
+    },
+    "statistician": {
+      "label": "Statistician",
+      "gif": "statistician.gif",
+      "webp": "statistician.webp",
+      "png": "statistician.png"
+    },
+    "clinical-scientist": {
+      "label": "Clinical scientist",
+      "gif": "clinical-scientist.gif",
+      "webp": "clinical-scientist.webp",
+      "png": "clinical-scientist.png"
+    },
+    "computational-biologist": {
+      "label": "Computational biologist",
+      "gif": "computational-biologist.gif",
+      "webp": "computational-biologist.webp",
+      "png": "computational-biologist.png"
+    },
+    "epidemiologist": {
+      "label": "Epidemiologist",
+      "gif": "epidemiologist.gif",
+      "webp": "epidemiologist.webp",
+      "png": "epidemiologist.png"
+    },
+    "immunologist": {
+      "label": "Immunologist",
+      "gif": "immunologist.gif",
+      "webp": "immunologist.webp",
+      "png": "immunologist.png"
+    },
+    "synthetic-biologist": {
+      "label": "Synthetic biologist",
+      "gif": "synthetic-biologist.gif",
+      "webp": "synthetic-biologist.webp",
+      "png": "synthetic-biologist.png"
+    },
+    "pharmacologist": {
+      "label": "Pharmacologist",
+      "gif": "pharmacologist.gif",
+      "webp": "pharmacologist.webp",
+      "png": "pharmacologist.png"
+    }
+  },
+  "facing": "right",
+  "horizontalMirrorApplied": true,
+  "transform": "Exact horizontal reflection of each original frame; performed once at asset preparation."
+}
