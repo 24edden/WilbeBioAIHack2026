@@ -35,6 +35,14 @@ requires browser support, microphone permission, and HTTPS or localhost. Spoken
 stage updates are opt-in and use local device voices when available. Unsupported
 features show text guidance; typing and navigation remain available.
 
+The microphone waveform uses a local Web Audio analyser and releases its media
+tracks when dictation ends. The theme switch, waveform, help tips and waiting
+animations run in the browser. Theme preference is stored locally in that browser.
+Backend capability discovery runs in a session-owned worker and has an explicit
+refresh control, so a slow capability endpoint does not block typing/navigation.
+See [Plan/ux-latency-audit.md](Plan/ux-latency-audit.md) for measured checks and the
+remaining optimization backlog.
+
 ## Comparing models and configurations
 
 The new `eval/` runner uses the existing Python dependencies. From the repository root:

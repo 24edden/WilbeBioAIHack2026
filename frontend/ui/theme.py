@@ -18,6 +18,7 @@ run state. They never double as an agent colour.
 """
 
 from __future__ import annotations
+from pathlib import Path
 from .config import PROFILE
 
 # -- agent groups ---------------------------------------------------------
@@ -317,7 +318,7 @@ CSS += """
 .file-chips span {font:11px ui-monospace,monospace;padding:.5rem .7rem;border:1px solid #38503d;background:#14291b;color:#c6ddc0;border-radius:3px;}
 [data-testid='stFileUploaderDropzone'] {background:#14231d;border:1px dashed #536b46;color:#dcebd5;}
 [data-testid='stFileUploaderDropzone'] * {color:#dcebd5;}
-[data-testid='stCaptionContainer'] {color:#a7b7ab;}
+[data-testid='stCaptionContainer'] {color:#a7b7ab;opacity:1;}
 """
 CSS += """
 [data-testid='stRadio'] label,[data-testid='stRadio'] p {color:#dcebd5!important;}
@@ -356,6 +357,9 @@ CSS += """
 CSS += """
 .loading-status {display:flex;align-items:center;gap:.7rem;padding:.8rem 1rem;border:1px solid #435738;border-radius:4px;background:#18271a;color:#dcebd5;font-size:.9rem;}
 .loading-status span {width:8px;height:8px;flex:none;border-radius:50%;background:#d6fb73;animation:beat 1.3s ease-in-out infinite;}
+.loading-status {position:relative;overflow:hidden;}
+.loading-status::after {content:'';position:absolute;bottom:0;left:0;width:34%;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent);animation:loading-sweep 2s ease-in-out infinite;}
+@keyframes loading-sweep {from{transform:translateX(-110%)}to{transform:translateX(400%)}}
 @media(prefers-reduced-motion:reduce){.loading-status span{animation:none}}
 """
 
@@ -379,7 +383,7 @@ CSS += """
 .trace-help-trigger {display:block;box-sizing:border-box;width:1rem;height:1rem;padding:0;border:1.5px solid currentColor;border-radius:50%;background:transparent;color:var(--ink-3);cursor:help;font:700 11px/13px 'Segoe UI',sans-serif;}
 .trace-help-trigger:focus-visible {outline:2px solid var(--accent);outline-offset:3px;border-radius:50%;}
 .trace-help-text {
- visibility:hidden;opacity:0;pointer-events:none;position:absolute;top:calc(100% + 10px);right:0;
+ visibility:hidden;opacity:0;pointer-events:auto;position:absolute;top:100%;right:0;
  width:min(340px,calc(100vw - 48px));padding:.65rem .85rem;border:1px solid var(--line);border-radius:5px;
  background:var(--raise);color:var(--ink);font:400 .85rem/1.5 'Segoe UI',sans-serif;
  text-transform:none;letter-spacing:normal;text-align:left;white-space:normal;
@@ -389,13 +393,16 @@ CSS += """
 .trace-help-trigger:focus-visible + .trace-help-text {visibility:visible;opacity:1;}
 @media(hover:none) {.trace-help-trigger:focus + .trace-help-text {visibility:visible;opacity:1;}}
 @supports(anchor-name:--trace-help) {
- .trace-help-text {position:fixed;top:anchor(bottom);right:anchor(right);margin-top:10px;position-try-fallbacks:flip-block,flip-inline;}
+ .trace-help-text {position:fixed;top:anchor(bottom);right:anchor(right);margin-top:0;position-try-fallbacks:flip-block,flip-inline;}
 }
+
+.trace-help-anchor[data-help-dismissed="true"] .trace-help-text {visibility:hidden!important;opacity:0!important;}
 
 /* Theme changes share geometry; only the paint below is theme-specific. */
 .st-key-workspace_header {margin-bottom:1.4rem;border:1px solid transparent;border-radius:10px;padding:1.1rem 1.25rem;}
 .st-key-workspace_header .flow-brand {margin:0;min-height:2rem;font-size:1.45rem;}
 [data-testid='stTooltipContent'] {border:1px solid transparent;}
+[data-testid='stGraphVizChart'] svg .edge text {fill:var(--ink-2);}
 .st-key-workspace_header [data-testid='stToggle'] {padding-top:.2rem;}
 .st-key-workspace_header [data-testid='stToggle'] p {font-size:.8rem;color:var(--ink-2);}
 @media(max-width:700px) {
@@ -406,6 +413,31 @@ CSS += """
  .st-key-workspace_header [data-testid='stWidgetLabel'] {white-space:nowrap;}
  .st-key-workspace_header .flow-brand span {display:none;}
 }
+"""
+
+CSS += """
+/* Linked arguments remain a single reading column, with no hidden text clipping. */
+.argument-trace {min-width:0;margin:.55rem 0 1rem;border:1px solid var(--line);border-radius:4px;background:var(--raise);color:var(--ink);}
+.argument-trace > summary {box-sizing:border-box;min-height:44px;padding:.7rem .85rem;cursor:pointer;font-size:.85rem;line-height:1.5;overflow-wrap:anywhere;}
+.argument-trace > summary:hover {background:var(--surface-hover,color-mix(in srgb,var(--ink) 6%,transparent));}
+.argument-trace > summary:focus-visible {outline:2px solid var(--accent);outline-offset:3px;border-radius:4px;}
+.argument-trace[open] > summary {border-bottom:1px solid var(--line);}
+.argument-trace-path,.argument-trace-note {margin:.75rem .85rem;color:var(--ink-2);font-size:.8rem;line-height:1.6;overflow-wrap:anywhere;}
+.argument-trace-turn {min-width:0;margin:.85rem;padding:.8rem;border:1px solid var(--line);border-radius:3px;}
+.argument-trace-kicker {font-size:.8rem;font-weight:700;color:var(--ink);overflow-wrap:anywhere;}
+.argument-trace-agent {margin:.35rem 0;color:var(--ink-2);font-size:.85rem;overflow-wrap:anywhere;}
+.argument-trace-id {color:var(--ink-3);font-family:var(--mono,monospace);font-size:.75rem;line-height:1.5;overflow-wrap:anywhere;}
+.argument-trace-text {margin-top:.75rem;font-size:.95rem;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere;}
+@media(max-width:600px) {.argument-trace-turn{margin:.6rem;padding:.65rem}.argument-trace-path,.argument-trace-note{margin:.65rem}}
+"""
+
+CSS += """
+/* A completed run is available without taking focus from the current draft. */
+.run-outcome-notice {min-width:0;padding:.85rem 1rem;border:1px solid var(--line);border-inline-start:3px solid var(--accent);border-radius:4px;background:var(--raise);color:var(--ink);}
+.run-outcome-title {margin:0;font-size:.95rem;font-weight:650;line-height:1.5;overflow-wrap:anywhere;}
+.run-outcome-detail {margin:.35rem 0 0;color:var(--ink-2);font-size:.85rem;line-height:1.6;overflow-wrap:anywhere;}
+.run-outcome-notice,.run-outcome-notice * {animation:none;transition:none;}
+@media(max-width:600px) {.run-outcome-notice{padding:.75rem}}
 """
 
 # This palette is selected explicitly, independent of the OS colour preference.
@@ -570,9 +602,21 @@ ASTRAL_CSS = r"""
 """
 
 
-def stylesheet(theme: str = "dark") -> str:
-    """Return a complete stylesheet; CSS replacement also removes old theme rules."""
-    return "<style>\n" + _BASE_CSS + (ASTRAL_CSS if theme == "astral" else "") + "\n</style>"
+def stylesheet(theme: str = "client") -> str:
+    """Ship both palettes once; a browser attribute selects colours without Python."""
+    astral = ASTRAL_CSS if theme == "astral" else (
+        '@scope (html[data-trace-theme="astral"]) {\n' + ASTRAL_CSS + '\n}' if theme == "client" else "")
+    return "<style>\n" + _BASE_CSS + astral + "\n</style>"
+
+
+def render_theme_control(default_theme: str = "dark") -> None:
+    from streamlit.components.v2 import component
+    assets = Path(__file__).resolve().parents[1] / "static"
+    toggle = component("trace_theme_toggle",
+        html=(assets / "theme.html").read_text(encoding="utf-8"),
+        css=(assets / "theme.css").read_text(encoding="utf-8"),
+        js=(assets / "theme.js").read_text(encoding="utf-8"))
+    toggle(key="trace_theme", data={"defaultTheme": default_theme})
 
 
 _BASE_CSS = CSS

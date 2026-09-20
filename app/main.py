@@ -16,6 +16,7 @@ from dataclasses import replace
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, UploadFile
+from fastapi.concurrency import run_in_threadpool
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 
@@ -123,7 +124,9 @@ async def upload(files: list[UploadFile]) -> UploadResponse:
             text = raw.decode("latin-1", errors="replace")
         name = upload_file.filename or "upload.txt"
         kind = sniff_kind(name, text)
-        bundle = build_bundle([("preview", name, text)])
+        # Parsing is synchronous CPU work; keep the event loop available for
+        # other sessions' streams, health checks and cancellation requests.
+        bundle = await run_in_threadpool(build_bundle, [("preview", name, text)])
         n_records = bundle.files[0].n_records if bundle.files else 0
         stored = file_store.add(name, text, kind, n_records)
         infos.append(
@@ -143,9 +146,9 @@ async def load_sample_patient() -> UploadResponse:
         raise HTTPException(status_code=500, detail=f"no samples found in {SAMPLES_DIR}")
     infos: list[UploadedFileInfo] = []
     for path in paths:
-        text = path.read_text(encoding="utf-8")
+        text = await run_in_threadpool(path.read_text, encoding="utf-8")
         kind = sniff_kind(path.name, text)
-        bundle = build_bundle([("preview", path.name, text)])
+        bundle = await run_in_threadpool(build_bundle, [("preview", path.name, text)])
         n_records = bundle.files[0].n_records if bundle.files else 0
         stored = file_store.add(path.name, text, kind, n_records)
         infos.append(
@@ -168,7 +171,9 @@ async def investigate(request: InvestigateRequest) -> InvestigateResponse:
         raise HTTPException(status_code=404, detail=f"unknown file_id(s): {missing}")
 
     stored = file_store.many(request.file_ids)
-    bundle = build_bundle([(s.file_id, s.filename, s.text) for s in stored])
+    bundle = await run_in_threadpool(
+        build_bundle, [(s.file_id, s.filename, s.text) for s in stored]
+    )
 
     settings = get_settings()
     config = request.config

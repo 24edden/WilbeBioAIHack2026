@@ -366,3 +366,362 @@ def test_followup_reuses_submitted_evidence_and_preserves_previous_report(wizard
     app.button(key='open_saved_result').click().run()
     assert app.session_state['run'].question == 'First question'
     assert len(source.requests) == 2 and not app.exception
+
+
+def test_saved_selection_uses_identity_and_restores_exact_record_and_drafts(wizard):
+    from dataclasses import replace
+    app, source = wizard
+    app.button(key='evidence_next').click().run()
+    app.button(key='start_run').click().run()
+    current_id = app.session_state['result_id']
+    original = deepcopy(app.session_state['run'])
+    request = deepcopy(app.session_state['submitted'])
+    records = []
+    full_question = 'Same long question prefix ' * 7 + '<exact ending>'
+    for suffix, mode, status in [('one', 'Demo', 'complete'), ('two', 'Mock', 'cancelled'), ('three', 'Live', 'error')]:
+        state = deepcopy(original)
+        state.question, state.status = full_question, status
+        records.append({'id': 'abcdefgh-' + suffix, 'run': state,
+                        'request': replace(request, mode=mode, question=full_question,
+                                           context={'question': 'Prior context for ' + suffix})})
+    app.session_state['previous_runs'] = records
+    app.session_state['followup_drafts']['abcdefgh-two'] = {
+        'prompt': 'Saved recording follow-up draft', 'weak_points': {}}
+    app.run()
+    assert len(set(app.selectbox(key='saved_result').options)) == 3
+    app.text_input(key='followup_prompt').set_value('Keep my current unsent follow-up')
+    app.selectbox(key='saved_result').set_value('abcdefgh-two').run()
+    assert app.session_state['result_id'] == current_id
+    assert app.session_state['run'] == original and app.session_state['submitted'] == request
+    assert app.session_state['followup_drafts'][current_id]['prompt'] == 'Keep my current unsent follow-up'
+    assert any('Same long question prefix' in item.value and '&lt;exact ending&gt;' in item.value
+               and 'Recorded playback' in item.value and 'Cancelled' in item.value for item in app.markdown)
+    assert len(source.requests) == 1
+    app.session_state['previous_runs'] = list(reversed(records))
+    app.run()
+    assert app.selectbox(key='saved_result').value == 'abcdefgh-two'
+    app.button(key='open_saved_result').click().run()
+    assert app.session_state['result_id'] == 'abcdefgh-two'
+    assert app.session_state['run'] == records[1]['run']
+    assert app.session_state['submitted'] == records[1]['request']
+    assert app.text_input(key='followup_prompt').value == 'Saved recording follow-up draft'
+    app.selectbox(key='saved_result').set_value(current_id).run()
+    app.button(key='open_saved_result').click().run()
+    assert app.session_state['run'] == original and app.session_state['submitted'] == request
+    assert app.text_input(key='followup_prompt').value == 'Keep my current unsent follow-up'
+    assert len(source.requests) == 1 and not app.exception
+
+
+def test_saved_selection_survives_history_eviction_without_index_drift(wizard):
+    app, source = wizard
+    app.button(key='evidence_next').click().run()
+    app.button(key='start_run').click().run()
+    current_id = app.session_state['result_id']
+    records = [{'id': f'saved-{index}', 'run': deepcopy(app.session_state['run']),
+                'request': deepcopy(app.session_state['submitted'])} for index in range(5)]
+    app.session_state['previous_runs'] = records
+    app.session_state['saved_result'] = 0  # Migrate a prior in-session index value.
+    app.run()
+    assert app.selectbox(key='saved_result').value == 'saved-0'
+    app.selectbox(key='saved_result').set_value('saved-4').run()
+    app.button(key='open_saved_result').click().run()
+    retained = app.session_state['previous_runs']
+    assert len(retained) == 5 and retained[0]['id'] == 'saved-1' and retained[-1]['id'] == current_id
+    assert app.session_state['result_id'] == 'saved-4'
+    assert app.selectbox(key='saved_result').value in [item['id'] for item in retained if item['id'] != 'saved-4']
+    assert len(source.requests) == 1 and not app.exception
+
+
+def test_opening_older_activity_preserves_result_context_draft_and_source_count(wizard):
+    app, source = wizard
+    app.button(key='evidence_next').click().run()
+    app.button(key='start_run').click().run()
+    Message = importlib.import_module('ui.state').Message
+    app.session_state['run'].timeline = [Message(index, 'agent_message', 'agent', 'research', None,
+                                                f'Saved message {index}') for index in range(95)]
+    original = deepcopy(app.session_state['run'])
+    request = deepcopy(app.session_state['submitted'])
+    app.run()
+    key = f"result_activity:{app.session_state['result_id']}"
+    app.session_state[f'{key}:open'] = True
+    app.run()
+    assert any('Showing entries 56 to 95 of 95' in item.value for item in app.caption)
+    app.text_input(key='followup_prompt').set_value('Keep this unsent follow-up while I inspect history')
+    app.session_state[f'{key}:open'] = True  # AppTest does not serialize expander widget state.
+    app.button(key=f'{key}:older').click().run()
+    assert any('Showing entries 16 to 55 of 95' in item.value for item in app.caption)
+    assert app.text_input(key='followup_prompt').value == 'Keep this unsent follow-up while I inspect history'
+    assert app.session_state['run'] == original and app.session_state['submitted'] == request
+    assert len(source.requests) == 1 and not app.exception
+
+
+def test_current_and_selected_receipts_export_saved_requests_without_opening_or_submitting(wizard):
+    from dataclasses import replace
+    import json
+    app, source = wizard
+    app.button(key='evidence_next').click().run()
+    app.button(key='start_run').click().run()
+    current_id = app.session_state['result_id']
+    current = deepcopy(app.session_state['run'])
+    current_request = deepcopy(app.session_state['submitted'])
+    saved_request = replace(current_request, question='Exact saved submitted question', mode='Mock',
+                            context={'question': 'Exact prior context αβγ'})
+    app.session_state['previous_runs'] = [{'id': 'saved-receipt', 'run': deepcopy(current), 'request': saved_request}]
+    app.run()
+    app.session_state[f'current_receipt:{current_id}:open'] = True
+    app.run()
+    current_payload = next(json.loads(item.value) for item in app.json if 'trace.request-receipt' in item.value)
+    assert current_payload['submitted_request']['question'] == current_request.question
+    app.text_input(key='followup_prompt').set_value('An unrelated unsent follow-up')
+    app.session_state['selected_receipt:saved-receipt:open'] = True
+    app.run()
+    selected = next(json.loads(item.value) for item in app.json
+                    if 'trace.request-receipt' in item.value and 'saved-receipt' in item.value)
+    assert selected['submitted_request']['question'] == saved_request.question
+    assert selected['submitted_request']['prior_context'] == saved_request.context
+    assert app.session_state['result_id'] == current_id and app.session_state['run'] == current
+    assert app.session_state['submitted'] == current_request
+    assert app.text_input(key='followup_prompt').value == 'An unrelated unsent follow-up'
+    assert len(source.requests) == 1 and not app.exception
+
+
+def test_slow_capability_discovery_keeps_question_and_navigation_responsive(wizard):
+    from threading import Event as Signal
+    from time import monotonic
+    app, source = wizard
+    release = Signal()
+    original = source.capabilities
+    calls = []
+    def delayed(backend):
+        calls.append(backend)
+        release.wait(10)
+        return original(backend)
+    source.capabilities = delayed
+    try:
+        began = monotonic()
+        app.radio(key='draft_mode').set_value('Live').run()
+        app.toggle(key='draft_sample').set_value(True).run()
+        app.button(key='evidence_next').click().run()
+        assert monotonic() - began < 3
+        assert app.session_state['stage'] == 'question'
+        assert app.button(key='start_run').disabled
+        app.text_area(key='draft_question').set_value('Keep editing while discovery waits').run()
+        app.button(key='question_back').click().run()
+        assert app.session_state['stage'] == 'evidence'
+        assert len(calls) == 1 and not source.requests
+        release.set()
+        app.session_state['capability_lookup'].thread.join(1)
+        app.button(key='evidence_next').click().run()
+        assert not app.button(key='start_run').disabled
+        assert app.text_area(key='draft_question').value == 'Keep editing while discovery waits'
+        assert not app.exception
+    finally:
+        release.set()
+
+
+def add_weak_points(app):
+    app.session_state['run'].weak_points = {'status': 'assessed', 'items': [
+        {'id': 'missing-control', 'category': 'evidence_gap', 'title': 'No comparison group',
+         'rationale': 'Only treated samples were supplied.', 'next_evidence': 'A matched untreated comparison.',
+         'finding_ids': ['finding-1'], 'sources': []},
+        {'id': 'conflict', 'category': 'conflicting_findings', 'title': 'The accounts disagree',
+         'rationale': 'Two reports name different mechanisms.', 'next_evidence': 'An independent mechanism check.',
+         'finding_ids': ['finding-2'], 'sources': []},
+    ]}
+    app.run()
+
+
+def test_weak_point_drafts_preserve_unsubmitted_text_and_survive_navigation(wizard):
+    app, source = wizard
+    advance_with_sample(app)
+    app.button(key='start_run').click().run()
+    add_weak_points(app)
+    original = deepcopy(app.session_state['run'])
+    submitted = deepcopy(app.session_state['submitted'])
+    result_id = app.session_state['result_id']
+    # No intermediate run: this is the typed, not-yet-submitted input that a form
+    # would lose when an unrelated weak-point button triggers a rerun.
+    app.text_input(key='followup_prompt').set_value('Keep my own unsent question')
+    app.button(key='draft_weak_point:1').click().run()
+    suggestion_key = f'weak_point_followup:{result_id}:1'
+    suggestion = app.text_area(key=suggestion_key).value
+    assert 'No comparison group' in suggestion and 'A matched untreated comparison.' in suggestion
+    assert app.text_input(key='followup_prompt').value == 'Keep my own unsent question'
+    assert len(source.requests) == 1
+    assert app.session_state['run'] == original and app.session_state['submitted'] == submitted
+
+    app.text_area(key=suggestion_key).set_value('An edited question about the missing control')
+    app.button(key='nav_question').click().run()
+    app.button(key='nav_results').click().run()
+    assert app.text_area(key=suggestion_key).value == 'An edited question about the missing control'
+    assert app.text_input(key='followup_prompt').value == 'Keep my own unsent question'
+    app.button(key='draft_weak_point:2').click().run()
+    assert app.text_area(key=suggestion_key).value == 'An edited question about the missing control'
+    assert 'The accounts disagree' in app.text_area(key=f'weak_point_followup:{result_id}:2').value
+    app.button(key='discard_weak_point:1').click().run()
+    assert suggestion_key not in [widget.key for widget in app.text_area]
+    assert app.text_input(key='followup_prompt').value == 'Keep my own unsent question'
+    assert app.session_state['run'] == original and len(source.requests) == 1 and not app.exception
+
+
+def test_weak_point_runs_only_after_explicit_submit_and_keeps_previous_drafts(wizard):
+    app, source = wizard
+    advance_with_sample(app)
+    app.button(key='start_run').click().run()
+    add_weak_points(app)
+    previous = deepcopy(app.session_state['run'])
+    previous_request = deepcopy(app.session_state['submitted'])
+    result_id = app.session_state['result_id']
+    app.text_input(key='followup_prompt').set_value('Original manual draft')
+    app.button(key='draft_weak_point:1').click().run()
+    suggestion_key = f'weak_point_followup:{result_id}:1'
+    app.text_area(key=suggestion_key).set_value('What can the existing evidence say about the missing control?')
+    app.button(key='run_weak_point:1').click().run()
+    assert len(source.requests) == 2 and app.session_state['stage'] == 'results'
+    request = app.session_state['submitted']
+    assert request.question == 'What can the existing evidence say about the missing control?'
+    assert request.sample == previous_request.sample and request.uploads == previous_request.uploads
+    assert request.context['question'] == previous.question
+    assert request.context['weak_points'][0]['description'] == 'Only treated samples were supplied.'
+    assert app.session_state['previous_runs'][0]['run'] == previous
+    assert app.text_input(key='followup_prompt').value == ''
+    app.run()
+    assert len(source.requests) == 2
+    app.text_input(key='followup_prompt').set_value('Draft for the new result')
+    app.button(key='open_saved_result').click().run()
+    assert app.session_state['run'] == previous
+    assert app.text_input(key='followup_prompt').value == 'Original manual draft'
+    assert app.text_area(key=suggestion_key).value == request.question
+    assert len(source.requests) == 2 and not app.exception
+
+
+def test_recorded_weak_point_followup_uses_simulated_review_without_original_files(wizard):
+    app, source = wizard
+    app.radio(key='draft_mode').set_value('Mock').run()
+    app.button(key='evidence_next').click().run()
+    app.button(key='start_run').click().run()
+    add_weak_points(app)
+    recorded = deepcopy(app.session_state['run'])
+    app.button(key='draft_weak_point:1').click().run()
+    assert len(source.requests) == 1
+    assert any('Original source files are not reanalyzed.' in caption.value for caption in app.caption)
+    app.button(key='run_weak_point:1').click().run()
+    submitted = app.session_state['submitted']
+    assert len(source.requests) == 2 and submitted.mode == 'Demo'
+    assert submitted.config['task_mode'] == 'idea_review'
+    assert not submitted.sample and not submitted.uploads and submitted.fixture is None
+    assert submitted.context['question'] == recorded.question
+    assert submitted.context == importlib.import_module('ui.followup').context_for(recorded)
+    assert app.session_state['previous_runs'][0]['run'] == recorded
+    assert not app.exception
+
+
+def test_empty_suggestion_requires_a_question_and_discard_does_not_run(wizard):
+    app, source = wizard
+    app.button(key='evidence_next').click().run()
+    app.button(key='start_run').click().run()
+    add_weak_points(app)
+    app.button(key='draft_weak_point:1').click().run()
+    key = f"weak_point_followup:{app.session_state['result_id']}:1"
+    app.text_area(key=key).set_value('  ')
+    app.button(key='run_weak_point:1').click().run()
+    assert any('Enter a follow-up question first.' in error.value for error in app.error)
+    app.button(key='discard_weak_point:1').click().run()
+    assert len(source.requests) == 1 and not app.exception
+
+
+@pytest.mark.parametrize('outcome,title,target', [
+    ('complete', 'Result ready', 'results'),
+    ('abstained', 'Finished without a supported conclusion', 'results'),
+    ('cancelled', 'Investigation stopped', 'results'),
+    ('terminal_error', 'Investigation ended with an error', 'results'),
+    ('source_error', 'Investigation ended with an error', 'investigation'),
+    ('stream_ended', 'No final result received', 'investigation'),
+])
+def test_background_outcome_notice_preserves_editing_and_requires_explicit_view(wizard, outcome, title, target):
+    from threading import Event as Signal
+    app, source = wizard
+    Event = importlib.import_module('ui.events').Event
+    release = Signal()
+    def events(request):
+        source.requests.append(request)
+        yield Event(type='run_started', run_id='notice-test', payload={'question': request.question})
+        release.wait(10)
+        if outcome == 'source_error':
+            raise RuntimeError('Backend unavailable')
+        if outcome == 'stream_ended':
+            return
+        status = {'terminal_error': 'error', 'cancelled': 'cancelled'}.get(outcome, 'complete')
+        yield Event(type='run_complete', payload={'status': status, 'abstained': outcome == 'abstained',
+                                                  'verdict': 'Recorded outcome'})
+    source.events = events
+    try:
+        advance_with_sample(app)
+        app.button(key='start_run').click().run()
+        original = deepcopy(app.session_state['submitted'])
+        app.button(key='nav_question').click().run()
+        app.text_area(key='draft_question').set_value('Keep this question while the run ends')
+        release.set()
+        app.session_state['job'].thread.join(1)
+        app.run()
+        assert app.session_state['stage'] == 'question'
+        assert app.text_area(key='draft_question').value == 'Keep this question while the run ends'
+        assert app.session_state['submitted'] == original and len(source.requests) == 1
+        assert any(title in item.value and 'run-outcome-notice' in item.value for item in app.markdown)
+        app.run()
+        assert len(source.requests) == 1 and app.session_state['stage'] == 'question'
+        key = f"view_run_outcome:{app.session_state['result_id']}"
+        app.text_area(key='draft_question').set_value('Latest edit before explicitly viewing the outcome')
+        app.button(key=key).click().run()
+        assert app.session_state['stage'] == target
+        assert app.session_state['draft']['question'] == 'Latest edit before explicitly viewing the outcome'
+        assert app.session_state['submitted'] == original and len(source.requests) == 1
+        app.button(key='nav_question').click().run()
+        assert app.text_area(key='draft_question').value == 'Latest edit before explicitly viewing the outcome'
+        assert key not in [button.key for button in app.button]
+        assert not app.exception
+    finally:
+        release.set()
+
+
+def test_saved_replay_does_not_publish_a_new_background_outcome_notice(wizard):
+    app, source = wizard
+    app.button(key='evidence_next').click().run()
+    app.button(key='start_run').click().run()
+    app.button(key='results_replay').click().run()
+    app.button(key='nav_question').click().run()
+    assert not any("<div class='run-outcome-notice'" in item.value for item in app.markdown)
+    assert len(source.requests) == 1 and not app.exception
+
+
+@pytest.mark.parametrize('suggested', [False, True])
+def test_followup_preview_matches_the_actual_submitted_context_and_reopened_record(wizard, suggested):
+    import json
+    import re
+    from html import unescape
+    app, source = wizard
+    app.button(key='evidence_next').click().run()
+    app.button(key='start_run').click().run()
+    add_weak_points(app)
+    previous = deepcopy(app.session_state['run'])
+    if suggested:
+        app.button(key='draft_weak_point:2').click().run()
+    previews = [item.value for item in app.markdown if '<summary>Exact prior-context payload</summary>' in item.value]
+    assert len(previews) == (2 if suggested else 1)
+    exact = previews[-1].split('<summary>Exact prior-context payload</summary>', 1)[1]
+    previewed = json.loads(unescape(re.search("<div class='argument-trace-text'>(.*?)</div>", exact, re.S).group(1)))
+    assert previewed['question'] == previous.question and len(source.requests) == 1
+    assert app.session_state['run'] == previous
+    if suggested:
+        app.button(key='run_weak_point:2').click().run()
+    else:
+        app.text_input(key='followup_prompt').set_value('An explicitly submitted follow-up')
+        app.button(key='run_followup').click().run()
+    assert len(source.requests) == 2
+    assert source.requests[-1].context == app.session_state['submitted'].context == previewed
+    app.button(key='open_saved_result').click().run()
+    assert app.session_state['run'] == previous
+    previews = [item.value for item in app.markdown if '<summary>Exact prior-context payload</summary>' in item.value]
+    exact = previews[0].split('<summary>Exact prior-context payload</summary>', 1)[1]
+    assert json.loads(unescape(re.search("<div class='argument-trace-text'>(.*?)</div>", exact, re.S).group(1))) == previewed
+    assert len(source.requests) == 2 and not app.exception

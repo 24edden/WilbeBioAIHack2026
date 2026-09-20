@@ -107,10 +107,40 @@ as untrusted context to recheck. Previous results remain available in the sessio
 (up to five). Recorded cases use a clearly labeled, context-only simulated idea
 review because their original source files are not necessarily available.
 
+Each weak point offers **Draft a follow-up**. Its editable suggestion uses the
+reported limitation and requested evidence, without claiming that evidence exists.
+Drafting makes no model or upload request. Manual and suggested drafts stay
+separate, survive navigation and restore with saved results. Explicit Run and
+Discard controls keep submission separate from editing. Draft retention follows
+the retained session results; this does not add permanent storage.
+
+The saved-result picker uses stable session record IDs rather than list positions.
+Options lead with a distinguishable ID and outcome so repeated questions remain
+recognizable on narrow screens. Selecting a record previews its full question,
+mode and identifiers; **Open selected result** restores its report and drafts.
+Native metadata disclosures toggle locally. The picker still uses Streamlit's
+selection rerun to choose the record for Open. A Live connection describes the
+transport route; only saved execution metadata can report its provider mode.
+
 Question-mark help beside controls and result panels uses `ui/help.py` with
 immediate CSS hover/focus tips. Text appears on hover and hides when the pointer
 leaves; keyboard focus also reveals it. Keep the copy in `ui/help_text.py` current when changing providers,
 datasets or scientific interpretation.
+
+Live activity help uses stable `help_key` values scoped by local result and view,
+so quiet polls preserve a focused tooltip and its Escape-dismissed state. Live and
+replay scopes are separate. New polling views should supply a unique view/control
+scope; ordinary unscoped helpers retain independent IDs. The activity fragment
+still paints every poll to preserve its content; this is not a render cache.
+
+Results' **Full activity timeline** exposes every retained activity summary in
+reverse arrival order. Small histories open locally; larger histories prepare one
+40-entry page on demand, with Newest, Newer, Older and Oldest controls. Paging is
+confined to its Streamlit fragment and scoped to the selected session result.
+Entry numbers and displayed/total counts make the window explicit. Structured
+tool summaries may be shortened by the event adapter; Run details > Raw events
+retains their supplied payloads. The live message feed still shows at most 12
+messages and now states that limit beside the retained message count.
 
 | Change | Edit |
 |---|---|
@@ -233,18 +263,29 @@ The **Astral light** toggle beside TRACE switches the whole workspace between th
 original dark palette and white surfaces with blue/violet accents. A static
 constellation decorates the header; reading areas stay clear. Native form controls,
 status colors, graph edge labels and the isolated voice component share the choice.
-The setting remains in Streamlit session state through navigation, reruns and new
-investigations; it does not persist after a new browser session. Palette rules live
-in `ui/theme.py`; Graphviz uses `build_dot(..., theme="astral")` and voice receives
-the same theme in its component data. Adding a theme does not change run contracts.
+The browser stores the choice in local storage and changes a root attribute without
+calling Python or rerunning the page. Both palettes ship in `ui/theme.py`; Graphviz
+edge text uses CSS colours and voice listens for the local theme event. The compact
+switch lives in `static/theme.*`. Adding a theme does not change run contracts.
 
 
 ## Rendering and run responsiveness
 
 One session-owned source worker feeds a bounded event queue. A Streamlit fragment
-folds batches on the main thread every 300 ms and paints at most once per polling tick. The question
+folds batches on the main thread every 300 ms and repaints the activity surface.
+Streamlit clears fragment-owned content between polls, so skipping unchanged paints
+needs a separate client-owned rendering boundary before it can be enabled safely.
+During quiet periods CSS supplies a moving progress sweep. Phase labels reflect preparation, planning,
+specialist work and critique; the sweep is not a completion percentage. The question
 editor and section headers remain usable during a run. Starting another run is
 disabled until the current worker ends; next-run edits stay separate.
+
+Agent/model capability discovery runs in a session-owned background thread, started
+while choosing evidence. A slow service cannot block question editing or navigation.
+The initial Start control waits for discovery to settle; Start itself never waits on
+an HTTP capability request. Known controls stay cached for that endpoint/mode until
+the user selects Refresh available models and agents. Refresh failures retain the
+last successful snapshot with an error message.
 
 Cancel stops local demo/replay work cooperatively, or invokes the backend's real
 cancel endpoint when advertised. Cancelled partial results are labeled explicitly.
@@ -272,6 +313,14 @@ question. Navigation commands use the same evidence/run availability guards as t
 section buttons; they never submit or cancel an investigation. Recorded questions
 remain fixed. Unsupported browsers retain typed input.
 
+One microphone icon toggles capture, with separate connecting, listening, speaking,
+finishing and error states. Its waveform uses a local Web Audio analyser; audio is
+never recorded or sent by that analyser. SpeechRecognition still uses the browser's
+speech service. If audio analysis is unavailable, speech events drive a fallback
+animation. Silence settles the waveform; finish, failure, consent revocation and
+true component unmount release the analyser tracks. Same-key UI updates preserve
+the capture session. Reduced-motion preferences suppress continuous animation.
+
 Optional spoken announcements use fixed workflow facts for section changes, the
 planner/critic milestones and terminal outcomes. Findings and patient data are not
 spoken. Announcements and microphone capture remain opt-in. The component assets
@@ -294,3 +343,41 @@ labels. The network renders actual directed message events, including handoffs
 whose recipient spawns later. Results show backend discussion turns, assumptions,
 references and source provenance separately from scientific findings. A completed
 idea review does not assert scientific validation.
+
+Replies with valid `reply_to` links offer **View earlier argument**. This native
+browser disclosure shows the exact earlier turn and recorded response chain,
+without a server rerun. Missing, ambiguous or invalid links show an explanation;
+TRACE never guesses a connection from neighboring turns. Source text, assumptions
+and references remain available in the original discussion.
+
+Weak-point reference panels also offer **Inspect finding** for an exact, unique
+finding ID. The view retains the original claim and attached source fields,
+including file locations and supplied excerpts. Reported stance describes the
+finding's relation to the hypothesis, not its correctness. Missing or ambiguous
+references stay unresolved. Small panels open locally; large source collections
+load when the outer References panel is opened, then individual finding
+disclosures toggle in the browser.
+
+During an investigation, **Time since local submission** advances in the browser
+even when no events arrive. It uses a run-specific monotonic anchor, preserves it
+across page updates and stops at completion. Backend-reported measured execution
+time is displayed separately. The clock does not indicate provider health or
+progress. Replay shows **Recording time** instead. No per-second Python callbacks,
+screen-reader announcements or clock animations are used.
+
+If a run ends while Evidence or Question setup is open, a persistent inline notice
+offers an explicit action to inspect its outcome. Completion, abstention,
+cancellation, errors and an interrupted stream use distinct wording. Receiving
+the notice does not navigate, remount the editor or submit its draft. The action
+preserves the current question, and reviewing the outcome suppresses repeat
+notices. Results headings also distinguish errors and unknown terminal states.
+
+Both follow-up editors offer a **Prior generated context** preview before Run.
+It shows retained and omitted records, per-field shortening, and the exact bounded
+context copied into the request. The first eight findings, first six weak points
+and last four discussion turns retain their existing selection rules; counts are
+not a completeness or quality score. The new question, reused files and provider
+instructions are separate. Large previews prepare their contents on first open;
+inner disclosures toggle locally. Saved payloads remain inspectable without
+inventing original totals or truncation metadata. Recording follow-ups keep the
+existing simulated idea-review behavior without the original uploaded files.

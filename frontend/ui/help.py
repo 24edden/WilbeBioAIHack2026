@@ -1,15 +1,20 @@
 """Immediate, local help tips with the same native widget semantics."""
 from html import escape
-from uuid import uuid4
+from uuid import NAMESPACE_URL, uuid4, uuid5
 
 import streamlit as st
 
 
-def widget(render, label, *args, help=None, help_label=None, **kwargs):
-    """Keep widget keys/labels intact; render its help without a delayed popover."""
+def widget(render, label, *args, help=None, help_label=None, help_key=None, **kwargs):
+    """Keep native semantics; explicit help keys must be unique in the visible view.
+
+    Polling callers can retain their help DOM by supplying a stable view/control
+    scope. Unscoped repeated controls still get independent IDs by default.
+    """
     if not help:
         return render(label, *args, **kwargs)
-    tip_id = "trace-tip-" + uuid4().hex
+    tip_id = "trace-tip-" + (uuid5(NAMESPACE_URL, "trace-help:" + str(help_key)).hex
+                            if help_key is not None else uuid4().hex)
     accessible_label = help_label or ("this section" if kwargs.get("unsafe_allow_html") else label)
     with st.container():
         result = render(label, *args, **kwargs)

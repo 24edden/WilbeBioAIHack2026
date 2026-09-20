@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 
 const source = await readFile(new URL('../frontend/static/voice.js', import.meta.url), 'utf8');
-const {default: render, navigationTarget, localVoice} = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
+const {default: render, navigationTarget, localVoice, MicrophoneMeter, waveformLevels} = await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
 assert.equal(navigationTarget('Show the results.'), 'results');
 assert.equal(navigationTarget('go to evidence'), 'evidence');
 assert.equal(navigationTarget('submit my question'), null);
@@ -25,6 +25,7 @@ class Recognition {
 }
 globalThis.window = {
   isSecureContext:true, SpeechRecognition:Recognition,
+  addEventListener:()=>{}, removeEventListener:()=>{},
   SpeechSynthesisUtterance:class { constructor(text) { this.text=text; } },
   speechSynthesis:{
     getVoices:()=>voices,
@@ -36,7 +37,8 @@ globalThis.document={createElement:()=>({value:'',textContent:''})};
 function mount(key, data = {}) {
   const elements = new Map();
   const element = id => {
-    if (!elements.has(id)) elements.set(id,{value:'',textContent:'',checked:false,disabled:false,dataset:{},children:[],
+    if (!elements.has(id)) elements.set(id,{value:'',textContent:'',checked:false,disabled:false,dataset:{},children:[],style:{},attributes:{},
+      setAttribute(name,value){this.attributes[name]=value;},
       replaceChildren(){this.children=[];},appendChild(child){this.children.push(child);},querySelector:()=>element('dictation-option')});
     return elements.get(id);
   };
@@ -58,17 +60,27 @@ widget.element('#consent').checked=true;
 widget.element('#consent').onchange();
 widget.element('#listen').onclick();
 assert.equal(starts,1);
+assert.equal(widget.element('#listen').dataset.phase,'starting');
+activeRecognition.onaudiostart();
+assert.equal(widget.element('#listen').dataset.phase,'listening');
+activeRecognition.onspeechstart();
+assert.equal(widget.element('#listen').dataset.phase,'speaking');
+activeRecognition.onspeechend();
+assert.equal(widget.element('#listen').dataset.phase,'listening');
 // A same-key Streamlit data rerender must preserve the active mic and consent.
 widget.cleanup();
 widget=mount('first', {announcementId:'question',announcement:'Set your question.'});
 await new Promise(resolve=>setTimeout(resolve,70));
 assert.equal(aborts,0);
 assert.equal(starts,1);
-assert.equal(widget.element('#stop').disabled,false);
+assert.equal(widget.element('#listen').disabled,false);
+assert.equal(widget.element('#listen').attributes['aria-pressed'],'true');
 assert.equal(widget.element('#consent').checked,true);
 activeRecognition.onresult({results:[[{transcript:'Why did treatment fail?'}]]});
 assert.equal(widget.actions.length,0);
-widget.element('#stop').onclick();
+widget.element('#listen').onclick();
+assert.equal(widget.element('#listen').dataset.phase,'idle');
+assert.equal(widget.element('#listen').attributes['aria-pressed'],'false');
 widget.element('#apply').onclick();
 assert.equal(widget.actions[0].value.type,'dictation');
 assert.equal(widget.actions[0].value.text,'Why did treatment fail?');
@@ -138,6 +150,44 @@ widget.element('#transcript').value='cancel investigation';
 widget.element('#transcript').oninput();
 assert.equal(widget.element('#apply').disabled,true);
 widget.cleanup();
+
+// The local analyser uses real samples, releases tracks, and handles late permission.
+assert.deepEqual(waveformLevels(new Uint8Array(256).fill(128)),[0,0,0,0,0]);
+assert.ok(waveformLevels(new Uint8Array(256).fill(145)).every(level=>level>.7));
+let tracksStopped=0, contextsClosed=0, cancelledFrames=0, meterFrame;
+const stream={getTracks:()=>[{stop:()=>tracksStopped++}]};
+window.navigator={mediaDevices:{getUserMedia:async()=>stream}};
+window.requestAnimationFrame=callback=>{meterFrame=callback;return 1;};
+window.cancelAnimationFrame=()=>cancelledFrames++;
+window.AudioContext=class {
+  state='running';
+  resume(){return Promise.resolve();}
+  close(){this.state='closed';contextsClosed++;return Promise.resolve();}
+  createAnalyser(){return {fftSize:256,getByteTimeDomainData:data=>data.fill(145),disconnect(){}};}
+  createMediaStreamSource(){return {connect(){},disconnect(){}};}
+};
+const levels=[];
+const meter=new MicrophoneMeter(values=>levels.push(values));
+await meter.start();
+assert.equal(meter.active,true);
+assert.ok(levels[0].every(level=>level>.7));
+meter.stop();
+assert.equal(tracksStopped,1);
+assert.equal(contextsClosed,1);
+assert.equal(cancelledFrames,1);
+const frames=levels.length;
+meterFrame();
+assert.equal(levels.length,frames);
+let grant;
+window.navigator.mediaDevices.getUserMedia=()=>new Promise(resolve=>{grant=resolve;});
+const delayed=new MicrophoneMeter();
+const opening=delayed.start();
+delayed.stop();
+grant(stream);
+await opening;
+assert.equal(delayed.active,false);
+assert.equal(tracksStopped,2);
+assert.equal(contextsClosed,2);
 
 delete window.SpeechRecognition;
 widget=mount('unsupported');

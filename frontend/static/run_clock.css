@@ -1,0 +1,26 @@
+:host {display:block;font-family:Inter,ui-sans-serif,system-ui,sans-serif;}
+* {box-sizing:border-box;}
+.run-clock {
+ --clock-ink:#eef4e8;--clock-muted:#b2c2b6;--clock-line:#34493b;--clock-surface:#14231d;
+ display:grid;grid-template-columns:minmax(0,1fr) max-content;gap:.35rem .8rem;
+ align-items:center;min-width:0;padding:.8rem 1rem;border:1px solid var(--clock-line);
+ border-radius:4px;background:var(--clock-surface);color:var(--clock-ink);color-scheme:dark;
+}
+.run-clock[data-theme='astral'] {
+ --clock-ink:#162342;--clock-muted:#425372;--clock-line:#cbd7ed;--clock-surface:#ffffff;
+ color-scheme:light;
+}
+.run-clock-label {font-size:.85rem;line-height:1.5;overflow-wrap:anywhere;}
+.run-clock-value {
+ display:block;width:11ch;min-height:1.5em;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;
+ font-size:1rem;line-height:1.5;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right;
+}
+.run-clock-note {grid-column:1/-1;margin:0;color:var(--clock-muted);font-size:.75rem;line-height:1.5;overflow-wrap:anywhere;}
+.run-clock-measured {grid-column:1/-1;min-height:1.5em;color:var(--clock-muted);font-size:.8rem;line-height:1.5;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;}
+.run-clock-measured[hidden] {display:block;visibility:hidden;}
+@media(max-width:420px) {
+ .run-clock {grid-template-columns:minmax(0,1fr);gap:.3rem;padding:.75rem;}
+ .run-clock-value {text-align:left;}
+}
+/* A clock updates its text only; there is no motion, including in reduced-motion mode. */
+.run-clock,.run-clock * {animation:none;transition:none;}

@@ -10,13 +10,32 @@
     <div class="row">
       <label class="mode-label" for="mode">Input</label>
       <select id="mode"><option value="dictation">Research question</option><option value="command">Navigate by voice</option></select>
-      <button id="listen" type="button" disabled>Start microphone</button>
-      <button id="stop" type="button" disabled>Stop</button>
     </div>
     <p id="commands" class="hint" hidden>Say: show evidence, show question, show investigation, or show results. Review the command, then select Go.</p>
+    <div class="voice-capture">
+      <button id="listen" class="mic-control" type="button" aria-label="Start microphone" aria-pressed="false" aria-describedby="mic-hint status" data-phase="idle" disabled>
+        <span class="mic-halo" aria-hidden="true"></span>
+        <span class="mic-ring" aria-hidden="true"></span>
+        <svg class="mic-glyph" viewBox="0 0 64 80" fill="none" aria-hidden="true">
+          <rect class="mic-capsule" x="16" y="4" width="32" height="48" rx="16"/>
+          <g class="mic-wave" stroke="currentColor" stroke-width="2.6" stroke-linecap="round">
+            <path id="wave-0" d="M22 25v6"/><path id="wave-1" d="M27 22v12"/>
+            <path id="wave-2" d="M32 18v20"/><path id="wave-3" d="M37 22v12"/>
+            <path id="wave-4" d="M42 25v6"/>
+          </g>
+          <path class="mic-outline" d="M9 34v7a23 23 0 0 0 46 0v-7M32 64v10M22 75h20"/>
+        </svg>
+        <span class="mic-live-dot" aria-hidden="true"></span>
+      </button>
+      <div class="mic-copy">
+        <strong id="mic-label">Speak your question</strong>
+        <span id="mic-hint">Enable voice input above, then tap the microphone.</span>
+        <span id="status" role="status" aria-live="polite">Microphone is off.</span>
+      </div>
+    </div>
     <label class="preview-label" for="transcript">Review recognized text</label>
     <textarea id="transcript" rows="2" maxlength="8000" placeholder="Speech appears here. You can edit it before applying."></textarea>
-    <div class="row"><button id="apply" type="button" disabled>Use as question</button><span id="status" role="status" aria-live="polite">Microphone is off.</span></div>
+    <div class="row"><button id="apply" type="button" disabled>Use as question</button></div>
     </div>
     <div id="playback-settings">
     <div class="spoken"><label class="check"><input id="spoken" type="checkbox"> Spoken stage updates</label></div>

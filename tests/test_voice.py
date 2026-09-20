@@ -37,12 +37,13 @@ def test_announcements_use_known_workflow_copy_only():
     assert "complete" not in stage_announcement("investigation", "running", "clinical")
 
 
-def test_voice_browser_lifecycle_and_explicit_actions():
+@pytest.mark.parametrize("filename", ["voice_browser_test.mjs", "theme_browser_test.mjs", "help_browser_test.mjs"])
+def test_voice_browser_lifecycle_and_explicit_actions(filename):
     """Run dependency-free JS mocks; no microphone, synthesis service or network."""
     node = shutil.which("node")
     if not node:
         pytest.skip("Node is required for the optional browser API lifecycle test")
-    script = Path(__file__).with_name("voice_browser_test.mjs")
+    script = Path(__file__).with_name(filename)
     result = subprocess.run([node, str(script)], capture_output=True, text=True, timeout=15)
     assert result.returncode == 0, result.stdout + result.stderr
     assert json.loads(result.stdout)["passed"] is True

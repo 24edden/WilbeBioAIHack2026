@@ -9,6 +9,7 @@ compliant on both themes. See `theme.py` for the colour policy.
 from __future__ import annotations
 
 from typing import Any
+import json
 import re
 
 import streamlit as st
@@ -20,6 +21,10 @@ from .theme import STATUS, hue
 from .config import PROFILE
 from .icons import svg_icon, alignment_style
 from .help_text import HELP
+from .details import render_details
+from .discussion import inspect_replies
+from .finding_refs import FindingReferenceIndex, compact_provenance
+from .run_clock import measured_execution_ms
 
 TYPE_ICON = {
     "run_started": "▶",
@@ -48,16 +53,16 @@ def confidence_band(value: float | None) -> tuple[str, str]:
     return "low", STATUS["critical"]
 
 
-def _html(markup: str, help: str | None = None, help_label: str | None = None) -> None:
-    H.widget(st.markdown, markup, unsafe_allow_html=True, help=help, help_label=help_label)
+def _html(markup: str, help: str | None = None, help_label: str | None = None, help_key: str | None = None) -> None:
+    H.widget(st.markdown, markup, unsafe_allow_html=True, help=help, help_label=help_label, help_key=help_key)
 
 
 def _empty(text: str) -> None:
     _html(f"<div class='empty'>{text}</div>")
 
 
-def section(label: str, help: str | None = None) -> None:
-    _html(f"<div class='rule'>{_escape(label)}</div>", help=help, help_label=label)
+def section(label: str, help: str | None = None, help_key: str | None = None) -> None:
+    _html(f"<div class='rule'>{_escape(label)}</div>", help=help, help_label=label, help_key=help_key)
 
 
 def _relative_time(state: RunState, timestamp: int) -> str:
@@ -79,7 +84,7 @@ def render_graph(state: RunState) -> None:
               f"<span class='satellite s-two'>{_escape(PROFILE.preview_roles[1]).upper()}</span>"
               f"<span class='satellite s-three'>{_escape(PROFILE.preview_roles[2]).upper()}</span></div>")
         return
-    st.graphviz_chart(build_dot(state, theme="astral" if st.session_state.get("astral_theme", False) else "dark"), width="stretch")
+    st.graphviz_chart(build_dot(state), width="stretch")
 
 
 def render_progress(state: RunState) -> None:
@@ -106,7 +111,7 @@ def render_progress(state: RunState) -> None:
         st.error(error)
 
 
-def render_stats(state: RunState) -> None:
+def render_stats(state: RunState, *, recording: bool = False) -> None:
     if state.complete:
         phase = "complete"
     elif state.agents:
@@ -114,11 +119,16 @@ def render_stats(state: RunState) -> None:
     else:
         phase = "idle"
 
+    event_span = max(0, max(event.ts for event in state.raw) - min(event.ts for event in state.raw)) if state.raw else 0
+    measured = measured_execution_ms(state)
+    timing = ("Recording time", event_span, "saved event span") if recording else (
+        ("Backend time", measured, "measured execution") if measured is not None else
+        ("Event span", event_span, "between received events"))
     tiles = [
         ("Agents", str(len(state.agents)), phase),
         ("Events", str(len(state.raw)), "on the stream"),
         ("Findings", str(len(state.findings)), "with provenance"),
-        ("Elapsed", f"{state.elapsed_ms / 1000:.1f}s", "run time"),
+        (timing[0], f"{timing[1] / 1000:.1f}s", timing[2]),
     ]
     cells = "".join(
         f"<div class='stat'><div class='k'>{k}</div>"
@@ -170,6 +180,7 @@ def render_conversation(state: RunState, limit: int = 12) -> None:
               "<div class='waiting-line'><span></span>Waiting for the first exchange</div></div>")
         return
 
+    st.caption(f"Latest {min(limit, len(talk))} of {len(talk)} agent messages, shown in arrival order.")
     rows = []
     for msg in talk[-limit:]:
         to = msg.parent_id or "all"
@@ -194,7 +205,7 @@ def render_findings(state: RunState) -> None:
         return
 
     H.widget(st.caption, "Confidence is a model or heuristic score, not a calibrated probability.", help=HELP["confidence"])
-    for finding in state.findings_by_confidence():
+    for index, finding in enumerate(state.findings_by_confidence()):
         label, colour = confidence_band(finding.confidence)
         score = "n/a" if finding.confidence is None else f"{finding.confidence:.2f}"
         width = int((finding.confidence or 0) * 100)
@@ -210,10 +221,12 @@ def render_findings(state: RunState) -> None:
             f"</div>"
         )
         if finding.provenance:
-            with st.expander(f"Provenance ({len(finding.provenance)})"):
+            def provenance(records=finding.provenance):
                 H.widget(st.caption, "Sources for this finding", help=HELP["provenance"])
-                for item in finding.provenance:
+                for item in records:
                     st.markdown(f"- {_provenance_line(item)}")
+            render_details(f"Provenance ({len(finding.provenance)})", provenance,
+                           key=f"finding_sources:{state.run_id}:{index}", lazy=len(finding.provenance) > 12)
         else:
             _empty("No provenance attached to this finding.")
 
@@ -221,7 +234,7 @@ def render_findings(state: RunState) -> None:
 def render_verdict(state: RunState) -> None:
     if not state.complete:
         return
-    if state.task_mode == "idea_review" and state.status not in ("cancelled", "error"):
+    if state.task_mode == "idea_review" and state.status == "complete" and not state.abstained:
         _html("<div class='verdict' style='--c:var(--accent)'><div class='tag'>Idea review complete</div>"
               f"<div class='body'>{_escape(state.verdict)}</div>"
               "<div style='color:var(--ink-2);font-size:.85rem'>This is a design review of the proposal. Scientific validation has not been established.</div></div>")
@@ -233,11 +246,19 @@ def render_verdict(state: RunState) -> None:
     if state.status == "cancelled":
         colour = "var(--ink-3)"
         tag = "Cancelled"
-        note = "Partial findings remain available. This is not a completed assessment."
+        note = "Any findings shown are partial. This is not a completed assessment."
+    elif state.status == "error":
+        colour = STATUS["critical"]
+        tag = "Run ended with an error"
+        note = "Inspect the recorded errors and available output before drawing a conclusion."
+    elif state.status != "complete":
+        colour = "var(--ink-3)"
+        tag = "Run ended"
+        note = f"Reported status: {_escape(state.status or 'unspecified')}. This outcome has not been marked complete."
     elif state.abstained:
         colour = STATUS["warning"]
         tag = "⚠ Abstained"
-        note = "The critic judged the evidence too thin to answer."
+        note = "The run withheld a supported conclusion. Review its limitations and suggested next evidence."
     else:
         colour = STATUS["good"]
         tag = "✔ Verdict"
@@ -262,7 +283,7 @@ def render_verdict(state: RunState) -> None:
                 st.error(err)
 
 
-def render_weak_points(state: RunState) -> None:
+def render_weak_points(state: RunState, *, followup_actions=None) -> None:
     """Present the backend's assessment without deriving new scientific claims."""
     section("Weak points", help=HELP["weak_points"])
     assessment = state.weak_points
@@ -278,6 +299,7 @@ def render_weak_points(state: RunState) -> None:
         "evidence_gap": "Evidence gap", "conflicting_findings": "Conflicting findings",
         "source_gap": "Source gap", "provider_failure": "Provider failure", "scope_limit": "Scope limit",
     }
+    finding_index = FindingReferenceIndex(state.findings)
     for index, item in enumerate(items, 1):
         category_id = str(item.get("category") or "Other")
         category = categories.get(category_id, category_id.replace("_", " "))
@@ -289,17 +311,63 @@ def render_weak_points(state: RunState) -> None:
               f"<p style='color:var(--ink-2);font-size:.9rem;margin:.65rem 0'>{_escape(rationale)}</p>"
               f"<div class='ask-label'>Evidence to resolve this</div>"
               f"<div style='color:var(--ink-2);font-size:.85rem'>{_escape(next_evidence)}</div></div>")
+        if followup_actions is not None:
+            followup_actions(index, item)
         refs = item.get("finding_ids") if isinstance(item.get("finding_ids"), list) else []
         sources = item.get("sources") if isinstance(item.get("sources"), list) else []
-        with st.expander(f"References for {index:02}: {title}"):
+        resolved = [finding_index.resolve(ref) for ref in refs]
+        def references(refs=refs, sources=sources, resolved=resolved):
             if isinstance(refs, list) and refs:
                 st.caption("Finding references")
                 st.code("\n".join(str(ref) for ref in refs), language=None)
+                for reference in resolved:
+                    if reference.finding is not None:
+                        _render_referenced_finding(reference.finding)
+                    else:
+                        _html(f"<p class='argument-trace-note'>Reference {_escape(str(reference.identifier))}: {_escape(reference.message)}</p>")
             if isinstance(sources, list) and sources:
                 st.caption("Source records supplied by the backend")
                 st.json(sources, expanded=False)
             if not refs and not sources:
                 st.caption("No finding or source references supplied for this item.")
+        render_details(f"References for {index:02}: {title}", references,
+                       key=f"weak_point_sources:{state.run_id}:{index}",
+                       lazy=len(refs) + len(sources) > 12 or not compact_provenance(sources)
+                       or any(not compact_provenance(ref.finding.provenance) for ref in resolved if ref.finding))
+
+
+def _render_referenced_finding(finding) -> None:
+    reported = getattr(finding, "stance", None)
+    stance = {"supports": "Supports", "contradicts": "Contradicts", "neutral": "Neutral"}.get(reported, "Unknown / not supplied") if isinstance(reported, str) else "Unknown / not supplied"
+    _html("<details class='argument-trace'>"
+          f"<summary>Inspect finding {_escape(str(finding.finding_id))} · {_escape(finding.role)}</summary>"
+          "<article class='argument-trace-turn'>"
+          f"<div class='argument-trace-text'>{_escape(finding.text)}</div>"
+          f"<div class='argument-trace-agent'>Produced by {_escape(finding.agent_id)} · {_escape(finding.role)}</div>"
+          f"<div class='argument-trace-id'>Finding ID: {_escape(str(finding.finding_id))}</div>"
+          f"<p class='argument-trace-note'>Backend-reported relation to the hypothesis: {stance}. "
+          "This describes the finding's assigned stance, not whether it is correct.</p>"
+          "<p class='argument-trace-note'>Finding located in this run. Attached source records have not been independently verified here.</p>"
+          f"{_finding_provenance_html(finding.provenance)}"
+          "</article></details>")
+
+
+def _finding_provenance_html(records: list[dict]) -> str:
+    if not records:
+        return "<p class='argument-trace-note'>No source records were attached to this finding.</p>"
+    labels = {"kind": "Source kind", "ref": "Source reference", "locator": "Location", "source": "Source",
+              "file": "File", "pmid": "PMID", "quote": "Source excerpt supplied with this finding"}
+    chunks = []
+    for index, record in enumerate(records, 1):
+        fields = []
+        for key, value in record.items():
+            text = value if isinstance(value, str) else json.dumps(value, ensure_ascii=False, default=str, indent=2)
+            label = labels.get(key, str(key).replace("_", " "))
+            fields.append(f"<div class='argument-trace-agent'>{_escape(label)}</div>"
+                          f"<div class='argument-trace-text'>{_escape(text)}</div>")
+        chunks.append(f"<section class='argument-trace-turn'><div class='argument-trace-kicker'>Source record {index}</div>"
+                      + ("".join(fields) or "<p class='argument-trace-note'>No source metadata supplied.</p>") + "</section>")
+    return "".join(chunks)
 
 
 def render_role_catalog(roles: list[dict], skills: list[dict]) -> None:
@@ -330,16 +398,41 @@ def render_plan(state: RunState) -> None:
 
 def render_discussion(state: RunState) -> None:
     section("Proposal discussion", help=HELP["discussion"])
-    st.caption("Arguments, assumptions and proposed checks. These are not validated scientific findings.")
+    st.caption("Arguments, assumptions and proposed checks. A revision does not establish scientific correctness.")
     if not state.discussion:
         _empty("No structured discussion was supplied by this run.")
-    for index, entry in enumerate(state.discussion, 1):
+    inspections = inspect_replies(state.discussion)
+    for index, (entry, inspection) in enumerate(zip(state.discussion, inspections), 1):
         stance, color, _ = alignment_style(str(entry.get("alignment") or entry.get("stance") or ""))
         phase = str(entry.get("phase") or "Review").replace("_", " ")
         _html(f"<div class='find' style='border-left:3px solid {color}'><div class='eyebrow'>{index:02} / {_escape(phase)}</div>"
               f"<span class='perspective' style='--perspective:{color}'>{_escape(stance)}</span>"
               f"<div class='body'>{_escape(str(entry.get('text') or ''))}</div>"
               f"<div class='id'>{_escape(str(entry.get('agent_id') or ''))}</div></div>")
+        if inspection.status == "linked":
+            earlier_index = inspection.target_index
+            earlier = state.discussion[earlier_index]
+            earlier_phase = str(earlier.get("phase") or "Review").replace("_", " ")
+            earlier_agent = str(earlier.get("agent_id") or earlier.get("role") or "Unspecified agent")
+            earlier_stance, _, _ = alignment_style(str(earlier.get("alignment") or earlier.get("stance") or ""))
+            chain = " → ".join(
+                f"Turn {turn + 1:02} · {str(state.discussion[turn].get('phase') or 'Review').replace('_', ' ')}"
+                for turn in inspection.chain
+            )
+            _html("<details class='argument-trace'>"
+                  f"<summary>View earlier argument: turn {earlier_index + 1:02} · {_escape(earlier_agent)} · {_escape(earlier_phase)}</summary>"
+                  f"<div class='argument-trace-path'>Recorded links: {_escape(chain)}</div>"
+                  "<p class='argument-trace-note'>Recorded discussion, not independently verified evidence.</p>"
+                  "<article class='argument-trace-turn'>"
+                  f"<div class='argument-trace-kicker'>Turn {earlier_index + 1:02} · {_escape(earlier_phase)}</div>"
+                  f"<div class='argument-trace-agent'>{_escape(earlier_agent)} · {_escape(earlier_stance)}</div>"
+                  f"<div class='argument-trace-id'>Source turn ID: {_escape(earlier['id'])}</div>"
+                  f"<div class='argument-trace-text'>{_escape(str(earlier.get('text') or ''))}</div>"
+                  "</article>"
+                  f"<p class='argument-trace-note'>Assumptions and references remain with turn {earlier_index + 1:02} in the full discussion.</p>"
+                  "</details>")
+        else:
+            st.caption(inspection.message)
         with st.expander(f"Assumptions and references for turn {index}"):
             for key, label in (("assumptions", "Assumptions"), ("evidence_refs", "Evidence references"), ("open_questions", "Open questions")):
                 values = entry.get(key)
@@ -355,13 +448,17 @@ def render_discussion(state: RunState) -> None:
                 st.caption(f"Responds to: {entry['reply_to']}")
 
 
-def render_timeline(state: RunState, limit: int = 40) -> None:
+def render_timeline(state: RunState, limit: int = 40, *, end: int | None = None) -> None:
     if not state.timeline:
         _empty("No activity yet.")
         return
 
+    total = len(state.timeline)
+    end = total if end is None else max(0, min(total, end))
+    start = max(0, end - limit)
+    st.caption(f"Showing entries {start + 1} to {end} of {total}. Latest arrival first.")
     rows = []
-    for msg in reversed(state.timeline[-limit:]):
+    for ordinal, msg in reversed(list(enumerate(state.timeline[start:end], start=start + 1))):
         icon = TYPE_ICON.get(msg.type, "·")
         to = (
             f" <span style='color:var(--ink-3)'>to {_escape(msg.parent_id)}</span>"
@@ -372,10 +469,11 @@ def render_timeline(state: RunState, limit: int = 40) -> None:
             f"<span class='t'>{_relative_time(state, msg.ts)}</span>"
             f"<span style='color:{hue(msg.role)}'>{icon}</span>"
             f"<span><span class='w'>{_escape(msg.agent_id)}</span>{to}"
-            f"<div class='b'>{_message_text(msg.text)}</div></span>"
+            f"<div class='argument-trace-id'>Entry {ordinal} · {_escape(msg.type)}</div>"
+            f"<div class='b argument-trace-text'>{_message_text(msg.text)}</div></span>"
             f"</div>"
         )
-    _html("".join(rows))
+    _html("<div class='timeline-window'>" + "".join(rows) + "</div>")
 
 
 def render_agent_table(state: RunState) -> None:

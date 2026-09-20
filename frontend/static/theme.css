@@ -1,0 +1,14 @@
+:host{display:block;font:12px 'Segoe UI',sans-serif;min-height:28px}
+*{box-sizing:border-box}.theme-control{display:flex;align-items:center;justify-content:flex-end;gap:7px;min-height:28px;--theme-ink:#c3cdbf;--theme-accent:#d6fb73;--theme-track:#4f6559;--theme-surface:#18291d}
+.theme-control[data-theme='astral']{--theme-ink:#425372;--theme-accent:#3159cc;--theme-track:#a8b9d5;--theme-surface:#fff}
+button{font:inherit;color:var(--theme-ink);cursor:pointer}#theme-toggle{display:flex;align-items:center;gap:6px;border:0;padding:3px 0;background:transparent;white-space:nowrap;min-height:28px}
+.track{display:block;width:31px;height:18px;padding:3px;border-radius:20px;background:var(--theme-track);flex:none}.track>span{display:block;width:12px;height:12px;background:white;border-radius:50%;transition:transform .15s}.theme-control[data-theme='astral'] .track{background:linear-gradient(120deg,#235dc9,#7951c3)}[aria-checked='true'] .track>span{transform:translateX(13px)}
+button:focus-visible{outline:2px solid var(--theme-accent);outline-offset:3px;border-radius:3px}
+/* Keep the existing row height while providing a full 28px pointer target. */
+.help{position:relative;display:block;flex:none}.help>button{display:block;padding:0;border:1px solid currentColor;background:transparent;border-radius:50%;width:28px;height:28px;font-size:12px;line-height:26px;cursor:help}
+.help>button:hover{color:var(--theme-accent);background:var(--theme-surface)}
+#theme-tip{position:absolute;right:0;top:100%;width:230px;max-width:calc(100vw - 48px);padding:10px 12px;border:1px solid var(--theme-track);border-radius:5px;background:var(--theme-surface);color:var(--theme-ink);font-size:12px;line-height:1.5;z-index:100000;visibility:hidden;pointer-events:auto;box-shadow:0 4px 18px #0002}.help:hover #theme-tip,.help>button:focus-visible+#theme-tip{visibility:visible}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+@media(hover:none){.help>button:focus+#theme-tip{visibility:visible}}
+
+.help[data-help-dismissed="true"] #theme-tip{visibility:hidden!important}

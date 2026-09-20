@@ -3,12 +3,16 @@ from copy import deepcopy
 from queue import Empty, Full, Queue
 from threading import Event as Signal, Lock, Thread
 from time import monotonic
+from uuid import uuid4
 
 from .events import Event
 
 
 class BackgroundRun:
     def __init__(self, source, request, *, can_cancel=False, max_events=1024, lease_seconds=120):
+        self.submitted_at = monotonic()
+        self.completed_at = None
+        self.clock_id = uuid4().hex
         self.source = source
         self.request = deepcopy(request)
         self.can_cancel = can_cancel
@@ -28,6 +32,11 @@ class BackgroundRun:
     @property
     def active(self):
         return not self.finished.is_set() or not self.queue.empty() or self._final_event is not None
+
+    @property
+    def elapsed_ms(self):
+        end = self.completed_at if self.completed_at is not None else monotonic()
+        return max(0.0, (end - self.submitted_at) * 1000)
 
     def _watch_lease(self):
         while not self.finished.wait(min(5.0, max(.01, self.lease_seconds / 4))):
@@ -84,6 +93,7 @@ class BackgroundRun:
                         'abstained': True, 'verdict': 'Investigation cancelled.'})
                 elif self._final_event is None:
                     self._final_event = Event(type='error', payload={'message': 'The event stream ended before a result was available.'})
+            self.completed_at = monotonic()
             self.finished.set()
 
     def drain(self, limit=256):

@@ -5,6 +5,8 @@ from . import components as C
 from .state import RunState
 from .config import PROFILE
 from .help_text import HELP
+from .details import render_details
+from .activity import render_activity_history
 
 def render_agent_setup(mode: str, backend: str, capabilities: dict, error: str = "", saved_config: dict | None = None) -> tuple[dict, bool]:
     """Return backend-supported configuration, never cosmetic agent controls."""
@@ -81,7 +83,7 @@ def render_agent_setup(mode: str, backend: str, capabilities: dict, error: str =
                            if capabilities.get("run_mode") == "mock" else "Model selection is fixed by the backend. Agent selection remains configurable.")
         return config, valid
 
-def paint_live(state: RunState, live_slot) -> None:
+def paint_live(state: RunState, live_slot, *, recording: bool = False, help_scope: str = "live-activity") -> None:
     with live_slot.container():
         if state.question:
             st.caption(state.question)
@@ -89,13 +91,14 @@ def paint_live(state: RunState, live_slot) -> None:
             st.error(error)
         if state.config:
             with st.expander("Run configuration"):
-                H.widget(st.caption, "Effective settings reported by this run.", help=HELP["run_config"])
+                H.widget(st.caption, "Effective settings reported by this run.", help=HELP["run_config"],
+                         help_key=f"{help_scope}:configuration")
                 st.json(state.config)
         C.render_plan(state)
-        C.render_stats(state)
+        C.render_stats(state, recording=recording)
         left, right = st.columns([3, 2], gap="medium")
         with left:
-            C.section("Agent network", help=HELP["network"])
+            C.section("Agent network", help=HELP["network"], help_key=f"{help_scope}:network")
             st.markdown(
                 "<div style='font-size:.74rem;color:var(--ink-3);margin-bottom:.3rem'>"
                 "Solid arrows spawn. Dashed arrows are messages between agents.</div>",
@@ -103,7 +106,7 @@ def paint_live(state: RunState, live_slot) -> None:
             )
             C.render_graph(state)
         with right:
-            C.section("Agent messages", help=HELP["messages"])
+            C.section("Agent messages", help=HELP["messages"], help_key=f"{help_scope}:messages")
             st.markdown(
                 "<div style='font-size:.74rem;color:var(--ink-3);margin-bottom:.3rem'>"
                 "What the agents are saying to each other.</div>",
@@ -129,16 +132,16 @@ def paint_detail(state: RunState, verdict_slot, detail_slot) -> None:
         with findings:
             C.render_findings(state)
         with timeline:
-            C.render_timeline(state)
+            render_activity_history(state, key=f"detail_activity:{st.session_state.get('result_id', id(state))}")
         with agents:
             C.render_agent_table(state)
         with raw:
-            st.json([vars(e) for e in state.raw], expanded=False)
+            render_raw_events(state, key="detail_raw_events")
 
 
 
 
-def render_results(state: RunState, *, show_summary: bool = True) -> None:
+def render_results(state: RunState, *, show_summary: bool = True, weak_point_actions=None) -> None:
     """Lead with the conclusion. Keep supporting details one level below it."""
     if show_summary:
         st.caption(state.question)
@@ -152,7 +155,7 @@ def render_results(state: RunState, *, show_summary: bool = True) -> None:
         else:
             C.render_findings(state)
     with weaknesses:
-        C.render_weak_points(state)
+        C.render_weak_points(state, followup_actions=weak_point_actions)
     with activity:
         network, messages = st.columns([3, 2])
         with network:
@@ -161,9 +164,7 @@ def render_results(state: RunState, *, show_summary: bool = True) -> None:
         with messages:
             C.section("Agent messages", help=HELP["messages"])
             C.render_conversation(state)
-        with st.expander("Full activity timeline"):
-            H.widget(st.caption, "Recent activity", help=HELP["timeline"])
-            C.render_timeline(state)
+        render_activity_history(state, key=f"result_activity:{st.session_state.get('result_id', id(state))}")
         with st.expander("Agent details"):
             C.render_agent_table(state)
     with context:
@@ -177,6 +178,12 @@ def render_results(state: RunState, *, show_summary: bool = True) -> None:
             st.json(state.config)
         if state.files:
             st.write("Evidence files", state.files)
-        with st.expander("Raw events"):
-            H.widget(st.caption, "Run event records", help=HELP["raw_events"])
-            st.json([vars(event) for event in state.raw], expanded=False)
+        render_raw_events(state)
+
+
+def render_raw_events(state: RunState, *, key: str = "result_raw_events") -> None:
+    def records():
+        H.widget(st.caption, "Run event records", help=HELP["raw_events"])
+        st.json([vars(event) for event in state.raw], expanded=False)
+
+    render_details("Raw events", records, key=f"{key}:{state.run_id}", lazy=True)

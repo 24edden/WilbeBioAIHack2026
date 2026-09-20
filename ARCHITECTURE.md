@@ -207,6 +207,14 @@ cursor or retention enforcement. Brev's access gate does not add those applicati
 properties. Server event histories/subscriber queues are not globally bounded.
 Follow [infra/README.md](infra/README.md) for deployment.
 
+Evidence parsing in the async upload, sample and investigation handlers runs in
+FastAPI's worker pool, keeping the API event loop available to other sessions.
+Sample file reads also use the pool. Store mutations stay on the event loop.
+The submitting request still waits for preparation; this is isolation of blocking
+work, not a parser speedup or a durable ingestion queue. A held-parser regression
+test verifies that health requests respond before preparation finishes. See
+[UX and latency audit](Plan/ux-latency-audit.md) for remaining wait/render costs.
+
 Run-scoped HTTP connection reuse and a versioned reference-embedding cache remain
 future optimizations. Evidence-linked biological imagery and mechanism comparison
 artifacts in [visual-storytelling.md](Plan/visual-storytelling.md) are proposals,

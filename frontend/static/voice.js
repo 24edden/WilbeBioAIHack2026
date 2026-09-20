@@ -1,6 +1,65 @@
 // Browser-only voice. No microphone starts, remote synthesis or model calls on mount.
 const sessions = new Map();
 
+export function waveformLevels(samples) {
+  return Array.from({length: 5}, (_, index) => {
+    const start = Math.floor(index * samples.length / 5), end = Math.floor((index + 1) * samples.length / 5);
+    let sum = 0;
+    for (let i = start; i < end; i++) sum += ((samples[i] - 128) / 128) ** 2;
+    return Math.min(1, Math.sqrt(sum / Math.max(1, end - start)) * 6);
+  });
+}
+
+// Analyser audio stays in this browser. It is never recorded or connected to speakers.
+export class MicrophoneMeter {
+  constructor(onLevels = () => {}) {
+    this.onLevels = onLevels;
+    this.stopped = false;
+    this.active = false;
+    this.frame = null;
+  }
+  async start() {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext || !window.navigator?.mediaDevices?.getUserMedia) return;
+    try {
+      this.context = new AudioContext();
+      // Resume while still in the click gesture; permission can resolve later.
+      const ready = this.context.resume().catch(() => {});
+      const stream = await window.navigator.mediaDevices.getUserMedia({audio: true});
+      if (this.stopped) { stream.getTracks().forEach(track => track.stop()); return; }
+      this.stream = stream;
+      await ready;
+      if (this.stopped) return;
+      this.analyser = this.context.createAnalyser();
+      this.analyser.fftSize = 256;
+      this.input = this.context.createMediaStreamSource(stream);
+      this.input.connect(this.analyser);
+      this.samples = new Uint8Array(this.analyser.fftSize);
+      this.active = true;
+      const tick = () => {
+        if (this.stopped) return;
+        this.analyser.getByteTimeDomainData(this.samples);
+        this.onLevels(waveformLevels(this.samples));
+        this.frame = window.requestAnimationFrame(tick);
+      };
+      tick();
+    } catch {
+      this.stop(); // Speech recognition can still work without an analyser.
+    }
+  }
+  stop() {
+    this.stopped = true;
+    this.active = false;
+    if (this.frame !== null) window.cancelAnimationFrame(this.frame);
+    this.stream?.getTracks().forEach(track => track.stop());
+    this.input?.disconnect();
+    this.analyser?.disconnect();
+    if (this.context && this.context.state !== 'closed') this.context.close().catch(() => {});
+    this.stream = this.input = this.analyser = null;
+    this.onLevels([0, 0, 0, 0, 0]);
+  }
+}
+
 export function navigationTarget(text) {
   const normalized = String(text).trim().toLowerCase().replace(/[.!?]+$/, '').replace(/\s+/g, ' ');
   const match = /^(?:show|open|go to) (?:the )?(evidence|question|investigation|results)$/.exec(normalized);
@@ -17,15 +76,17 @@ export default function render(component) {
   const {parentElement, data, key, setTriggerValue} = component;
   const state = sessions.get(key) || {consent: false, spoken: false, mode: 'dictation', text: '', setupOpen: false, controlsOpen: false,
     seenAnnouncements: new Set(), recognition: null, listening: false, utterance: null, speechTimer: null, cleanupTimer: null,
-    voiceId: 'auto', onlineVoices: false};
+    voiceId: 'auto', onlineVoices: false, phase: 'idle', meter: null, speechTimerReset: null};
   if (state.cleanupTimer !== null) clearTimeout(state.cleanupTimer);
   if (state.speechTimer !== null) clearTimeout(state.speechTimer);
   state.cleanupTimer = state.speechTimer = null;
   sessions.set(key, state);
   const el = id => parentElement.querySelector(`#${id}`);
   const details = parentElement.querySelector('details');
-  details.dataset.theme = data.theme === 'astral' ? 'astral' : 'dark';
-  const consent = el('consent'), mode = el('mode'), listen = el('listen'), stop = el('stop');
+  const syncTheme = () => { details.dataset.theme = document.documentElement?.dataset.traceTheme || (data.theme === 'astral' ? 'astral' : 'dark'); };
+  syncTheme();
+  window.addEventListener('trace-theme-change', syncTheme);
+  const consent = el('consent'), mode = el('mode'), listen = el('listen');
   const transcript = el('transcript'), apply = el('apply'), status = el('status');
   const spoken = el('spoken'), speechStatus = el('speech-status');
   const voiceChoice = el('voice-choice'), onlineVoices = el('online-voices'), preview = el('preview');
@@ -34,6 +95,18 @@ export default function render(component) {
   let recognition = state.recognition, listening = state.listening, disposed = false;
   const supported = Boolean(Recognition && window.isSecureContext);
   const setupMode = data.setupMode !== false;
+  const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+  function paintLevels(levels) {
+    if (disposed) return;
+    listen.dataset.meter = state.meter?.active ? 'live' : 'fallback';
+    listen.dataset.audioActive = String(listening && levels.some(value => value > .12));
+    for (let i = 0; i < 5; i++) {
+      el(`wave-${i}`).style.transform = `scaleY(${reducedMotion ? .5 : .18 + levels[i] * 1.1})`;
+    }
+  }
+  if (state.meter) state.meter.onLevels = paintLevels;
+  paintLevels([0, 0, 0, 0, 0]);
 
   details.open = setupMode ? state.setupOpen : state.controlsOpen;
   el('voice-title').textContent = setupMode ? 'Voice setup' : 'Voice';
@@ -50,10 +123,13 @@ export default function render(component) {
 
   function update() {
     const command = mode.value === 'command';
-    listen.disabled = !supported || !consent.checked || listening;
-    stop.disabled = !listening;
+    listen.disabled = !supported || !consent.checked || state.phase === 'finishing';
     listen.dataset.listening = String(listening);
-    listen.textContent = listening ? 'Listening...' : 'Start microphone';
+    listen.dataset.phase = state.phase;
+    listen.setAttribute('aria-label', listening ? 'Finish dictation' : 'Start microphone');
+    listen.setAttribute('aria-pressed', String(listening));
+    el('mic-label').textContent = {starting: 'Connecting microphone', listening: 'Listening', speaking: 'Recognising your voice', finishing: 'Finishing dictation', error: 'Let’s try again'}[state.phase] || (command ? 'Navigate by voice' : 'Speak your question');
+    el('mic-hint').textContent = !supported ? 'Type your question in this browser.' : !state.consent ? 'Enable voice input above, then tap the microphone.' : listening ? 'Tap the microphone again when you’re finished.' : 'Tap the microphone and start speaking.';
     mode.disabled = listening;
     el('commands').hidden = !command;
     apply.textContent = command ? 'Go' : 'Use as question';
@@ -130,20 +206,69 @@ export default function render(component) {
   };
   consent.onchange = () => {
     state.consent = consent.checked;
-    if (!state.consent && recognition) recognition.abort();
+    if (!state.consent) {
+      state.meter?.stop();
+      if (recognition) recognition.abort();
+      listening = state.listening = false;
+      state.phase = 'idle';
+      status.textContent = 'Microphone is off.';
+    }
     update();
   };
   mode.onchange = () => { state.mode = mode.value; update(); };
   transcript.oninput = () => { state.text = transcript.value; update(); };
   function bindRecognition() {
     if (!recognition) return;
+    const bound = recognition;
+    const isCurrent = () => !disposed && state.recognition === bound;
+    recognition.onstart = recognition.onaudiostart = () => {
+      if (!isCurrent() || !listening || state.phase === 'finishing') return;
+      state.phase = 'listening';
+      status.textContent = 'Ready for your voice.';
+      update();
+    };
+    recognition.onspeechstart = () => {
+      if (!isCurrent() || !listening || state.phase === 'finishing') return;
+      state.phase = 'speaking';
+      status.textContent = 'Speech detected. Your words appear below.';
+      update();
+    };
+    recognition.onspeechend = () => {
+      if (!isCurrent() || !listening || state.phase === 'finishing') return;
+      state.phase = 'listening';
+      status.textContent = 'Listening for your next words.';
+      update();
+    };
+    recognition.onaudioend = () => {
+      if (!isCurrent()) return;
+      state.meter?.stop();
+      if (disposed || !listening || state.phase === 'error') return;
+      state.phase = 'finishing';
+      status.textContent = 'Finishing the transcript.';
+      update();
+    };
     recognition.onresult = event => {
-      if (disposed) return;
+      if (!isCurrent()) return;
       const text = Array.from(event.results, result => result[0].transcript).join(' ').slice(0, 8000);
       transcript.value = state.text = text;
+      if (listening && state.phase !== 'finishing') {
+        state.phase = 'speaking';
+        status.textContent = 'Recognising your words.';
+        clearTimeout(state.speechTimerReset);
+        state.speechTimerReset = setTimeout(() => {
+          if (!disposed && listening && state.phase === 'speaking') {
+            state.phase = 'listening';
+            update();
+          }
+        }, 900);
+      }
       update();
     };
     recognition.onerror = event => {
+      if (!isCurrent()) return;
+      state.meter?.stop();
+      listening = state.listening = false;
+      state.phase = event.error === 'aborted' ? 'idle' : 'error';
       const messages = {
         'not-allowed': 'Microphone permission was denied. Use typed input or change browser permissions.',
         'service-not-allowed': 'Speech recognition is unavailable in this browser. Use typed input.',
@@ -153,34 +278,55 @@ export default function render(component) {
         'aborted': 'Microphone is off.',
       };
       status.textContent = messages[event.error] || 'Speech recognition stopped. Use typed input or try again.';
+      update();
     };
     recognition.onend = () => {
+      if (!isCurrent()) return;
       listening = state.listening = false;
+      state.meter?.stop();
+      clearTimeout(state.speechTimerReset);
       if (disposed) return;
-      if (status.textContent === 'Listening. Select Stop when finished.') status.textContent = 'Microphone is off. Review the text before applying.';
+      if (state.phase !== 'error') {
+        state.phase = 'idle';
+        status.textContent = state.text ? 'Ready to review. Your microphone is off.' : 'Microphone is off.';
+      }
       update();
     };
   }
   bindRecognition();
   listen.onclick = () => {
-    if (!supported || !consent.checked || listening) return;
+    if (!supported || !consent.checked || state.phase === 'finishing') return;
+    if (listening) {
+      state.phase = 'finishing';
+      state.meter?.stop();
+      status.textContent = 'Finishing the transcript.';
+      try { recognition.stop(); } catch { recognition.abort(); }
+      update();
+      return;
+    }
     stopSpeech();
     recognition = state.recognition = new Recognition();
     recognition.lang = 'en-GB';
-    recognition.continuous = false;
+    recognition.continuous = true;
     recognition.interimResults = true;
     recognition.maxAlternatives = 1;
     bindRecognition();
     try {
-      recognition.start();
       listening = state.listening = true;
-      status.textContent = 'Listening. Select Stop when finished.';
+      state.phase = 'starting';
+      status.textContent = 'Waiting for microphone access.';
+      recognition.start();
+      state.meter?.stop();
+      state.meter = new MicrophoneMeter(paintLevels);
+      void state.meter.start();
     } catch {
+      listening = state.listening = false;
+      state.phase = 'error';
+      state.meter?.stop();
       status.textContent = 'The microphone could not start. Use typed input or try again.';
     }
     update();
   };
-  stop.onclick = () => { if (recognition) recognition.stop(); };
   apply.onclick = () => {
     if (apply.disabled) return;
     const id = window.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
@@ -218,7 +364,7 @@ export default function render(component) {
   const voicesChanged = () => { populateVoices(); announce(); };
   if (synthesis) synthesis.addEventListener('voiceschanged', voicesChanged);
   if (!supported) status.textContent = 'Voice input is unavailable in this browser or connection. Continue with typed input.';
-  else if (listening) status.textContent = 'Listening. Select Stop when finished.';
+  else if (listening) status.textContent = state.phase === 'starting' ? 'Waiting for microphone access.' : 'Microphone is on. Tap it again to finish.';
   if (spoken.disabled) speechStatus.textContent = 'Speech playback is unavailable. On-screen updates remain available.';
   onlineVoices.disabled = spoken.disabled;
   populateVoices();
@@ -228,11 +374,17 @@ export default function render(component) {
 
   return () => {
     disposed = true;
+    window.removeEventListener('trace-theme-change', syncTheme);
     if (synthesis) synthesis.removeEventListener('voiceschanged', voicesChanged);
     // Streamlit cleans up immediately before same-key data updates. A short grace
     // period lets the next renderer take ownership without interrupting dictation.
     state.cleanupTimer = setTimeout(() => {
-      if (recognition) { recognition.onresult = null; recognition.onerror = null; recognition.onend = null; recognition.abort(); }
+      if (recognition) {
+        for (const name of ['onresult', 'onerror', 'onend', 'onstart', 'onaudiostart', 'onaudioend', 'onspeechstart', 'onspeechend']) recognition[name] = null;
+        recognition.abort();
+      }
+      clearTimeout(state.speechTimerReset);
+      state.meter?.stop();
       stopSpeech();
       sessions.delete(key);
     }, 50);

@@ -1,6 +1,6 @@
 from frontend.ui.adapters import DemoSource, RunRequest
 from frontend.ui.events import Event
-from frontend.ui.followup import FollowUpSource, context_for, execution_question
+from frontend.ui.followup import FollowUpSource, context_for, execution_question, weak_point_question
 from frontend.ui.state import Finding, RunState
 from frontend.ui.components import _message_text
 
@@ -50,3 +50,16 @@ def test_echoed_context_folds_without_removing_or_executing_its_text():
     assert '<details' in html and '<summary>Prior run context</summary>' in html
     assert '&lt;script&gt;unsafe&lt;/script&gt;' in html and '<script>' not in html
     assert html.startswith('Question ') and html.endswith(' then review')
+
+
+def test_weak_point_draft_quotes_actual_unresolved_context_without_mutating_it():
+    from copy import deepcopy
+    state = RunState(question='Which mechanism explains the difference?')
+    item = {'id': 'missing-control', 'title': 'No comparison group',
+            'rationale': 'The supplied records have only treated samples.',
+            'next_evidence': 'A matched untreated comparison.'}
+    original = deepcopy(item)
+    draft = weak_point_question(state, item)
+    assert all(text in draft for text in [state.question, item['title'], item['rationale'], item['next_evidence']])
+    assert 'Do not assume the suggested evidence has been obtained.' in draft
+    assert item == original and not state.raw

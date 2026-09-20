@@ -100,11 +100,21 @@ class Event:
         return None
 
     @property
+    def finding_id(self) -> str | None:
+        value = self.payload.get("finding_id")
+        return value if isinstance(value, str) and value.strip() else None
+
+    @property
+    def stance(self) -> str | None:
+        value = self.payload.get("stance")
+        return value if isinstance(value, str) and value in ("supports", "contradicts", "neutral") else None
+
+    @property
     def provenance(self) -> list[dict[str, Any]]:
         items = self.payload.get("provenance")
         if not isinstance(items, list):
             return []
-        return [i if isinstance(i, dict) else {"source": str(i)} for i in items]
+        return [deepcopy(i) if isinstance(i, dict) else {"source": str(i)} for i in items]
 
     @property
     def weak_points(self) -> dict[str, Any]:

@@ -40,6 +40,8 @@ class Finding:
     confidence: float | None
     provenance: list[dict[str, Any]] = field(default_factory=list)
     ts: int = 0
+    finding_id: str | None = None
+    stance: str | None = None
 
 
 @dataclass
@@ -155,6 +157,8 @@ class RunState:
                 confidence=ev.confidence,
                 provenance=ev.provenance,
                 ts=ev.ts,
+                finding_id=ev.finding_id,
+                stance=ev.stance,
             )
         )
         self._log(ev)

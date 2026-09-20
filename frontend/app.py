@@ -12,17 +12,21 @@ from ui.config import PROFILE
 from ui.adapters import RunRequest, source_for, recorded_context, list_fixtures, DEFAULT_BACKEND
 from ui.layout import paint_live, render_results, render_agent_setup
 from ui.events import Event
-from ui.theme import stylesheet
+from ui.theme import stylesheet, render_theme_control
 from ui.help_text import HELP
 from ui.runtime import BackgroundRun
 from ui.voice import render_voice_controls
 from ui.replay import Playback
-from ui.followup import FollowUpSource, context_for
+from ui.followup import FollowUpSource, ContextInspection, weak_point_question
+from ui.followup_preview import render_context_preview
+from ui.capabilities import CapabilityLookup
+from ui.run_clock import clock_data, render_run_clock
+from ui.outcomes import outcome_notice, render_outcome_notice
+from ui.history import result_labels, selected_result_html
+from ui.receipt import render_request_receipt
 
 st.set_page_config(page_title=PROFILE.page_title, page_icon=":material/science:", layout="wide", initial_sidebar_state="collapsed")
-st.session_state.setdefault("astral_theme", False)
-theme = "astral" if st.session_state.astral_theme else "dark"
-st.markdown(stylesheet(theme), unsafe_allow_html=True)
+st.markdown(stylesheet(), unsafe_allow_html=True)
 
 
 def new_draft():
@@ -39,6 +43,7 @@ st.session_state.setdefault("job", None)
 st.session_state.setdefault("playback", None)
 st.session_state.setdefault("previous_runs", [])
 st.session_state.setdefault("result_id", uuid4().hex)
+st.session_state.setdefault("followup_drafts", {})
 draft = st.session_state.draft
 
 
@@ -73,12 +78,18 @@ def capture_uploads(widget_key):
     st.session_state.draft["uploads"] = [(file.name, file.getvalue()) for file in st.session_state.get(widget_key, [])]
 
 
-@st.cache_data(ttl=15, show_spinner=False)
+def capability_lookup(base_url, mode="Live"):
+    key = (base_url.strip(), mode)
+    # One current discovery per session. Keep known settings until explicit refresh.
+    if st.session_state.get("capability_key") != key:
+        st.session_state.capability_key = key
+        st.session_state.capability_lookup = CapabilityLookup(lambda: source_for(mode).capabilities(base_url))
+    return st.session_state.capability_lookup
+
+
 def backend_capabilities(base_url, mode="Live"):
-    try:
-        return source_for(mode).capabilities(base_url), ""
-    except Exception as exc:
-        return {}, f"Could not read backend capabilities ({type(exc).__name__})."
+    # Starting a run only reads an existing snapshot, never waits on HTTP.
+    return capability_lookup(base_url, mode).snapshot()[:2]
 
 
 def save_result():
@@ -113,6 +124,84 @@ def start(request):
     navigate("investigation")
 
 
+def followup_draft():
+    """Keep unsent drafts outside widget state, scoped to retained results."""
+    current_id = st.session_state.result_id
+    retained = {current_id, *(item["id"] for item in st.session_state.previous_runs)}
+    drafts = st.session_state.followup_drafts
+    for result_id in list(drafts):
+        if result_id not in retained:
+            del drafts[result_id]
+    return drafts.setdefault(current_id, {"prompt": "", "weak_points": {}})
+
+
+def remember_followup(widget_key, weak_point=None):
+    saved = followup_draft()
+    if weak_point is None:
+        saved["prompt"] = st.session_state.get(widget_key, "")
+    elif weak_point in saved["weak_points"]:
+        saved["weak_points"][weak_point]["prompt"] = st.session_state.get(widget_key, "")
+
+
+def discard_followup(widget_key, weak_point=None):
+    saved = followup_draft()
+    if weak_point is None:
+        saved["prompt"] = ""
+    else:
+        saved["weak_points"].pop(weak_point, None)
+    st.session_state.pop(widget_key, None)
+
+
+def queue_followup(prompt, inspection):
+    if not prompt.strip():
+        st.error("Enter a follow-up question first.")
+        return
+    if st.session_state.job and st.session_state.job.active:
+        st.warning("Wait for the current investigation to finish before running a follow-up.")
+        return
+    previous = st.session_state.submitted
+    recording = previous.mode == "Mock"
+    config = deepcopy(previous.config)
+    # Keep routing stable when the context mentions a different workflow.
+    config["task_mode"] = "idea_review" if recording else st.session_state.run.task_mode
+    st.session_state.queued_followup = replace(previous, mode="Demo" if recording else previous.mode,
+        question=prompt.strip(), context=deepcopy(inspection.payload), config=config,
+        fixture=None if recording else previous.fixture, sample=False if recording else previous.sample,
+        uploads=[] if recording else deepcopy(previous.uploads))
+    st.rerun()
+
+
+def render_weak_point_followup(index, item, inspection):
+    saved = followup_draft()
+    # The completed result has a stable item order, including older records without IDs.
+    point_key = str(index)
+    widget_key = f"weak_point_followup:{st.session_state.result_id}:{point_key}"
+    entry = saved["weak_points"].get(point_key)
+    if entry is None:
+        if st.button("Draft a follow-up", key=f"draft_weak_point:{index}", disabled=run_active):
+            saved["weak_points"][point_key] = {
+                "id": item.get("id"), "prompt": weak_point_question(st.session_state.run, item),
+            }
+            st.rerun()
+        return
+    with st.container(border=True):
+        st.caption("Follow-up draft for this weak point")
+        st.caption("This drafts a question using the evidence already in this run. It does not add the requested evidence.")
+        if st.session_state.submitted.mode == "Mock":
+            st.caption("Running this follow-up reviews the saved context with simulated agents. Original source files are not reanalyzed.")
+        seed(widget_key, entry["prompt"])
+        entry["prompt"] = st.text_area("Review and edit the follow-up", key=widget_key, height=220,
+                                      on_change=remember_followup, args=(widget_key, point_key))
+        render_context_preview(inspection, key=f"weak_followup_context:{st.session_state.result_id}:{point_key}")
+        run, discard = st.columns(2)
+        with run:
+            if st.button("Run follow-up", key=f"run_weak_point:{index}", type="primary", disabled=run_active):
+                queue_followup(entry["prompt"], inspection)
+        with discard:
+            st.button("Discard draft", key=f"discard_weak_point:{index}",
+                      on_click=discard_followup, args=(widget_key, point_key))
+
+
 if st.session_state.get("queued_followup"):
     request = st.session_state.pop("queued_followup")
     draft.update(question=request.question, mode=request.mode, backend=request.backend,
@@ -135,8 +224,7 @@ with st.container(key="workspace_header"):
     with brand_column:
         st.markdown(f"<div class='flow-brand'>{C._escape(PROFILE.name)}<span>{C._escape(PROFILE.eyebrow)}</span></div>", unsafe_allow_html=True)
     with theme_column:
-        H.widget(st.toggle, "Astral light", key="astral_theme",
-                  help="Switch between the dark workspace and a white, blue and violet constellation theme. Your choice stays with this session.")
+        render_theme_control("astral" if st.session_state.get("astral_theme") else "dark")
 stages = ["evidence", "question", "investigation", "results"]
 labels = ["Evidence", "Question & agents", "Investigation", "Results"]
 current = stages.index(st.session_state.stage)
@@ -206,8 +294,13 @@ if st.session_state.stage in ("investigation", "results"):
         st.caption("Mock execution. The workflow runs on your inputs with simulated model outputs.")
 
 view_previous = False
+pending_capabilities = None
+previous_result_slot = st.empty()
 if st.session_state.stage in ("evidence", "question") and st.session_state.run.complete:
-    view_previous = st.button("View previous result", key="view_previous_result")
+    # Reserve this outer position before completion so a draft's blur rerun
+    # cannot shift the polling fragment and replace its outcome button midclick.
+    with previous_result_slot.container():
+        view_previous = st.button("View previous result", key="view_previous_result")
 
 if st.session_state.stage == "evidence":
     st.title("Choose your evidence")
@@ -269,6 +362,8 @@ if st.session_state.stage == "evidence":
                     st.rerun()
             st.caption("Files are sent to the backend only when you start. Remove saved files to clear this draft.")
         valid = bool(draft["backend"].strip()) and (not PROFILE.require_files or draft["sample"] or bool(draft["uploads"]) or draft.get("question_only"))
+    if draft["mode"] != "Mock":
+        capability_lookup(draft["backend"], draft["mode"])
     if st.button("Continue to question", key="evidence_next", type="primary"):
         if valid:
             navigate("question")
@@ -278,21 +373,35 @@ if st.session_state.stage == "evidence":
 elif st.session_state.stage == "question":
     st.title("Choose your agents")
     mode = draft["mode"]
+    capabilities_ready = True
     if mode == "Mock":
         st.caption("This recording uses its saved question and agents. It does not analyze a new prompt.")
         agent_config, config_valid = {}, True
     else:
-        capabilities, error = backend_capabilities(draft["backend"], mode)
+        lookup = capability_lookup(draft["backend"], mode)
+        capabilities, error, capabilities_ready, refreshing, _ = lookup.snapshot()
+        if refreshing:
+            pending_capabilities = lookup
         if capabilities.get("run_mode") == "mock":
             st.caption("This backend uses simulated model outputs.")
-        agent_config, config_valid = render_agent_setup(mode, draft["backend"], capabilities, error, saved_config=draft["config"])
-        draft["config"] = deepcopy(agent_config)
+        if not capabilities_ready:
+            st.markdown("<div class='loading-status'><span></span>Loading available agents and models</div>", unsafe_allow_html=True)
+            st.caption("You can edit your question or return to evidence while the service responds.")
+            agent_config, config_valid = deepcopy(draft["config"]), False
+        else:
+            agent_config, config_valid = render_agent_setup(mode, draft["backend"], capabilities, error, saved_config=draft["config"])
+            draft["config"] = deepcopy(agent_config)
+            if mode == "Live" and st.button("Refresh available models and agents", key="refresh_capabilities", disabled=refreshing):
+                lookup.refresh()
+                st.rerun()
+            if refreshing:
+                st.caption("Refreshing available controls. Your current settings remain usable.")
     back, launch = st.columns([1, 2])
     with back:
         if st.button("Back to evidence", key="question_back"):
             navigate("evidence")
     with launch:
-        if st.button("Start replay" if mode == "Mock" else "Start investigation", key="start_run", type="primary", disabled=run_active):
+        if st.button("Start replay" if mode == "Mock" else "Start investigation", key="start_run", type="primary", disabled=run_active or not capabilities_ready):
             if not question.strip():
                 st.error("Enter a research question before starting.")
             elif not config_valid:
@@ -314,42 +423,54 @@ elif st.session_state.stage == "results":
     st.title("Results")
     if st.session_state.submitted.context:
         with st.expander("Context carried into this follow-up"):
-            st.caption("Previous generated claims are context to check, not new evidence.")
-            st.json(st.session_state.submitted.context, expanded=False)
+            render_context_preview(ContextInspection(payload=st.session_state.submitted.context),
+                                   key=f"carried_followup_context:{st.session_state.result_id}")
     if st.button("Replay agent activity", key="results_replay", disabled=run_active or not st.session_state.run.raw):
         st.session_state.playback = Playback(st.session_state.run.raw)
         navigate("investigation")
     st.caption(st.session_state.run.question)
     C.render_verdict(st.session_state.run)
     recording = st.session_state.submitted.mode == "Mock"
+    context_inspection = ContextInspection(st.session_state.run)
     with st.expander("Ask a follow-up"):
         st.caption("Follow-ups to recordings review the saved context with simulated agents. Original source files are not reanalyzed."
                    if recording else "Ask a follow-up using the same evidence and agent settings. Previous findings and weak points are included as context to check.")
-        with st.form("followup_form", clear_on_submit=True):
-            followup = st.text_input("Follow-up prompt", key="followup_prompt", max_chars=4000,
-                                     placeholder="What evidence would distinguish the competing explanations?")
-            followup_requested = st.form_submit_button("Run follow-up", type="primary", disabled=run_active)
-    if followup_requested:
-        if not followup.strip():
-            st.error("Enter a follow-up question first.")
-        else:
-            previous = st.session_state.submitted
-            config = deepcopy(previous.config)
-            # Keep routing stable when the context mentions a different workflow.
-            config["task_mode"] = "idea_review" if recording else st.session_state.run.task_mode
-            st.session_state.queued_followup = replace(previous, mode="Demo" if recording else previous.mode,
-                question=followup.strip(), context=context_for(st.session_state.run), config=config,
-                fixture=None if recording else previous.fixture, sample=False if recording else previous.sample)
-            st.rerun()
-    render_results(st.session_state.run, show_summary=False)
+        saved_followup = followup_draft()
+        if st.session_state.get("followup_owner") != st.session_state.result_id:
+            st.session_state.followup_owner = st.session_state.result_id
+            st.session_state.followup_prompt = saved_followup["prompt"]
+        seed("followup_prompt", saved_followup["prompt"])
+        saved_followup["prompt"] = st.text_input("Follow-up prompt", key="followup_prompt", max_chars=4000,
+            on_change=remember_followup, args=("followup_prompt",),
+            placeholder="What evidence would distinguish the competing explanations?")
+        render_context_preview(context_inspection, key=f"manual_followup_context:{st.session_state.result_id}")
+        run_followup, discard = st.columns(2)
+        with run_followup:
+            if st.button("Run follow-up", key="run_followup", type="primary", disabled=run_active):
+                queue_followup(saved_followup["prompt"], context_inspection)
+        with discard:
+            st.button("Discard draft", key="discard_followup", disabled=not saved_followup["prompt"],
+                      on_click=discard_followup, args=("followup_prompt",))
+    render_results(st.session_state.run, show_summary=False,
+                   weak_point_actions=lambda index, item: render_weak_point_followup(index, item, context_inspection))
+    render_request_receipt({'id': st.session_state.result_id, 'run': st.session_state.run,
+                            'request': st.session_state.submitted},
+                           key=f"current_receipt:{st.session_state.result_id}")
     previous_runs = [item for item in st.session_state.previous_runs if item["id"] != st.session_state.result_id]
     if previous_runs:
         with st.expander("Previous results in this session"):
             st.caption("The five most recent results are kept while this session is open.")
-            chosen = st.selectbox("Saved result", range(len(previous_runs)), key="saved_result",
-                                  format_func=lambda index: previous_runs[index]["run"].question[:100])
-            if st.button("Open saved result", key="open_saved_result", disabled=run_active):
-                selected = previous_runs[chosen]
+            records_by_id = {item["id"]: item for item in previous_runs}
+            saved_labels = result_labels(previous_runs)
+            if st.session_state.get("saved_result") not in records_by_id:
+                st.session_state.saved_result = previous_runs[0]["id"]
+            chosen = st.selectbox("Saved result", list(records_by_id), key="saved_result",
+                                  format_func=saved_labels.__getitem__)
+            selected = records_by_id[chosen]
+            st.markdown(selected_result_html(selected), unsafe_allow_html=True)
+            render_request_receipt(selected, key=f"selected_receipt:{selected['id']}",
+                                   label='Request receipt for selected result')
+            if st.button("Open selected result", key="open_saved_result", disabled=run_active):
                 save_result()
                 st.session_state.run = deepcopy(selected["run"])
                 st.session_state.submitted = deepcopy(selected["request"])
@@ -369,7 +490,21 @@ elif st.session_state.stage == "results":
                     del st.session_state[key]
             navigate("evidence")
 
+if (st.session_state.stage in ("investigation", "results") and st.session_state.job
+        and st.session_state.submitted.mode != "Mock" and not st.session_state.playback):
+    # Outside the 300ms activity fragment: browser ticks never request a rerun.
+    render_run_clock(clock_data(st.session_state.job, st.session_state.run))
+
 activity_slot = st.empty()
+
+
+@st.fragment(run_every=.25 if pending_capabilities else None)
+def poll_capabilities():
+    if pending_capabilities and not pending_capabilities.snapshot()[3]:
+        st.rerun()
+
+
+poll_capabilities()
 
 replay_active = bool(st.session_state.playback and st.session_state.playback.playing and st.session_state.stage == "investigation")
 
@@ -399,7 +534,7 @@ def poll_investigation():
         if speed != playback.speed:
             playback.set_speed(speed)
         st.progress(playback.index / max(1, len(playback.events)), text=f"{playback.index} of {len(playback.events)} saved events")
-        paint_live(playback.state, st.empty())
+        paint_live(playback.state, st.empty(), recording=True, help_scope=f"replay:{st.session_state.result_id}")
         if playback.finished:
             st.caption("Replay complete. The original result is available in Results.")
             if replay_active:
@@ -408,14 +543,19 @@ def poll_investigation():
     current_job = st.session_state.job
     if not current_job:
         return
+    if current_job.request.mode == "Live" and st.session_state.get("capability_key") == (current_job.request.backend.strip(), "Live"):
+        current_job.can_cancel = bool(st.session_state.capability_lookup.snapshot()[0].get("cancellation_supported"))
     events = current_job.drain()
     for event in events:
         st.session_state.run.apply(event)
     state = st.session_state.run
     active = current_job.active
     if active:
+        working = [agent.role.replace("_", " ") for agent in state.agents.values() if agent.status == "running"]
         phase = "Cancellation requested. Waiting for cleanup." if current_job.cancel_requested else (
-            "Agents are investigating" if state.agents else "Preparing evidence and starting the investigation")
+            "Checking the findings and evidence" if "critic" in working else
+            "Specialists are examining the evidence" if any(role != "orchestrator" for role in working) else
+            "Planning the investigation" if "orchestrator" in working else "Preparing evidence and starting the investigation")
         st.markdown(f"<div class='loading-status'><span></span>{phase}</div>", unsafe_allow_html=True)
         st.caption("You can switch sections and edit the next question while this run continues.")
         if current_job.can_cancel and (current_job.request.mode != "Live" or state.run_id):
@@ -423,9 +563,11 @@ def poll_investigation():
                 current_job.request_cancel()
                 st.rerun()
     if st.session_state.stage == "investigation":
-        # Fragment reruns clear their output. Repaint at the bounded polling rate
-        # even when idle, keeping the graph visible between incoming batches.
-        paint_live(state, activity_slot)
+        # Streamlit clears fragment-owned children on each poll, even when their
+        # placeholder was declared outside it. Paint every poll until activity has
+        # a separate client-owned rendering boundary; otherwise quiet runs vanish.
+        paint_live(state, activity_slot, recording=current_job.request.mode == "Mock",
+                   help_scope=f"live:{st.session_state.result_id}")
         current_job.render_batches = getattr(current_job, "render_batches", 0) + 1
         if not active and not state.complete:
             st.warning("This run has not produced a completed result. Edit the setup or explicitly start a new attempt.")
@@ -438,19 +580,36 @@ def poll_investigation():
                     navigate("question")
         elif state.complete:
             st.caption("This run has ended. Open Results to review its outcome and evidence.")
+    if not active:
+        if st.session_state.stage in ("investigation", "results"):
+            current_job.outcome_reviewed = True
+        elif not getattr(current_job, "outcome_reviewed", False):
+            notice = outcome_notice(state, active=False, recording=current_job.request.mode == "Mock",
+                                    replaying=bool(playback))
+            if notice and render_outcome_notice(notice, key=f"view_run_outcome:{st.session_state.result_id}"):
+                # A fragment button does not otherwise rerender the outer editor
+                # before navigation. Retain its latest submitted widget value.
+                if "draft_question" in st.session_state:
+                    draft["question"] = st.session_state.draft_question
+                current_job.outcome_reviewed = True
+                navigate(notice.target)
     if not active and not current_job.completion_announced:
         current_job.completion_announced = True
         if header_target or view_previous:
             return  # Explicit navigation wins; draft controls have already saved.
         if state.complete and st.session_state.stage == "investigation":
             st.session_state.stage = "results"
-        st.rerun()
+        if st.session_state.stage in ("investigation", "results"):
+            st.rerun()
+        # Leave an editor's DOM and uncommitted text untouched. The fragment-owned
+        # notice provides immediate navigation; headers refresh on normal input.
     if active and not header_target and not view_previous:
         roles = {agent.role for agent in state.agents.values()}
         milestone = "critic" if "critic" in roles else "orchestrator" if "orchestrator" in roles else ""
         if milestone and milestone != st.session_state.get("voice_agent_stage", ""):
             st.session_state.voice_agent_stage = milestone
-            st.rerun()  # Refresh optional stage announcement once per meaningful milestone.
+            if st.session_state.stage == "investigation":
+                st.rerun()  # Do not remount an editor merely for a voice milestone.
 
 poll_investigation()
 
