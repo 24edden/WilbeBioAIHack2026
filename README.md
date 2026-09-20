@@ -2,17 +2,16 @@
 
 Repo for the Wilbe Bio x AI hackathon (London, WilbeLABS).
 
-This branch prepares an agent benchmark for paired childhood leukaemia diagnosis
-and relapse. The active hypothesis concerns reproducible expression changes that
-can nominate resistance-associated processes and experiments.
+This branch provides one clean agent dataset: **GEO GSE28460, 49 paired B-ALL
+patients, 98 diagnosis/relapse samples and 54,675 expression probes**.
 
-The downloaded GEO data contain **49 paired B-ALL patients for discovery and 27
-paired B-ALL patients for validation**. An additional 14 paired T-ALL patients are
-kept separate. These are conventional-treatment cohorts, not CD19 CAR-T cohorts.
+Start with [hypothesis.txt](ana-workspace/hypothesis.txt) and
+[the agent task](ana-workspace/input/TASK.md). The hypothesis asks whether
+cell-cycle and DNA-repair expression rises at relapse within the same patients.
+These are conventional-treatment cases, not CD19 CAR-T cases.
 
-Start with the [hypothesis](ana-workspace/hypothesis/hypothesis.txt),
-[agent task and inputs](ana-workspace/datasets/agent_access/paired_all_relapse/TASK.md),
-and [dataset provenance and reproducibility guide](ana-workspace/geo_relapse_benchmark/README.md).
+[Dataset provenance and setup](ana-workspace/geo_relapse_benchmark/README.md)
+and [shared instance paths](ana-workspace/START_HERE_GEO_RELAPSE.md) are included.
 
 Notes on the event brief, tracks, and judging criteria are in [Context/](Context/);
 pre-event candidate ideas and plans are in [Plan/](Plan/).
@@ -33,10 +32,10 @@ Context/           event brief, judging criteria, tooling prep
 Plan/              idea candidates, scoring, and execution plans
 AGENTS.md          project instructions for coding agents (edit this one)
 CLAUDE.md          one-line import of AGENTS.md, for Claude Code
-ana-workspace/hypothesis/                 active hypothesis
-ana-workspace/datasets/agent_access/paired_all_relapse/  active agent inputs
-ana-workspace/geo_relapse_benchmark/       GEO source files, preparation, evaluator checks
-ana-workspace/archive/cd19_car_t_previous/ archived previous hypothesis and inputs
+ana-workspace/hypothesis.txt              active hypothesis
+ana-workspace/input/                     the sole agent input (directory alias)
+ana-workspace/datasets/agent_access/GSE28460/  expression and required metadata
+ana-workspace/geo_relapse_benchmark/       original GEO source and evaluator checks
 ```
 
 ## Notes

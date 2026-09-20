@@ -1,0 +1,77 @@
+[
+  {
+    "path": "ana-workspace/archive/cd19_car_t_previous",
+    "files": 22,
+    "bytes": 78988175
+  },
+  {
+    "path": "ana-workspace/input",
+    "files": 17,
+    "bytes": 127565580
+  },
+  {
+    "path": "ana-workspace/datasets/agent_access/paired_all_relapse",
+    "files": 8,
+    "bytes": 19267644
+  },
+  {
+    "path": "ana-workspace/geo_relapse_benchmark/source/GSE18497_series_matrix.txt.gz",
+    "files": 1,
+    "bytes": 11132509
+  },
+  {
+    "path": "ana-workspace/geo_relapse_benchmark/source/GSE18497_sample_manifest.csv",
+    "files": 1,
+    "bytes": 12599
+  },
+  {
+    "path": "ana-workspace/geo_relapse_benchmark/evaluator/validation_B_ALL_arithmetic_reference.csv",
+    "files": 1,
+    "bytes": 1991
+  },
+  {
+    "path": "ana-workspace/geo_relapse_benchmark/evaluator/optional_T_ALL_arithmetic_reference.csv",
+    "files": 1,
+    "bytes": 1105
+  },
+  {
+    "path": "ana-workspace/geo_relapse_benchmark/delivery_manifest.json",
+    "files": 1,
+    "bytes": 6438
+  },
+  {
+    "path": "ana-workspace/CD19_AGENT_SAMPLE_MANIFEST.tsv",
+    "files": 1,
+    "bytes": 476
+  },
+  {
+    "path": "ana-workspace/INPUT_DELIVERY_STATUS.txt",
+    "files": 1,
+    "bytes": 500
+  },
+  {
+    "path": "ana-workspace/install_input_remote.sh",
+    "files": 1,
+    "bytes": 5457
+  },
+  {
+    "path": "ana-workspace/prepare_cd19_input.py",
+    "files": 1,
+    "bytes": 3130
+  },
+  {
+    "path": "ana-workspace/BCMA_CAR_T_.txt",
+    "files": 1,
+    "bytes": 1406
+  },
+  {
+    "path": "ana-workspace/DATASET_PROVENANCE.txt",
+    "files": 1,
+    "bytes": 899
+  },
+  {
+    "path": "/tmp/geo_relapse_benchmark_20260920.tar",
+    "files": 1,
+    "bytes": 100700160
+  }
+]

@@ -1,4 +1,3 @@
 file,url,bytes,sha256
 GSE28460_series_matrix.txt.gz,https://ftp.ncbi.nlm.nih.gov/geo/series/GSE28nnn/GSE28460/matrix/GSE28460_series_matrix.txt.gz,30935117,048c949a101e556675289631107818dd5dd57e045d42912638ee57b24b540f92
-GSE18497_series_matrix.txt.gz,https://ftp.ncbi.nlm.nih.gov/geo/series/GSE18nnn/GSE18497/matrix/GSE18497_series_matrix.txt.gz,11132509,8fa690e3837634b1e8c29092e518c4ee71e09794e8bfcd0cc0f21cbfc5914e6f
 GPL570.annot.gz,https://ftp.ncbi.nlm.nih.gov/geo/platforms/GPLnnn/GPL570/annot/GPL570.annot.gz,8471521,d7cd44352127b1e34f3a720ebea86093ef255a38f1612a85a2962b71bde8f394

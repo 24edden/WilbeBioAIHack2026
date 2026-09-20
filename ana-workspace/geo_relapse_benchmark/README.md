@@ -1,120 +1,80 @@
-# GEO paired leukaemia relapse benchmark
+# One-cohort GEO leukaemia benchmark
 
-Downloaded and opened on 2026-09-20. The active hypothesis is:
+The sole active patient dataset is **GSE28460: 49 paired B-ALL patients, 98 samples,
+54,675 expression probes**. GSE18497, its T-ALL subset, and the old CD19/SRA input
+copies were removed from the working dataset package. GPL570 annotation is required
+metadata for GSE28460, not a second patient dataset.
 
-> Leukaemia cells at relapse show reproducible gene-expression changes relative to
-> diagnosis that nominate resistance-associated biological processes and interventions
-> for experimental testing.
+Start locally at `ana-workspace/hypothesis.txt` and `ana-workspace/input/TASK.md`.
+On Brev, use `/home/ubuntu/ana-workspace/hypothesis.txt` and
+`/home/ubuntu/ana-workspace/input/`. The input directory is an alias of
+`datasets/agent_access/GSE28460/`; it does not duplicate the expression data.
 
-This package supports agent tests of ingestion, paired statistics, replication and
-experimental reasoning. Preparation has not established a biological mechanism or
-measured agent performance.
+## Hypothesis and test scope
 
-## Verified cohorts
+The hypothesis is that cell-cycle and DNA-repair expression increase at relapse
+relative to the same patients' diagnosis samples. `hypothesis_gene_sets.json`
+contains fixed author-defined panels, not exhaustive or validated pathway signatures.
+The agent task specifies scoring and falsifiable decision rules. The hypothesis is
+motivated by existing biology and is not an independently preregistered discovery.
+No hypothesis result or agent evaluation has been computed by this preparation.
 
-| Role | GEO source | Patients | Samples |
-|---|---|---:|---:|
-| Discovery | GSE28460 | 49 B-ALL | 98 |
-| Validation | GSE18497, B-ALL subset | 27 B-ALL | 54 |
-| Separate optional comparison | GSE18497, T-ALL subset | 14 T-ALL | 28 |
+The cohort concerns conventional-treatment relapse, not CAR-T. All patients relapsed;
+there are no cured controls. One 49-patient cohort is a moderate, usable exploratory
+benchmark, not a large clinical validation study. Removing the second cohort removes
+independent replication: resampling within this cohort cannot replace it.
 
-The primary benchmark has **76 paired B-ALL patients (152 samples)** across two
-studies. The full download has 90 paired ALL patients (180 samples). Study-local
-identifiers do not independently prove cross-study donor non-overlap. Keep estimates
-and processing study-specific. All matrices use GPL570 expression microarrays.
+## Opening and reproducing
 
-Both source matrices contain 54,675 probes and no missing/non-finite values. Every
-patient has one diagnosis and one relapse sample. Numerical read-back of every
-exported matrix passed. This is enough for an exploratory computational benchmark;
-no prospective power calculation or clinical validation has been performed.
-
-## Open the data
-
-Agent input directory: `ana-workspace/datasets/agent_access/paired_all_relapse/`.
-Run this example from the repository root:
+From the repository root:
 
 ```python
-from pathlib import Path
 import pandas as pd
-
-base = Path("ana-workspace/datasets/agent_access/paired_all_relapse")
-group = base / "discovery_B_ALL"
-expression = pd.read_csv(group / "expression_log2.tsv.gz", sep="\t", index_col=0)
-samples = pd.read_csv(group / "samples.csv")
-pairs = pd.read_csv(group / "patient_pairs.csv", index_col=0)
-annotation = pd.read_csv(base / "probe_annotation.tsv", sep="\t")
-assert expression.shape == (54675, 98)
+x = pd.read_csv('ana-workspace/input/expression_log2.tsv.gz', sep='\t', index_col=0)
+pairs = pd.read_csv('ana-workspace/input/patient_pairs.csv')
+assert x.shape == (54675, 98)
 assert len(pairs) == 49
-patient = pairs.index[0]
-delta = expression[pairs.loc[patient, "relapse"]] - expression[pairs.loc[patient, "diagnosis"]]
 ```
 
-Matrices are gzipped tab-separated text, not R-only objects or SRA archives. CSV
-manifests and ten-probe previews can be opened directly in a spreadsheet editor.
-No account or controlled-access application is required. Raw Affymetrix CEL
-archives were not downloaded; original GEO processed matrices were downloaded.
-
-## Processing and evidence limits
-
-- GEO describes the expression as normalized/RMA-derived signal. The actual
-  deposited ranges are 15.119–42,313.948 (GSE28460) and 6.63–26,803.99 (GSE18497).
-  We supply **log2 of the deposited positive signal**, without a pseudocount,
-  additional normalization or imputation. This explicit transformation does not
-  reconstruct every original preprocessing step. Original files are preserved;
-  consider CEL-based preprocessing for a definitive biological study.
-- Patients are paired biological units; probes are not biological replicates.
-  These are microarray signals, not RNA-seq read counts. Control multiple testing.
-- The GEO GPL570 annotation is dated 2016-08-09: 42,904 single-symbol probes,
-  2,214 multi-symbol probes, 9,557 without a symbol. Single-symbol does not mean
-  unique gene or current sequence specificity. Document probe-to-gene handling.
-- GSE28460 used Ficoll-enriched marrow. GSE18497 sample metadata specify CD19
-  enrichment for B-ALL and CD7 enrichment for T-ALL. Purification, cell composition,
-  subtype, treatment history and technical differences can affect comparisons.
-- GSE28460 metadata label **29 early/20 late** patients; its primary paper reports
-  **27 early/22 late** for expression profiling. This discrepancy is unresolved.
-  Preserve deposited labels and omit timing subgroups from the primary benchmark.
-  p51 and p54 occur in different diagnosis/relapse column positions: pair by ID.
-- These are conventional-treatment relapse cohorts, not CAR-T cohorts. All
-  included patients eventually relapsed. Diagnosis samples are not cured controls.
-  The data cannot establish relapse risk versus cure, causal resistance mechanisms,
-  mutations, splice isoforms, surface antigen targetability, or treatment efficacy.
-  No patient-specific regimen or blast purity was invented where absent.
-
-## Reproduce and evaluate
-
-Unmodified GEO files are in `source/`. `download_manifest.csv` records exact URLs,
-sizes and SHA-256 checksums. From the repository root:
+Source files are included in `source/`. Exact URLs and SHA-256 checksums are in
+`download_manifest.csv`. Rebuild using Python 3.11+ with the pinned numpy/pandas
+versions in `requirements.txt`:
 
 ```bash
-python3 -m venv .venv-geo-relapse
-.venv-geo-relapse/bin/python -m pip install -r ana-workspace/geo_relapse_benchmark/requirements.txt
-# Already downloaded; run only to reacquire:
-bash ana-workspace/geo_relapse_benchmark/download.sh
-.venv-geo-relapse/bin/python ana-workspace/geo_relapse_benchmark/prepare_inputs.py
+python3 ana-workspace/geo_relapse_benchmark/prepare_inputs.py
 ```
 
-Python 3.11 or later is required. Preparation reads locally, exports the separate
-groups, and verifies dimensions, pairing, annotations, positivity, finite values
-and every written value. See `evaluator/validation_report.json` and the per-patient
-arithmetic references. These are ingestion checks, not biological result labels.
-GEO may update files; compare checksums before replacing a benchmark snapshot.
+`download.sh` reacquires only GSE28460 and its GPL570 annotation if needed. It
+requires network access and overwrites the source files. Compare checksums against
+the recorded snapshot before rebuilding. Source matrices are normalized signals,
+not raw CEL files. Prepared values are explicitly log2 of the deposited positive
+signals (original range 15.11902536–42313.94755), with no imputation or renormalization.
+Raw CEL reprocessing may be appropriate for a definitive biological study.
 
-Provide agents with `TASK.md` and the specified inputs. Keep this README, `source/`,
-`evaluator/`, archives and prior analyses outside their allowed files. For strict
-holdout evaluation, expose validation only after candidates and decision rules
-are frozen. This package does not implement an automated runner or access sandbox.
-Public datasets may be in model training: evaluate executed calculations and
-reasoning rather than claiming discovery on unseen biology.
+## Checks and caveats
 
-## Primary sources
+All 49 pairs are complete, sample IDs are unique, all 54,675 probes match the
+platform table, all values are finite, and every exported value passed read-back
+comparison. `evaluator/validation_report.json` documents ingestion, not biological
+validation. The arithmetic reference is an ingestion sanity check, not an answer key.
 
-- [GSE28460](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE28460) and
-  [Hogan et al., Blood 2011](https://pmc.ncbi.nlm.nih.gov/articles/PMC3217405/),
-  DOI 10.1182/blood-2011-04-345595, PMID 21921043.
-- [GSE18497](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18497) and
-  [Staal et al., Leukemia 2010](https://pubmed.ncbi.nlm.nih.gov/20072147/),
-  DOI 10.1038/leu.2009.286.
-- [GPL570 annotation](https://ftp.ncbi.nlm.nih.gov/geo/platforms/GPLnnn/GPL570/annot/GPL570.annot.gz).
+GEO labels 29 pairs early and 20 late; the paper reports 27/22 for expression
+profiling. This remains unresolved; the primary test uses all pairs. In particular,
+p51 and p54 have different diagnosis/relapse column positions: pair by ID.
 
-Previous tracked CD19 files are preserved at
-`ana-workspace/archive/cd19_car_t_previous/`, outside the active inputs.
+The 2016-08-09 platform annotation has 42,904 single-symbol, 2,214 multi-symbol and
+9,557 symbol-missing probes. Multiple probes can map to one gene. Purification,
+cell composition, subtype and treatment history are potential confounders. RNA
+alone does not establish mechanism, protein activation, surface accessibility or
+benefit from an intervention. Restrict agents to `input/` and their output, keeping
+source publication metadata and evaluator material outside the allowed scope.
+
+## Sources
+
+- [GSE28460](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE28460)
+- [Hogan et al., Blood 2011](https://pmc.ncbi.nlm.nih.gov/articles/PMC3217405/),
+  DOI 10.1182/blood-2011-04-345595; PMID 21921043.
+- [GPL570 annotation](https://ftp.ncbi.nlm.nih.gov/geo/platforms/GPLnnn/GPL570/annot/GPL570.annot.gz)
+
+Historical analysis results and project code are outside the input directory.
+Deleted tracked datasets remain recoverable from Git history; history was not rewritten.

@@ -1,130 +1,108 @@
 {
-  "branch": "hypothesis-dataset",
+  "created_at_utc": "2026-09-20T09:34:12.086185+00:00",
+  "dataset": "GSE28460",
+  "patients": 49,
+  "samples": 98,
   "files": [
     {
       "path": "AGENT_DATASET_README.txt",
-      "bytes": 1577,
-      "sha256": "fc7d509995da5b43d488b3426d0d1cc744dedb366342102b71a85806648af503"
+      "bytes": 531,
+      "sha256": "bda8aaee0a70dbd305cbc72ac96ac6e9bb88efe3ca04dc4d7e990ea926f9b11f"
     },
     {
       "path": "START_HERE_GEO_RELAPSE.md",
-      "bytes": 2534,
-      "sha256": "78eca4a9f9684abbe89d78211c263d9872383b94c2dc55df4f7ff4ff016e777b"
+      "bytes": 1413,
+      "sha256": "8a7d9b22e53d753293ce6f97283fe2d01866578313bd7ae4a7a44f43ae66b688"
     },
     {
-      "path": "datasets/agent_access/paired_all_relapse/TASK.md",
-      "bytes": 4270,
-      "sha256": "d928e0bc712bc480020fb262dc6410a021eb4dfb301ede82dd3014d6e960d524"
+      "path": "datasets/agent_access/GSE28460/TASK.md",
+      "bytes": 4024,
+      "sha256": "3b94daac4b3b84436497540dc90d56923218b2b1eb4dc46f89e3b607f9ce84f2"
     },
     {
-      "path": "datasets/agent_access/paired_all_relapse/discovery_B_ALL/expression_log2.tsv.gz",
+      "path": "datasets/agent_access/GSE28460/expression_log2.tsv.gz",
       "bytes": 27110984,
       "sha256": "cc5751784aed33a0ccf018fcc3e297f75f9a55ca0f75cf679e8dfd56e5128de5"
     },
     {
-      "path": "datasets/agent_access/paired_all_relapse/discovery_B_ALL/patient_pairs.csv",
+      "path": "datasets/agent_access/GSE28460/hypothesis.txt",
+      "bytes": 300,
+      "sha256": "d15fd3808365deabeb7e9f3beffc49c51327412b8da96a295df7201632a85788"
+    },
+    {
+      "path": "datasets/agent_access/GSE28460/hypothesis_gene_sets.json",
+      "bytes": 553,
+      "sha256": "ceba9079fa126feb59fc4206491f12afe2a13bf303bfbb673be9099d98514558"
+    },
+    {
+      "path": "datasets/agent_access/GSE28460/patient_pairs.csv",
       "bytes": 1646,
       "sha256": "89440a01306c1557434fd0b25025fc2fb7bbe7a6cf0bdc6aaed6d5f220a94ec1"
     },
     {
-      "path": "datasets/agent_access/paired_all_relapse/discovery_B_ALL/preview_original_signal.csv",
+      "path": "datasets/agent_access/GSE28460/preview_original_signal.csv",
       "bytes": 12720,
       "sha256": "6cc5887554d72c046123e7f33ba67bc88dbf60158cd1c5c66368e2559dbd39a7"
     },
     {
-      "path": "datasets/agent_access/paired_all_relapse/discovery_B_ALL/samples.csv",
-      "bytes": 10737,
-      "sha256": "3a02e5f5f784d022b121585b397ece0cc5624266c8112dc41aa722c90075067f"
-    },
-    {
-      "path": "datasets/agent_access/paired_all_relapse/optional_T_ALL/expression_log2.tsv.gz",
-      "bytes": 6657298,
-      "sha256": "a02841b8677f78025b868e5bafe00b52e7e179fe9fab893da0c1e5d6edbcf281"
-    },
-    {
-      "path": "datasets/agent_access/paired_all_relapse/optional_T_ALL/patient_pairs.csv",
-      "bytes": 505,
-      "sha256": "f38396ee28d406f476d7f8f8f57be858f4b2ad2e21701bfe6b2e99c604c6f9f0"
-    },
-    {
-      "path": "datasets/agent_access/paired_all_relapse/optional_T_ALL/preview_original_signal.csv",
-      "bytes": 2139,
-      "sha256": "6e32e37724f08ca34e33e34d25a0c5ba08b965b68a4ef95e0bd26ff885cfde9d"
-    },
-    {
-      "path": "datasets/agent_access/paired_all_relapse/optional_T_ALL/samples.csv",
-      "bytes": 4117,
-      "sha256": "52d554b79edb798ed96fdc3c7513352ec30690fe74b725b513fd9dfe9b0b592b"
-    },
-    {
-      "path": "datasets/agent_access/paired_all_relapse/probe_annotation.tsv",
+      "path": "datasets/agent_access/GSE28460/probe_annotation.tsv",
       "bytes": 3622845,
       "sha256": "a81e3e5d2b1114fd2797e82331cd93eaf1e1257acf425d57393d06245d04bc0a"
     },
     {
-      "path": "datasets/agent_access/paired_all_relapse/validation_B_ALL/expression_log2.tsv.gz",
-      "bytes": 12589936,
-      "sha256": "bf9819cdf5b88696d83bf54d47c92a6288f0d294a65a9c7cae25b480a700208d"
-    },
-    {
-      "path": "datasets/agent_access/paired_all_relapse/validation_B_ALL/patient_pairs.csv",
-      "bytes": 947,
-      "sha256": "4060b4f4dda5ca01ecfb72a3a47ac56636c2392e0b720141af7ed8274566867f"
-    },
-    {
-      "path": "datasets/agent_access/paired_all_relapse/validation_B_ALL/preview_original_signal.csv",
-      "bytes": 4049,
-      "sha256": "4a7524807a2730634962485b3a9bddd5955e7091566310885df773d9a8be005b"
-    },
-    {
-      "path": "datasets/agent_access/paired_all_relapse/validation_B_ALL/samples.csv",
-      "bytes": 8653,
-      "sha256": "74931029fe53fc867b6218a1bb69ac6683ddae7738669238bcf18c20c53eb63f"
+      "path": "datasets/agent_access/GSE28460/samples.csv",
+      "bytes": 10737,
+      "sha256": "3a02e5f5f784d022b121585b397ece0cc5624266c8112dc41aa722c90075067f"
     },
     {
       "path": "geo_relapse_benchmark/README.md",
-      "bytes": 6345,
-      "sha256": "0d2c45795697f5a8dcbbf489beaa3867423a804be852a1aa8162a6a05bbdc3c4"
+      "bytes": 4106,
+      "sha256": "4c345683c7e509305de72292b2d36a752b4e5a364b4e8ca4103b7ec8534b0ea9"
     },
     {
       "path": "geo_relapse_benchmark/download.sh",
-      "bytes": 519,
-      "sha256": "e4586acde1cd7cff320596178d16c2241bd328d0bfb0359d143b95901e3e3ab4"
+      "bytes": 361,
+      "sha256": "705ee9fa15a212f2aef056b9114c41797a6c17737e3f40bda8c8a4f06bb24267"
     },
     {
       "path": "geo_relapse_benchmark/download_manifest.csv",
-      "bytes": 588,
-      "sha256": "54808c1f06747ea9327f9f4335ac1aee0fbc5d70327ca21699cc84c19b400815"
+      "bytes": 389,
+      "sha256": "6993e2754f73454f8d74a8a3a062d38af61daf0cd3b13916164579aa0cb8f452"
     },
     {
       "path": "geo_relapse_benchmark/evaluator/RUBRIC.md",
-      "bytes": 3336,
-      "sha256": "9c957866c58f1db885dab0343f5a6eb92a0b68a4833bb40f769cf72acfc80992"
+      "bytes": 1666,
+      "sha256": "b294ab9ef7ec422f620026ed7f98e707b00add66aad0f8a899019cefbe86df85"
     },
     {
-      "path": "geo_relapse_benchmark/evaluator/discovery_B_ALL_arithmetic_reference.csv",
+      "path": "geo_relapse_benchmark/evaluator/arithmetic_reference.csv",
       "bytes": 3410,
       "sha256": "ba67cb7509e14b06631e371a63025c6578339821f8a467c37543fcac0554e6dd"
     },
     {
-      "path": "geo_relapse_benchmark/evaluator/optional_T_ALL_arithmetic_reference.csv",
-      "bytes": 1105,
-      "sha256": "f4c91759fd7091bac4021b67e8c31f510075ad12ea0105fc567c7bc2431a96ca"
-    },
-    {
-      "path": "geo_relapse_benchmark/evaluator/validation_B_ALL_arithmetic_reference.csv",
-      "bytes": 1991,
-      "sha256": "c9039744e55e0b08b40e71557e2f8ad1d6e4f2c5f7acb7c3007b06f33a53b86a"
+      "path": "geo_relapse_benchmark/evaluator/local_cleanup_receipt.json",
+      "bytes": 1656,
+      "sha256": "18dbf25a277fec53c6f532f3bec6983ca5966e104c73cbdfba29dcaf5d42342f"
     },
     {
       "path": "geo_relapse_benchmark/evaluator/validation_report.json",
-      "bytes": 2224,
-      "sha256": "0e6f58e03d96ce4a77eb15bdf0fcf3ce88094f18301770359b45cc9819437220"
+      "bytes": 1301,
+      "sha256": "861284936c586b466c5eed6c8d1ecabf8fefca7d3da5ebb69bc04119d64ef33b"
+    },
+    {
+      "path": "geo_relapse_benchmark/install_instance.py",
+      "bytes": 5554,
+      "sha256": "f73224551560609107ecd1ac6a18ecb0c0866fde47f68c0262aa734764c443a1"
+    },
+    {
+      "path": "geo_relapse_benchmark/make_delivery.py",
+      "bytes": 1704,
+      "sha256": "8c4b4d22692cd89f29232f60b12f161491560c4556cce5aacec1c208d4cc757c"
     },
     {
       "path": "geo_relapse_benchmark/prepare_inputs.py",
-      "bytes": 9333,
-      "sha256": "1a597536d0a4c9ac97306ad522ec50bbcc83c4340f12ad9be0bfec9106099ef3"
+      "bytes": 8581,
+      "sha256": "4d4e052eb091e30160a79a23a466641afb345deb022e691b89faf7b6130e1e2a"
     },
     {
       "path": "geo_relapse_benchmark/requirements.txt",
@@ -135,16 +113,6 @@
       "path": "geo_relapse_benchmark/source/GPL570.annot.gz",
       "bytes": 8471521,
       "sha256": "d7cd44352127b1e34f3a720ebea86093ef255a38f1612a85a2962b71bde8f394"
-    },
-    {
-      "path": "geo_relapse_benchmark/source/GSE18497_sample_manifest.csv",
-      "bytes": 12599,
-      "sha256": "761612e66f3ca38939e20fb3f9efb35f1c4e6e84af325de6d9fdee6960337f56"
-    },
-    {
-      "path": "geo_relapse_benchmark/source/GSE18497_series_matrix.txt.gz",
-      "bytes": 11132509,
-      "sha256": "8fa690e3837634b1e8c29092e518c4ee71e09794e8bfcd0cc0f21cbfc5914e6f"
     },
     {
       "path": "geo_relapse_benchmark/source/GSE28460_sample_manifest.csv",
@@ -158,13 +126,13 @@
     },
     {
       "path": "geo_relapse_benchmark/verify_delivery.py",
-      "bytes": 2465,
-      "sha256": "54a9a93bb68839d16aeb30f2dbc2c9f9597dd1cdf8b43c00a6360f55b996a52f"
+      "bytes": 3396,
+      "sha256": "d05dcbfaedce56464cc608ea22563be5fc97c7e90e42d5373af000c3415264ea"
     },
     {
-      "path": "hypothesis/hypothesis.txt",
-      "bytes": 973,
-      "sha256": "be72fed42c9216d83095a12e45a21d21f9a400a0454691b3ce0e2d3c092724f9"
+      "path": "hypothesis.txt",
+      "bytes": 300,
+      "sha256": "d15fd3808365deabeb7e9f3beffc49c51327412b8da96a295df7201632a85788"
     }
   ]
 }

@@ -1,0 +1,60 @@
+{
+  "completed_at_utc": "2026-09-20T09:37:08.058309+00:00",
+  "instance": "agentic-takeoff-cpu",
+  "root": "/home/ubuntu/ana-workspace",
+  "active_dataset": "GSE28460",
+  "patients": 49,
+  "samples": 98,
+  "probes": 54675,
+  "input": "/home/ubuntu/ana-workspace/input",
+  "input_resolves_to": "/home/ubuntu/ana-workspace/datasets/agent_access/GSE28460",
+  "hypothesis": "/home/ubuntu/ana-workspace/hypothesis.txt",
+  "hypothesis_copies_match": true,
+  "active_dataset_directories": [
+    "GSE28460"
+  ],
+  "removed": [
+    {
+      "path": "/home/ubuntu/ana-workspace/datasets/agent_access/cd19_tumour_pairs",
+      "bytes": 78986116
+    },
+    {
+      "path": "/home/ubuntu/ana-workspace/hypothesis/CD19_CAR_T_.txt",
+      "bytes": 2133
+    },
+    {
+      "path": "/home/ubuntu/ana-workspace/hypothesis/BCMA_CAR_T_.txt",
+      "bytes": 1406
+    },
+    {
+      "path": "/home/ubuntu/ana-workspace/datasets/provenance/DATASET_PROVENANCE.txt",
+      "bytes": 899
+    },
+    {
+      "path": "/home/ubuntu/ana-workspace/datasets/car_t_download.log",
+      "bytes": 0
+    },
+    {
+      "path": "/home/ubuntu/ana-workspace/datasets/car_t_redownload.log",
+      "bytes": 0
+    },
+    {
+      "path": "/home/ubuntu/geo_relapse_benchmark_20260920.tar",
+      "bytes": 100700160
+    },
+    {
+      "path": "/home/ubuntu/ana-workspace/input",
+      "bytes": 78992821
+    },
+    {
+      "path": "/home/ubuntu/ana-workspace/hypothesis/hypothesis.txt",
+      "bytes": 178
+    },
+    {
+      "path": "/home/ubuntu/GSE28460_clean_20260920.tar",
+      "bytes": 70277120
+    }
+  ],
+  "removed_bytes": 328960833,
+  "historical_analysis_outputs_preserved": true
+}

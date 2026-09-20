@@ -1,4 +1,4 @@
-"""Build and validate agent inputs from the three unmodified GEO downloads.
+"""Build and validate agent inputs from the two unmodified GEO downloads.
 
 Run with Python 3, numpy and pandas. No network access or biological result lookup.
 """
@@ -16,11 +16,10 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parent
 SOURCE = ROOT / "source"
-INPUT = ROOT.parent / "datasets" / "agent_access" / "paired_all_relapse"
+INPUT = ROOT.parent / "datasets" / "agent_access" / "GSE28460"
 EVAL = ROOT / "evaluator"
 URLS = {
     "GSE28460_series_matrix.txt.gz": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE28nnn/GSE28460/matrix/GSE28460_series_matrix.txt.gz",
-    "GSE18497_series_matrix.txt.gz": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE18nnn/GSE18497/matrix/GSE18497_series_matrix.txt.gz",
     "GPL570.annot.gz": "https://ftp.ncbi.nlm.nih.gov/geo/platforms/GPLnnn/GPL570/annot/GPL570.annot.gz",
 }
 
@@ -66,19 +65,13 @@ def manifest(acc, meta):
         for line in meta["!Sample_characteristics_ch1"]:
             key, value = line[i].split(": ", 1)
             traits[key] = value
-        if acc == "GSE28460":
-            match = re.fullmatch(r"(p\d+)-([DR])-([EL])", title)
-            assert match, title
-            patient, time, subgroup = match.groups()
-            time = {"D": "diagnosis", "R": "relapse"}[time]
-            assert meta["!Sample_source_name_ch1"][0][i] == time
-            lineage = "Precursor-B-ALL"
-        else:
-            match = re.fullmatch(r"Patient_(\d+)_(diagnosis|relapse)", title)
-            assert match, title
-            patient, time = match.groups()
-            subgroup = ""
-            lineage = traits["all type"]
+        assert acc == "GSE28460"
+        match = re.fullmatch(r"(p\d+)-([DR])-([EL])", title)
+        assert match, title
+        patient, time, subgroup = match.groups()
+        time = {"D": "diagnosis", "R": "relapse"}[time]
+        assert meta["!Sample_source_name_ch1"][0][i] == time
+        lineage = "Precursor-B-ALL"
         rows.append({
             "sample_id": gsm, "patient_id": f"{acc}_{patient}",
             "timepoint": time, "lineage": lineage, "original_title": title,
@@ -97,8 +90,8 @@ def manifest(acc, meta):
     return samples
 
 
-def export_group(name, frame, samples):
-    folder = INPUT / name
+def export_group(frame, samples):
+    folder = INPUT
     folder.mkdir(parents=True, exist_ok=True)
     columns = list(samples.sample_id)
     original = frame.loc[:, columns]
@@ -125,14 +118,14 @@ def export_group(name, frame, samples):
                        "number_probes_increased": int((delta > 0).sum()),
                        "number_probes_decreased": int((delta < 0).sum()),
                        "number_probes_unchanged": int((delta == 0).sum())})
-    pd.DataFrame(checks).to_csv(EVAL / f"{name}_arithmetic_reference.csv", index=False)
+    pd.DataFrame(checks).to_csv(EVAL / "arithmetic_reference.csv", index=False)
     return {"patients": len(pairs), "samples": len(samples), "probes": len(frame),
             "lineages": dict(Counter(samples.drop_duplicates("patient_id").lineage)),
             "all_pairs_complete": True, "roundtrip_passed": True}
 
 
 def main():
-    INPUT.mkdir(exist_ok=True)
+    INPUT.mkdir(parents=True, exist_ok=True)
     EVAL.mkdir(exist_ok=True)
     hashes = []
     for name, url in URLS.items():
@@ -160,7 +153,7 @@ def main():
     audit = {"python": sys.version, "numpy": np.__version__, "pandas": pd.__version__,
              "annotation_mapping": dict(Counter(annotation.mapping_status)),
              "source": {}, "agent_groups": {}}
-    for acc in ["GSE28460", "GSE18497"]:
+    for acc in ["GSE28460"]:
         meta, frame = read_matrix(SOURCE / f"{acc}_series_matrix.txt.gz")
         samples = manifest(acc, meta)
         assert set(frame.index) == set(annotation.probe_id)
@@ -174,12 +167,7 @@ def main():
             "deposited_relapse_group_by_patient": dict(Counter(samples.drop_duplicates("patient_id").relapse_group_deposited)),
         }
         samples.to_csv(SOURCE / f"{acc}_sample_manifest.csv", index=False)
-        if acc == "GSE28460":
-            audit["agent_groups"]["discovery_B_ALL"] = export_group("discovery_B_ALL", frame, samples)
-        else:
-            for name, lineage in [("validation_B_ALL", "Precursor-B-ALL"), ("optional_T_ALL", "T-ALL")]:
-                selected = samples[samples.lineage == lineage].copy()
-                audit["agent_groups"][name] = export_group(name, frame, selected)
+        audit["agent_groups"]["GSE28460"] = export_group(frame, samples)
     audit["known_discrepancy"] = (
         "GSE28460 deposited metadata label 29 patients E and 20 L; the primary paper reports "
         "27 early and 22 late in the 49-patient expression cohort. Do not silently relabel. "

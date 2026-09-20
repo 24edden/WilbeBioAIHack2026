@@ -1,0 +1,32 @@
+{
+  "version": "1.0",
+  "purpose": "Small author-defined operational panels for this benchmark; not exhaustive pathway definitions or externally validated signatures. Fixed before running the hypothesis test.",
+  "cell_cycle": [
+    "MCM2",
+    "MCM3",
+    "MCM4",
+    "MCM5",
+    "MCM6",
+    "MCM7",
+    "PCNA",
+    "MKI67",
+    "CDK1",
+    "CCNB1",
+    "CCNB2",
+    "TOP2A"
+  ],
+  "dna_repair": [
+    "RAD51",
+    "BRCA1",
+    "BRCA2",
+    "FANCD2",
+    "FANCI",
+    "CHEK1",
+    "ATR",
+    "ATM",
+    "ERCC1",
+    "ERCC2",
+    "XPA",
+    "XPC"
+  ]
+}

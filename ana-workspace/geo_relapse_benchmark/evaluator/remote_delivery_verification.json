@@ -1,0 +1,19 @@
+{
+  "verified_at_utc": "2026-09-20T09:37:08.024218+00:00",
+  "root": "/home/ubuntu/ana-workspace",
+  "files_checksum_verified": 26,
+  "groups": {
+    "GSE28460": {
+      "patients": 49,
+      "samples": 98,
+      "probes": 54675,
+      "matrix_opened": true,
+      "pairs_verified": true,
+      "annotation_verified": true,
+      "panel_gene_coverage": {
+        "cell_cycle": 12,
+        "dna_repair": 12
+      }
+    }
+  }
+}

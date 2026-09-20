@@ -2,31 +2,35 @@
 
 Working notes for the team. Setup and run instructions go here once we have something to run.
 
-## Paired GEO relapse benchmark (2026-09-20)
+## Single GEO relapse benchmark (2026-09-20)
 
-The active dataset on `hypothesis-dataset` is now GSE28460 (49 B-ALL pairs), plus
-the B-ALL subset of GSE18497 (27 validation pairs). The 14 T-ALL pairs are a
-separate optional group. The previous CD19 CAR-T input is archived under
-`ana-workspace/archive/cd19_car_t_previous/`.
+The sole active dataset on `hypothesis-dataset` is GSE28460: 49 B-ALL pairs.
+The smaller second cohort, T-ALL subset and legacy CD19/SRA inputs were removed.
+Use `ana-workspace/hypothesis.txt` and `ana-workspace/input/TASK.md`.
+`input/` aliases `datasets/agent_access/GSE28460/`; it is not another data copy.
 
-See [the data guide](ana-workspace/geo_relapse_benchmark/README.md) for exact URLs,
-checksums, evidence limits, source/processed file layout and the unresolved
-early/late relapse annotation discrepancy. No account, SRA Toolkit or GPU is
-needed to open these processed GEO matrices.
+See [the data guide](ana-workspace/geo_relapse_benchmark/README.md) for provenance,
+checksums, limitations and reproducibility. No account, GPU or SRA Toolkit is
+needed to open the processed matrices. Python 3.11+ and the pinned numpy/pandas
+requirements support `python3 ana-workspace/geo_relapse_benchmark/prepare_inputs.py`.
+The agent performing statistical tests also needs its chosen statistical libraries.
+`download.sh` reacquires only GSE28460 plus GPL570 annotation if needed.
 
-Use Python 3.11 or later with
-`ana-workspace/geo_relapse_benchmark/requirements.txt` (numpy 2.2.1, pandas 2.2.3).
-Run `python3 ana-workspace/geo_relapse_benchmark/prepare_inputs.py` from the repo
-root to rebuild and verify the inputs. The downloaded source files are included;
-`bash ana-workspace/geo_relapse_benchmark/download.sh` reacquires them if needed.
-The download command needs network access and overwrites the three source files.
+For the team instance, use `/home/ubuntu/ana-workspace/hypothesis.txt` and
+`/home/ubuntu/ana-workspace/input/`. Keep source publication metadata, evaluator
+files and historical analyses outside tested agents' allowed inputs. The package
+provides a fixed hypothesis and scoring rules; it does not claim independent
+replication, a proven mechanism, or completed agent evaluation.
 
-The agent entry point is
-`ana-workspace/datasets/agent_access/paired_all_relapse/TASK.md`.
-Keep evaluator files and previous reports outside the agent's allowed inputs.
-To enforce a discovery/validation split, withhold validation data until the
-candidate list is frozen; directories alone do not enforce isolation. This
-package supplies data and a rubric, not a completed agent evaluation.
+To prepare a checksummed instance delivery, run
+`python3 ana-workspace/geo_relapse_benchmark/make_delivery.py`, then verify locally
+with `python3 ana-workspace/geo_relapse_benchmark/verify_delivery.py`.
+Upload `/tmp/GSE28460_clean_20260920.tar` with `brev copy` to
+`agentic-takeoff-cpu:/home/ubuntu/GSE28460_clean_20260920.tar`.
+`geo_relapse_benchmark/install_instance.py` documents the installation and exact
+obsolete paths removed after verification. It targets the shared instance workspace;
+review its cleanup list before reuse. The evaluator directory holds installation
+and verification receipts. Verification uses only Python's standard library.
 
 ## Context files
 

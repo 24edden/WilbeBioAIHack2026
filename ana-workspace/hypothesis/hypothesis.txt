@@ -1,5 +1,1 @@
-Leukaemia cells at relapse show reproducible gene-expression changes relative to diagnosis that nominate resistance-associated biological processes and interventions for experimental testing.
-
-Test the expression-association component in childhood B-ALL using paired diagnosis/relapse samples from GEO GSE28460 (49 patients; discovery) and the B-ALL subset of GSE18497 (27 patients; validation). These are conventional-treatment relapse cohorts, not CD19 CAR-T cohorts. The additional 14 T-ALL pairs in GSE18497 are a separate exploratory group.
-
-Use ana-workspace/datasets/agent_access/paired_all_relapse/TASK.md and its expression matrices, probe annotations, sample manifests and patient-pair tables. Analyse patients as paired biological units and keep the studies separate. All included patients eventually relapsed: diagnosis samples are not non-relapsing controls. Expression associations nominate experiments; they do not establish causality or treatment efficacy.
+../hypothesis.txt

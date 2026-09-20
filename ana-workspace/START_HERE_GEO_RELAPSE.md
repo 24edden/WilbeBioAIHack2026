@@ -1,49 +1,31 @@
-# Start here: paired leukaemia relapse benchmark
+# Start here: one leukaemia dataset
 
-Git branch: `hypothesis-dataset`.
+Branch: `hypothesis-dataset`. Instance: `agentic-takeoff-cpu`.
 
-Hypothesis: **Leukaemia cells at relapse show reproducible gene-expression changes
-relative to diagnosis that nominate resistance-associated biological processes and
-interventions for experimental testing.**
+- Hypothesis: `/home/ubuntu/ana-workspace/hypothesis.txt`
+- Agent input: `/home/ubuntu/ana-workspace/input/`
+- Task instructions: `/home/ubuntu/ana-workspace/input/TASK.md`
+- Provenance and preparation: `/home/ubuntu/ana-workspace/geo_relapse_benchmark/`
 
-Shared Brev instance: `agentic-takeoff-cpu`.
+The local workspace has the same layout under `ana-workspace/`.
 
-| What | Absolute instance path |
-|---|---|
-| Hypothesis | `/home/ubuntu/ana-workspace/hypothesis/hypothesis.txt` |
-| Agent task | `/home/ubuntu/ana-workspace/datasets/agent_access/paired_all_relapse/TASK.md` |
-| Discovery: 49 paired B-ALL patients | `/home/ubuntu/ana-workspace/datasets/agent_access/paired_all_relapse/discovery_B_ALL/` |
-| Validation: 27 paired B-ALL patients | `/home/ubuntu/ana-workspace/datasets/agent_access/paired_all_relapse/validation_B_ALL/` |
-| Separate optional 14 T-ALL pairs | `/home/ubuntu/ana-workspace/datasets/agent_access/paired_all_relapse/optional_T_ALL/` |
-| Data/provenance guide | `/home/ubuntu/ana-workspace/geo_relapse_benchmark/README.md` |
-| Original GEO downloads | `/home/ubuntu/ana-workspace/geo_relapse_benchmark/source/` |
-| Evaluator rubric and checks | `/home/ubuntu/ana-workspace/geo_relapse_benchmark/evaluator/` |
+**GSE28460: 49 B-ALL patients, each sampled at diagnosis and relapse; 98 samples
+and 54,675 expression probes.** One complete cohort; no T-ALL or other patient
+cohorts are included. `input/` aliases `datasets/agent_access/GSE28460/`.
 
-Each group contains a gzipped TSV expression matrix, sample metadata and explicit
-patient pairs. Read with pandas, R or ordinary gzip/TSV tools. No GPU or SRA Toolkit
-is needed. The main B-ALL comparison contains 76 paired patients across two studies.
-
-These cohorts are not CAR-T cohorts. All patients eventually relapsed. The supplied
-measurements support expression associations and experimental prioritisation,
-not proof of resistance causality or an effective new treatment.
-
-For agent testing, start from `TASK.md`; restrict the agent to its input and output
-directories. Withhold validation files until discovery candidates are frozen.
-Do not expose evaluator files or the prior CD19 analysis. The older remote
-`input/` directory is a legacy CD19/SRA package and is not the active input.
-
-From the instance, a minimal loading check is:
+Read hypothesis.txt, then TASK.md. The agents can test whether cell-cycle and
+DNA-repair gene expression rises at relapse within patients and propose experiments.
+These are conventional-treatment cases, not CAR-T cases. Expression cannot by
+itself establish causal resistance or effective treatment. No independent validation
+cohort remains in this simplified package.
 
 ```python
 import pandas as pd
-base = '/home/ubuntu/ana-workspace/datasets/agent_access/paired_all_relapse/discovery_B_ALL/'
-x = pd.read_csv(base + 'expression_log2.tsv.gz', sep='\t', index_col=0)
-pairs = pd.read_csv(base + 'patient_pairs.csv')
+root = '/home/ubuntu/ana-workspace/input/'
+x = pd.read_csv(root + 'expression_log2.tsv.gz', sep='\t', index_col=0)
+pairs = pd.read_csv(root + 'patient_pairs.csv')
 print(x.shape, len(pairs))  # (54675, 98), 49
 ```
 
-For the full integrity check, Python standard library is sufficient:
-
-```bash
-python3 /home/ubuntu/ana-workspace/geo_relapse_benchmark/verify_delivery.py /home/ubuntu/ana-workspace
-```
+For an agent test, allow only input/ and its output directory. Source files,
+evaluator material and historical analyses are not agent inputs.
