@@ -25,6 +25,10 @@ export default function render(component) {
   const el = id => parentElement.querySelector(`#${id}`);
   const details = parentElement.querySelector('details');
   details.dataset.theme = data.theme === 'astral' ? 'astral' : 'dark';
+  if(data.colors && details.style){
+    const mapping={ink:'text',muted:'muted',label:'secondary',line:'border','field-line':'border',surface:'surface',field:'soft',input:'surface',hover:'hover',accent:'accent',listening:'critical','listening-line':'critical'};
+    for(const [name,token] of Object.entries(mapping))details.style.setProperty('--voice-'+name,data.colors[token]);
+  }
   const consent = el('consent'), mode = el('mode'), listen = el('listen'), stop = el('stop');
   const transcript = el('transcript'), apply = el('apply'), status = el('status');
   const spoken = el('spoken'), speechStatus = el('speech-status');

@@ -399,3 +399,14 @@ node tests/composer_browser_test.mjs
 `frontend/requirements-preview.lock.txt` records the exact packages used for this
 local macOS / Python 3.12 preview. It is a platform-specific reproducibility snapshot;
 the normal cross-platform installation uses the original requirements files above.
+
+### Shared light and dark appearance
+
+The header's **Dark mode / Light mode** button applies to the start composer, pet
+activity, advanced setup, voice controls and Results. Light is the initial default.
+The preference is session-local and survives stage navigation and starting a new
+investigation. It does not submit work, clear draft files, or modify saved reports.
+
+`frontend/ui/appearance.py` owns the shared palette; `frontend/static/workspace.css`
+applies it to TRACE's existing result widgets. The shadow-DOM prompt and voice
+components receive the same palette explicitly. Their shape and behavior are unchanged.

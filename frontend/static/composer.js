@@ -14,6 +14,9 @@ export default function render(component) {
   }
   const el=id=>parentElement.querySelector('#'+id);
   const form=el('composer'),question=el('question'),picker=el('files'),submit=el('submit'),attach=el('attach'),demo=el('demo'),error=el('composer-error');
+  const wrap=el('composer-wrap');
+  wrap.style.colorScheme=data.theme==='dark'?'dark':'light';
+  for(const [name,color] of Object.entries(data.colors||{}))wrap.style.setProperty('--ui-'+name,color);
   question.value=state.text;
   question.disabled=Boolean(data.readOnly||data.disabled);
   picker.accept=(data.extensions||[]).map(e=>'.'+e).join(',');

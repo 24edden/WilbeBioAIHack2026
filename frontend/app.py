@@ -22,12 +22,15 @@ from ui.followup import FollowUpSource, context_for
 from ui.pet_activity import PetActivity
 from ui.pets import render_pet, stylesheet as pet_stylesheet
 from ui.pet_start import render_start
+from ui.appearance import stylesheet as appearance_stylesheet, toggle_theme
 
 st.set_page_config(page_title=PROFILE.page_title, page_icon=":material/science:", layout="wide", initial_sidebar_state="collapsed")
-st.session_state.setdefault("astral_theme", False)
-theme = "astral" if st.session_state.astral_theme else "dark"
+st.session_state.setdefault("ui_theme", "light")
+st.session_state.astral_theme = st.session_state.ui_theme == "light"
+theme = "astral" if st.session_state.ui_theme == "light" else "dark"
 st.markdown(stylesheet(theme), unsafe_allow_html=True)
 st.markdown(pet_stylesheet(), unsafe_allow_html=True)
+st.markdown(appearance_stylesheet(st.session_state.ui_theme), unsafe_allow_html=True)
 PET_UI = os.environ.get("TRACE_START_SCREEN", "pets") != "classic"
 
 
@@ -143,22 +146,19 @@ run_active = bool(job and job.active)
 pet_starting = PET_UI and st.session_state.pet_composer and st.session_state.stage == "evidence"
 pet_live = PET_UI and st.session_state.stage == "investigation"
 header_target = None
+with st.container(key="workspace_header"):
+    brand_column, theme_column = st.columns([6, 1], vertical_alignment="center")
+    with brand_column:
+        st.markdown(f"<div class='flow-brand'>{C._escape(PROFILE.name)}<span>Your research companions</span></div>", unsafe_allow_html=True)
+    with theme_column:
+        st.button("☾ Dark mode" if st.session_state.ui_theme == "light" else "☀ Light mode",
+                  key="theme_toggle", on_click=toggle_theme,
+                  help="Switch the appearance of every screen. Your choice stays with this session.")
 if pet_starting or pet_live:
-    brand, links = st.columns([4, 1])
-    with brand:
-        st.markdown("<div class='pet-brand'>TRACE <span>Your research companions</span></div>", unsafe_allow_html=True)
-    with links:
-        if st.session_state.run.complete:
-            if st.button("View results", key="pet_header_results"):
-                navigate("results")
+    if st.session_state.run.complete:
+        if st.button("View results", key="pet_header_results"):
+            navigate("results")
 else:
-    with st.container(key="workspace_header"):
-        brand_column, theme_column = st.columns([4, 1], vertical_alignment="center")
-        with brand_column:
-            st.markdown(f"<div class='flow-brand'>{C._escape(PROFILE.name)}<span>{C._escape(PROFILE.eyebrow)}</span></div>", unsafe_allow_html=True)
-        with theme_column:
-            H.widget(st.toggle, "Astral light", key="astral_theme",
-                      help="Switch between the dark workspace and a white, blue and violet constellation theme. Your choice stays with this session.")
     stages = ["evidence", "question", "investigation", "results"]
     labels = ["Evidence", "Question & agents", "Investigation", "Results"]
     current = stages.index(st.session_state.stage)

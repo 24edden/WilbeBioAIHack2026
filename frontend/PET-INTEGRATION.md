@@ -50,3 +50,12 @@ The JavaScript harness exercises the actual component drop/submit/remove handler
 
 Local browser review covered the prompt, file chips, real local-demo submission,
 pet presentation and original Results. No public deployment is part of this work.
+
+## Unified appearance
+
+A single header button now selects light or dark for every stage. The same session
+preference and palette paint the custom composer, pet view, original result panels,
+forms, popovers and optional voice component. Theme changes preserve drafts, active
+run identity and report contents. Functional Results rendering remains unchanged.
+Added checks cover navigation persistence, no duplicate submission, shadow-component
+file retention during theme updates and normal-text palette contrast.

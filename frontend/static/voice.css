@@ -1,5 +1,5 @@
 :host{font-family:Inter,ui-sans-serif,system-ui,sans-serif;font-size:13px}
-*{box-sizing:border-box}.voice{color:var(--voice-ink);color-scheme:dark;border:1px solid var(--voice-line);border-radius:4px;background:var(--voice-surface)}
+*{box-sizing:border-box}.voice{color:var(--voice-ink);color-scheme:dark;border:1px solid var(--voice-line);border-radius:11px;background:var(--voice-surface)}
 summary{display:flex;align-items:center;gap:12px;padding:11px 13px;cursor:pointer;font-weight:600;list-style-position:inside}
 summary::before{content:'+';color:var(--voice-accent)}details[open] summary::before{content:'−'}summary small{font-weight:400;color:var(--voice-muted);margin-left:auto}
 .voice-body{padding:0 13px 13px}.disclosure,.hint{color:var(--voice-muted);line-height:1.45;margin:0 0 10px}.hint{font-size:12px}

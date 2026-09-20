@@ -4,6 +4,7 @@ import base64
 import binascii
 import streamlit as st
 from .config import PROFILE
+from .appearance import palette
 
 MAX_FILE=20*1024*1024
 MAX_TOTAL=40*1024*1024
@@ -48,6 +49,7 @@ def render_composer(draft,*,question,read_only=False,disabled=False,note=''):
     composer=component('trace_prompt_composer',html=(assets/'composer.html').read_text(),
         css=(assets/'composer.css').read_text(),js=(assets/'composer.js').read_text())
     result=composer(key='trace_prompt_composer',data={'question':question,'generation':draft['composer_id'],
+        'colors':palette(st.session_state.get('ui_theme','light')),'theme':st.session_state.get('ui_theme','light'),
         'readOnly':read_only,'disabled':disabled,'note':note,'extensions':list(PROFILE.input_extensions),
         'files':[{'name':name,'size':len(data),'data':base64.b64encode(data).decode()} for name,data in draft['uploads']]},
         on_action_change=lambda:None,on_draft_change=lambda:None)

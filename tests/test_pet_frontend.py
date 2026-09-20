@@ -123,3 +123,41 @@ def test_composer_validates_attachment_bytes_before_submission():
         with pytest.raises(ValueError):validate_action(bad)
     with pytest.raises(ValueError):validate_action({**payload,'question':'   '})
     assert validate_action({**payload,'type':'untrusted_command'}) is None
+
+
+def test_shared_theme_survives_navigation_and_never_resubmits(pet_app):
+    app,source=pet_app
+    assert app.session_state['ui_theme']=='light'
+    files=[('sample.csv',b'a,b\n')]
+    app.session_state['draft']['uploads']=files
+    app.session_state['draft']['question']='Draft before theme switch'
+    app.button(key='theme_toggle').click().run()
+    assert app.session_state['ui_theme']=='dark'
+    assert app.session_state['draft']['uploads']==files
+    assert app.session_state['draft']['question']=='Draft before theme switch'
+    assert not source.requests
+    app.session_state['_test_composer_action']={'type':'start','question':'Final question','uploads':files}
+    app.run()
+    assert app.session_state['stage']=='investigation' and app.session_state['ui_theme']=='dark'
+    original=deepcopy(app.session_state['run'])
+    app.button(key='theme_toggle').click().run()
+    assert app.session_state['ui_theme']=='light' and len(source.requests)==1
+    app.button(key='pet_results').click().run()
+    assert app.session_state['stage']=='results' and app.session_state['ui_theme']=='light'
+    app.button(key='theme_toggle').click().run()
+    assert app.session_state['ui_theme']=='dark'
+    assert app.session_state['run']==original and len(source.requests)==1
+    app.button(key='results_new').click().run()
+    assert app.session_state['ui_theme']=='dark' and not app.exception
+
+
+def test_shared_palette_text_contrast():
+    from frontend.ui.appearance import PALETTES
+    def luminance(color):
+        channels=[int(color[i:i+2],16)/255 for i in (1,3,5)]
+        linear=[x/12.92 if x<=.04045 else ((x+.055)/1.055)**2.4 for x in channels]
+        return sum(x*y for x,y in zip(linear,(.2126,.7152,.0722)))
+    for name,colors in PALETTES.items():
+        for foreground,background in [('text','surface'),('secondary','surface'),('muted','page'),('muted','soft'),('on-accent','accent')]:
+            low,high=sorted([luminance(colors[foreground]),luminance(colors[background])])
+            assert (high+.05)/(low+.05)>=4.5,(name,foreground,background)

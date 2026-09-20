@@ -6,6 +6,7 @@ the same draft/navigation guards as typed input. No action submits or cancels wo
 from __future__ import annotations
 
 from pathlib import Path
+from .appearance import palette
 
 
 NAVIGATION_TARGETS = frozenset({"evidence", "question", "investigation", "results"})
@@ -89,6 +90,7 @@ def render_voice_controls(
         key=key,
         data={
             "theme": "astral" if st.session_state.get("astral_theme", False) else "dark",
+            "colors": palette(st.session_state.get("ui_theme", "light")),
             "dictationEnabled": bool(dictation_enabled),
             "setupMode": stage == "evidence",
             "announcement": stage_announcement(stage, phase, agent_stage),
