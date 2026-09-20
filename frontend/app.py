@@ -2,6 +2,7 @@
 from copy import deepcopy
 from dataclasses import replace
 from uuid import uuid4
+import os
 import streamlit as st
 
 from ui import components as C
@@ -29,6 +30,12 @@ st.session_state.astral_theme=st.session_state.ui_theme=='light'
 st.markdown(stylesheet('astral' if st.session_state.ui_theme=='light' else 'dark'),unsafe_allow_html=True)
 st.markdown(pet_stylesheet(),unsafe_allow_html=True)
 st.markdown(appearance_stylesheet(st.session_state.ui_theme),unsafe_allow_html=True)
+
+# Deployment-selected, read-only Team TBD connection; the original demo remains intact.
+if os.environ.get('TEAM_TBD_CAPSULE'):
+    from ui.team_tbd import render_workspace
+    render_workspace()
+    st.stop()
 
 for key,value in {'stage':'prompt','draft':new_draft(),'run':RunState(),'submitted':None,'job':None,
                   'previous_runs':[],'followup_drafts':{},'result_id':uuid4().hex}.items():

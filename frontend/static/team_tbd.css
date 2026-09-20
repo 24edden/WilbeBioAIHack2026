@@ -1,0 +1,20 @@
+/* The existing pet palette, typography, characters and open layout are retained. */
+.stApp:has(.tbd-marker) [data-testid=stMainBlockContainer]{max-width:1120px;padding:2rem 2.5rem 3rem}
+.stApp:has(.tbd-marker) [data-testid=stElementContainer]:has(style),.stApp:has(.tbd-marker) [data-testid=stElementContainer]:has(.tbd-marker){display:none}
+.stApp:has(.tbd-marker) .st-key-workspace_header{margin-bottom:.5rem}
+.tbd-eyebrow{color:var(--ui-accent);font-size:11px;letter-spacing:1.4px;text-transform:uppercase;margin:14px 0 10px}
+.tbd-question{font-size:18px;line-height:1.65;color:var(--ui-secondary);max-width:850px;margin:20px 0 8px}
+.tbd-summary{max-width:none;margin:16px 0 20px;padding:12px 30px;border:0;background:transparent;box-shadow:none}
+.tbd-summary .trace-pet-scene{grid-template-columns:180px minmax(0,1fr);min-height:270px;gap:34px}
+.tbd-summary .scientist-pet{width:180px;height:180px}.tbd-summary h1{font-size:32px!important;font-weight:600!important;line-height:1.2!important;letter-spacing:-1px!important}
+.tbd-summary p{font-size:17px;line-height:1.75;color:var(--ui-secondary)}
+.tbd-scope{font-size:14px;color:var(--ui-muted);line-height:1.7;padding:12px 0;border-top:1px solid var(--ui-border)}
+.tbd-finding{font-size:18px;line-height:1.7;color:var(--ui-text)}
+.tbd-role{display:flex;align-items:center;gap:8px;min-height:84px}.tbd-role strong{font-size:15px;font-weight:600}.tbd-role .pet-roster-image{width:65px;height:65px}
+.tbd-replay{display:flex;align-items:center;gap:24px;padding:15px}.tbd-replay small{color:var(--ui-muted)}
+.tbd-footer{font-size:11px;color:var(--ui-muted);border-top:1px solid var(--ui-border);margin-top:34px;padding-top:18px}
+.stApp:has(.tbd-marker) [data-testid=stRadio]>div{gap:8px 20px;border-bottom:1px solid var(--ui-border);padding-bottom:16px;margin:8px 0}
+.stApp:has(.tbd-marker) [data-testid=stMetricValue]{font-size:27px}
+.stApp:has(.tbd-marker) h1{font-size:30px;font-weight:600;letter-spacing:-.8px}
+.stApp:has(.tbd-marker) .network-canvas svg{min-width:620px;max-height:none}
+@media(max-width:720px){.stApp:has(.tbd-marker) [data-testid=stMainBlockContainer]{padding:1.25rem 1rem 2rem}.tbd-summary{padding:0}.tbd-summary .trace-pet-scene{gap:8px}.tbd-summary .scientist-pet{width:120px;height:120px}.tbd-summary h1{font-size:26px!important}.tbd-summary .trace-pet-character strong{display:none}.tbd-question{font-size:16px}.tbd-finding{font-size:16px}}

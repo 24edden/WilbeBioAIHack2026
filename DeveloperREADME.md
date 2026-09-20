@@ -420,3 +420,22 @@ Repeated live Graphviz updates caused preview responsiveness problems; the integ
 network now renders bounded SVG instead. Final end-to-end browser revalidation was
 curtailed at the user's request to ship promptly. Real microphone capture, provider
 inference and 50-user hosting capacity were not exercised in this integration pass.
+
+### Team TBD read-only connection
+
+Set `TEAM_TBD_CAPSULE` to the private external
+`team-tbd-results-capsule-2026-09-20-v1` directory to enable the connected pet
+workspace. Start it separately on loopback port 8504, leaving the existing services
+on 8081 and 8082 unchanged:
+
+```bash
+export TEAM_TBD_CAPSULE="/absolute/path/to/private/team-tbd-results-capsule-2026-09-20-v1"
+.venv/bin/python -m streamlit run frontend/app.py --server.address 127.0.0.1 --server.port 8504 --browser.gatherUsageStats false
+```
+
+The workspace defaults to explicitly labeled frozen replay. Live reads fetch the
+selected existing run, with optional 15-second refresh; no connected control
+submits scientific work or changes backend settings. Unset `TEAM_TBD_CAPSULE` to
+retain the original UI. Keep the capsule outside Git and public static assets.
+See [frontend/TEAM-TBD.md](frontend/TEAM-TBD.md) for environment setup, source
+routing, adapter mappings, integrity bounds, snapshot interpretation and validation.

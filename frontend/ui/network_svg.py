@@ -12,6 +12,9 @@ def network_svg(state):
         return '<div class="network-wait" role="status">Waiting for the first agent update.</div>'
     rows=defaultdict(list)
     def depth(agent):
+        # Explicit presentation rows do not assert a parent/spawn relationship.
+        if getattr(agent, 'layout_row', None) is not None:
+            return max(0, min(agent.layout_row, 5))
         seen={agent.id};parent=agent.parent_id;level=0
         while parent in state.agents and parent not in seen:
             seen.add(parent);level+=1;parent=state.agents[parent].parent_id
@@ -45,8 +48,9 @@ def network_svg(state):
         short=label if len(label)<=25 else label[:23]+'…'
         active=' network-active' if agent.id==state.active_id else ''
         status={'running':'Working','done':'Done','failed':'Failed','stopped':'Stopped'}.get(agent.status,agent.status)
-        node_parts.append(f'<g class="network-node{active}" transform="translate({x-94},{y-29})"><title>{escape(label)} · {escape(agent.id)} · {escape(status)}</title><rect width="188" height="58" rx="12"/><text class="network-label" x="94" y="23">{escape(short)}</text><text class="network-status" x="94" y="43">{escape(status)} · {agent.activity} events</text></g>')
-    description=f'{len(state.agents)} observed agents. Solid arrows show spawning and dashed arrows show recorded messages.'
+        activity_label=escape(getattr(state, 'activity_label', 'events'))
+        node_parts.append(f'<g class="network-node{active}" transform="translate({x-94},{y-29})"><title>{escape(label)} · {escape(agent.id)} · {escape(status)}</title><rect width="188" height="58" rx="12"/><text class="network-label" x="94" y="23">{escape(short)}</text><text class="network-status" x="94" y="43">{escape(status)} · {agent.activity} {activity_label}</text></g>')
+    description=getattr(state, 'network_description', f'{len(state.agents)} observed agents. Solid arrows show spawning and dashed arrows show recorded messages.')
     moving='' if state.complete else ' network-moving'
     return (f'<div class="network-canvas{moving}"><svg viewBox="0 0 {width} {height}" role="img" aria-label="{escape(description,quote=True)}" xmlns="http://www.w3.org/2000/svg">'
         '<defs><marker id="pet-spawn-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="var(--ui-muted)"/></marker>'
