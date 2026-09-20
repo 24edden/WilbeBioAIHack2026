@@ -25,7 +25,14 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--runtime", required=True, type=Path)
 parser.add_argument("--delay", default=12, type=float)
 arguments = parser.parse_args()
-assert arguments.runtime.is_absolute() and not arguments.runtime.is_relative_to(BACKEND), "Use a dedicated absolute test runtime outside the backend source"
+assert arguments.runtime.is_absolute(), "Use an absolute test runtime"
+arguments.runtime = arguments.runtime.resolve()
+assert not arguments.runtime.is_relative_to(BACKEND), "Use a dedicated test runtime outside the backend source"
+marker = arguments.runtime / ".team-tbd-offline-fixture"
+if arguments.runtime.exists() and any(arguments.runtime.iterdir()) and not marker.is_file():
+    parser.error("Refusing a nonempty runtime that is not marked as an offline browser fixture")
+arguments.runtime.mkdir(parents=True, exist_ok=True)
+marker.write_text("Offline browser fixture only; no scientific provider execution.\n")
 assert not (BACKEND / ".env").exists(), "Source release must not contain private configuration"
 for key in ("OPENAI_API_KEY", "NVIDIA_API_KEY", "NGC_API_KEY", "BOLTZ2_NIM_URL", "OPENAI_BASE_URL"):
     os.environ.pop(key, None)
@@ -47,7 +54,7 @@ from app.store import Store, digest, now
 import uvicorn
 
 CASE = {"id": "offline-ui-fixture", "title": "Offline integration test", "subtitle": "Synthetic browser fixture; no scientific inference",
-        "hypothesis": "What can this offline software fixture demonstrate?", "hypothesis_source": "Explicit browser integration test",
+        "hypothesis": "What can this offline software fixture demonstrate?", "hypothesis_source": {"name": "Explicit browser integration test"},
         "description": "Synthetic records for checking software controls. No patient data or scientific results.", "evidence_count": 0,
         "readiness": "Offline fixture ready", "limitations": ["All results are synthetic test data."], "data_mode": "synthetic",
         "source_manifest": [{"path": "synthetic.tsv", "sha256": "a" * 64}], "evidence": []}

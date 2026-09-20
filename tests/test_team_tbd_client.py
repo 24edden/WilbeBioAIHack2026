@@ -205,6 +205,9 @@ def test_against_isolated_authoritative_api(tmp_path):
     # This fixture neither reads private env files nor contacts a running service.
     for key in ("OPENAI_API_KEY", "NVIDIA_API_KEY", "NGC_API_KEY", "BOLTZ2_NIM_URL"):
         env.pop(key, None)
-    result = subprocess.run([sys.executable, str(script)], cwd=root, env=env, capture_output=True, text=True, timeout=90)
-    assert result.returncode == 0, result.stdout + result.stderr
+    backend_python = root / "scientific_backend" / ".venv" / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
+    interpreter = os.environ.get("TEAM_TBD_TEST_PYTHON") or (str(backend_python) if backend_python.is_file() else sys.executable)
+    result = subprocess.run([interpreter, str(script)], cwd=root, env=env, capture_output=True, text=True, timeout=90)
+    assert result.returncode == 0, ("The scientific contract check is required, never silently skipped. Install the scientific_backend environment "
+                                  "or set TEAM_TBD_TEST_PYTHON to its Python executable.\n" + result.stdout + result.stderr)
     assert "isolated scientific API contracts passed" in result.stdout
